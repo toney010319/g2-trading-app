@@ -22,4 +22,4 @@ User Story #7: As a Trader, I want to have a Transaction page to see and monitor
 of buying and selling.
 User Story #8: As a Trader, I want to sell my stocks so that I can adjust my portfolio.
 
-Justin
+Justin Edited
