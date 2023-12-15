@@ -1,5 +1,6 @@
 # README
 
+
 USER STORIES
 
 
@@ -23,3 +24,26 @@ of buying and selling.
 User Story #8: As a Trader, I want to sell my stocks so that I can adjust my portfolio.
 
 Justin Edited
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
