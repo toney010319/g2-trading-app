@@ -21,3 +21,5 @@ User Story #6: As a Trader, I want to have a My Portfolio page to view all my st
 User Story #7: As a Trader, I want to have a Transaction page to see and monitor all the transactions made by my actions
 of buying and selling.
 User Story #8: As a Trader, I want to sell my stocks so that I can adjust my portfolio.
+
+Justin
