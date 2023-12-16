@@ -1,5 +1,6 @@
 # README
 
+<<<<<<< HEAD
 
 USER STORIES
 
@@ -46,4 +47,7 @@ Things you may want to cover:
 
 * Deployment instructions
 
+=======
+## Anthony Bautista 
+>>>>>>> 3a4dbfbc08ec62f19bd45a09f527e16ef0f9e202
 * ...
