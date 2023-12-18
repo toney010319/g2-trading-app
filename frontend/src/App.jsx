@@ -1,11 +1,20 @@
 import './App.css'
-import Dashboard from './dashboard/dashboard'
+import Login from './pages/Login'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Dashboard from './dashboard/dashboard';
+import Registration from './pages/Registration';
 
-function App() {
+const App = () => {
 
   return (
     <>
-      <Dashboard />
+     <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />.
+        <Route path="/register" element={<Registration />} />
+      </Routes>
+    </BrowserRouter>
     </>
   )
 }

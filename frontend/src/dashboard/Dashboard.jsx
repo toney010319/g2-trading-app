@@ -1,9 +1,13 @@
 import Footer from "../components/Footer";
+import Sidebar from "../components/Sidebar";
+
 
 const Dashboard = () => {
     return (
     <div className="grid grid-cols-12 grid-rows-12 gap-2 w-screen h-screen">
-        <div className="col-span-2 row-span-12 bg-red-200 h-full">Expandable Sidebar</div>
+        <div className="col-span-2 row-span-12 bg-red-200 h-full">
+            <Sidebar />
+        </div>
         <div className="col-span-10 col-start-3 bg-blue-200">Header Navigation Bar</div>
         <div className="col-span-10 col-start-3 row-start-2 bg-cyan-200">Ads</div>
         <div className="col-span-10 row-span-6 col-start-3 row-start-3 bg-yellow-200">Content Area</div>

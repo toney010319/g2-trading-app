@@ -6,8 +6,6 @@ const Registration = () => {
     
     const handleSubmit = async (event) => {
         event.preventDefault();
-    
-       `API HERE`
     };
 
     //kayo nalang din maglagay ng mga infos :D
@@ -16,11 +14,13 @@ const Registration = () => {
         <>
             <div>
                 <form onSubmit={handleSubmit}>
+                    Email
                     <input
                     type="email"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
                     />
+                    Password
                     <input
                     type="password"
                     value={password}
@@ -33,4 +33,4 @@ const Registration = () => {
     );
     }
 
-    export default Registration;
+export default Registration;
