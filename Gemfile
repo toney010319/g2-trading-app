@@ -66,4 +66,5 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "devise-api", "~> 0.1.3"
+gem 'devise'
+gem 'jwt'
