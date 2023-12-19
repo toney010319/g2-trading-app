@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const Registration = () => {
+// eslint-disable-next-line react/prop-types
+const Registration = ({ addAlert }) => {
 const [username, setUsername] = useState("");
 const [firstName, setFirstName] = useState("");
 const [middleName, setMiddleName] = useState("");
@@ -16,6 +16,11 @@ const navigate = useNavigate();
 const navigateLogin = () => {
     console.log(username, firstName, middleName, lastName, email, birthday, password, confirmPassword, agreed);
     navigate('/')
+}
+
+const handleRegistration = () => {
+    addAlert('success', 'User registered successfully!')
+    console.log('addAlert')
 }
 
     return (
@@ -134,7 +139,7 @@ const navigateLogin = () => {
                 </div>
 
                 <div className="flex flex-row justify-center gap-4 mt-2">
-                    <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700">Register</button>
+                    <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700" onClick={handleRegistration}>Register</button>
                 </div>
                 <div className="flex flex-row justify-between">
                     <button className="flex mt-2 text-sm text-blue-200 hover:text-blue-400 hover:underline" onClick={navigateLogin}>Already Registered?</button>

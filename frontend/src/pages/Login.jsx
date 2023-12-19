@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+// eslint-disable-next-line react/prop-types
+const Login = ({addAlert}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [agreed, setAgreed] = useState(false);
@@ -11,6 +12,7 @@ const Login = () => {
         e.preventDefault();
         navigate('/dashboard')
         console.log(email, password, agreed)
+        addAlert('success', 'You have successfully logged in')
     };
 
     const handleRegister = () => {
