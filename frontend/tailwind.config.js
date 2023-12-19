@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+// eslint-disable-next-line no-undef
 const colors = require('tailwindcss/colors')
 
 export default {
@@ -10,6 +11,8 @@ export default {
     colors:{
       transparent: 'transparent',
       current: 'currentColor',
+      green: colors.green,
+      red: colors.red,
       black: colors.black,
       blue: colors.blue,
       white: colors.white,
