@@ -8,13 +8,15 @@ const App = () => {
 
   return (
     <>
-     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />.
-        <Route path="/register" element={<Registration />} />
-      </Routes>
-    </BrowserRouter>
+      <div className="bg-gradient-to-b from-azure-300 to-azure-700">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />.
+            <Route path="/register" element={<Registration />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </>
   )
 }
