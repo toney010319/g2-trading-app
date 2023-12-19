@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line react/prop-types
@@ -19,8 +20,28 @@ const navigateLogin = () => {
 }
 
 const handleRegistration = () => {
+    registerUser()
     addAlert('success', 'User registered successfully!')
     console.log('addAlert')
+}
+
+const registerUser = async () => {
+    const formData = {
+        username: username,
+        first_name: firstName,
+        middle_name: middleName,
+        last_name: lastName,
+        email: email,
+        birthday: birthday,
+        password: password,
+        confirm_password: confirmPassword,
+    }
+    try {
+        const res = await axios.post('http://localhost:3000/api/v1/registrations', formData)
+        console.log(res)
+    } catch (error) {
+        console.log(error)  
+    }
 }
 
     return (

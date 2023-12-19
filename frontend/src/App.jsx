@@ -1,7 +1,7 @@
 import './App.css'
 import Login from './pages/Login'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Dashboard from './dashboard/dashboard';
+import Dashboard from './dashboard/Dashboard';
 import Registration from './pages/Registration';
 import Alertbox from './components/Alertbox';
 import { useState } from 'react';
@@ -24,7 +24,7 @@ const removeAlert = (index) => {
   return (
     <>
       <div className="bg-gradient-to-b from-azure-300 to-azure-700">
-        <div style={{position: 'absolute', top: '10%', left: '45%'}}>
+        <div style={{position: 'absolute', top: '10%', left: '43%'}}>
           {alerts.map((alert, index) => (
             <Alertbox 
             key={index}
