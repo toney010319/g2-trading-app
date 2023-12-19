@@ -4,41 +4,73 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [agreed, setAgreed] = useState(false);
     const navigate = useNavigate();
 
-    const login = () => {
-        console.log('User Logged-in')
-    }
-
-    const handleSubmit = (e) => {
+    const handleLogin = (e) => {
         e.preventDefault();
-        login(email, password);
         navigate('/dashboard')
+        console.log(email, password, agreed)
     };
 
-    const register = () => {
+    const handleRegister = () => {
         navigate('/register')
     }
     
-    // sample lang din to ah hahaha kayo na rin lang maglagay infos :D
     
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+    <>
+    <div className="flex flex-col justify-center items-center align-center content-center w-screen h-screen">
+        <div className="justify-center text-center align-center shadow-md border-md rounded-md  bg-gradient-to-b from-azure-300 to-azure-700 m-2 p-5 pl-8 pr-8">
+            <div className="flex flex-row justify-center mb-5">
+                <div className="z-10">
+                    <img src="https://www.freeiconspng.com/uploads/stock-exchange-icon-png-10.png" width="50" alt="Icon Svg Stock Exchange" />
+                </div>
+                <div className="flex flex-col relative z-5">
+                    <span className="font-bold text-3xl">Stellar</span>
+                    <sub className="text-md ml-10">Markets</sub>
+                </div>
+            </div>
+            <div>
+                <div className="flex flex-col">
+                    <span className="flex justify-start mb-1 font-semibold">Email</span>
+                    <input
+                    className="rounded-sm"
+                    type="email"
+                    placeholder=" Enter email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
+                <div className="flex flex-col mt-1">
+                    <span className="flex justify-start mb-1 font-semibold">Password</span>
+                    <input
+                    className="rounded-sm"
+                    type="password"
+                    placeholder=" Enter password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+            </div>
+
+            <div className="flex mt-1">
                 <input
-                type="email"
-                placeholder="email"
-                onChange={(e) => setEmail(e.target.value)}
+                className="rounded-sm"
+                type="checkbox"
+                onChange={(e) => setAgreed(e.target.value)}
                 />
-                <input
-                type="password"
-                placeholder="password"
-                onChange={(e) => setPassword(e.target.value)}
-                />
-                <button type="submit">Login</button>
-            </form>
-            <span onClick={register}>Register</span>
+                <span className="flex justify-start ml-1 text-sm">Remember me</span>
+            </div>
+
+            <div className="flex flex-row justify-center gap-4 mt-2">
+                <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700" onClick={handleLogin}>Login</button>
+                <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700" onClick={handleRegister}>Register</button>
+            </div>
+            <div>
+                <button className="flex justify-end w-full mt-2 text-sm text-blue-200 hover:text-blue-400 hover:underline">Forgot Password</button>
+            </div>
         </div>
+    </div>
+    </>
     );
 }
 
