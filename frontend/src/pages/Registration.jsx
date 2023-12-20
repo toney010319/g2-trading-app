@@ -1,47 +1,20 @@
-import axios from "axios";
-import { useState } from "react";
+ 
 import { useNavigate } from "react-router-dom";
+import { registerUser } from "../lib/api";
+import { useState } from "react";
+ 
 // eslint-disable-next-line react/prop-types
 const Registration = ({ addAlert }) => {
-const [username, setUsername] = useState("");
-const [firstName, setFirstName] = useState("");
-const [middleName, setMiddleName] = useState("");
-const [lastName, setLastName] = useState("");
-const [email, setEmail] = useState("");
-const [birthday, setBirthday] = useState("");
-const [password, setPassword] = useState("");
-const [confirmPassword, setConfirmPassword] = useState("");
-const [agreed, setAgreed] = useState(false);
+    const [agreed, setAgreed] = useState(false)
+ 
 const navigate = useNavigate();
 
 const navigateLogin = () => {
-    console.log(username, firstName, middleName, lastName, email, birthday, password, confirmPassword, agreed);
-    navigate('/')
+     navigate('/')
 }
+ 
 
-const handleRegistration = () => {
-    registerUser()
-    addAlert('success', 'User registered successfully!')
-    console.log('addAlert')
-}
 
-const registerUser = async () => {
-    const formData = {
-            username: username,
-            first_name: firstName,
-            middle_name: middleName,
-            last_name: lastName,
-            email: email,
-            birthday: birthday,
-            password: password,
-    };
-    try {
-        const res = await axios.post('http://localhost:3000/api/v1/users', formData);
-        console.log(res);
-    } catch (error) {
-        console.log(error);
-    }
-};
 
     return (
     <>
@@ -57,7 +30,20 @@ const registerUser = async () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col">
+                <form 
+                onSubmit={async(event) => {
+                    event.preventDefault()
+                    const data = await registerUser(event)
+                    console.log(data)
+                    if(data.statusText !== "OK"){
+                        addAlert('error', data.errors[0])
+                    }
+                    else{
+                        addAlert('success', 'You have successfully registered')
+                        navigateLogin()
+                    }
+                    }} 
+                    className="flex flex-col">
                     <div className="flex justify-between">
                         <div className="flex flex-col">
                             <span className="flex justify-start mb-1 font-semibold">Username</span>
@@ -65,7 +51,8 @@ const registerUser = async () => {
                             className="rounded-sm"
                             type="text"
                             placeholder=" Username"
-                            onChange={(e) => setUsername(e.target.value)}
+                            name="username"
+                            required
                             />
                         </div>
 
@@ -75,7 +62,8 @@ const registerUser = async () => {
                             className="rounded-sm w-64"
                             type="text"
                             placeholder=" Email"
-                            onChange={(e) => setEmail(e.target.value)}
+                            name="email"
+                            required
                             />
                         </div>
                     </div>
@@ -87,7 +75,8 @@ const registerUser = async () => {
                             className="rounded-sm"
                             type="text"
                             placeholder=" First Name"
-                            onChange={(e) => setFirstName(e.target.value)}
+                           name="firstName"
+                           required
                             />
                         </div>
 
@@ -97,7 +86,8 @@ const registerUser = async () => {
                             className="rounded-sm"
                             type="text"
                             placeholder=" Middle Name"
-                            onChange={(e) => setMiddleName(e.target.value)}
+                            name="middleName"
+                            required
                             />
                         </div>
 
@@ -107,7 +97,8 @@ const registerUser = async () => {
                             className="rounded-sm"
                             type="text"
                             placeholder=" Last Name"
-                            onChange={(e) => setLastName(e.target.value)}
+                            name="lastName"
+                            required
                             />
                         </div>
                     </div>
@@ -117,7 +108,8 @@ const registerUser = async () => {
                             <input
                             className="rounded-sm w-64"
                             type="date"
-                            onChange={(e) => setBirthday(e.target.value)}
+                           name="birthday"
+                           required
                             />
                         </div>
 
@@ -128,7 +120,8 @@ const registerUser = async () => {
                                 className="rounded-sm w-64"
                                 placeholder=" Password"
                                 type="password"
-                                onChange={(e) => setPassword(e.target.value)}
+                                name="password"
+                                required
                                 />
                             </div>
 
@@ -137,8 +130,10 @@ const registerUser = async () => {
                                 <input
                                 className="rounded-sm w-64"
                                 placeholder=" Confirm Password"
+                                name="confirmPassword"
                                 type="password"
-                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                required
+                                
                                 />
                             </div>
                         </div>
@@ -156,11 +151,12 @@ const registerUser = async () => {
                     <div className="flex flex-col mt-1">
                         
                     </div>
-                </div>
+              
 
-                <div className="flex flex-row justify-center gap-4 mt-2">
-                    <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700" onClick={handleRegistration}>Register</button>
-                </div>
+                    <div className="flex flex-row justify-center gap-4 mt-2">
+                        <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700" type="submit">Register</button>
+                    </div>
+                </form>
                 <div className="flex flex-row justify-between">
                     <button className="flex mt-2 text-sm text-blue-200 hover:text-blue-400 hover:underline" onClick={navigateLogin}>Already Registered?</button>
                     <button className="flex mt-2 text-sm text-blue-200 hover:text-blue-400 hover:underline">Forgot Password</button>

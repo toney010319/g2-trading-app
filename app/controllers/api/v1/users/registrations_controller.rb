@@ -8,9 +8,9 @@ module Api
           user = User.new(sign_up_params)
       
           if user.save
-            render json: user
+            render json: user ,status: :ok
           else
-            render json: { errors: user.errors }
+            render json: { errors: user.errors.full_messages }, status: :unauthorized
           end
         end
       
