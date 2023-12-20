@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 // eslint-disable-next-line react/prop-types
 const Login = ({addAlert}) => {
     const [email, setEmail] = useState("");
@@ -9,11 +9,27 @@ const Login = ({addAlert}) => {
     const navigate = useNavigate();
 
     const handleLogin = (e) => {
+        loginUser()
         e.preventDefault();
         navigate('/dashboard')
         console.log(email, password, agreed)
         addAlert('success', 'You have successfully logged in')
+    
     };
+
+    const loginUser = async () => {
+        const formData = {
+            email: email,
+            password: password,
+            
+        }
+        try {
+            const res = await axios.post('http://localhost:3000/api/v1/users/sign_in', formData)
+            console.log(res.data)
+        } catch (error) {
+            console.log(error.response.data)
+        }        
+    }
 
     const handleRegister = () => {
         navigate('/register')
@@ -76,4 +92,4 @@ const Login = ({addAlert}) => {
     );
 }
 
-export default Login;
+export default Login

@@ -27,22 +27,21 @@ const handleRegistration = () => {
 
 const registerUser = async () => {
     const formData = {
-        username: username,
-        first_name: firstName,
-        middle_name: middleName,
-        last_name: lastName,
-        email: email,
-        birthday: birthday,
-        password: password,
-        confirm_password: confirmPassword,
-    }
+            username: username,
+            first_name: firstName,
+            middle_name: middleName,
+            last_name: lastName,
+            email: email,
+            birthday: birthday,
+            password: password,
+    };
     try {
-        const res = await axios.post('http://localhost:3000/api/v1/registrations', formData)
-        console.log(res)
+        const res = await axios.post('http://localhost:3000/api/v1/users', formData);
+        console.log(res);
     } catch (error) {
-        console.log(error)  
+        console.log(error);
     }
-}
+};
 
     return (
     <>
