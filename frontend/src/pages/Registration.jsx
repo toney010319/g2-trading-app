@@ -3,45 +3,45 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line react/prop-types
 const Registration = ({ addAlert }) => {
-const [username, setUsername] = useState("");
-const [firstName, setFirstName] = useState("");
-const [middleName, setMiddleName] = useState("");
-const [lastName, setLastName] = useState("");
-const [email, setEmail] = useState("");
-const [birthday, setBirthday] = useState("");
-const [password, setPassword] = useState("");
-const [confirmPassword, setConfirmPassword] = useState("");
-const [agreed, setAgreed] = useState(false);
-const navigate = useNavigate();
+    const [username, setUsername] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [middleName, setMiddleName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [birthday, setBirthday] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [agreed, setAgreed] = useState(false);
+    const navigate = useNavigate();
 
-const navigateLogin = () => {
-    console.log(username, firstName, middleName, lastName, email, birthday, password, confirmPassword, agreed);
-    navigate('/')
-}
-
-const handleRegistration = () => {
-    registerUser()
-    addAlert('success', 'User registered successfully!')
-    console.log('addAlert')
-}
-
-const registerUser = async () => {
-    const formData = {
-            username: username,
-            first_name: firstName,
-            middle_name: middleName,
-            last_name: lastName,
-            email: email,
-            birthday: birthday,
-            password: password,
-    };
-    try {
-        const res = await axios.post('http://localhost:3000/api/v1/users', formData);
-        console.log(res);
-    } catch (error) {
-        console.log(error);
+    const navigateLogin = () => {
+        console.log(username, firstName, middleName, lastName, email, birthday, password, confirmPassword, agreed);
+        navigate('/')
     }
-};
+
+    const handleRegistration = () => {
+        registerUser()
+        addAlert('success', 'User registered successfully!')
+        console.log('addAlert')
+    }
+
+    const registerUser = async () => {
+        const formData = {
+                username: username,
+                first_name: firstName,
+                middle_name: middleName,
+                last_name: lastName,
+                email: email,
+                birthday: birthday,
+                password: password,
+        };
+        try {
+            const res = await axios.post('http://localhost:3000/api/v1/users', formData);
+            console.log(res);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
     <>
@@ -161,6 +161,7 @@ const registerUser = async () => {
                 <div className="flex flex-row justify-center gap-4 mt-2">
                     <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700" onClick={handleRegistration}>Register</button>
                 </div>
+
                 <div className="flex flex-row justify-between">
                     <button className="flex mt-2 text-sm text-blue-200 hover:text-blue-400 hover:underline" onClick={navigateLogin}>Already Registered?</button>
                     <button className="flex mt-2 text-sm text-blue-200 hover:text-blue-400 hover:underline">Forgot Password</button>
