@@ -1,28 +1,57 @@
-import Navigationbar from "../components/Navigationbar";
-import Sidebar from "../components/Sidebar";
+import DashboardLayout from "./DashboardLayout";
+import Portfolio from "./pages/portfolio/Portfolio";
+import {Routes, Route } from 'react-router-dom';
+import DashboardHome from "./DashboardHome";
+import FolioNews from "./pages/portfolio/FolioNews";
+import FolioPerformance from "./pages/portfolio/FolioPerformance";
+import FolioCrypto from "./pages/portfolio/FolioCrypto";
+import FolioStocks from "./pages/portfolio/FolioStocks";
+import FolioForex from "./pages/portfolio/FolioForex";
+import Stocks from "./pages/stocks/Stocks";
+import BuyStocks from "./pages/stocks/buystocks";
+import MarketStocks from "./pages/stocks/marketstocks";
+import Crypto from "./pages/crypto/Crypto";
+import BuyCrypto from "./pages/crypto/BuyCrypto";
+import MarketCrypto from "./pages/crypto/MarketCrypto";
+import Forex from "./pages/forex/Forex";
+import BuyForex from "./pages/forex/BuyForex";
+import MarketForex from "./pages/forex/MarketForex";
+import TransactionHistory from "./pages/others/TransactionHistory";
+import Referrals from "./pages/others/Referrals";
+import Support from "./pages/others/Support";
 
 // eslint-disable-next-line react/prop-types
 const Dashboard = ({addAlert}) => {
     return (
-    <div className="flex h-screen bg-green-200">
-        <div className="flex">
-            <Sidebar />
-        </div>
-        
-        <div className="w-screen">
-            <div className="flex">
-                <Navigationbar addAlert={addAlert} />
-            </div>
+    <>
+    <DashboardLayout addAlert={addAlert}>
+        <Routes>
+            <Route path="/" element={<DashboardHome />} />
+                <Route path="portfolio" element={<Portfolio />} />
+                    <Route path="portfolio/news" element={<FolioNews />} />
+                    <Route path="portfolio/performance" element={<FolioPerformance />} />
+                    <Route path="portfolio/crypto" element={<FolioCrypto />} />
+                    <Route path="portfolio/stocks" element={<FolioStocks />} />
+                    <Route path="portfolio/forex" element={<FolioForex />} />
+                <Route path="stocks" element={<Stocks />} />
+                    <Route path="stocks/trade" element={<BuyStocks />} />
+                    <Route path="stocks/market" element={<MarketStocks />} />
+                <Route path="crypto" element={<Crypto />} />
+                    <Route path="crypto/trade" element={<BuyCrypto />} />
+                    <Route path="crypto/market" element={<MarketCrypto />} />
+                <Route path="forex" element={<Forex />} />
+                    <Route path="forex/trade" element={<BuyForex />} />
+                    <Route path="forex/market" element={<MarketForex />} />
 
-            <div className="grid grid-cols-12 grid-rows-10 gap-2 ml-1">
-                <div className="col-span-12 bg-red-200 justify-self-stretch">2</div>
-                <div className="col-span-12 row-start-2 bg-yellow-200">3</div>
-                <div className="col-span-12 row-span-5 row-start-3 bg-indigo-200">7</div>
-                <div className="col-span-12 row-span-3 row-start-8 bg-red-200">8</div>
-            </div>
+                <Route path="transactions" element={<TransactionHistory/>} />
+                <Route path="referrals" element={<Referrals />} />
+                <Route path="support" element={<Support />} />
 
-        </div>
-    </div>
+                
+
+        </Routes>
+    </DashboardLayout>
+    </>
     
     )
 }

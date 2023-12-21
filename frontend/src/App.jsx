@@ -37,7 +37,7 @@ const removeAlert = (index) => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login addAlert={addAlert} />} />
-            <Route path="/dashboard" element={<Dashboard addAlert={addAlert} />} />.
+            <Route path="/dashboard/*" element={<Dashboard addAlert={addAlert} />} />.
             <Route path="/register" element={<Registration addAlert={addAlert} />} />
           </Routes>
         </BrowserRouter>
