@@ -1,7 +1,7 @@
 import DashboardLayout from "./DashboardLayout";
 import Portfolio from "./pages/portfolio/Portfolio";
 import {Routes, Route } from 'react-router-dom';
-import DashboardHome from "./DashboardHome";
+import DashboardHome from "./home/DashboardHome";
 import FolioNews from "./pages/portfolio/FolioNews";
 import FolioPerformance from "./pages/portfolio/FolioPerformance";
 import FolioCrypto from "./pages/portfolio/FolioCrypto";
@@ -42,13 +42,9 @@ const Dashboard = ({addAlert}) => {
                 <Route path="forex" element={<Forex />} />
                     <Route path="forex/trade" element={<BuyForex />} />
                     <Route path="forex/market" element={<MarketForex />} />
-
                 <Route path="transactions" element={<TransactionHistory/>} />
                 <Route path="referrals" element={<Referrals />} />
                 <Route path="support" element={<Support />} />
-
-                
-
         </Routes>
     </DashboardLayout>
     </>

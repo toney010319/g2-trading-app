@@ -24,7 +24,7 @@ const removeAlert = (index) => {
   return (
     <>
       <div className="bg-gradient-to-b from-azure-300 to-azure-700">
-        <div style={{position: 'absolute', top: '10%', left: '43%'}}>
+        <div style={{position: 'absolute', top: '10%', left: '41%'}}>
           {alerts.map((alert, index) => (
             <Alertbox 
             key={index}
