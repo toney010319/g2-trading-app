@@ -20,6 +20,7 @@ export default {
       emerald: colors.emerald,
       indigo: colors.indigo,
       yellow: colors.yellow,
+      slate: colors.slate,
     
       'azure': {
         50: '#f0f5fe',
