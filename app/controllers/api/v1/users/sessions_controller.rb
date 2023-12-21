@@ -7,9 +7,10 @@ module Api
         
           if user&.valid_password?(params[:password])
             token = encode_token({ user_id: user.id })
-            render json: { user: user, token: token }, status: :ok
+            render json: { user: user, token: token, notice: 'You have successfully logged in'}, status: :ok
           else
-            render json: { error: 'Invalid email or password' }, status: :unauthorized
+            render json:  { error: 'Invalid email or password'} , status: :unauthorized
+             
           end
         end
 
