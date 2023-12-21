@@ -2,6 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../lib/api";
 import { useState } from "react";
+import Logo from "../assets/logo";
  
 // eslint-disable-next-line react/prop-types
 const Registration = ({ addAlert }) => {
@@ -11,6 +12,7 @@ const navigate = useNavigate();
 
 const navigateLogin = () => {
      navigate('/')
+     console.log(agreed)
 }
  
 
@@ -20,15 +22,7 @@ const navigateLogin = () => {
     <>
         <div className="flex flex-col justify-center items-center align-center content-center w-screen h-screen">
             <div className="justify-center text-center align-center shadow-md border-md rounded-md  bg-gradient-to-b from-azure-300 to-azure-700 m-2 p-5 pl-8 pr-8">
-                <div className="flex flex-row justify-center mb-5">
-                    <div className="z-10">
-                        <img src="https://www.freeiconspng.com/uploads/stock-exchange-icon-png-10.png" width="50" alt="Icon Svg Stock Exchange" />
-                    </div>
-                    <div className="flex flex-col relative z-5">
-                        <span className="font-bold text-3xl">Stellar</span>
-                        <sub className="text-md ml-10">Markets</sub>
-                    </div>
-                </div>
+                <Logo />
 
                 <form 
                 onSubmit={async(event) => {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Logo from "../assets/logo";
 // eslint-disable-next-line react/prop-types
 const Login = ({addAlert}) => {
     const [email, setEmail] = useState("");
@@ -41,15 +42,7 @@ const Login = ({addAlert}) => {
     <>
     <div className="flex flex-col justify-center items-center align-center content-center w-screen h-screen">
         <div className="justify-center text-center align-center shadow-md border-md rounded-md  bg-gradient-to-b from-azure-300 to-azure-700 m-2 p-5 pl-8 pr-8">
-            <div className="flex flex-row justify-center mb-5">
-                <div className="z-10">
-                    <img src="https://www.freeiconspng.com/uploads/stock-exchange-icon-png-10.png" width="50" alt="Icon Svg Stock Exchange" />
-                </div>
-                <div className="flex flex-col relative z-5">
-                    <span className="font-bold text-3xl">Stellar</span>
-                    <sub className="text-md ml-10">Markets</sub>
-                </div>
-            </div>
+           <Logo />
             <div>
                 <div className="flex flex-col">
                     <span className="flex justify-start mb-1 font-semibold">Email</span>
