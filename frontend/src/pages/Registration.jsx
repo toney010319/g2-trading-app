@@ -2,8 +2,9 @@
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../lib/api";
 import { useState } from "react";
-import Logo from "../assets/logo";
- 
+import Logo from "../assets/Logo";
+
+
 // eslint-disable-next-line react/prop-types
 const Registration = ({ addAlert }) => {
     const [agreed, setAgreed] = useState(false)

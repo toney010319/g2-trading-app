@@ -8,8 +8,8 @@ import FolioCrypto from "./pages/portfolio/FolioCrypto";
 import FolioStocks from "./pages/portfolio/FolioStocks";
 import FolioForex from "./pages/portfolio/FolioForex";
 import Stocks from "./pages/stocks/Stocks";
-import BuyStocks from "./pages/stocks/buystocks";
-import MarketStocks from "./pages/stocks/marketstocks";
+import BuyStocks from "./pages/stocks/BuyStocks";
+import MarketStocks from "./pages/stocks/MarketStocks";
 import Crypto from "./pages/crypto/Crypto";
 import BuyCrypto from "./pages/crypto/BuyCrypto";
 import MarketCrypto from "./pages/crypto/MarketCrypto";
@@ -19,6 +19,7 @@ import MarketForex from "./pages/forex/MarketForex";
 import TransactionHistory from "./pages/others/TransactionHistory";
 import Referrals from "./pages/others/Referrals";
 import Support from "./pages/others/Support";
+
 
 // eslint-disable-next-line react/prop-types
 const Dashboard = ({addAlert}) => {
