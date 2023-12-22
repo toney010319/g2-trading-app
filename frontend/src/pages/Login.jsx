@@ -1,36 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import Logo from "../assets/logo";
+ 
+import Logo from "../assets/Logo";
+import { loginUser } from "../lib/api";
 // eslint-disable-next-line react/prop-types
 const Login = ({addAlert}) => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
     const [agreed, setAgreed] = useState(false);
     const navigate = useNavigate();
 
-    const handleLogin = (e) => {
-        loginUser()
-        e.preventDefault();
-        navigate('/dashboard')
-        console.log(email, password, agreed)
-        addAlert('success', 'You have successfully logged in')
     
-    };
 
-    const loginUser = async () => {
-        const formData = {
-            email: email,
-            password: password,
-            
-        }
-        try {
-            const res = await axios.post('http://localhost:3000/api/v1/users/sign_in', formData)
-            console.log(res.data)
-        } catch (error) {
-            console.log(error.response.data)
-        }        
-    }
+   
 
     const handleRegister = () => {
         navigate('/register')
@@ -41,7 +21,20 @@ const Login = ({addAlert}) => {
     return (
     <>
     <div className="flex flex-col justify-center items-center align-center content-center w-screen h-screen">
-        <div className="justify-center text-center align-center shadow-md border-md rounded-md  bg-gradient-to-b from-azure-300 to-azure-700 m-2 p-5 pl-8 pr-8">
+        <form onSubmit={async(event) => {
+                    event.preventDefault()
+                    const data = await loginUser(event)
+                    console.log(data)
+                    if(data.statusText !== "OK"){
+                        addAlert('error', data.error)
+                        navigate('/')
+                    }
+                    else{
+                        addAlert('success', 'You have successfully registered')
+                       navigate('dashboard')
+                    }
+                    }} 
+        className="justify-center text-center align-center shadow-md border-md rounded-md  bg-gradient-to-b from-azure-300 to-azure-700 m-2 p-5 pl-8 pr-8">
            <Logo />
             <div>
                 <div className="flex flex-col">
@@ -50,7 +43,7 @@ const Login = ({addAlert}) => {
                     className="rounded-sm"
                     type="email"
                     placeholder=" Enter email"
-                    onChange={(e) => setEmail(e.target.value)}
+                   name="email"
                     />
                 </div>
                 <div className="flex flex-col mt-1">
@@ -59,7 +52,7 @@ const Login = ({addAlert}) => {
                     className="rounded-sm"
                     type="password"
                     placeholder=" Enter password"
-                    onChange={(e) => setPassword(e.target.value)}
+                   name="password"
                     />
                 </div>
             </div>
@@ -74,16 +67,16 @@ const Login = ({addAlert}) => {
             </div>
 
             <div className="flex flex-row justify-center gap-4 mt-2">
-                <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700" onClick={handleLogin}>Login</button>
+                <button  className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700" type="submit">Login</button>
                 <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700" onClick={handleRegister}>Register</button>
             </div>
             <div>
                 <button className="flex justify-end w-full mt-2 text-sm text-blue-200 hover:text-blue-400 hover:underline">Forgot Password</button>
             </div>
-        </div>
+        </form>
     </div>
     </>
     );
 }
 
-export default Login
+export default Login 

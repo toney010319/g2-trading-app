@@ -29,3 +29,27 @@ export const registerUser = async (event) => {
         }
       }
 };
+
+export const loginUser = async (event) => {
+    event.preventDefault()
+    
+    const formData = new FormData(event.target)
+    const user = {
+      email: formData.get('email'),
+        password: formData.get('password'),
+       
+    }
+   
+  try {
+      const res = await axios.post('http://localhost:3000/api/v1/users/sign_in', user)
+      console.log("res",res.data)
+      return res
+  } catch (error) {
+    if (error.response) {
+      console.log('error', error.response.data)
+      return error.response.data;
+    } else {
+      return error;
+    }
+  }    
+}
