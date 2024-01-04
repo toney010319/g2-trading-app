@@ -67,4 +67,8 @@ group :test do
 end
 
 gem 'devise'
-gem 'jwt'
+gem 'devise-jwt'
+
+gem 'rack-cors'
+
+ 
