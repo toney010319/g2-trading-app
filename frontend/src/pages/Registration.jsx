@@ -1,4 +1,3 @@
- 
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../lib/api";
 import { useState } from "react";
@@ -28,15 +27,13 @@ const navigateLogin = () => {
                 <form 
                 onSubmit={async(event) => {
                     event.preventDefault()
-                    const data = await registerUser(event)
-                    console.log(data)
-                    if(data.statusText !== "OK"){
-                        addAlert('error', data.errors[0])
-                    }
-                    else{
-                        addAlert('success', 'You have successfully registered')
+                    const res = await registerUser(event)
+                    if (res?.data?.status?.code == "200"){
+                        addAlert('success', res?.data?.status.message)
                         navigateLogin()
-                    }
+                        }
+                    else
+                    addAlert('error', res?.response?.data?.status?.message)
                     }} 
                     className="flex flex-col">
                     <div className="flex justify-between">

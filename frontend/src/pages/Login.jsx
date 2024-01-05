@@ -17,21 +17,20 @@ const Login = ({addAlert}) => {
     }
     
     
-    
+     
     return (
     <>
     <div className="flex flex-col justify-center items-center align-center content-center w-screen h-screen">
         <form onSubmit={async(event) => {
                     event.preventDefault()
-                    const data = await loginUser(event)
-                    console.log(data)
-                    if(data.statusText !== "OK"){
-                        addAlert('error', data.error)
-                        navigate('/')
+                    const res = await loginUser(event)
+                    if(res.status == "200"){
+                        addAlert('success', res.message)
+                        navigate('dashboard')
                     }
                     else{
-                        addAlert('success', 'You have successfully registered')
-                       navigate('dashboard')
+                        addAlert('error', res.response?.data)
+                       navigate('/')
                     }
                     }} 
         className="justify-center text-center align-center shadow-md border-md rounded-md  bg-gradient-to-b from-azure-300 to-azure-700 m-2 p-5 pl-8 pr-8">
@@ -79,4 +78,4 @@ const Login = ({addAlert}) => {
     );
 }
 
-export default Login 
+export default Login

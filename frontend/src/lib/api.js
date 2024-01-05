@@ -7,9 +7,12 @@ export const registerUser = async (event) => {
     const confirmPassword = formData.get('confirmPassword');
 
     if (password !== confirmPassword) {
-        return {errors:['Passwords do not match']};
+      // return {errors:['Passwords do not match']};
+      return { response: { data: { status: { code: 422, message: 'Passwords do not match' } } } };
     }
-    const newUser = {
+
+
+    const newUser = {user:{
       first_name: formData.get('firstName'),
       middle_name: formData.get('middleName'),
       last_name: formData.get('lastName'),
@@ -17,13 +20,13 @@ export const registerUser = async (event) => {
         password: formData.get('password'),
         birthday: formData.get('birthday'),
         email: formData.get('email'),
-    }
+    }}
     try {
-        const res = await axios.post('http://localhost:3000/api/v1/users', newUser);
+        const res = await axios.post('http://localhost:3000/signup', newUser);
         return res
     } catch (error) {
         if (error.response) {
-          return error.response.data;
+          return error 
         } else {
           return error;
         }
@@ -34,22 +37,35 @@ export const loginUser = async (event) => {
     event.preventDefault()
     
     const formData = new FormData(event.target)
-    const user = {
+    const user = {user:{
       email: formData.get('email'),
         password: formData.get('password'),
-       
+    }
     }
    
   try {
-      const res = await axios.post('http://localhost:3000/api/v1/users/sign_in', user)
-      console.log("res",res.data)
-      return res
-  } catch (error) {
-    if (error.response) {
-      console.log('error', error.response.data)
-      return error.response.data;
-    } else {
+      const res = await axios.post('http://localhost:3000/login', user)
+      return res.data
+  } catch (error){
       return error;
-    }
-  }    
+  }
+}
+
+
+export const logoutUser = async (event) => {
+  event.preventDefault()
+  
+  const formData = new FormData(event.target)
+  const user = {user:{
+    email: formData.get('email'),
+      password: formData.get('password'),
+  }
+  }
+ 
+try {
+    const res = await axios.post('http://localhost:3000/login', user)
+    return res.data
+} catch (error){
+    return error;
+}
 }
