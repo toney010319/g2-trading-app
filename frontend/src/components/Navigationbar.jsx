@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import Navbalance from "./subcomponents/Navbalance";
 // import { useState } from "react";
 
@@ -31,14 +31,19 @@ const Navigationbar = ({addAlert}) => {
             </div>
 
             <div className="flex flex-row ml-2">
-                    <span 
-                    className="cursor-pointer flex ml-2 mr-2 bg-white rounded-full">
+                
+                <span className="cursor-pointer flex ml-2 mr-2 bg-white rounded-full">
+                <Link to='/my-profile'>
+                    
                         <img
                         className="ml-1 mr-1" 
                         src="https://www.svgrepo.com/show/498301/profile-circle.svg" 
-                        width="25" 
+                        width="35" 
                         alt="Icon Svg Stock Exchange" />
+                </Link>
                     </span>
+                
+                    
 
                 <span 
                 className="flex justify-center cursor-pointer"
