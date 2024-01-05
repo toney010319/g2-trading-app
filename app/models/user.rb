@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: self
-         
+
          def jwt_payload
           super
         end
@@ -16,9 +16,9 @@ class User < ApplicationRecord
   validates :middle_name, presence: true
   validates :password, presence: true
   validate :at_least_18
-         
+
   private
-       
+
          def at_least_18
            if birthday.present? && birthday > 18.years.ago
              errors.add(:base, 'You must be 18 years old or above.')
