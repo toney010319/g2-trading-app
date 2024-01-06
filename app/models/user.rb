@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
+  has_one :balance
+  after_create :create_balance
 
   devise :database_authenticatable, :registerable, :validatable, :confirmable,
          :jwt_authenticatable, jwt_revocation_strategy: self
@@ -16,6 +18,11 @@ class User < ApplicationRecord
   validates :middle_name, presence: true
   validates :password, presence: true
   validate :at_least_18
+
+
+  def create_balance
+    self.balance = Balance.new(amount: 0)
+  end
 
   private
 
