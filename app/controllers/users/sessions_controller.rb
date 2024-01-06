@@ -5,6 +5,7 @@ class Users::SessionsController < Devise::SessionsController
   def login_params
     params.require(:user).permit( :email, :password)
   end
+
   def respond_with(resource, _opts = {})
     render json: {
       status:  200,

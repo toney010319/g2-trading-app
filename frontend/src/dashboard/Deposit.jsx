@@ -1,10 +1,38 @@
-const Deposit = () => {
+import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { addBalance } from "../lib/api";
+// eslint-disable-next-line react/prop-types
+const Deposit = ( {addAlert} ) => {
+    const [searchParams] = useSearchParams();
+    const balance = searchParams.get("amount");
+    const user_id = document.cookie.split('user_id=')[1];
+    const navigate = useNavigate();
+    
+
+    const handlePayNow = async () => {
+ 
+        try {
+          const response = await addBalance(balance, user_id);
+          console.log(response)
+          addAlert('success', 'Deposit successful!');
+          navigate('/dashboard')
+    
+        } catch (error) {
+        if (error.response) {
+        addAlert('error', error.response.data.message);
+  
+      } else {
+        addAlert('error', 'Something went wrong'); 
+            }  
+         }
+    }
+
     return (
     <>
        <div className="min-w-screen min-h-screen bg-gray-50 py-5">
     <div className="px-5">
         <div className="mb-2">
-            <h1 className="text-3xl md:text-5xl font-bold text-gray-600">Checkout.</h1>
+            <h1 className="text-3xl md:text-5xl font-bold text-gray-600">Checkout</h1>
         </div>
     </div>
     <div className="w-full bg-white border-t border-b border-gray-200 px-5 py-10 text-gray-800">
@@ -21,7 +49,7 @@ const Deposit = () => {
                                 <p className="text-gray-400">x 1</p>
                             </div>
                             <div>
-                                <span className="font-semibold text-gray-600 text-xl">NULL</span><span className="font-semibold text-gray-600 text-sm">.00</span>
+                                <span className="font-semibold text-gray-600 text-xl">{balance} </span>
                             </div>
                         </div>
                     </div>
@@ -44,15 +72,7 @@ const Deposit = () => {
                                 <span className="text-gray-600">Subtotal</span>
                             </div>
                             <div className="pl-3">
-                                <span className="font-semibold">NULL</span>
-                            </div>
-                        </div>
-                        <div className="w-full flex items-center">
-                            <div className="flex-grow">
-                                <span className="text-gray-600">NULL</span>
-                            </div>
-                            <div className="pl-3">
-                                <span className="font-semibold">NULL</span>
+                                <span className="font-semibold">{balance}</span>
                             </div>
                         </div>
                     </div>
@@ -63,7 +83,7 @@ const Deposit = () => {
                             </div>
                             <div className="pl-3">
                                 <span className="font-semibold text-gray-400 text-sm">PHP</span> 
-                                <span className="font-semibold">NULL</span>
+                                <span className="font-semibold">{balance}</span>
                             </div>
                         </div>
                     </div>
@@ -134,7 +154,13 @@ const Deposit = () => {
                         </div>
                     </div>
                     <div>
-                        <button className="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-2 font-semibold"><i className="mdi mdi-lock-outline mr-1"></i> PAY NOW</button>
+                        <button 
+                        className="block w-full max-w-xs mx-auto bg-azure-700 hover:bg-azure-950  text-white rounded-lg px-3 py-2 font-semibold"
+                        onClick={handlePayNow}
+                        >
+                            <i className="mdi mdi-lock-outline mr-1">
+                                </i> PAY NOW
+                        </button>
                     </div>
                 </div>
             </div>

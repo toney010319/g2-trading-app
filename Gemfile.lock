@@ -228,6 +228,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activerecord (~> 7.0)
   bootsnap
   debug
   devise

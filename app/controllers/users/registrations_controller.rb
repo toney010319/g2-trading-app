@@ -20,4 +20,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
       }, status: :unprocessable_entity
     end
   end
+
+  def devise_create
+    super do |user|
+      user.balance = Balance.new(balance: 0)
+    end
+  end
 end

@@ -24,25 +24,27 @@ const removeAlert = (index) => {
 
   return (
     <>
-      <div className="bg-gradient-to-b from-azure-300 to-azure-700">
-        <div style={{position: 'absolute', top: '10%', left: '41%'}}>
-          {alerts.map((alert, index) => (
-            <Alertbox 
-            key={index}
-            type={alert.type} 
-            message={alert.message}
-            onClose={() => removeAlert(index)}
-            />
-          ))}
-        </div>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Login addAlert={addAlert} />} />
-            <Route path="/dashboard/*" element={<Dashboard addAlert={addAlert} />} />.
-            <Route path="/register" element={<Registration addAlert={addAlert} />} />
-            <Route path ="/deposit" element={<Deposit />} />
-          </Routes>
-        </BrowserRouter>
+      <div className="relative">
+          <div className="bg-gradient-to-b from-azure-300 to-azure-700">
+            <div style={{position: 'absolute', left: '50%', transform: 'translateX(-50%)'}}>
+              {alerts.map((alert, index) => (
+                <Alertbox 
+                key={index}
+                type={alert.type} 
+                message={alert.message}
+                onClose={() => removeAlert(index)}
+                />
+              ))}
+            </div>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Login addAlert={addAlert} />} />
+                <Route path="/dashboard/*" element={<Dashboard addAlert={addAlert} />} />.
+                <Route path="/register" element={<Registration addAlert={addAlert} />} />
+                <Route path ="/deposit" element={<Deposit addAlert={addAlert}/>} />
+              </Routes>
+            </BrowserRouter>
+          </div>
       </div>
     </>
   )
