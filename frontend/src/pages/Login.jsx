@@ -25,14 +25,20 @@ const Login = ({addAlert}) => {
                     event.preventDefault()
                     const res = await loginUser(event)
                     if(res.status == "200"){
-                        addAlert('success', res.message)
+                        console.log ('From login', res.data.data.id)
+                        const token = res.headers.authorization
+                        const user_id = res.data.data.id;
+                        document.cookie = `token=${token};path=/`;
+                        document.cookie = `user_id=${user_id};path=/`;
+                        addAlert('success', res.data.message)
                         navigate('dashboard')
                     }
                     else{
                         addAlert('error', res.response?.data)
-                       navigate('/')
+                        navigate('/')
                     }
                     }} 
+
         className="justify-center text-center align-center shadow-md border-md rounded-md  bg-gradient-to-b from-azure-300 to-azure-700 m-2 p-5 pl-8 pr-8">
            <Logo />
             <div>

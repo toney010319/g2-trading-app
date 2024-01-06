@@ -21,7 +21,7 @@ class User < ApplicationRecord
 
 
   def create_balance
-    self.balance = Balance.new(amount: 0)
+    self.balance = Balance.new(balance: 0)
   end
 
   private

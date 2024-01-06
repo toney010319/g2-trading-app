@@ -1,4 +1,7 @@
 import axios from 'axios';
+const token = document.cookie.split('token=')[1]; 
+axios.defaults.headers.common['Authorization'] = token;
+
 export const registerUser = async (event) => {
     event.preventDefault()
     
@@ -48,7 +51,7 @@ export const loginUser = async (event) => {
   try {
       const res = await axios.post('http://localhost:3000/login', user)
       console.log(res)
-      return res.data
+      return res
   } catch (error){
     console.log(error)
       return error;
@@ -72,4 +75,13 @@ try {
 } catch (error){
     return error;
 }
+}
+
+export const addBalance = async (balance, user_id) => {
+  const response = await axios.post('http://localhost:3000/add_balance', {
+    balance,
+    user_id
+  });
+
+  return response.data;
 }

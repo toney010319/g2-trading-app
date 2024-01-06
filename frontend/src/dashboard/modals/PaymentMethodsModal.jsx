@@ -13,13 +13,18 @@ const PaymentMethodsModal = ({handleClose, addAlert}) => {
       return
     }
 
+    if (amount < 100) {
+      addAlert('error', 'The minimum deposit should not be less than ₱100.00')
+      return
+    }
+
     if (!selectedMethod) {
       addAlert('error', 'Please choose a payment method')
       return
     }
 
     if (selectedMethod === 'card') {
-      navigate('/deposit')
+      navigate(`/deposit?amount=${amount}`)
       return
     }
   

@@ -23,7 +23,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def devise_create
     super do |user|
-      user.create_balance
+      user.balance = Balance.new(balance: 0)
     end
   end
 end

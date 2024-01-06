@@ -16,7 +16,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_06_044150) do
 
   create_table "balances", force: :cascade do |t|
     t.bigint "user_id"
-    t.decimal "base_balance"
+    t.decimal "balance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_balances_on_user_id"

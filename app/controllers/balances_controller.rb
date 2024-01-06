@@ -1,10 +1,17 @@
 class BalancesController < ApplicationController
 
-  def add_balance
-    current_user.balance.amount += params[:amount]
-    current_user.balance.save
+ def add_balance
+    user = User.find(params[:user_id])
+    user.balance.balance += params[:balance].to_f
+    user.balance.save
 
-    render json: { balance: current_user.balance }
+    render json: { balance: user.balance.balance }
+  end
+
+  def show
+    @balances = Balance.all
+
+    render json: @balances
   end
 
   # private
