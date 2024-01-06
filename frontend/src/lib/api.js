@@ -2,6 +2,7 @@ import axios from 'axios';
 const token = document.cookie.split('token=')[1]; 
 axios.defaults.headers.common['Authorization'] = token;
 
+
 export const registerUser = async (event) => {
     event.preventDefault()
     
@@ -70,7 +71,8 @@ export const logoutUser = async (event) => {
   }
  
 try {
-    const res = await axios.post('http://localhost:3000/login', user)
+    const res = await axios.delete('http://localhost:3000/logout', user)
+    console.log(res)
     return res.data
 } catch (error){
     return error;
