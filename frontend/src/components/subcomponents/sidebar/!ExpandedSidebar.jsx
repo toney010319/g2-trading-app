@@ -60,7 +60,7 @@ const NotExpandedSidebar = () => {
             <Link to="portfolio/stocks">
               <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
                 <img src="https://www.svgrepo.com/show/141143/stocks-graphic-in-a-circle.svg" 
-                  width="20" 
+                  width="35" 
                   alt="Stocks" />
               </div>
             </Link>

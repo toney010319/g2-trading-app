@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
+
 // import Navbalance from "./subcomponents/Navbalance";
-// import { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
 const Navigationbar = ({addAlert}) => {
@@ -14,12 +14,17 @@ const Navigationbar = ({addAlert}) => {
     }   
 
  return (
+    
     <>
         <div className="flex min-w-full justify-between bg-gradient-to-r from-azure-400 to-azure-900 p-2">
             <div className="flex gap-2 ml-1">
-                <span className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-950">
-                    Deposit
-                </span>
+
+                    <button 
+                    className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-950"
+                    >
+                        Deposit
+                    </button>
+         
                 
                 <span className="cursor-pointer text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700">
                     Withdraw

@@ -5,6 +5,7 @@ import Dashboard from './dashboard/Dashboard';
 import Registration from './pages/Registration';
 import Alertbox from './components/Alertbox';
 import { useState } from 'react';
+import Deposit from './dashboard/Deposit';
 
 const App = () => {
 const [alerts, setAlerts] = useState([]); 
@@ -39,6 +40,7 @@ const removeAlert = (index) => {
             <Route path="/" element={<Login addAlert={addAlert} />} />
             <Route path="/dashboard/*" element={<Dashboard addAlert={addAlert} />} />.
             <Route path="/register" element={<Registration addAlert={addAlert} />} />
+            <Route path ="/deposit" element={<Deposit />} />
           </Routes>
         </BrowserRouter>
       </div>
