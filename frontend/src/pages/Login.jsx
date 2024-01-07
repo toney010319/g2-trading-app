@@ -46,14 +46,24 @@ const Login = ({addAlert}) => {
         <form onSubmit={async(event) => {
                     event.preventDefault()
                     const res = await loginUser(event)
-                    if(res.status == "200"){
-                        console.log ('From login', res.data.data.id)
+                    console.log(res)
+                    if(res.status == "200" && res.data.data.role === null){
                         const token = res.headers.authorization
                         const user_id = res.data.data.id;
                         document.cookie = `token=${token};path=/`;
                         document.cookie = `user_id=${user_id};path=/`;
                         addAlert('success', res.data.message)
                         navigate('dashboard')
+                       
+                    }
+
+                    else if (res.status == "200" && res.data.data.role == "admin"){
+                        const token = res.headers.authorization
+                        const user_id = res.data.data.id;
+                        document.cookie = `token=${token};path=/`;
+                        document.cookie = `user_id=${user_id};path=/`;
+                        addAlert('success', res.data.message)
+                        navigate('admin')
                     }
                     else{
                         addAlert('error', res.response?.data)

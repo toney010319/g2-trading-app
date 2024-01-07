@@ -5,6 +5,7 @@ axios.defaults.headers.post['Authorization'] = token;
 axios.defaults.headers.get['Authorization'] = token;
 
 
+
 export const registerUser = async (event) => {
     event.preventDefault()
     
