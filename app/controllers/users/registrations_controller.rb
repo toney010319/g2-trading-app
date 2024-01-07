@@ -2,7 +2,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
   private
   def sign_up_params
-    params.require(:user).permit(:username, :email, :password, :birthday, :first_name, :middle_name, :last_name)
+    params.require(:user).permit(:username, :email, :password, :birthday, :first_name, :role, :middle_name, :last_name)
   end
   def respond_with(resource, _opts = {})
     if request.method == "POST" && resource.persisted?
