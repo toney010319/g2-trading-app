@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
+  has_many :transactions, dependent: :destroy
   has_one :balance
   after_create :create_balance
 

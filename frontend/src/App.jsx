@@ -21,7 +21,6 @@ const removeAlert = (index) => {
   setAlerts(prev => prev.filter((a, i) => i !== index))  
 }
 
-
   return (
     <>
       <div className="relative">

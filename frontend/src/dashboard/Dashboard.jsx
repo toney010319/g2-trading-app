@@ -19,8 +19,6 @@ import MarketForex from "./pages/forex/MarketForex";
 import TransactionHistory from "./pages/others/TransactionHistory";
 import Referrals from "./pages/others/Referrals";
 import Support from "./pages/others/Support";
-
-
 // eslint-disable-next-line react/prop-types
 const Dashboard = ({addAlert}) => {
     return (

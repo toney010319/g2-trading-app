@@ -1,4 +1,5 @@
 class BalancesController < ApplicationController
+before_action :authenticate_user!, only: [:add_balance ]
 
  def add_balance
     user = User.find(params[:user_id])
@@ -13,13 +14,4 @@ class BalancesController < ApplicationController
 
     render json: @balances
   end
-
-  # private
-
-  # def authenticate_user
-  #   return if controller_name == 'registrations'
-  #   auth_token = request.headers['Authorization'].split(' ').last
-  #   @current_user = User.find_by(auth_token: auth_token)
-  # end
-
 end

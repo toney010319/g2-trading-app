@@ -12,10 +12,14 @@ const Deposit = ( {addAlert} ) => {
     const handlePayNow = async () => {
  
         try {
-          const response = await addBalance(balance, user_id);
-          console.log(response)
-          addAlert('success', 'Deposit successful!');
-          navigate('/dashboard')
+        const transactionData = {
+            transaction_category: 'Deposit',
+            date: new Date()
+            };
+        const response = await addBalance(balance, user_id, transactionData);
+        console.log(response, user_id)
+        addAlert('success', 'Deposit successful!');
+        navigate('/dashboard')
     
         } catch (error) {
         if (error.response) {

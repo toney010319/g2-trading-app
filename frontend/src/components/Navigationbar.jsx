@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import PaymentMethodsModal from "../dashboard/modals/PaymentMethodsModal";
+import axios from "axios";
 
 // import Navbalance from "./subcomponents/Navbalance";
 import { useState } from "react";
@@ -15,10 +16,16 @@ const Navigationbar = ({addAlert}) => {
     }
 
     const handleLogout = () => {
+        document.cookie = 'token=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+        document.cookie = 'user_id=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+        delete axios.defaults.headers.post['Authorization'];
+        delete axios.defaults.headers.get['Authorization'];
         navigate('/')
         addAlert('success', 'You have successfully logged out')
         // console.log('test', setBalance)
     }   
+
+    
 
  return (
     

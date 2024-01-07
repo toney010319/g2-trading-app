@@ -1,23 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
- 
+import axios from "axios";
 import Logo from "../assets/Logo";
-import { loginUser } from "../lib/api";
 // eslint-disable-next-line react/prop-types
 const Login = ({addAlert}) => {
     const [agreed, setAgreed] = useState(false);
     const navigate = useNavigate();
 
-    
-
-   
-
     const handleRegister = () => {
         navigate('/register')
     }
     
+    const loginUser = async (event) => {
+        event.preventDefault();
+      
+        const formData = new FormData(event.target);
+        const user = {
+          user: {
+            email: formData.get('email'),
+            password: formData.get('password'),
+          },
+        };
+      
+        try {
+          const res = await axios.post('http://localhost:3000/login', user);
+          console.log(res);
+          return res;
+        } catch (error) {
+          console.log(error);
+          return error;
+        }
+      };
     
-     
+      useEffect(() => {
+        const token = document.cookie.split('token=')[1];
+        if (token) {
+          navigate('/dashboard');
+        }
+      }, [navigate]);
+
+
     return (
     <>
     <div className="flex flex-col justify-center items-center align-center content-center w-screen h-screen">

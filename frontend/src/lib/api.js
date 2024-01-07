@@ -1,6 +1,9 @@
 import axios from 'axios';
 const token = document.cookie.split('token=')[1]; 
-axios.defaults.headers.common['Authorization'] = token;
+console.log('Token', token)
+axios.defaults.headers.post['Authorization'] = token;
+axios.defaults.headers.get['Authorization'] = token;
+
 
 export const registerUser = async (event) => {
     event.preventDefault()
@@ -38,27 +41,6 @@ export const registerUser = async (event) => {
       }
 };
 
-export const loginUser = async (event) => {
-    event.preventDefault()
-    
-    const formData = new FormData(event.target)
-    const user = {user:{
-      email: formData.get('email'),
-        password: formData.get('password'),
-    }
-    }
-   
-  try {
-      const res = await axios.post('http://localhost:3000/login', user)
-      console.log(res)
-      return res
-  } catch (error){
-    console.log(error)
-      return error;
-  }
-}
-
-
 export const logoutUser = async (event) => {
   event.preventDefault()
   
@@ -71,17 +53,52 @@ export const logoutUser = async (event) => {
  
 try {
     const res = await axios.post('http://localhost:3000/login', user)
+    delete axios.defaults.headers.common['Authorization'];
     return res.data
 } catch (error){
     return error;
 }
 }
 
-export const addBalance = async (balance, user_id) => {
-  const response = await axios.post('http://localhost:3000/add_balance', {
-    balance,
-    user_id
-  });
+export const addBalance = async (balance, user_id, transactionData) => {
+  const token = document.cookie.split('token=')[1];
+  try {
+    const addBalanceResponse = await axios.post('http://localhost:3000/add_balance', {
+      headers: {
+        Authorization: token,
+      },
+      balance,
+      user_id,
+    });
 
-  return response.data;
-}
+    const transactionResponse = await axios.post('http://localhost:3000/transactions', {
+      headers: {
+        Authorization: token,
+      },
+      balance,
+      user_id,
+      ...transactionData,
+    });
+
+    return {
+      addBalanceResponse: addBalanceResponse.data,
+      transactionResponse: transactionResponse.data,
+    };
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getTransactions = async (user_id) => {
+  try {
+    const token = document.cookie.split('token=')[1];
+    const response = await axios.get(`http://localhost:3000/transactions?user_id=${user_id}`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
