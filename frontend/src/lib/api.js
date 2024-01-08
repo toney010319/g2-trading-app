@@ -1,6 +1,5 @@
 import axios from 'axios';
 const token = document.cookie.split('token=')[1]; 
-console.log('Token', token)
 axios.defaults.headers.common['Authorization'] = token;
 
 
@@ -84,6 +83,16 @@ export const addBalance = async (balance, user_id, transactionData) => {
 export const getTransactions = async (user_id) => {
   try {
     const response = await axios.get(`http://localhost:3000/transactions?user_id=${user_id}`, {
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getUserBalance = async (user_id) => {
+  try {
+    const response = await axios.get(`http://localhost:3000/balance?user_id=${user_id}`, {
     });
     return response.data;
   } catch (error) {

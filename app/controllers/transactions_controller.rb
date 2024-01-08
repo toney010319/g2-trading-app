@@ -1,11 +1,9 @@
 class TransactionsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :index]
+  before_action :authenticate_user!, only: [:create, :index, :show]
 
   def create
     user = User.find(params[:user_id])
     amount = params[:balance].to_f
-    user.balance.balance += amount
-    user.balance.save
 
     transaction_number = rand(100_000..999_999).to_s
     transaction_type, transfer_type = if amount.positive?
