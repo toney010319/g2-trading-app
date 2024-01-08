@@ -1,8 +1,6 @@
 # README
 
-# Your Project Name
-
-Trading App
+# Stock, Forex & Crypto Trading App
 
 ## Table of Contents
 
