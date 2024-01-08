@@ -39,6 +39,12 @@ const Login = ({addAlert}) => {
         }
       }, [navigate]);
 
+      useEffect(() => {
+        return () => {
+          axios.defaults.headers.common["Authorization"] = undefined;
+        };
+      }, []);
+
 
     return (
     <>

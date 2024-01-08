@@ -1,9 +1,7 @@
 import axios from 'axios';
 const token = document.cookie.split('token=')[1]; 
 console.log('Token', token)
-axios.defaults.headers.post['Authorization'] = token;
-axios.defaults.headers.get['Authorization'] = token;
-
+axios.defaults.headers.common['Authorization'] = token;
 
 
 export const registerUser = async (event) => {
@@ -62,20 +60,13 @@ try {
 }
 
 export const addBalance = async (balance, user_id, transactionData) => {
-  const token = document.cookie.split('token=')[1];
   try {
     const addBalanceResponse = await axios.post('http://localhost:3000/add_balance', {
-      headers: {
-        Authorization: token,
-      },
       balance,
       user_id,
     });
 
     const transactionResponse = await axios.post('http://localhost:3000/transactions', {
-      headers: {
-        Authorization: token,
-      },
       balance,
       user_id,
       ...transactionData,
@@ -92,11 +83,7 @@ export const addBalance = async (balance, user_id, transactionData) => {
 
 export const getTransactions = async (user_id) => {
   try {
-    const token = document.cookie.split('token=')[1];
     const response = await axios.get(`http://localhost:3000/transactions?user_id=${user_id}`, {
-      headers: {
-        Authorization: token,
-      },
     });
     return response.data;
   } catch (error) {

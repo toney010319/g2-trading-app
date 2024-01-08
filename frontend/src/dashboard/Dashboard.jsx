@@ -19,9 +19,22 @@ import MarketForex from "./pages/forex/MarketForex";
 import TransactionHistory from "./pages/others/TransactionHistory";
 import Referrals from "./pages/others/Referrals";
 import Support from "./pages/others/Support";
+import axios from "axios";
+import { useEffect } from "react";
 // eslint-disable-next-line react/prop-types
 const Dashboard = ({addAlert}) => {
+
+    useEffect(() => {
+        const initiateAuthorization = () => {
+          const token = document.cookie.split('token=')[1];
+          if (token) {
+            axios.defaults.headers.common['Authorization'] = token;
+          }
+        };
+        initiateAuthorization();
+      }, []);
     return (
+
     <>
     <DashboardLayout addAlert={addAlert}>
         <Routes>
