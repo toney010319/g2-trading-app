@@ -7,3 +7,22 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require 'json'
+json_data = File.read(Rails.root.join('data/cryptolist.data 1.9.24.json'))
+crypto_data = JSON.parse(json_data)
+
+
+crypto_data.each do |crypto|
+  Cryptocurrency.create(crypto)
+end
+
+require 'json'
+
+
+json_data = File.read(Rails.root.join('data/stocks.data.sorted 1.9.24.json'))
+stocks_data = JSON.parse(json_data)
+
+
+stocks_data.each do |crypto|
+  Stock.create(crypto)
+end

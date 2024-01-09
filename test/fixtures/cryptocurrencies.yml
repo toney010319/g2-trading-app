@@ -1,0 +1,33 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  symbol: MyString
+  name: MyString
+  price: 9.99
+  changes_percentage: 9.99
+  change: 9.99
+  day_low: 9.99
+  day_high: 9.99
+  year_high: 9.99
+  year_low: 9.99
+  market_cap: 9.99
+  exchange: MyString
+  volume: 9.99
+  avg_volume: 9.99
+  shares_outstanding: 1
+
+two:
+  symbol: MyString
+  name: MyString
+  price: 9.99
+  changes_percentage: 9.99
+  change: 9.99
+  day_low: 9.99
+  day_high: 9.99
+  year_high: 9.99
+  year_low: 9.99
+  market_cap: 9.99
+  exchange: MyString
+  volume: 9.99
+  avg_volume: 9.99
+  shares_outstanding: 1
