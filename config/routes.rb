@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  get '/users', to: 'users#show'
   resources :transactions, only: [:create, :index]
   get '/transactions/show', to: 'transactions#show'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

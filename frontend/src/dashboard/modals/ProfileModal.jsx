@@ -2,6 +2,8 @@
 import { getUserBalance } from "../../lib/api";
 import { useState, useEffect, useMemo } from "react";
 import Loading from "../../components/Loading";
+import { Link } from "react-router-dom";
+
 // eslint-disable-next-line react/prop-types
 const ProfileModal = ({setShowModal}) => {
   const user_id = document.cookie.split('user_id=')[1];
@@ -50,6 +52,9 @@ const ProfileModal = ({setShowModal}) => {
 
     
       <div className="flex flex-col pb-2">
+        <Link to = 'myprofile'>
+          <button className="text-blue-500 hover:text-blue-700">View Profile</button>
+        </Link>
         <button className="text-blue-500 hover:text-blue-700">Change Password</button>
         <button className="text-blue-500 hover:text-blue-700">Settings</button>
       </div>
