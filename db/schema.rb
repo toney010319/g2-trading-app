@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_07_114758) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_09_171347) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,42 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_07_114758) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_balances_on_user_id"
+  end
+
+  create_table "cryptocurrencies", force: :cascade do |t|
+    t.string "symbol"
+    t.string "name"
+    t.decimal "price"
+    t.decimal "changes_percentage"
+    t.decimal "change"
+    t.decimal "day_low"
+    t.decimal "day_high"
+    t.decimal "year_high"
+    t.decimal "year_low"
+    t.decimal "market_cap"
+    t.string "exchange"
+    t.decimal "volume"
+    t.decimal "avg_volume"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stocks", force: :cascade do |t|
+    t.string "symbol"
+    t.string "name"
+    t.decimal "price"
+    t.decimal "changes_percentage"
+    t.decimal "change"
+    t.decimal "day_low"
+    t.decimal "day_high"
+    t.decimal "year_high"
+    t.decimal "year_low"
+    t.bigint "market_cap"
+    t.string "exchange"
+    t.integer "volume"
+    t.integer "avg_volume"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "devise_api_tokens", force: :cascade do |t|
