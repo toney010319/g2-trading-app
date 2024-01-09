@@ -7,6 +7,7 @@ import Alertbox from './components/Alertbox';
 import { useState } from 'react';
 import Deposit from './dashboard/Deposit';
 import AdminDashboard from './admin/AdminDashboard';
+import MyProfile from './dashboard/Myprofile';
 
 const App = () => {
 const [alerts, setAlerts] = useState([]); 
@@ -43,7 +44,8 @@ const removeAlert = (index) => {
                 <Route path="/admin" element={<AdminDashboard addAlert={addAlert}/>} />
                 <Route path="/register" element={<Registration addAlert={addAlert} />} />
                 <Route path ="/deposit" element={<Deposit addAlert={addAlert}/>} />
-              </Routes>
+                <Route path="/my-profile" element={<MyProfile addAlert={addAlert} />} />
+          </Routes>
             </BrowserRouter>
           </div>
       </div>
