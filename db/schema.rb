@@ -25,7 +25,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_07_114758) do
   create_table "transactions", force: :cascade do |t|
     t.bigint "user_id"
     t.string "transaction_number", null: false
-    t.datetime "date", null: false
+    t.datetime "date"
     t.float "amount", null: false
     t.string "debit_credit", null: false
     t.string "transaction_type", null: false
@@ -56,7 +56,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_07_114758) do
     t.boolean "email_confirmed"
     t.string "status"
     t.string "role"
-    t.string "auth_token"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["jti"], name: "index_users_on_jti", unique: true
