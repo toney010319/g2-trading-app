@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   }
 
   resources :transactions, only: [:create, :index]
+  resources :admins, only: [:index, :show, :create, :update, :destroy]
+
   get '/transactions/show', to: 'transactions#show'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

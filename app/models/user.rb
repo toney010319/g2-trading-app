@@ -20,7 +20,10 @@ class User < ApplicationRecord
   validates :password, presence: true
   validate :at_least_18
 
-
+  def admin?
+    role == 'admin'
+  end
+  
   def create_balance
     self.balance = Balance.new(balance: 0)
   end
