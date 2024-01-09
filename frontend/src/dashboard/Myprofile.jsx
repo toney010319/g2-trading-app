@@ -3,27 +3,22 @@ import { useState, useEffect, useMemo } from 'react';
 import Loading from '../../../frontend/src/components/Loading';
 
 const MyProfile = () => {
-  const [profile, setProfile] = useState();
+  const [profile, setProfile] = useState([]);
   const [loading, setLoading] = useState(true);
   const user_id = document.cookie.split('user_id=')[1];
 
- 
-
+  const fetchProfile = async () => {
+    let response = await getProfile(user_id)
+    setProfile(response)
+    setLoading(false)
+    return response
+  }
+  
   useEffect(() => {
-    const fetchProfile = async () => {
-        try {
-          const response = await getProfile(user_id);
-          setProfile(response);
-          setLoading(false);
-        } catch (error) {
-          console.error('Error fetching Profile', error);
-          setLoading(false);
-        }
-      }; 
-      fetchProfile()
-  }, []);
-    console.log(profile, "string")
+  fetchProfile()
+  },[])
 
+  console.log(profile)
   return (
     <>
     <section className="container mx-auto p-6 font-mono">
@@ -41,18 +36,17 @@ const MyProfile = () => {
               </tr>
             </thead>
             <tbody className="bg-white">
-              {loading ? (
-                <tr>
-                  <td colSpan="6" className="text-center py-4">
-                    <div className="flex justify-center w-full h-10">
-                      <Loading />
-                    </div>
-                  </td>
-                </tr>
-              ) : (
-                profile.length > 0 ? (
-                  profile.map((profile) => (
-                    <tr key={profile.id} className="text-gray-700">
+                {loading ? (
+                  <tr>
+                    <td colSpan="6" className="text-center py-4">
+                      <div className="flex justify-center w-full h-10">
+                        <Loading />
+                      </div>
+                    </td>
+                  </tr>
+                ) : (
+                  profile ? (
+                    <tr className="text-gray-700">
                       <td className="px-2 py-2 border">
                         <div className="flex items-center text-sm">
                           <div>
@@ -61,23 +55,17 @@ const MyProfile = () => {
                         </div>
                       </td>
                       <td className="px-4 py-3 text-ms font-semibold border">{profile.email}</td>
-                      {/* <td className="px-4 py-3 text-ms font-semibold border">{profile.username}</td>
-                      <td className="px-4 py-3 text-ms font-semibold border">{profile.first_name}</td>
-                      <td className="px-4 py-3 text-ms font-semibold border">{profile.middle_name}</td>
-                      <td className="px-4 py-3 text-ms font-semibold border">{profile.last_name}</td> */}
-                      <td className="px-4 py-3 text-xs border">
+
+                    </tr>
+                  ) : (
+                    <tr>
+                      <td colSpan="6" className="text-center py-4">
+                        No Profile
                       </td>
                     </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="6" className="text-center py-4">
-                      No Profile
-                    </td>
-                  </tr>
-                )
-              )}
-            </tbody>
+                  )
+                )}
+              </tbody>
           </table>
         </div>
       </div>

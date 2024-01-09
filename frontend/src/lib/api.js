@@ -93,7 +93,7 @@ export const getTransactions = async (user_id) => {
 export const getProfile = async (user_id) => {
   try {
     const response = await axios.get(`http://localhost:3000/users?user_id=${user_id}`, {
-    }); console.log (response.data)
+    });
     return response.data;
   } catch (error) {
     return error;
