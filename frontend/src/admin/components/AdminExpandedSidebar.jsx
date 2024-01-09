@@ -30,7 +30,7 @@ const AdminExpandedSidebar = () => {
                 <img src="https://www.svgrepo.com/show/189071/files-folder.svg" 
                   width="30" 
                   alt="Portfolio" />
-                <span className="font-bold text-lg ml-2">Portoflio</span>
+                <span className="font-bold text-lg ml-2">Create User</span>
               </div>
             </Link>
           

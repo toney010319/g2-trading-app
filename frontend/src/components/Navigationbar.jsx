@@ -1,10 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PaymentMethodsModal from "../dashboard/modals/PaymentMethodsModal";
 import axios from "axios";
 import ProfileModal from "../dashboard/modals/ProfileModal";
 
 // import Navbalance from "./subcomponents/Navbalance";
 import { useState } from "react";
+import { logoutUser } from "../lib/api";
 
 // eslint-disable-next-line react/prop-types
 const Navigationbar = ({addAlert}) => {
@@ -23,11 +24,11 @@ const Navigationbar = ({addAlert}) => {
       };
 
 
-    const handleLogout = () => {
+    const handleLogout = (event) => {
+        logoutUser(event)
         document.cookie = 'token=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
         document.cookie = 'user_id=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
-        delete axios.defaults.headers.post['Authorization'];
-        delete axios.defaults.headers.get['Authorization'];
+       
         navigate('/')
         addAlert('success', 'You have successfully logged out')
         // console.log('test', setBalance)
