@@ -42,16 +42,9 @@ export const registerUser = async (event) => {
 export const logoutUser = async (event) => {
   event.preventDefault()
   
-  const formData = new FormData(event.target)
-  const user = {user:{
-    email: formData.get('email'),
-      password: formData.get('password'),
-  }
-  }
- 
 try {
-    const res = await axios.post('http://localhost:3000/login', user)
-    delete axios.defaults.headers.common['Authorization'];
+    const res = await axios.delete('http://localhost:3000/logout')
+    console.log(res)
     return res.data
 } catch (error){
     return error;
