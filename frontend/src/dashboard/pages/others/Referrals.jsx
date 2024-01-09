@@ -1,8 +1,10 @@
 const Referrals = () => {
     return (
+        <>
         <div>
-            <h1>Referrals</h1>
+            Referrals
         </div>
+        </>
     )
 }
 

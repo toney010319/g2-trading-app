@@ -8,8 +8,8 @@ import FolioCrypto from "./pages/portfolio/FolioCrypto";
 import FolioStocks from "./pages/portfolio/FolioStocks";
 import FolioForex from "./pages/portfolio/FolioForex";
 import Stocks from "./pages/stocks/Stocks";
-import BuyStocks from "./pages/stocks/buystocks";
-import MarketStocks from "./pages/stocks/marketstocks";
+import BuyStocks from "./pages/stocks/BuyStocks";
+import MarketStocks from "./pages/stocks/MarketStocks";
 import Crypto from "./pages/crypto/Crypto";
 import BuyCrypto from "./pages/crypto/BuyCrypto";
 import MarketCrypto from "./pages/crypto/MarketCrypto";
@@ -19,11 +19,23 @@ import MarketForex from "./pages/forex/MarketForex";
 import TransactionHistory from "./pages/others/TransactionHistory";
 import Referrals from "./pages/others/Referrals";
 import Support from "./pages/others/Support";
-import MyProfile from "./Myprofile";
+import axios from "axios";
+import { useEffect } from "react";import MyProfile from "./Myprofile";
 
 // eslint-disable-next-line react/prop-types
 const Dashboard = ({addAlert}) => {
+
+    useEffect(() => {
+        const initiateAuthorization = () => {
+          const token = document.cookie.split('token=')[1];
+          if (token) {
+            axios.defaults.headers.common['Authorization'] = token;
+          }
+        };
+        initiateAuthorization();
+      }, []);
     return (
+
     <>
     <DashboardLayout addAlert={addAlert}>
         <Routes>
