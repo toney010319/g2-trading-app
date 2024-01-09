@@ -19,6 +19,7 @@ import MarketForex from "./pages/forex/MarketForex";
 import TransactionHistory from "./pages/others/TransactionHistory";
 import Referrals from "./pages/others/Referrals";
 import Support from "./pages/others/Support";
+import MyProfile from "./Myprofile";
 
 // eslint-disable-next-line react/prop-types
 const Dashboard = ({addAlert}) => {
@@ -45,6 +46,7 @@ const Dashboard = ({addAlert}) => {
                 <Route path="transactions" element={<TransactionHistory/>} />
                 <Route path="referrals" element={<Referrals />} />
                 <Route path="support" element={<Support />} />
+                <Route path="myprofile" element={<MyProfile />} />
         </Routes>
     </DashboardLayout>
     </>
