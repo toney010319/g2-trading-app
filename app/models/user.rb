@@ -2,6 +2,7 @@ class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
   has_many :transactions, dependent: :destroy
   has_one :balance, dependent: :destroy
+  accepts_nested_attributes_for :balance, allow_destroy: true
   after_create :create_balance
 
   devise :database_authenticatable, :registerable, :validatable, :confirmable,
@@ -16,8 +17,8 @@ class User < ApplicationRecord
   validates :birthday, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :middle_name, presence: true
-  validates :password, presence: true
+  validates :middle_name, presence: true 
+  validates :password, presence: true, on: :create
   validate :at_least_18
 
   def admin?
@@ -29,7 +30,6 @@ class User < ApplicationRecord
   end
 
   private
-
          def at_least_18
            if birthday.present? && birthday > 18.years.ago
              errors.add(:base, 'You must be 18 years old or above.')
