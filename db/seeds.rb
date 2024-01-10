@@ -10,19 +10,34 @@
 require 'json'
 json_data = File.read(Rails.root.join('data/cryptolist.data 1.9.24.json'))
 crypto_data = JSON.parse(json_data)
-
-
 crypto_data.each do |crypto|
   Cryptocurrency.create(crypto)
 end
 
 require 'json'
-
-
 json_data = File.read(Rails.root.join('data/stocks.data.sorted 1.9.24.json'))
 stocks_data = JSON.parse(json_data)
-
-
 stocks_data.each do |crypto|
   Stock.create(crypto)
 end
+
+require 'json'
+json_data = File.read(Rails.root.join('data/forex.data.sorted 1.10.24.json'))
+currency_data = JSON.parse(json_data)
+currency_data.each do |currency|
+  Currency.create(currency)
+end
+
+admin_user = User.create!(
+  email: 'admin@stellarmarkets.com',
+  password: 'admin1234',
+  confirmed_at: Time.now,
+  first_name: 'Admin',
+  middle_name: 'Admin',
+  last_name: 'User',
+  username: 'admin',
+  birthday: Date.new(1990, 1, 1),
+  email_confirmed: true,
+  status: 'active',
+  role: 'admin'
+)

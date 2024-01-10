@@ -1,68 +1,78 @@
-import axios from 'axios';
-const token = document.cookie.split('token=')[1]; 
-axios.defaults.headers.common['Authorization'] = token;
-
+import axios from "axios";
+const token = document.cookie.split("token=")[1];
+axios.defaults.headers.common["Authorization"] = token;
 
 export const registerUser = async (event) => {
-    event.preventDefault()
-    
-    const formData = new FormData(event.target)
-    const password = formData.get('password');
-    const confirmPassword = formData.get('confirmPassword');
+  event.preventDefault();
 
-    if (password !== confirmPassword) {
-      // return {errors:['Passwords do not match']};
-      return { response: { data: { status: { code: 422, message: 'Passwords do not match' } } } };
+  const formData = new FormData(event.target);
+  const password = formData.get("password");
+  const confirmPassword = formData.get("confirmPassword");
+
+  if (password !== confirmPassword) {
+    // return {errors:['Passwords do not match']};
+    return {
+      response: {
+        data: { status: { code: 422, message: "Passwords do not match" } },
+      },
+    };
+  }
+
+  const newUser = {
+    user: {
+      first_name: formData.get("firstName"),
+      middle_name: formData.get("middleName"),
+      last_name: formData.get("lastName"),
+      username: formData.get("username"),
+      password: formData.get("password"),
+      birthday: formData.get("birthday"),
+      email: formData.get("email"),
+    },
+  };
+  try {
+    const res = await axios.post("http://localhost:3000/signup", newUser);
+    console.log(res);
+    return res;
+  } catch (error) {
+    if (error.response) {
+      console.log(error);
+      return error;
+    } else {
+      return error;
     }
-
-
-    const newUser = {user:{
-      first_name: formData.get('firstName'),
-      middle_name: formData.get('middleName'),
-      last_name: formData.get('lastName'),
-        username: formData.get('username'),
-        password: formData.get('password'),
-        birthday: formData.get('birthday'),
-        email: formData.get('email'),
-    }}
-    try {
-        const res = await axios.post('http://localhost:3000/signup', newUser);
-        console.log(res)
-        return res
-    } catch (error) {
-        if (error.response) {
-          console.log(error)
-          return error 
-        } else {
-          return error;
-        }
-      }
+  }
 };
 
 export const logoutUser = async (event) => {
-  event.preventDefault()
-  
-try {
-    const res = await axios.delete('http://localhost:3000/logout')
-    console.log(res)
-    return res.data
-} catch (error){
+  event.preventDefault();
+
+  try {
+    const res = await axios.delete("http://localhost:3000/logout");
+    console.log(res);
+    return res.data;
+  } catch (error) {
     return error;
-}
-}
+  }
+};
 
 export const addBalance = async (balance, user_id, transactionData) => {
   try {
-    const addBalanceResponse = await axios.post('http://localhost:3000/add_balance', {
-      balance,
-      user_id,
-    });
+    const addBalanceResponse = await axios.post(
+      "http://localhost:3000/add_balance",
+      {
+        balance,
+        user_id,
+      }
+    );
 
-    const transactionResponse = await axios.post('http://localhost:3000/transactions', {
-      balance,
-      user_id,
-      ...transactionData,
-    });
+    const transactionResponse = await axios.post(
+      "http://localhost:3000/transactions",
+      {
+        balance,
+        user_id,
+        ...transactionData,
+      }
+    );
 
     return {
       addBalanceResponse: addBalanceResponse.data,
@@ -73,10 +83,68 @@ export const addBalance = async (balance, user_id, transactionData) => {
   }
 };
 
+export const addStockBalance = async (balance, user_id, transactionData) => {
+  try {
+    const addStockBalanceResponse = await axios.post(
+      "http://localhost:3000/add_stock_balance",
+      {
+        balance,
+        user_id,
+      }
+    );
+
+    const transactionResponse = await axios.post(
+      "http://localhost:3000/transactions",
+      {
+        balance,
+        user_id,
+        ...transactionData,
+      }
+    );
+
+    return {
+      addBalanceResponse: addStockBalanceResponse.data,
+      transactionResponse: transactionResponse.data,
+    };
+  } catch (error) {
+    return error;
+  }
+};
+
+export const revertStockBalance = async (balance, user_id, transactionData) => {
+  try {
+    const revertStockBalanceResponse = await axios.post(
+      "http://localhost:3000/revert_stock_balance",
+      {
+        balance,
+        user_id,
+      }
+    );
+
+    const transactionResponse = await axios.post(
+      "http://localhost:3000/transactions",
+      {
+        balance,
+        user_id,
+        ...transactionData,
+      }
+    );
+
+    return {
+      revertBalanceResponse: revertStockBalanceResponse.data,
+      transactionResponse: transactionResponse.data,
+    };
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getTransactions = async (user_id) => {
   try {
-    const response = await axios.get(`http://localhost:3000/transactions?user_id=${user_id}`, {
-    });
+    const response = await axios.get(
+      `http://localhost:3000/transactions?user_id=${user_id}`,
+      {}
+    );
     return response.data;
   } catch (error) {
     return error;
@@ -85,8 +153,10 @@ export const getTransactions = async (user_id) => {
 
 export const getProfile = async (user_id) => {
   try {
-    const response = await axios.get(`http://localhost:3000/users?user_id=${user_id}`, {
-    });
+    const response = await axios.get(
+      `http://localhost:3000/users?user_id=${user_id}`,
+      {}
+    );
     return response.data;
   } catch (error) {
     return error;
@@ -95,8 +165,10 @@ export const getProfile = async (user_id) => {
 
 export const getUserBalance = async (user_id) => {
   try {
-    const response = await axios.get(`http://localhost:3000/balance?user_id=${user_id}`, {
-    });
+    const response = await axios.get(
+      `http://localhost:3000/balance?user_id=${user_id}`,
+      {}
+    );
     return response.data;
   } catch (error) {
     return error;
@@ -105,8 +177,7 @@ export const getUserBalance = async (user_id) => {
 
 export const getStockList = async () => {
   try {
-    const response = await axios.get(`http://localhost:3000/stocks_list`, {
-    });
+    const response = await axios.get(`http://localhost:3000/stocks_list`, {});
     return response.data;
   } catch (error) {
     return error;
@@ -115,8 +186,7 @@ export const getStockList = async () => {
 
 export const getCryptoList = async () => {
   try {
-    const response = await axios.get(`http://localhost:3000/crypto_list`, {
-    });
+    const response = await axios.get(`http://localhost:3000/crypto_list`, {});
     return response.data;
   } catch (error) {
     return error;
@@ -125,8 +195,7 @@ export const getCryptoList = async () => {
 
 export const getForexList = async () => {
   try {
-    const response = await axios.get(`http://localhost:3000/currency_list`, {
-    });
+    const response = await axios.get(`http://localhost:3000/currency_list`, {});
     return response.data;
   } catch (error) {
     return error;

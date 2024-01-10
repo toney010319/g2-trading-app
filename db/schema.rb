@@ -10,13 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_09_171347) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_10_025837) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "balances", force: :cascade do |t|
     t.bigint "user_id"
     t.decimal "balance"
+    t.decimal "crypto"
+    t.decimal "stocks"
+    t.decimal "forex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_balances_on_user_id"
@@ -36,6 +39,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_09_171347) do
     t.string "exchange"
     t.decimal "volume"
     t.decimal "avg_volume"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "currencies", force: :cascade do |t|
+    t.string "symbol"
+    t.string "name"
+    t.string "country"
+    t.float "price"
+    t.float "changes_percentage"
+    t.float "change"
+    t.float "day_low"
+    t.float "day_high"
+    t.float "year_high"
+    t.float "year_low"
+    t.float "market_cap"
+    t.integer "volume"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
