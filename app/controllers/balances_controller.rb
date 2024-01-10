@@ -1,5 +1,5 @@
 class BalancesController < ApplicationController
-  before_action :authenticate_user!, only: :all
+  before_action :authenticate_user!
 
 def add_balance
   user = User.find(params[:user_id])

@@ -1,4 +1,4 @@
-import { getTransactions } from '../../../lib/api'
+import { getStockList} from '../../../lib/api'
 import { useState, useEffect, useMemo } from 'react';
 import Loading from '../../../components/Loading';
 
@@ -9,7 +9,7 @@ const TransactionHistory = () => {
 
   const fetchTransactionsMemoized = useMemo(() => async () => {
     try {
-      const response = await getTransactions(user_id);
+      const response = await getStockList(user_id);
       setTransactions(response);
       setLoading(false);
     } catch (error) {

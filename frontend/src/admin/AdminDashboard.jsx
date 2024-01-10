@@ -3,8 +3,9 @@ import AdminDashboardHome from "./AdminDashboardHome";
 import AdminDashboardLayout from "./AdminDashboardLayout";
 import { useEffect } from "react";
 import axios from "axios";
-
+// eslint-disable-next-line react/prop-types
 const AdminDashboard = ({ addAlert }) => {
+
   useEffect(() => {
     const initiateAuthorization = () => {
       const token = document.cookie.split("token=")[1];
