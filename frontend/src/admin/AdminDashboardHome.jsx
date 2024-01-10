@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getUsers } from "../lib/adminapi"
+import { deleteUser, getUsers } from "../lib/adminapi"
 import Loading from "../components/Loading"
 import Modal from "./modals/modal"
 import { createPortal } from 'react-dom';
@@ -54,7 +54,15 @@ const AdminDashboardHome = () => {
         return null;
     }
   };
-
+  const handleDeleteUser = async (id) => {
+    try {
+      await deleteUser(id);
+      setUsers(users.filter((user) => user.id !== id));
+    }
+    catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  }
   return (
   <>
   <section className="container mx-auto p-6 font-mono">
@@ -97,7 +105,7 @@ const AdminDashboardHome = () => {
                   alt="edit" /></button>
                    
             </td>
-                      <td className="px-4 py-3 text-ms font-semibold border"><button ><img src="https://www.svgrepo.com/show/502608/delete-2.svg" 
+                      <td className="px-4 py-3 text-ms font-semibold border"><button onClick={()=> handleDeleteUser(user.id)}><img src="https://www.svgrepo.com/show/502608/delete-2.svg" 
                   width="25" 
                   alt="delete" /></button></td>
                       </tr>
@@ -111,7 +119,7 @@ const AdminDashboardHome = () => {
                   )
                 )}
           </tbody>
-        </table>
+      </table>
       </div>
     </div>
   </section>

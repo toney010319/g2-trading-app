@@ -43,11 +43,12 @@ class AdminsController < ApplicationController
   
    
     def destroy
+      user_data = render_user_data(@user)
       @user.destroy
       if @user.destroyed?
-        head :no_content
+        render json: user_data, status: :ok  
       else
-        render json: @user.errors, status: :unprocessable_entity
+        render_error(@user.errors)  
       end
     end
   
@@ -58,6 +59,7 @@ class AdminsController < ApplicationController
       user_data[:balance] = user.balance
       user_data[:transaction_history] = user.transactions.order(created_at: :desc).as_json
       render json: user_data
+    
     end
   
     def render_error(errors)
