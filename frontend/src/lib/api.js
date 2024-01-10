@@ -102,3 +102,33 @@ export const getUserBalance = async (user_id) => {
     return error;
   }
 };
+
+export const getStockList = async () => {
+  try {
+    const response = await axios.get(`http://localhost:3000/stocks_list`, {
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getCryptoList = async () => {
+  try {
+    const response = await axios.get(`http://localhost:3000/crypto_list`, {
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getForexList = async () => {
+  try {
+    const response = await axios.get(`http://localhost:3000/currency_list`, {
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
