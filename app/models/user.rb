@@ -29,7 +29,6 @@ class User < ApplicationRecord
   end
 
   private
-
          def at_least_18
            if birthday.present? && birthday > 18.years.ago
              errors.add(:base, 'You must be 18 years old or above.')
