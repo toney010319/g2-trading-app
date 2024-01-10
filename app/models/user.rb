@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
   has_many :transactions, dependent: :destroy
-  has_one :balance
+  has_one :balance, dependent: :destroy
   after_create :create_balance
 
   devise :database_authenticatable, :registerable, :validatable, :confirmable,

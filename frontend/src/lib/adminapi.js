@@ -13,15 +13,24 @@ export const getUsers = async () => {
     }
 }
 
-export const showUser = async (user_id) => {
+// export const showUser = async (user_id) => {
     
-    try {
+//     try {
       
-        const res = await axios.get(`http://localhost:3000/admins/${user_id}`)
+//         const res = await axios.get(`http://localhost:3000/admins/${user_id}`)
         
+//         return res.data
+//     } catch (error) {
+//         return error
+        
+//     }
+// }
+
+export const deleteUser = async (user_id) => {
+    try {
+        const res = await axios.delete(`http://localhost:3000/admins/${user_id}`)
         return res.data
     } catch (error) {
         return error
-        
     }
 }
