@@ -10,19 +10,20 @@
 require 'json'
 json_data = File.read(Rails.root.join('data/cryptolist.data 1.9.24.json'))
 crypto_data = JSON.parse(json_data)
-
-
 crypto_data.each do |crypto|
   Cryptocurrency.create(crypto)
 end
 
 require 'json'
-
-
 json_data = File.read(Rails.root.join('data/stocks.data.sorted 1.9.24.json'))
 stocks_data = JSON.parse(json_data)
-
-
 stocks_data.each do |crypto|
   Stock.create(crypto)
+end
+
+require 'json'
+json_data = File.read(Rails.root.join('data/forex.data.sorted 1.10.24.json'))
+currency_data = JSON.parse(json_data)
+currency_data.each do |currency|
+  Currency.create(currency)
 end
