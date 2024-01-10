@@ -86,7 +86,7 @@ export const addBalance = async (balance, user_id, transactionData) => {
 export const addStockBalance = async (balance, user_id, transactionData) => {
   try {
     const addStockBalanceResponse = await axios.post(
-      "http://localhost:3000/add__stock_balance",
+      "http://localhost:3000/add_stock_balance",
       {
         balance,
         user_id,
@@ -104,6 +104,34 @@ export const addStockBalance = async (balance, user_id, transactionData) => {
 
     return {
       addBalanceResponse: addStockBalanceResponse.data,
+      transactionResponse: transactionResponse.data,
+    };
+  } catch (error) {
+    return error;
+  }
+};
+
+export const revertStockBalance = async (balance, user_id, transactionData) => {
+  try {
+    const revertStockBalanceResponse = await axios.post(
+      "http://localhost:3000/revert_stock_balance",
+      {
+        balance,
+        user_id,
+      }
+    );
+
+    const transactionResponse = await axios.post(
+      "http://localhost:3000/transactions",
+      {
+        balance,
+        user_id,
+        ...transactionData,
+      }
+    );
+
+    return {
+      revertBalanceResponse: revertStockBalanceResponse.data,
       transactionResponse: transactionResponse.data,
     };
   } catch (error) {

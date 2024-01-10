@@ -1,29 +1,41 @@
 import React, { useState } from "react";
+import { addStockBalance, revertStockBalance } from "../../../lib/api";
 
 const BuyStocks = () => {
-  const [walletBalance, setWalletBalance] = useState();
-  const [stockBalance, setStockBalance] = useState(0);
   const [transferAmount, setTransferAmount] = useState("");
   const [selectedStock, setSelectedStock] = useState("");
   const [stockValue, setStockValue] = useState("");
+  const user_id = document.cookie.split("user_id=")[1];
 
-  const handleTransferToStock = () => {
-    console.log(
-      "Transfer from wallet to stock:",
-      transferAmount,
-      selectedStock
-    );
+  const handleTransferToStock = async () => {
+    try {
+      const { addBalanceResponse } = await addStockBalance(
+        transferAmount,
+        user_id
+      );
+      console.log(
+        "Transfer from wallet to stock successful:",
+        addBalanceResponse
+      );
+    } catch (error) {
+      console.error("Error transferring from wallet to stock:", error);
+    }
   };
 
-  const handleTransferToWallet = () => {
-    console.log(
-      "Transfer from stock to wallet:",
-      transferAmount,
-      selectedStock
-    );
+  const handleTransferToWallet = async () => {
+    try {
+      const { revertBalanceResponse } = await revertStockBalance(
+        transferAmount,
+        user_id
+      );
+      console.log(
+        "Transfer from stock to wallet successful:",
+        revertBalanceResponse
+      );
+    } catch (error) {
+      console.error("Error transferring from stock to wallet:", error);
+    }
   };
-
-  const stockOptions = ["Stock A", "Stock B", "Stock C"];
 
   return (
     <>
@@ -31,7 +43,7 @@ const BuyStocks = () => {
         <div className="bg-yellow-200">
           <div className="bg-green-200 rounded-md m-3">
             <div>Your Wallet</div>
-            <div>Balance: ${walletBalance}</div>
+            <div>Balance: </div>
           </div>
           <div className="m-3">
             <label htmlFor="transferAmount">Transfer Amount:</label>
@@ -49,7 +61,7 @@ const BuyStocks = () => {
         <div className="bg-blue-200 rounded-md">
           <div className="bg-green-200 rounded-md m-3">
             <div>Your Stock Wallet</div>
-            <div>Balance: ${stockBalance}</div>
+            <div>Balance: </div>
           </div>
           <div className="m-3">
             <label htmlFor="transferAmount">Transfer Amount:</label>
@@ -59,26 +71,6 @@ const BuyStocks = () => {
               value={transferAmount}
               onChange={(e) => setTransferAmount(e.target.value)}
             />
-            <br />
-            <label htmlFor="selectedStock">Select Stock:</label>
-            <select
-              id="selectedStock"
-              value={selectedStock}
-              onChange={(e) => {
-                setSelectedStock(e.target.value);
-              }}
-            >
-              <option value="">Choose a stock</option>
-              {stockOptions.map((stock) => (
-                <option key={stock} value={stock}>
-                  {stock}
-                </option>
-              ))}
-            </select>
-            <br />
-            <label htmlFor="stockValue">Stock Value:</label>
-            <div>{stockValue}</div>
-            <br />
             <button onClick={handleTransferToWallet}>Transfer to Wallet</button>
           </div>
         </div>
