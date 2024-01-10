@@ -7,8 +7,7 @@
     "dev": "concurrently \"cd ../app && rails s\" \"vite\" \"npm run mailcatcher\"",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "mailcatcher": "mailcatcher" 
+    "preview": "vite preview"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.1",
