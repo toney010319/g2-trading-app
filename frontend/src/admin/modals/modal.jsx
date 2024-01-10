@@ -5,7 +5,7 @@ const MODAL_STYLE = {
     top: "50%",
     left: "50%",
     transform: "translate(-50%,-50%)",
-    backgroundColor: "rgb(216, 209, 209)",
+    // backgroundColor: "rgb(216, 209, 209)",
     zIndex: 1000,
     padding: "50px 200px",
     borderRadius: "30px"
@@ -25,12 +25,12 @@ const MODAL_STYLE = {
       <>
         <div style={OVERLAY_STYLES} />
         <div style={MODAL_STYLE}>
-          <button
+          {/* <button
             onClick={onClose}
             className="absolute top-0 right-0  m-3 bg-gradient-to-b from-azure-300 to-azure-700 px-5  text-lg font-semibold text-slate-100 py-1 rounded-full shadow-slate-500 shadow-md hover:from-[#ff5b3e] hover:to-[#640d00f8] "
           >
             Close
-          </button>
+          </button> */}
           {children }
         </div>
       </>
