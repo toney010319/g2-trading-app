@@ -23,9 +23,9 @@ class User < ApplicationRecord
   def admin?
     role == 'admin'
   end
-  
+
   def create_balance
-    self.balance = Balance.new(balance: 0)
+    self.balance = Balance.new(balance: 0, stocks: 0, forex: 0, crypto: 0)
   end
 
   private
