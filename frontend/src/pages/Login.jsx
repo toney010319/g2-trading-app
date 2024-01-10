@@ -6,6 +6,7 @@ import Logo from "../assets/Logo";
 const Login = ({addAlert}) => {
     const [agreed, setAgreed] = useState(false);
     const navigate = useNavigate();
+    
 
     const handleRegister = () => {
         navigate('/register')
@@ -69,7 +70,9 @@ const Login = ({addAlert}) => {
                         document.cookie = `token=${token};path=/`;
                         document.cookie = `user_id=${user_id};path=/`;
                         addAlert('success', res.data.message)
-                        navigate('admin')
+                          navigate('admin')
+                        
+                       
                     }
                     else{
                         addAlert('error', res.response?.data)

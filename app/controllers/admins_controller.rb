@@ -2,14 +2,24 @@ class AdminsController < ApplicationController
     before_action :set_user, only: [:show, :update, :destroy]
     before_action :ensure_admin_user!
    before_action :authenticate_user!
-    def index
-      @users = User.all
-      render json: @users
+   def index
+    users = User.includes(:balance, :transactions).all
+    users_with_additional_info = users.map do |user|
+      user_attributes = user.attributes
+      user_attributes[:balance] = user.balance
+      user_attributes[:transaction_history] = user.transactions.order(created_at: :desc)
+      user_attributes
     end
+    render json: users_with_additional_info
+  end
   
    
     def show
-      render json: @user
+      user_data = @user.as_json
+      user_data[:balance] = @user.balance  
+      user_data[:transaction_history] = @user.transactions.order(created_at: :desc).as_json
+
+      render json: user_data
     end
   
     
@@ -25,9 +35,9 @@ class AdminsController < ApplicationController
  
     def update
       if @user.update(user_params)
-        render json: @user
+        render_user_data(@user)
       else
-        render json: @user.errors, status: :unprocessable_entity
+        render_error(@user.errors)
       end
     end
   
@@ -42,7 +52,17 @@ class AdminsController < ApplicationController
     end
   
     private
+    
+    def render_user_data(user)
+      user_data = user.as_json
+      user_data[:balance] = user.balance
+      user_data[:transaction_history] = user.transactions.order(created_at: :desc).as_json
+      render json: user_data
+    end
   
+    def render_error(errors)
+      render json: errors, status: :unprocessable_entity
+    end
   
     def set_user
       @user = User.find(params[:id])
