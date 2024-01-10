@@ -43,17 +43,25 @@ class AdminsController < ApplicationController
   
    
     def destroy
-      user_data = render_user_data(@user)
+      user_data_hash = user_data_hash(@user) 
       @user.destroy
       if @user.destroyed?
-        render json: user_data, status: :ok  
+        render json: user_data_hash, status: :ok  
       else
         render_error(@user.errors)  
       end
     end
   
+  
     private
-    
+    def user_data_hash(user)
+      {
+        user: user.as_json,
+        balance: user.balance,
+        transaction_history: user.transactions.order(created_at: :desc).as_json
+      }
+    end
+
     def render_user_data(user)
       user_data = user.as_json
       user_data[:balance] = user.balance
