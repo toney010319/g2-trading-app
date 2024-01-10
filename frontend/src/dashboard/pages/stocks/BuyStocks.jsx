@@ -1,22 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const BuyStocks = () => {
-  const [walletBalance, setWalletBalance] = useState(); 
+  const [walletBalance, setWalletBalance] = useState();
   const [stockBalance, setStockBalance] = useState(0);
-  const [transferAmount, setTransferAmount] = useState('');
-  const [selectedStock, setSelectedStock] = useState('');
-  const [stockValue, setStockValue] = useState('');
+  const [transferAmount, setTransferAmount] = useState("");
+  const [selectedStock, setSelectedStock] = useState("");
+  const [stockValue, setStockValue] = useState("");
 
   const handleTransferToStock = () => {
-    console.log('Transfer from wallet to stock:', transferAmount, selectedStock);
+    console.log(
+      "Transfer from wallet to stock:",
+      transferAmount,
+      selectedStock
+    );
   };
 
   const handleTransferToWallet = () => {
-    console.log('Transfer from stock to wallet:', transferAmount, selectedStock);
+    console.log(
+      "Transfer from stock to wallet:",
+      transferAmount,
+      selectedStock
+    );
   };
 
-
-  const stockOptions = ['Stock A', 'Stock B', 'Stock C'];
+  const stockOptions = ["Stock A", "Stock B", "Stock C"];
 
   return (
     <>
