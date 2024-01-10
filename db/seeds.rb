@@ -27,3 +27,17 @@ currency_data = JSON.parse(json_data)
 currency_data.each do |currency|
   Currency.create(currency)
 end
+
+admin_user = User.create!(
+  email: 'admin@stellarmarkets.com',
+  password: 'admin1234',
+  confirmed_at: Time.now,
+  first_name: 'Admin',
+  middle_name: 'Admin',
+  last_name: 'User',
+  username: 'admin',
+  birthday: Date.new(1990, 1, 1),
+  email_confirmed: true,
+  status: 'active',
+  role: 'admin'
+)
