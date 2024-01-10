@@ -3,8 +3,6 @@ import { addStockBalance, revertStockBalance } from "../../../lib/api";
 
 const BuyStocks = () => {
   const [transferAmount, setTransferAmount] = useState("");
-  const [selectedStock, setSelectedStock] = useState("");
-  const [stockValue, setStockValue] = useState("");
   const user_id = document.cookie.split("user_id=")[1];
 
   const handleTransferToStock = async () => {
