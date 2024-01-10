@@ -1,5 +1,5 @@
 
-import { getUserBalance } from "../../lib/api";
+import { getUserBalance, getProfile } from "../../lib/api";
 import { useState, useEffect, useMemo } from "react";
 import Loading from "../../components/Loading";
 import { Link } from "react-router-dom";
@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 // eslint-disable-next-line react/prop-types
 const ProfileModal = ({setShowModal}) => {
   const user_id = document.cookie.split('user_id=')[1];
+  const [profile, setProfile] = useState([]);
   const [balance, setBalance] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -22,8 +23,16 @@ const ProfileModal = ({setShowModal}) => {
       }
   }, [user_id]);
 
+  const fetchProfile = async () => {
+    let response = await getProfile(user_id)
+    setProfile(response)
+    setLoading(false)
+    return response
+  }
+
   useEffect(() => {
-    fetchBalanceMemoized();
+    fetchBalanceMemoized()
+    fetchProfile();
   }, [fetchBalanceMemoized]);
 
 
@@ -32,6 +41,11 @@ const ProfileModal = ({setShowModal}) => {
         <div className="flex flex-row justify between">
           <span className="flex-1 text-center text-2xl font-bold w-full">Profile</span>
         </div>
+
+        <div className="flex flex-row justify between">
+          <span className="flex-1 text-center font-bold w-full">Hi, {profile.first_name}</span>
+        </div>
+
       
         <div className="flex-1">
         <span className="flex justify-center text-gray-600 text-xl">Wallet Balance</span>

@@ -1,7 +1,22 @@
 import Logo from '../../../assets/Logo';
 import { Link } from 'react-router-dom';
+import { getProfile } from '../../../lib/api';
+import { useState, useEffect } from 'react';
 // eslint-disable-next-line react/prop-types
 const ExpandedSidebar = () => {
+  const [profile, setProfile] = useState([]);
+  const user_id = document.cookie.split('user_id=')[1];
+
+  const fetchProfile = async () => {
+    let response = await getProfile(user_id)
+    setProfile(response)
+    setLoading(false)
+    return response
+  }
+  
+  useEffect(() => {
+  fetchProfile()
+  },[])
 
   return (
     <>
@@ -223,8 +238,8 @@ const ExpandedSidebar = () => {
                   alt="avatar" />
                 </div>
                 <div className="flex justify-start flex-col items-start">
-                  <p className="cursor-pointer text-sm leading-5 text-white">DB Name</p>
-                  <p className="cursor-pointer text-xs leading-3 text-gray-300">DB Email</p>
+                  <p className="cursor-pointer text-sm leading-5 text-white">{profile.first_name} {profile.last_name}</p>
+                  <p className="cursor-pointer text-xs leading-3 text-gray-300">{profile.email}</p>
                 </div>
               </div>
               <div>
