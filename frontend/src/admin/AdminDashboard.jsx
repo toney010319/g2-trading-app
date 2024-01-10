@@ -1,21 +1,30 @@
- 
-import {Routes, Route } from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
 import AdminDashboardHome from "./AdminDashboardHome";
 import AdminDashboardLayout from "./AdminDashboardLayout";
-const AdminDashboard = ({addAlert}) => {
-    return (
+import { useEffect } from "react";
+import axios from "axios";
+
+const AdminDashboard = ({ addAlert }) => {
+  useEffect(() => {
+    const initiateAuthorization = () => {
+      const token = document.cookie.split("token=")[1];
+      if (token) {
+        axios.defaults.headers.common["Authorization"] = token;
+      }
+    };
+    initiateAuthorization();
+    console.log("Initiate token, admin dashboard");
+  }, []);
+
+  return (
     <>
-    <AdminDashboardLayout addAlert={addAlert}>
+      <AdminDashboardLayout addAlert={addAlert}>
         <Routes>
-          <Route path="/" element={<AdminDashboardHome  />} />  
+          <Route path="/" element={<AdminDashboardHome />} />
         </Routes>
-    </AdminDashboardLayout>
+      </AdminDashboardLayout>
     </>
-    
-    )
-}
+  );
+};
 
 export default AdminDashboard;
-
-
- 
