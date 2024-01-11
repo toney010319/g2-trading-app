@@ -18,7 +18,6 @@ class AdminsController < ApplicationController
       user_data = @user.as_json
       user_data[:balance] = @user.balance
       user_data[:transaction_history] = @user.transactions.order(created_at: :desc).as_json
-
       render json: user_data
     end
 

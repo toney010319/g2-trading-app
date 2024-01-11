@@ -6,12 +6,9 @@ import Logo from "../assets/Logo";
 const Login = ({ addAlert }) => {
   const [agreed, setAgreed] = useState(false);
   const navigate = useNavigate();
-
-
   const handleRegister = () => {
     navigate('/register')
   }
-
   const loginUser = async (event) => {
     event.preventDefault();
 
@@ -22,7 +19,6 @@ const Login = ({ addAlert }) => {
         password: formData.get('password'),
       },
     };
-
     try {
       const res = await axios.post('http://localhost:3000/login', user);
       return res;
@@ -30,21 +26,17 @@ const Login = ({ addAlert }) => {
       return error;
     }
   };
-
   useEffect(() => {
     const token = document.cookie.split('token=')[1];
     if (token) {
       navigate('/dashboard');
     }
   }, [navigate]);
-
   useEffect(() => {
     return () => {
       axios.defaults.headers.common["Authorization"] = undefined;
     };
   }, []);
-
-
   return (
     <>
       <div className="flex flex-col justify-center items-center align-center content-center w-screen h-screen">

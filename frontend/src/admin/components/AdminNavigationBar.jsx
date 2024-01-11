@@ -1,6 +1,7 @@
 import { logoutUser } from "../../lib/api";
 import Logo from "../../assets/Logo";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import AdminVerifcation from "../AdminVerifcation";
 // eslint-disable-next-line react/prop-types
 const AdminNavigationBar = ({ addAlert }) => {
     // const [balance, setBalance] = useState(500);
@@ -18,12 +19,15 @@ const AdminNavigationBar = ({ addAlert }) => {
             <div className="flex min-w-full justify-between bg-gradient-to-r from-azure-400 to-azure-900 p-2">
                 <Logo />
                 <div className="flex gap-2 ml-1">
-                    <button
+                    <Link to="/admin" className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-500">
+                        Dashboard
+                    </Link>
+                    <Link to="/admin/verification" element={<AdminVerifcation />}
                         className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-500"
 
                     >
                         Verification
-                    </button>
+                    </Link>
 
 
                     <span className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-500">

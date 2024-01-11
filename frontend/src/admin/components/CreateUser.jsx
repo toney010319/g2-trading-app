@@ -100,8 +100,8 @@ const CreateUser = ({ addAlert, onClose }) => {
                             <div className="flex flex-col">
                                 <span className="flex justify-start mb-1 font-semibold">Select Role</span>
                                 <select name="role" className="rounded-sm w-64">
-                                    <option value="user">Trader</option>
-                                    <option value="admin">Admin</option>
+                                    <option value="Trader">Trader</option>
+                                    <option value="Admin">Admin</option>
                                 </select>
 
                             </div>
