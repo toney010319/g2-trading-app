@@ -10,44 +10,44 @@ import AdminDashboard from './admin/AdminDashboard';
 import MyProfile from './dashboard/Myprofile';
 
 const App = () => {
-const [alerts, setAlerts] = useState([]); 
+  const [alerts, setAlerts] = useState([]);
 
-const addAlert = (type, message) => {
-  setAlerts(prev => [...prev, {type, message}]);
-  setTimeout(() => {
-    removeAlert(0) 
-  }, 3000)
-}
+  const addAlert = (type, message) => {
+    setAlerts(prev => [...prev, { type, message }]);
+    setTimeout(() => {
+      removeAlert(0)
+    }, 3000)
+  }
 
-const removeAlert = (index) => {
-  setAlerts(prev => prev.filter((a, i) => i !== index))  
-}
+  const removeAlert = (index) => {
+    setAlerts(prev => prev.filter((a, i) => i !== index))
+  }
 
   return (
     <>
       <div className="relative">
-          <div className="bg-gradient-to-b from-azure-300 to-azure-700">
-            <div style={{position: 'absolute', left: '50%', transform: 'translateX(-50%)'}}>
-              {alerts.map((alert, index) => (
-                <Alertbox 
+        <div className="bg-gradient-to-b from-azure-300 to-azure-700">
+          <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
+            {alerts.map((alert, index) => (
+              <Alertbox
                 key={index}
-                type={alert.type} 
+                type={alert.type}
                 message={alert.message}
                 onClose={() => removeAlert(index)}
-                />
-              ))}
-            </div>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Login addAlert={addAlert} />} />
-                <Route path="/dashboard/*" element={<Dashboard addAlert={addAlert} />} />.
-                <Route path="/admin/*" element={<AdminDashboard addAlert={addAlert}/>} />
-                <Route path="/register" element={<Registration addAlert={addAlert} />} />
-                <Route path ="/deposit" element={<Deposit addAlert={addAlert}/>} />
-                <Route path="/my-profile" element={<MyProfile addAlert={addAlert} />} />
-          </Routes>
-            </BrowserRouter>
+              />
+            ))}
           </div>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Login addAlert={addAlert} />} />
+              <Route path="/dashboard/*" element={<Dashboard addAlert={addAlert} />} />.
+              <Route path="/admin/*" element={<AdminDashboard addAlert={addAlert} />} />
+              <Route path="/register" element={<Registration addAlert={addAlert} />} />
+              <Route path="/deposit" element={<Deposit addAlert={addAlert} />} />
+              <Route path="/my-profile" element={<MyProfile addAlert={addAlert} />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
       </div>
     </>
   )

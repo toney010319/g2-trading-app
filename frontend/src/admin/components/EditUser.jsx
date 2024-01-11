@@ -3,15 +3,33 @@
 import Logo from "../../assets/Logo";
 import Loading from "../../components/Loading";
 import { updateUser } from "../../lib/adminapi";
-
+import { useState } from "react";
 
 
 
 const EditUser = ({ user, onClose, addAlert }) => {
+  const [formData, setFormData] = useState({
+    username: user?.username || '',
+    email: user?.email || '',
+    firstName: user.first_name || '',
+    middleName: user?.middle_name || '',
+    lastName: user?.last_name || '',
+    birthday: user?.birthday || '',
+    role: user?.role || '',
+    balance: user?.balance?.balance || '',
+    crypto: user?.balance?.crypto || '',
+    stocks: user?.balance?.stocks || '',
+    forex: user?.balance?.forex || '',
+  }
+  );
 
-
-
-
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value
+    }));
+  };
   if (!user) {
     return (
       <div className="flex justify-center w-full h-10">
@@ -31,6 +49,7 @@ const EditUser = ({ user, onClose, addAlert }) => {
           >
             Close
           </button>
+          <h1>Personal Info</h1>
           <form
             onSubmit={async (event) => {
               event.preventDefault()
@@ -50,9 +69,9 @@ const EditUser = ({ user, onClose, addAlert }) => {
                 <input
                   className="rounded-sm"
                   type="text"
-                  placeholder=" Username"
+                  value={formData.username}
                   name="username"
-
+                  onChange={handleInputChange}
                 />
               </div>
 
@@ -61,9 +80,9 @@ const EditUser = ({ user, onClose, addAlert }) => {
                 <input
                   className="rounded-sm w-64"
                   type="text"
-                  placeholder=" Email"
+                  value={formData.email}
                   name="email"
-
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -74,9 +93,9 @@ const EditUser = ({ user, onClose, addAlert }) => {
                 <input
                   className="rounded-sm"
                   type="text"
-                  placeholder=" First Name"
+                  value={formData.firstName}
                   name="firstName"
-
+                  onChange={handleInputChange}
                 />
               </div>
 
@@ -85,9 +104,9 @@ const EditUser = ({ user, onClose, addAlert }) => {
                 <input
                   className="rounded-sm"
                   type="text"
-                  placeholder=" Middle Name"
+                  value={formData.middleName}
                   name="middleName"
-
+                  onChange={handleInputChange}
                 />
               </div>
 
@@ -96,9 +115,9 @@ const EditUser = ({ user, onClose, addAlert }) => {
                 <input
                   className="rounded-sm"
                   type="text"
-                  placeholder=" Last Name"
+                  value={formData.lastName}
                   name="lastName"
-
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -110,7 +129,8 @@ const EditUser = ({ user, onClose, addAlert }) => {
                   className="rounded-sm w-64"
                   type="date"
                   name="birthday"
-
+                  value={formData.birthday}
+                  onChange={handleInputChange}
                 />
               </div>
 
@@ -120,20 +140,18 @@ const EditUser = ({ user, onClose, addAlert }) => {
                   <option value="user">Trader</option>
                   <option value="admin">Admin</option>
                 </select>
-
               </div>
-
-
             </div>
+            <div className="flex flex-col mt-5"><h1>Wallet</h1></div>
             <div className="flex flex-row justify-between">
               <div className="flex flex-col">
                 <span className="flex justify-start mb-1 font-semibold">balance</span>
                 <input
                   className="rounded-sm w-64"
-                  placeholder=" Password"
-                  type="text"
+                  value={formData.balance}
+                  type="number"
                   name="balance"
-
+                  onChange={handleInputChange}
                 />
               </div>
 
@@ -141,19 +159,22 @@ const EditUser = ({ user, onClose, addAlert }) => {
                 <span className="flex justify-start mb-1 font-semibold">crypto</span>
                 <input
                   className="rounded-sm w-64"
-                  placeholder=" Confirm Password"
+                  value={formData.crypto}
                   name="crypto"
-                  type="text"
+                  type="number"
+                  onChange={handleInputChange}
                 />
               </div>
+            </div>
+            <div className="flex flex-row justify-between">
               <div className="flex flex-col">
                 <span className="flex justify-start mb-1 font-semibold">stocks</span>
                 <input
                   className="rounded-sm w-64"
-                  placeholder=" Confirm Password"
+                  value={formData.stocks}
                   name="stocks"
-                  type="text"
-
+                  type="number"
+                  onChange={handleInputChange}
 
                 />
               </div>
@@ -161,10 +182,10 @@ const EditUser = ({ user, onClose, addAlert }) => {
                 <span className="flex justify-start mb-1 font-semibold">forex</span>
                 <input
                   className="rounded-sm w-64"
-                  placeholder=" Confirm Password"
+                  value={formData.forex}
                   name="forex"
-                  type="text"
-
+                  type="number"
+                  onChange={handleInputChange}
 
                 />
               </div>

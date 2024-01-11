@@ -1,5 +1,6 @@
 import Navigationbar from "../components/Navigationbar";
 import AdminSidebar from "./AdminSidebar";
+import AdminNavigationBar from "./components/AdminNavigationBar";
 // eslint-disable-next-line react/prop-types
 const AdminDashboardLayout = ({ children, addAlert }) => {
   return (
@@ -10,7 +11,7 @@ const AdminDashboardLayout = ({ children, addAlert }) => {
 
       <div className="w-screen">
         <div className="flex-1">
-          <Navigationbar addAlert={addAlert} />
+          <AdminNavigationBar addAlert={addAlert} />
         </div>
 
         <div className="flex-1">{children}</div>
