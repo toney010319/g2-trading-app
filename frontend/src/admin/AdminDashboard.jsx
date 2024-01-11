@@ -21,7 +21,7 @@ const AdminDashboard = ({ addAlert }) => {
     <>
       <AdminDashboardLayout addAlert={addAlert}>
         <Routes>
-          <Route path="/" element={<AdminDashboardHome />} />
+          <Route path="/" element={<AdminDashboardHome addAlert={addAlert} />} />
         </Routes>
       </AdminDashboardLayout>
     </>

@@ -1,63 +1,33 @@
-
-
-
-
-
-// import Navbalance from "./subcomponents/Navbalance";
-import { useState } from "react";
 import { logoutUser } from "../../lib/api";
-import ProfileModal from "../../dashboard/modals/ProfileModal";
-import PaymentMethodsModal from "../../dashboard/modals/PaymentMethodsModal";
-
+import Logo from "../../assets/Logo";
+import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line react/prop-types
 const AdminNavigationBar = ({ addAlert }) => {
     // const [balance, setBalance] = useState(500);
-
-    const [showModal, setShowModal] = useState(false);
-    const [showProfileModal, setShowProfileModal] = useState(false);
-
-    const handleClose = () => {
-        setShowModal(false)
-        setShowProfileModal(false);
-    }
-
-    const handleProfileClick = () => {
-        setShowProfileModal(!showProfileModal);
-    };
-
-
+    const navigate = useNavigate();
     const handleLogout = (event) => {
         logoutUser(event)
         document.cookie = 'token=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
         document.cookie = 'user_id=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
-
         navigate('/')
         addAlert('success', 'You have successfully logged out')
         // console.log('test', setBalance)
     }
-
-
-
     return (
-
         <>
-            {showModal ? (<PaymentMethodsModal handleClose={handleClose} addAlert={addAlert} />
-            ) : null}
-
-
-
             <div className="flex min-w-full justify-between bg-gradient-to-r from-azure-400 to-azure-900 p-2">
+                <Logo />
                 <div className="flex gap-2 ml-1">
                     <button
-                        className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-950"
-                        onClick={() => setShowModal(true)}
+                        className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-500"
+
                     >
-                        Deposit
+                        Verification
                     </button>
 
 
-                    <span className="cursor-pointer text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700">
-                        Withdraw
+                    <span className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-500">
+                        Transaction History
                     </span>
 
                     <div>
@@ -68,7 +38,7 @@ const AdminNavigationBar = ({ addAlert }) => {
                 <div className="flex flex-row ml-2">
                     <div className="relative">
                         <span
-                            onClick={handleProfileClick}
+
                             className="cursor-pointer flex ml-2 mr-2 bg-white rounded-full">
                             <img
                                 className="ml-1 mr-1"
@@ -77,9 +47,7 @@ const AdminNavigationBar = ({ addAlert }) => {
                                 alt="Profile" />
                         </span>
                         <div className="absolute top-full right-0">
-                            {showProfileModal && (
-                                <ProfileModal handleClose={() => setShowProfileModal(false)} setShowModal={setShowModal} />
-                            )}
+
                         </div>
                     </div>
 

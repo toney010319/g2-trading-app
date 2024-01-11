@@ -7,7 +7,7 @@ import ShowUser from "./components/ShowUser";
 import EditUser from "./components/EditUser";
 import CreateUser from "./components/CreateUser";
 
-const AdminDashboardHome = () => {
+const AdminDashboardHome = ({ addAlert }) => {
   const [users, setUsers] = useState();
   const [loading, setLoading] = useState(true);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -54,16 +54,18 @@ const AdminDashboardHome = () => {
       case "show":
         return <ShowUser user={selectedUser} onClose={() => setShowModal(false)} />;
       case "edit":
-        return <EditUser user={selectedUser} onClose={() => setShowModal(false)} />;
+        return <EditUser user={selectedUser} onClose={() => setShowModal(false)} addAlert={addAlert} />;
       case "createuser":
-        return <CreateUser onClose={() => setShowModal(false)} />;
+        return <CreateUser onClose={() => setShowModal(false)} addAlert={addAlert} />;
       default:
         return null;
     }
   };
   const handleDeleteUser = async (id) => {
     try {
-      await deleteUser(id);
+      const res = await deleteUser(id);
+      console.log(res)
+      addAlert('success', 'User deleted successfully!');
       setUsers(users.filter((user) => user.id !== id));
     } catch (error) {
       console.error("Error deleting user:", error);

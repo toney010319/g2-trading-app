@@ -29,6 +29,7 @@ export const getUsers = async () => {
 export const deleteUser = async (user_id) => {
     try {
         const res = await axios.delete(`http://localhost:3000/admins/${user_id}`)
+        console.log(res)
         return res.data
     } catch (error) {
         return error
@@ -99,6 +100,7 @@ export const createUser = async (event) => {
           }
         }
       }
+      console.log("newUser",newUser)
       try {
         const res = await axios.patch(`http://localhost:3000/admins/${user_id}`, newUser);
         console.log(res);

@@ -22,7 +22,7 @@ class User < ApplicationRecord
   validate :at_least_18
 
   def admin?
-    role == 'admin'
+    role == 'Admin'
   end
 
   def create_balance

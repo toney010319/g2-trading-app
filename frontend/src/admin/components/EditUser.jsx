@@ -37,7 +37,7 @@ const EditUser = ({ user, onClose, addAlert }) => {
       </div>
     );
   }
-  console.log(user)
+  console.log("user", user)
   return (
     <>
       <div className="flex flex-col justify-center items-center align-center content-center w-screen h-screen">
@@ -45,9 +45,13 @@ const EditUser = ({ user, onClose, addAlert }) => {
           <Logo />
           <button
             onClick={onClose}
-            className="  absolute top-0 right-0  bg-gradient-to-b from-azure-300 to-azure-700 px-5  text-lg font-semibold text-slate-100 py-1 rounded-full shadow-slate-500 shadow-md hover:from-[#ff5b3e] hover:to-[#640d00f8] "
+            className="  absolute top-0 right-0  "
           >
-            Close
+            <img
+
+              src="https://www.svgrepo.com/show/380138/x-close-delete.svg"
+              width="20"
+              alt="close" />
           </button>
           <h1>Personal Info</h1>
           <form
@@ -55,9 +59,9 @@ const EditUser = ({ user, onClose, addAlert }) => {
               event.preventDefault()
               const res = await updateUser(event, user.id)
               console.log("res", res)
-              if (res?.data?.status?.code == "200") {
-                addAlert('success', res?.data?.status.message)
-
+              if (res?.status == "200") {
+                addAlert('success', "User updated successfully")
+                onClose()
               }
               else
                 addAlert('error', res?.response?.data?.status?.message)
@@ -136,9 +140,10 @@ const EditUser = ({ user, onClose, addAlert }) => {
 
               <div className="flex flex-col">
                 <span className="flex justify-start mb-1 font-semibold">Select Role</span>
-                <select name="role" className="rounded-sm w-64">
-                  <option value="user">Trader</option>
-                  <option value="admin">Admin</option>
+                <select name="role" className="rounded-sm w-64" value={formData.role}
+                  onChange={handleInputChange} required>
+                  <option value="Trader">Trader</option>
+                  <option value="Admin">Admin</option>
                 </select>
               </div>
             </div>
