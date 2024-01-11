@@ -13,17 +13,20 @@ const ShowUser = ({ user, onClose }) => {
       </div>
     );
   }
-  console.log(user)
   return (
     <>
-      <section className="  max-w-screen-xl w-screen max-h-screen overflow-scroll container mx-auto p-6 font-mono relative">
+      <section className="  max-w-screen-xl w-full max-h-screen overflow-scroll container mx-12 p-6 font-mono relative">
         <div className="w-full mb-8 overflow-scroll rounded-lg shadow-lg">
           <div className="w-full overflow-x-auto">
             <button
               onClick={onClose}
-              className="  absolute top-0 right-0  bg-gradient-to-b from-azure-300 to-azure-700 px-5  text-md font-semibold text-slate-100 py-1 rounded-full shadow-slate-500 shadow-md hover:from-[#ff5b3e] hover:to-[#640d00f8] "
+              className="  absolute top-0 right-0"
             >
-              Close
+              <img
+                className="mt-6 mr-6"
+                src="https://www.svgrepo.com/show/380138/x-close-delete.svg"
+                width="20"
+                alt="close" />
             </button>
             <table className="w-full">
               <thead>

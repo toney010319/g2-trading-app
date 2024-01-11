@@ -26,9 +26,9 @@ class AdminsController < ApplicationController
     def create
       @user = User.new(user_params.merge(confirmed_at: Time.now, status: "active"))
       if @user.save
-        render json: @user, status: :created
+        render_user_data(@user)
       else
-        render json: @user.errors, status: :unprocessable_entity
+        render_error(@user.errors)
       end
     end
 
@@ -46,7 +46,10 @@ class AdminsController < ApplicationController
       user_data_hash = user_data_hash(@user) 
       @user.destroy
       if @user.destroyed?
-        render json: user_data_hash, status: :ok  
+        render json: { 
+      user: user_data_hash,
+      message: "Account deleted successfully."
+    }, status: :ok
       else
         render_error(@user.errors)
       end
@@ -71,7 +74,9 @@ class AdminsController < ApplicationController
     end
 
     def render_error(errors)
-      render json: errors, status: :unprocessable_entity
+      render json: {
+        status: {code: 422, message: " #{errors.full_messages.to_sentence}"}
+      }, status: :unprocessable_entity
     end
 
     def set_user
@@ -84,7 +89,7 @@ class AdminsController < ApplicationController
     end
 
     def update_params
-      params.require(:user).permit(:first_name, :middle_name, :last_name, :username, :password, :email, :birthday, balance_attributes: [:id, :balance, :forex, :stocks, :crypto])
+      params.require(:user).permit(:first_name, :middle_name, :last_name, :username, :password, :email, :birthday,:role , balance_attributes: [:id, :balance, :forex, :stocks, :crypto])
     end
 
     def ensure_admin_user!

@@ -39,5 +39,5 @@ admin_user = User.create!(
   birthday: Date.new(1990, 1, 1),
   email_confirmed: true,
   status: 'active',
-  role: 'admin'
+  role: 'Admin'
 )

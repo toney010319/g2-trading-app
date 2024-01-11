@@ -14,14 +14,14 @@ const AdminDashboard = ({ addAlert }) => {
       }
     };
     initiateAuthorization();
-    console.log("Initiate token, admin dashboard");
+
   }, []);
 
   return (
     <>
       <AdminDashboardLayout addAlert={addAlert}>
         <Routes>
-          <Route path="/" element={<AdminDashboardHome />} />
+          <Route path="/" element={<AdminDashboardHome addAlert={addAlert} />} />
         </Routes>
       </AdminDashboardLayout>
     </>

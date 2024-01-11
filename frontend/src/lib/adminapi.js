@@ -66,11 +66,9 @@ export const createUser = async (event) => {
     };
     try {
       const res = await axios.post("http://localhost:3000/admins", newUser);
-      console.log(res);
       return res;
     } catch (error) {
       if (error.response) {
-        console.log(error);
         return error;
       } else {
         return error;
@@ -101,11 +99,9 @@ export const createUser = async (event) => {
       }
       try {
         const res = await axios.patch(`http://localhost:3000/admins/${user_id}`, newUser);
-        console.log(res);
         return res;
       } catch (error) {
         if (error.response) {
-          console.log(error);
           return error;
         } else {
           return error;

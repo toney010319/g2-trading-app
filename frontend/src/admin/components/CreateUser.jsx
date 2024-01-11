@@ -1,19 +1,6 @@
-
-import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/Logo";
 import { createUser } from "../../lib/adminapi";
 const CreateUser = ({ addAlert, onClose }) => {
-
-    const navigate = useNavigate();
-
-    const navigateLogin = () => {
-        navigate('/')
-
-    }
-
-
-
-
     return (
         <>
             <div className="flex flex-col justify-center items-center align-center content-center w-screen h-screen">
@@ -21,18 +8,20 @@ const CreateUser = ({ addAlert, onClose }) => {
                     <Logo />
                     <button
                         onClick={onClose}
-                        className="  absolute top-0 right-0  bg-gradient-to-b from-azure-300 to-azure-700 px-5  text-lg font-semibold text-slate-100 py-1 rounded-full shadow-slate-500 shadow-md hover:from-[#ff5b3e] hover:to-[#640d00f8] "
+                        className="  absolute top-0 right-0 "
                     >
-                        Close
+                        <img
+                            src="https://www.svgrepo.com/show/380138/x-close-delete.svg"
+                            width="20"
+                            alt="close" />
                     </button>
                     <form
                         onSubmit={async (event) => {
                             event.preventDefault()
                             const res = await createUser(event)
-                            console.log("res", res)
-                            if (res?.data?.status?.code == "200") {
-                                addAlert('success', res?.data?.status.message)
-                                navigateLogin()
+                            if (res?.status == "200") {
+                                addAlert('success', "User created successfully")
+                                onClose()
                             }
                             else
                                 addAlert('error', res?.response?.data?.status?.message)
