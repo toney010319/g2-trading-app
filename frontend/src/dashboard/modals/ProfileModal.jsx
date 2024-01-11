@@ -58,7 +58,7 @@ const ProfileModal = ({setShowModal}) => {
             className="cursor-pointer flex justify-center text-green-500 hover:text-green-700 hover:underline font-bold border-b-2 text-lg"
             onClick={() => setShowModal(true)}
           >
-            ₱{balance?.balance}
+            ₱{parseFloat(balance?.balance).toFixed(2)}
           </span>
         )}
       </div>
