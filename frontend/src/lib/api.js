@@ -199,3 +199,21 @@ export const getForexList = async () => {
     return error;
   }
 };
+
+export const buyStocks = async (user_id, quantity, price, symbol) => {
+  try {
+    const buyStocksResponse = await axios.post(
+      "http://localhost:3000/buy_stocks",
+      {
+        user_id,
+        quantity,
+        price,
+        symbol,
+      }
+    );
+
+    return buyStocksResponse.data;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};

@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
-import { addStockBalance, revertStockBalance, getUserBalance, getStockList } from "../../../lib/api";
+import { addStockBalance, revertStockBalance, getUserBalance, getStockList, buyStocks } from "../../../lib/api";
 import Logo from "../../../assets/Logo";
 import BuyStocksMarket from "./subcomponents/BuyStocksMarket";
 
@@ -11,8 +11,8 @@ const BuyStocks = () => {
   const [symbol, setSymbol] = useState('');
   const [price, setPrice] = useState('');
   const [stockList, setStockList] = useState([]);
-  const usdAmount = stockAmount * 56.17
   const [quantity, setQuantity] = useState(1);
+  const usdAmount = stockAmount * 56.17
 
   const fetchUserBalance = useMemo(() => async () => {
     try {
@@ -39,6 +39,8 @@ const BuyStocks = () => {
     }
   };
 
+
+
   const handleTransferToWallet = async () => {
     try {
       const { revertBalanceResponse } = await revertStockBalance(
@@ -53,8 +55,8 @@ const BuyStocks = () => {
     }
   };
 
-  const handleDropdownChange = (event) => {
-    const selectedSymbol = event.target.value;
+  const handleDropdownChange = (e) => {
+    const selectedSymbol = e.target.value;
     const selectedStock = stockList.find(stock => stock.symbol === selectedSymbol);
     setSymbol(selectedStock.symbol);
     setPrice(selectedStock.price);
@@ -62,11 +64,35 @@ const BuyStocks = () => {
     localStorage.removeItem('selectedStockName');
   };
 
+  const handleBuyStocks = async () => {
+    try {
+      const adjustedPrice = price * 56.17;
+  
+      const { success, message } = await buyStocks(user_id, quantity, adjustedPrice, symbol);
+      if (success) {
+        console.log("Stock purchased successfully:", message);
+        fetchUserBalance();
+      } else {
+        console.error("Error purchasing stocks:", message);
+      }
+    } catch (error) {
+      console.error("Error purchasing stocks:", error);
+    }
+  };
+
+  const handleSellStocks = async () => {
+    try {
+      console.log('stock amount:', quantity, 'price:', price,'symbol:', symbol)
+    } catch (error) {
+      console.error("Error selling stocks:", error);
+    }
+  };
+
   
 const calculateTotalAmount = () => {
   return (price * quantity).toFixed(2);
 };
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -221,6 +247,12 @@ const calculateTotalAmount = () => {
         <div>
           TOTAL AMOUNT: ${calculateTotalAmount()}
         </div>
+        <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700 mt-2" onClick={handleBuyStocks}>
+            Buy Stocks
+          </button>
+          <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700 mt-2" onClick={handleSellStocks}>
+            Sell Stocks
+        </button>
       </div>
     </>
   );

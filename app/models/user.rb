@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
   has_many :transactions, dependent: :destroy
-  has_many :portfolio_transactions
+  has_many :stocks, dependent: :destroy
   has_one :balance, dependent: :destroy
   accepts_nested_attributes_for :balance, allow_destroy: true
   after_create :create_balance

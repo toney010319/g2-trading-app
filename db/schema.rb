@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_10_025837) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_11_134841) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,6 +58,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_10_025837) do
     t.integer "volume"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "portfolio_transactions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.decimal "quantity"
+    t.decimal "price"
+    t.string "symbol"
+    t.string "transaction_type"
+    t.string "asset_type", null: false
+    t.bigint "asset_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_type", "asset_id"], name: "index_portfolio_transactions_on_asset"
+    t.index ["user_id"], name: "index_portfolio_transactions_on_user_id"
   end
 
   create_table "stocks", force: :cascade do |t|
@@ -119,5 +133,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_10_025837) do
   end
 
   add_foreign_key "balances", "users"
+  add_foreign_key "portfolio_transactions", "users"
   add_foreign_key "transactions", "users"
 end

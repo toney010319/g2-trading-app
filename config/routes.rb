@@ -37,6 +37,10 @@ Rails.application.routes.draw do
   get 'crypto_list', to: 'datas#show_crypto'
   get 'stocks_list', to: 'datas#show_stocks'
   get 'currency_list', to: 'datas#show_currency'
+
+  post 'buy_stocks', to: 'stock_transactions#buy'
+  get 'show_all_portfolio_stocks', to: 'stock_transactions#show_all_stocks'
+
   # Defines the root path route ("/")
   # root "posts#index"
 end
