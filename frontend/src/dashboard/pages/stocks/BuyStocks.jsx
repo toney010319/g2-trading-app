@@ -1,18 +1,18 @@
 import { useState, useMemo, useEffect } from "react";
-import { addStockBalance, revertStockBalance, getUserBalance } from "../../../lib/api";
+import { addStockBalance, revertStockBalance, getUserBalance, getStockList } from "../../../lib/api";
 import Logo from "../../../assets/Logo";
 import BuyStocksMarket from "./subcomponents/BuyStocksMarket";
-import { useSearchParams } from 'react-router-dom';
 
 const BuyStocks = () => {
   const [transferAmount, setTransferAmount] = useState("");
   const [stockAmount, setStockAmount] = useState("");
   const [balance, setBalance] = useState("");
   const user_id = document.cookie.split("user_id=")[1];
-  const [searchParams] = useSearchParams();
-  const symbol = searchParams.get('symbol');
-  const price = searchParams.get('price');
+  const [symbol, setSymbol] = useState('');
+  const [price, setPrice] = useState('');
+  const [stockList, setStockList] = useState([]);
   const usdAmount = stockAmount * 56.17
+  const [quantity, setQuantity] = useState(1);
 
   const fetchUserBalance = useMemo(() => async () => {
     try {
@@ -53,12 +53,41 @@ const BuyStocks = () => {
     }
   };
 
+  const handleDropdownChange = (event) => {
+    const selectedSymbol = event.target.value;
+    const selectedStock = stockList.find(stock => stock.symbol === selectedSymbol);
+    setSymbol(selectedStock.symbol);
+    setPrice(selectedStock.price);
+    localStorage.removeItem('selectedStockSymbol');
+    localStorage.removeItem('selectedStockName');
+  };
 
-
+  
+const calculateTotalAmount = () => {
+  return (price * quantity).toFixed(2);
+};
+  
   useEffect(() => {
-    fetchUserBalance();
-  }, [fetchUserBalance]);
+    const fetchData = async () => {
+      try {
+        const apiData = await getStockList();
+        setStockList(apiData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
+    fetchData();
+    fetchUserBalance();
+    
+    const storedSymbol = localStorage.getItem('selectedStockSymbol');
+    const storedPrice = localStorage.getItem('selectedStockPrice');
+
+    if (storedSymbol && storedPrice) {
+      setSymbol(storedSymbol);
+      setPrice(storedPrice);
+    }
+  }, [user_id, fetchUserBalance]);
 
 
   return (
@@ -156,10 +185,42 @@ const BuyStocks = () => {
       </div>
 
       <div>
-      TABLE BUY SELL HERE
-
-      AMOUNT: {price}
-      COMPANY: {symbol}
+        TABLE BUY SELL HERE
+        <div>
+          <label>Select a stock:</label>
+          <select
+            value={symbol}
+            onChange={handleDropdownChange}
+            className="text-center font-semibold"
+          >
+            <option value="" disabled>
+              Choose a Stock
+            </option>
+            {stockList.map((stock) => (
+              <option key={stock.symbol} value={stock.symbol}>
+                {stock.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label>Quantity:</label>
+          <input
+            type="number"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+            className="text-center"
+          />
+        </div>
+        <div>
+          AMOUNT: ${price}
+        </div>
+        <div>
+          COMPANY: {symbol}
+        </div>
+        <div>
+          TOTAL AMOUNT: ${calculateTotalAmount()}
+        </div>
       </div>
     </>
   );

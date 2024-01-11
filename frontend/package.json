@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"cd ../app && rails s\" \"vite\" \"npm run mailcatcher\"",
+    "dev": "concurrently \"cd ../app && rails s\" \"vite\" \"cd ../app && mailcatcher\"",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"

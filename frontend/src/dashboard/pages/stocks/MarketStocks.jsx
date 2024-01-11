@@ -153,7 +153,11 @@ const MarketStocks = () => {
                             
                                 <div 
                                 className="hover:scale-105 hover:border-2 hover:border-blue-500 cursor-pointer flex"
-                                onClick={() => navigate(`/dashboard/stocks/trade?symbol=${data.symbol}&price=${data.price}`)}
+                                onClick={() => {
+                                  localStorage.setItem('selectedStockSymbol', data.symbol);
+                                  localStorage.setItem('selectedStockName', data.name);
+                                  navigate('/dashboard/stocks/trade');
+                                }}
                                 >
                                   <img className="w-10" src={getImageLink(data.symbol)} alt={data.symbol} />
                                   <span className="ml-1">{data.name}</span>
@@ -180,7 +184,7 @@ const MarketStocks = () => {
                   ) : (
                     <tr>
                       <td colSpan="11" className="text-center py-4">
-                        Error
+                        No Data
                       </td>
                     </tr>
                   )
