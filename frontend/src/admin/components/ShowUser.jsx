@@ -5,7 +5,7 @@ import Loading from "../../components/Loading";
 
 
  
-const ShowUser = ({ user }) => {
+const ShowUser = ({ user, onClose }) => {
   if (!user) {
     return (
       <div className="flex justify-center w-full h-10">
@@ -16,9 +16,15 @@ const ShowUser = ({ user }) => {
 console.log(user)
   return (
    <>
-   <section className="container mx-auto p-6 font-mono">
+   <section className="container mx-auto p-6 font-mono relative">
       <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
         <div className="w-full overflow-x-auto">
+        <button
+            onClick={onClose}
+            className="  absolute top-0 right-0  bg-gradient-to-b from-azure-300 to-azure-700 px-5  text-lg font-semibold text-slate-100 py-1 rounded-full shadow-slate-500 shadow-md hover:from-[#ff5b3e] hover:to-[#640d00f8] "
+          >
+            Close
+          </button>
         <table className="w-full">
   <tbody className="bg-white">
     {user && (

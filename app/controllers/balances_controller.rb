@@ -93,7 +93,6 @@ def revert_forex_balance
   end
 end
 
-
   def index
     user = User.find(params[:user_id])
     @user_balances = user.balance

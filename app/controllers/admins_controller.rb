@@ -24,7 +24,7 @@ class AdminsController < ApplicationController
 
 
     def create
-      @user = User.new(user_params)
+      @user = User.new(user_params.merge(confirmed_at: Time.now, status: "active"))
       if @user.save
         render json: @user, status: :created
       else
@@ -34,7 +34,7 @@ class AdminsController < ApplicationController
 
 
     def update
-      if @user.update(user_params)
+      if @user.update(update_params)
         render_user_data(@user)
       else
         render_error(@user.errors)
@@ -43,16 +43,24 @@ class AdminsController < ApplicationController
 
 
     def destroy
-      user_data = render_user_data(@user)
+      user_data_hash = user_data_hash(@user) 
       @user.destroy
       if @user.destroyed?
-        render json: user_data, status: :ok
+        render json: user_data_hash, status: :ok  
       else
         render_error(@user.errors)
       end
     end
-
+  
+  
     private
+    def user_data_hash(user)
+      {
+        user: user.as_json,
+        balance: user.balance,
+        transaction_history: user.transactions.order(created_at: :desc).as_json
+      }
+    end
 
     def render_user_data(user)
       user_data = user.as_json
@@ -72,11 +80,12 @@ class AdminsController < ApplicationController
 
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
-
+      params.require(:user).permit(:email, :password, :password_confirmation, :username, :birthday, :status, :first_name, :middle_name, :role, :last_name, )
     end
 
-    private
+    def update_params
+      params.require(:user).permit(:first_name, :middle_name, :last_name, :username, :password, :email, :birthday, balance_attributes: [:id, :balance, :forex, :stocks, :crypto])
+    end
 
     def ensure_admin_user!
       unless current_user.admin?
@@ -84,3 +93,4 @@ class AdminsController < ApplicationController
       end
     end
   end
+ 

@@ -5,6 +5,7 @@ import Modal from "./modals/modal";
 import { createPortal } from "react-dom";
 import ShowUser from "./components/ShowUser";
 import EditUser from "./components/EditUser";
+import CreateUser from "./components/CreateUser";
 
 const AdminDashboardHome = () => {
   const [users, setUsers] = useState();
@@ -31,7 +32,7 @@ const AdminDashboardHome = () => {
 
   useEffect(() => {
     fetchUsersMemoized();
-  }, [fetchUsersMemoized]);
+  }, [fetchUsersMemoized, showModal]);
 
   const handleShowUser = (user) => {
     setShowModal(true);
@@ -44,13 +45,18 @@ const AdminDashboardHome = () => {
     setSelectedUser(user);
     setModalContent("edit");
   };
-
+  const handleCreateUser = () => {
+    setShowModal(true);
+    setModalContent("createuser");
+  }
   const renderModalContent = () => {
     switch (modalContent) {
       case "show":
-        return <ShowUser user={selectedUser} />;
+        return <ShowUser user={selectedUser} onClose={() => setShowModal(false)} />;
       case "edit":
-        return <EditUser user={selectedUser} />;
+        return <EditUser user={selectedUser} onClose={() => setShowModal(false)} />;
+      case "createuser":
+        return <CreateUser onClose={() => setShowModal(false)} />;
       default:
         return null;
     }
@@ -67,6 +73,7 @@ const AdminDashboardHome = () => {
     <>
       <section className="container mx-auto p-6 font-mono">
         <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+          <button onClick={() => handleCreateUser()}>Create User</button>
           <div className="w-full overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -141,7 +148,7 @@ const AdminDashboardHome = () => {
       </section>
       {showModal &&
         createPortal(
-          <Modal onClose={() => setShowModal(false)}>
+          <Modal >
             {renderModalContent()}
           </Modal>,
           document.body
