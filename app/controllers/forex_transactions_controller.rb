@@ -1,0 +1,2 @@
+class ForexTransactionsController < ApplicationController
+end

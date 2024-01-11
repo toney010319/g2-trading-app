@@ -2,9 +2,11 @@ import Logo from '../../../assets/Logo';
 import { Link } from 'react-router-dom';
 import { getProfile } from '../../../lib/api';
 import { useState, useEffect } from 'react';
+import Loading from '../../Loading';
 // eslint-disable-next-line react/prop-types
 const ExpandedSidebar = () => {
   const [profile, setProfile] = useState([]);
+  const [loading, setLoading] = useState(true);
   const user_id = document.cookie.split('user_id=')[1];
 
   const fetchProfile = async () => {
@@ -238,16 +240,30 @@ const ExpandedSidebar = () => {
                   alt="avatar" />
                 </div>
                 <div className="flex justify-start flex-col items-start">
-                  <p className="cursor-pointer text-sm leading-5 text-white">{profile.first_name} {profile.last_name}</p>
-                  <p className="cursor-pointer text-xs leading-3 text-gray-300">{profile.email}</p>
+                {loading? (
+                    <div className="flex ml-8 w-16">
+                      <Loading />
+                    </div>
+                
+                  ) : (
+                    <>
+                      <p className="cursor-pointer text-sm leading-5 text-white">
+                        {profile.first_name} {profile.last_name}
+                      </p>
+                      <p className="cursor-pointer text-xs leading-3 text-gray-300">
+                        {profile.email}
+                      </p>
+                    </>
+                  )}
                 </div>
               </div>
               <div>
                 <img
-                className="text-center item-center cursor-pointer mt-1" 
-                src="https://www.svgrepo.com/show/506315/settings.svg" 
-                width="30" 
-                alt="Gear" />
+                  className="text-center item-center cursor-pointer mt-1"
+                  src="https://www.svgrepo.com/show/506315/settings.svg"
+                  width="30"
+                  alt="Gear"
+                />
               </div>
             </div>
           </div>

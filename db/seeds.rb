@@ -17,8 +17,8 @@ end
 require 'json'
 json_data = File.read(Rails.root.join('data/stocks.data.sorted 1.9.24.json'))
 stocks_data = JSON.parse(json_data)
-stocks_data.each do |crypto|
-  Stock.create(crypto)
+stocks_data.each do |stock|
+  Stock.create(stock)
 end
 
 require 'json'

@@ -1,5 +1,5 @@
 class BalancesController < ApplicationController
-  before_action :authenticate_user!
+  ## before_action :authenticate_user!
 
 def add_balance
   user = User.find(params[:user_id])
@@ -17,7 +17,7 @@ def add_stock_balance
   user.balance.balance -= amount
 
   if user.balance.save && (!user.username_changed? || user.save)
-    render json: { stocks_balance: user.balance.stocks, main_balance: user.balance.balance }
+    render json: { stocks_balance: user.balance.stocks, main_balance: user.balance.balance, amount: amount }
   else
     render json: { error: "Failed to update balances" }, status: :unprocessable_entity
   end
@@ -31,7 +31,7 @@ def revert_stock_balance
   user.balance.balance += amount
 
   if user.balance.save && (!user.username_changed? || user.save)
-    render json: { stocks_balance: user.balance.stocks, main_balance: user.balance.balance }
+    render json: { stocks_balance: user.balance.stocks, main_balance: user.balance.balance, amount: amount }
   else
     render json: { error: "Failed to update balances" }, status: :unprocessable_entity
   end
