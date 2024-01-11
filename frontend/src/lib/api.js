@@ -32,11 +32,9 @@ export const registerUser = async (event) => {
   };
   try {
     const res = await axios.post("http://localhost:3000/signup", newUser);
-    console.log(res);
     return res;
   } catch (error) {
     if (error.response) {
-      console.log(error);
       return error;
     } else {
       return error;
@@ -49,7 +47,6 @@ export const logoutUser = async (event) => {
 
   try {
     const res = await axios.delete("http://localhost:3000/logout");
-    console.log(res);
     return res.data;
   } catch (error) {
     return error;

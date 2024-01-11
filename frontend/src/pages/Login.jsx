@@ -25,10 +25,8 @@ const Login = ({ addAlert }) => {
 
     try {
       const res = await axios.post('http://localhost:3000/login', user);
-      console.log(res);
       return res;
     } catch (error) {
-      console.log(error);
       return error;
     }
   };
@@ -61,7 +59,6 @@ const Login = ({ addAlert }) => {
             document.cookie = `user_id=${user_id};path=/`;
             addAlert('success', res.data.message)
             navigate('dashboard')
-            console.log("Tradier", res)
 
           }
 
@@ -72,7 +69,6 @@ const Login = ({ addAlert }) => {
             document.cookie = `user_id=${user_id};path=/`;
             addAlert('success', res.data.message)
             navigate('admin')
-            console.log("admin", res)
 
           }
           else {

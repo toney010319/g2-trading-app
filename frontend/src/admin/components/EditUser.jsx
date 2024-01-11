@@ -37,7 +37,6 @@ const EditUser = ({ user, onClose, addAlert }) => {
       </div>
     );
   }
-  console.log("user", user)
   return (
     <>
       <div className="flex flex-col justify-center items-center align-center content-center w-screen h-screen">
@@ -58,7 +57,6 @@ const EditUser = ({ user, onClose, addAlert }) => {
             onSubmit={async (event) => {
               event.preventDefault()
               const res = await updateUser(event, user.id)
-              console.log("res", res)
               if (res?.status == "200") {
                 addAlert('success', "User updated successfully")
                 onClose()

@@ -19,7 +19,6 @@ const CreateUser = ({ addAlert, onClose }) => {
                         onSubmit={async (event) => {
                             event.preventDefault()
                             const res = await createUser(event)
-                            console.log("res", res)
                             if (res?.status == "200") {
                                 addAlert('success', "User created successfully")
                                 onClose()

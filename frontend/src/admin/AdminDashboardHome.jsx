@@ -21,7 +21,6 @@ const AdminDashboardHome = ({ addAlert }) => {
         const response = await getUsers();
         setUsers(response);
         setLoading(false);
-        console.log("Hi admin dashboard", response);
       } catch (error) {
         console.error("Error fetching transactions:", error);
         setLoading(false);
@@ -64,7 +63,6 @@ const AdminDashboardHome = ({ addAlert }) => {
   const handleDeleteUser = async (id) => {
     try {
       const res = await deleteUser(id);
-      console.log(res)
       addAlert('success', 'User deleted successfully!');
       setUsers(users.filter((user) => user.id !== id));
     } catch (error) {

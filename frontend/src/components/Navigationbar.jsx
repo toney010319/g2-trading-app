@@ -31,7 +31,6 @@ const Navigationbar = ({ addAlert }) => {
 
         navigate('/')
         addAlert('success', 'You have successfully logged out')
-        // console.log('test', setBalance)
     }
 
 

@@ -13,7 +13,6 @@ const ShowUser = ({ user, onClose }) => {
       </div>
     );
   }
-  console.log(user)
   return (
     <>
       <section className="  max-w-screen-xl w-full max-h-screen overflow-scroll container mx-12 p-6 font-mono relative">

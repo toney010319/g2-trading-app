@@ -14,7 +14,7 @@ const AdminDashboard = ({ addAlert }) => {
       }
     };
     initiateAuthorization();
-    console.log("Initiate token, admin dashboard");
+
   }, []);
 
   return (

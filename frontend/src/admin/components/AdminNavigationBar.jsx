@@ -11,7 +11,7 @@ const AdminNavigationBar = ({ addAlert }) => {
         document.cookie = 'user_id=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
         navigate('/')
         addAlert('success', 'You have successfully logged out')
-        // console.log('test', setBalance)
+
     }
     return (
         <>
