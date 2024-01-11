@@ -23,7 +23,7 @@ class AdminsController < ApplicationController
 
 
     def create
-      @user = User.new(user_params.merge(confirmed_at: Time.now, status: "active"))
+      @user = User.new(user_params.merge(confirmed_at: Time.now, status: "active", email_confirmed: true))
       if @user.save
         render_user_data(@user)
       else
@@ -54,13 +54,22 @@ class AdminsController < ApplicationController
       end
     end
   
-  
+    def approve
+      user = User.find_by(id: params[:id])
+      if user
+        user.approve!
+        render json: { message: 'User approved and email sent.' }, status: :ok
+      else
+        render json: { error: 'User not found.' }, status: :not_found
+      end
+    end
     private
     def user_data_hash(user)
       {
         user: user.as_json,
         balance: user.balance,
-        transaction_history: user.transactions.order(created_at: :desc).as_json
+        transaction_history: user.transactions.order(created_at: :desc).as_json,
+         
       }
     end
 
@@ -88,7 +97,7 @@ class AdminsController < ApplicationController
     end
 
     def update_params
-      params.require(:user).permit(:first_name, :middle_name, :last_name, :username, :password, :email, :birthday,:role , balance_attributes: [:id, :balance, :forex, :stocks, :crypto])
+      params.require(:user).permit(:first_name, :middle_name, :last_name, :username, :password, :email, :birthday,:role, balance_attributes: [:id, :balance, :forex, :stocks, :crypto])
     end
 
     def ensure_admin_user!
