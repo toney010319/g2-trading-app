@@ -5,8 +5,9 @@ import Modal from "./modals/modal";
 import { createPortal } from "react-dom";
 import ShowUser from "./components/ShowUser";
 import EditUser from "./components/EditUser";
+import CreateUser from "./components/CreateUser";
 
-const AdminDashboardHome = () => {
+const AdminDashboardHome = ({ addAlert }) => {
   const [users, setUsers] = useState();
   const [loading, setLoading] = useState(true);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -20,7 +21,6 @@ const AdminDashboardHome = () => {
         const response = await getUsers();
         setUsers(response);
         setLoading(false);
-        console.log("Hi admin dashboard", response);
       } catch (error) {
         console.error("Error fetching transactions:", error);
         setLoading(false);
@@ -31,7 +31,7 @@ const AdminDashboardHome = () => {
 
   useEffect(() => {
     fetchUsersMemoized();
-  }, [fetchUsersMemoized]);
+  }, [fetchUsersMemoized, showModal]);
 
   const handleShowUser = (user) => {
     setShowModal(true);
@@ -44,20 +44,26 @@ const AdminDashboardHome = () => {
     setSelectedUser(user);
     setModalContent("edit");
   };
-
+  const handleCreateUser = () => {
+    setShowModal(true);
+    setModalContent("createuser");
+  }
   const renderModalContent = () => {
     switch (modalContent) {
       case "show":
-        return <ShowUser user={selectedUser} />;
+        return <ShowUser user={selectedUser} onClose={() => setShowModal(false)} />;
       case "edit":
-        return <EditUser user={selectedUser} />;
+        return <EditUser user={selectedUser} onClose={() => setShowModal(false)} addAlert={addAlert} />;
+      case "createuser":
+        return <CreateUser onClose={() => setShowModal(false)} addAlert={addAlert} />;
       default:
         return null;
     }
   };
   const handleDeleteUser = async (id) => {
     try {
-      await deleteUser(id);
+      const res = await deleteUser(id);
+      addAlert('success', 'User deleted successfully!');
       setUsers(users.filter((user) => user.id !== id));
     } catch (error) {
       console.error("Error deleting user:", error);
@@ -67,6 +73,7 @@ const AdminDashboardHome = () => {
     <>
       <section className="container mx-auto p-6 font-mono">
         <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+          <button className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-950 mb-2 " onClick={() => handleCreateUser()}>Create User</button>
           <div className="w-full overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -141,7 +148,7 @@ const AdminDashboardHome = () => {
       </section>
       {showModal &&
         createPortal(
-          <Modal onClose={() => setShowModal(false)}>
+          <Modal >
             {renderModalContent()}
           </Modal>,
           document.body

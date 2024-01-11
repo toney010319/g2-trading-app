@@ -1,5 +1,5 @@
 class BalancesController < ApplicationController
-  before_action :authenticate_user!, only: :all
+  before_action :authenticate_user!
 
 def add_balance
   user = User.find(params[:user_id])
@@ -92,7 +92,6 @@ def revert_forex_balance
     render json: { error: "Failed to update balances" }, status: :unprocessable_entity
   end
 end
-
 
   def index
     user = User.find(params[:user_id])

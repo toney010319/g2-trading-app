@@ -24,17 +24,17 @@ class AdminsController < ApplicationController
 
 
     def create
-      @user = User.new(user_params)
+      @user = User.new(user_params.merge(confirmed_at: Time.now, status: "active"))
       if @user.save
-        render json: @user, status: :created
+        render_user_data(@user)
       else
-        render json: @user.errors, status: :unprocessable_entity
+        render_error(@user.errors)
       end
     end
 
 
     def update
-      if @user.update(user_params)
+      if @user.update(update_params)
         render_user_data(@user)
       else
         render_error(@user.errors)
@@ -43,16 +43,27 @@ class AdminsController < ApplicationController
 
 
     def destroy
-      user_data = render_user_data(@user)
+      user_data_hash = user_data_hash(@user) 
       @user.destroy
       if @user.destroyed?
-        render json: user_data, status: :ok
+        render json: { 
+      user: user_data_hash,
+      message: "Account deleted successfully."
+    }, status: :ok
       else
         render_error(@user.errors)
       end
     end
-
+  
+  
     private
+    def user_data_hash(user)
+      {
+        user: user.as_json,
+        balance: user.balance,
+        transaction_history: user.transactions.order(created_at: :desc).as_json
+      }
+    end
 
     def render_user_data(user)
       user_data = user.as_json
@@ -63,7 +74,9 @@ class AdminsController < ApplicationController
     end
 
     def render_error(errors)
-      render json: errors, status: :unprocessable_entity
+      render json: {
+        status: {code: 422, message: " #{errors.full_messages.to_sentence}"}
+      }, status: :unprocessable_entity
     end
 
     def set_user
@@ -72,11 +85,12 @@ class AdminsController < ApplicationController
 
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
-
+      params.require(:user).permit(:email, :password, :password_confirmation, :username, :birthday, :status, :first_name, :middle_name, :role, :last_name, )
     end
 
-    private
+    def update_params
+      params.require(:user).permit(:first_name, :middle_name, :last_name, :username, :password, :email, :birthday,:role , balance_attributes: [:id, :balance, :forex, :stocks, :crypto])
+    end
 
     def ensure_admin_user!
       unless current_user.admin?
@@ -84,3 +98,4 @@ class AdminsController < ApplicationController
       end
     end
   end
+ 
