@@ -6,8 +6,11 @@ import Registration from './pages/Registration';
 import Alertbox from './components/Alertbox';
 import { useState } from 'react';
 import Deposit from './dashboard/Deposit';
-import AdminDashboard from './admin/AdminDashboard';
+
 import MyProfile from './dashboard/Myprofile';
+import AdminDashboardLayout from './admin/AdminDashboardLayout';
+import AdminVerifcation from './admin/AdminVerifcation';
+import AdminDashboardHome from './admin/AdminDashboardHome';
 
 const App = () => {
   const [alerts, setAlerts] = useState([]);
@@ -40,11 +43,15 @@ const App = () => {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Login addAlert={addAlert} />} />
-              <Route path="/dashboard/*" element={<Dashboard addAlert={addAlert} />} />.
-              <Route path="/admin/*" element={<AdminDashboard addAlert={addAlert} />} />
               <Route path="/register" element={<Registration addAlert={addAlert} />} />
+              <Route path="/dashboard/*" element={<Dashboard addAlert={addAlert} />} />.
               <Route path="/deposit" element={<Deposit addAlert={addAlert} />} />
               <Route path="/my-profile" element={<MyProfile addAlert={addAlert} />} />
+              <Route element={<AdminDashboardLayout />}>
+                <Route path="/admin" element={<AdminDashboardHome addAlert={addAlert} />} />
+                <Route path="/admin/verification" element={<AdminVerifcation addAlert={addAlert} />} />
+
+              </Route>
             </Routes>
           </BrowserRouter>
         </div>

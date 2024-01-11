@@ -200,7 +200,7 @@ const EditUser = ({ user, onClose, addAlert }) => {
 
 
             <div className="flex flex-row justify-center gap-4 mt-2">
-              <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700" type="submit">Create</button>
+              <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700" type="submit">Update</button>
             </div>
           </form>
 

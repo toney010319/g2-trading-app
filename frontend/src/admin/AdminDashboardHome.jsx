@@ -7,6 +7,7 @@ import ShowUser from "./components/ShowUser";
 import EditUser from "./components/EditUser";
 import CreateUser from "./components/CreateUser";
 
+
 const AdminDashboardHome = ({ addAlert }) => {
   const [users, setUsers] = useState();
   const [loading, setLoading] = useState(true);
@@ -21,6 +22,7 @@ const AdminDashboardHome = ({ addAlert }) => {
         const response = await getUsers();
         setUsers(response);
         setLoading(false);
+        return response;
       } catch (error) {
         console.error("Error fetching transactions:", error);
         setLoading(false);
@@ -62,7 +64,7 @@ const AdminDashboardHome = ({ addAlert }) => {
   };
   const handleDeleteUser = async (id) => {
     try {
-      const res = await deleteUser(id);
+      await deleteUser(id);
       addAlert('success', 'User deleted successfully!');
       setUsers(users.filter((user) => user.id !== id));
     } catch (error) {
