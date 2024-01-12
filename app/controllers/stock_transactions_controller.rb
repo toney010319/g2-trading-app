@@ -36,7 +36,16 @@ class StockTransactionsController < ApplicationController
   stocks_info = stock_transactions.map { |transaction| transaction.attributes }
 
   render json: { stocks: stocks_info }
-end
+  end
+
+  def show_user_stocks
+    user = User.find(params[:user_id])
+    stock_transactions = PortfolioTransaction.where(user_id: user.id, asset_type: 'Stock')
+    stocks_info = stock_transactions.map { |transaction| transaction.attributes }
+
+    render json: { user_stocks: stocks_info }
+  end
+
 
   private
 

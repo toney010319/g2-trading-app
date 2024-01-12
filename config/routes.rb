@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 
   post 'buy_stocks', to: 'stock_transactions#buy'
   get 'show_all_portfolio_stocks', to: 'stock_transactions#show_all_stocks'
+  get 'show_user_stocks', to:'stock_transactions#show_user_stocks'
 
   # Defines the root path route ("/")
   # root "posts#index"
