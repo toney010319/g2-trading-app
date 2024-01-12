@@ -16,8 +16,9 @@ const AdminVerifcation = () => {
         () => async () => {
             try {
                 const response = await getUsers();
-                console.log("res", response.status)
-                setUsers(response);
+                console.log("res", response)
+                const filter = response.filter(user => user.status === 'pending')
+                setUsers(filter)
                 setLoading(false);
                 return response;
             } catch (error) {
@@ -65,7 +66,7 @@ const AdminVerifcation = () => {
                                             </td>
                                         </tr>
                                     ) : users.length > 0 ? (
-                                        users.filter(user => user.status === 'pending').map((user, index) => (
+                                        users.map((user, index) => (
                                             <tr key={index} className="text-gray-700">
                                                 <td className="px-4 py-3 text-ms font-semibold border">{`${user.first_name} ${user.last_name}`}</td>
                                                 <td className="px-4 py-3 text-ms font-semibold border">
