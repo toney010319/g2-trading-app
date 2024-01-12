@@ -132,7 +132,7 @@ const BuyStocks = () => {
 
   return (
     <>
-      <div className="flex-1 flex bg-green-500 justify-around">
+      <div className="flex-1 flex justify-around">
         {loading ? (
         <div className="ml-12 w-96 mr-24">
           <div className="h-full my-auto mx-auto w-20">
@@ -140,9 +140,9 @@ const BuyStocks = () => {
           </div>
         </div>
         ) : (
-          <div className="mt-1 rounded-lg p-3 flex flex-col bg-indigo-200">
+          <div className="mt-1 rounded-lg p-3 flex flex-col bg-gradient-to-b from-azure-950 to-azure-600">
             <div className="mb-4">
-              <label className="ml-1 block text-lg font-bold">
+              <label className="text-white ml-1 block text-lg font-bold">
                 Select a stock:
               </label>
               <select
@@ -161,35 +161,35 @@ const BuyStocks = () => {
               </select>
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-semibold">Quantity:</label>
+              <label className=" text-white font-semibold">Quantity:</label>
               <input
                 type="number"
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="text-center w-full p-2 border border-gray-300 rounded-md"
               />
             </div>
             {price && symbol ? (
               <>
-                <div className="flex underline underline-offset-4 justify-center border rounded-md shadow-lg p-4 my-2 mx-4">
+                <div className="bg-white flex underline underline-offset-4 justify-center rounded-md shadow-lg p-4 my-2 mx-4">
                   <img className="w-10 mr-3" src={getImageLink(symbol)} alt={symbol} />
                   <div className="mt-1 font-bold font-serif text-lg">{selectedStockName}</div>
                 </div>
-                <div className="flex-1 bg-red-200 flex-col justify-center">
+                <div className="flex-1 flex-col justify-center ease-in-out duration-300">
                 {price !== null && !isNaN(parseFloat(price)) && (
-                    <div className="flex justify-center mb-2 font-semibold text-lg">
+                    <div className="text-white bg-azure-950 rounded-md flex justify-center mb-2 font-semibold text-lg">
                       PRICE: <span className="ml-2 font-bold">${parseFloat(price).toFixed(2)}</span>
                     </div>
                   )}
 
                   {symbol && (
-                    <div className="flex justify-center mb-2 font-semibold text-lg">
+                    <div className="text-white bg-azure-950 rounded-md flex justify-center mb-2 font-semibold text-lg ease-in-out duration-300">
                       SYMBOL: <span className="ml-2 font-bold">{symbol}</span>
                     </div>
                   )}
 
                   {quantity !== null && !isNaN(parseFloat(quantity)) && (
-                    <div className="flex justify-center mb-2 font-semibold text-lg">
+                    <div className="text-white bg-azure-950 rounded-md flex justify-center mb-2 font-semibold text-lg ease-in-out duration-300">
                       TOTAL: <span className="ml-2 font-bold animate-pulse">${calculateTotalAmount()}</span>
                     </div>
                   )}

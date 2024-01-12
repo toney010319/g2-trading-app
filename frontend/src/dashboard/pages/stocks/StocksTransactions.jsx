@@ -117,43 +117,40 @@ const StocksTransactions = ({ updateTransactionHistory, setUpdateTransactionHist
                 </tr>
               </thead>
               <tbody className="bg-white">
-              {loading ? (
+                {loading ? (
+                  <tr>
+                    <td colSpan="6" className="text-center py-4">
+                      <div className="flex justify-center w-full h-10">
+                        <Loading />
+                      </div>
+                    </td>
+                  </tr>
+                ) : (
+                  paginatedTransactions.length > 0 ? (
+                    paginatedTransactions.map((userStock) => (
+                      <tr key={userStock.id}>
+                        <div className="flex">
+                          <div className="flex">
+                            <img className="ml-2 w-12" src={getImageLink(userStock.symbol)} alt={userStock.symbol} />
+                          </div>
+                          <td className="px-4 py-3">{userStock.symbol}</td>
+                        </div>
+                        <td className="px-4 py-3 text-center">{parseFloat(userStock.quantity).toFixed(0)}</td>
+                        <td className="px-4 py-3 text-center">$ {parseFloat(userStock.price).toFixed(2)}</td>
+                        <td className="px-4 py-3 text-center">{(userStock.transaction_type).toUpperCase()}</td>
+                        <td className="px-4 py-3 text-center">{format(new Date(userStock.created_at), 'MM/dd/yyyy HH:mm a')}</td>
+                      </tr>
+                    ))
+                  ) : (
                     <tr>
                       <td colSpan="6" className="text-center py-4">
                         <div className="flex justify-center w-full h-10">
-                          <Loading />
+                          No Transactions
                         </div>
                       </td>
                     </tr>
-                  ) : (
-                    paginatedTransactions.length > 0 ? (
-                      paginatedTransactions.map((userStock) => {
-                        console.log('Transaction Object:', userStock);
-                        return (
-                          <tr key={userStock.id}>
-                            <div className="flex">
-                            <div className="flex">
-                              <img className="ml-2 w-12" src={getImageLink(userStock.symbol)} alt={userStock.symbol} />
-                            </div>
-                            <td className="px-4 py-3">{userStock.symbol}</td>
-                            </div>
-                            <td className="px-4 py-3 text-center">{parseFloat(userStock.quantity).toFixed(0)}</td>
-                            <td className="px-4 py-3 text-center">$ {parseFloat(userStock.price).toFixed(2)}</td>
-                            <td className="px-4 py-3 text-center">{(userStock.transaction_type).toUpperCase()}</td>
-                            <td className="px-4 py-3 text-center">{format(new Date(userStock.created_at), 'MM/dd/yyyy HH:mm a')}</td>
-                          </tr>
-                        );
-                      })
-                    ) : (
-                      <tr>
-                        <td colSpan="6" className="text-center py-4">
-                          <div className="flex justify-center w-full h-10">
-                            No Transactions
-                          </div>
-                        </td>
-                      </tr>
-                    )
-                  )}
+                  )
+                )}
               </tbody>
             </table>
               <div className="flex justify-center w-full  mt-4 mb-4">

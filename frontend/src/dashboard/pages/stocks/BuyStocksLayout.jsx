@@ -6,7 +6,7 @@ const BuyStocksLayout = () => {
 
   return (
     <>
-      <div className="flex justify-around mt-3 bg-red-200 h-96">
+      <div className="flex justify-around mt-3 h-96">
         <div className="flex">
           <TransferStocks />
         </div>
@@ -16,7 +16,7 @@ const BuyStocksLayout = () => {
         </div>
       </div>
 
-      <div className="flex bg-green-200 p-4">
+      <div className="flex p-4">
         <BuyStocks />
       </div>
     </>

@@ -4,7 +4,7 @@ import {
   revertStockBalance,
   getUserBalance
 } from "../../../lib/api";
-import Logo from "../../../assets/Logo";
+import LogoDark from "../../../assets/LogoDark";
 
 const TransferStocks = () => {
   const [transferAmount, setTransferAmount] = useState("");
@@ -69,20 +69,20 @@ const TransferStocks = () => {
 
   return (
     <>
-      <div className="flex justify-around mt-3 bg-red-200 h-96">
-        <div className="bg-yellow-200 rounded-lg ml-4">
+      <div className="flex justify-around mt-3 h-96">
+        <div className="bg-gradient-to-b from-azure-950 to-azure-600 rounded-lg ml-4">
           <div className="mt-4">
-            <Logo />
+            <LogoDark  />
           </div>
           <div className="flex flex-col">
-            <div className="flex bg-green-200 rounded-lg m-3 pb-3">
+            <div className="flex bg-azure-700 text-white rounded-lg m-3 pb-3">
               <div className="flex-1">
-                <div className="flex justify-center font-sans font-bold text-lg">
+                <div className="flex mt-2 justify-center font-sans font-bold text-lg">
                   Your PHP Wallet
                 </div>
                 <div className="flex flex-col">
                   <span className="font-bold ml-1">Balance: </span>
-                  <span className="flex font-bold justify-center text-3xl border-1 mt-4 border-black border-b-4">
+                  <span className="flex text-white font-bold justify-center text-3xl border-1 mt-4 border-black border-b-4 rounded-sm bg-blue-900">
                     {loading ? <div className="text-center">Loading...</div> : `₱${parseFloat(balance.balance).toFixed(2)}`}
                   </span>
                 </div>
@@ -90,7 +90,7 @@ const TransferStocks = () => {
             </div>
 
             <div className="m-3 flex flex-col">
-              <label className="text-center" htmlFor="transferAmount">
+              <label className="text-center text-white font-semibold" htmlFor="transferAmount">
                 Transfer Amount
               </label>
               <input
@@ -121,19 +121,19 @@ const TransferStocks = () => {
           </div>
         </div>
 
-        <div className="bg-yellow-500 rounded-lg ml-5">
+        <div className="bg-gradient-to-b from-azure-600 to-azure-950 rounded-lg ml-4">
           <div className="mt-4">
-            <Logo />
+            <LogoDark  />
           </div>
           <div className="flex flex-col">
-            <div className="flex bg-green-200 rounded-lg m-3 pb-3">
+            <div className="flex bg-azure-900 text-white rounded-lg m-3 pb-3">
               <div className="flex-1">
-                <div className="flex justify-center font-sans font-bold text-lg">
+                <div className="flex mt-2 justify-center font-sans font-bold text-lg">
                   USD Stock Wallet
                 </div>
                 <div className="flex flex-col">
                   <span className="font-bold ml-1">Balance: </span>
-                  <span className="flex font-bold justify-center text-3xl border-1 mt-4 border-black border-b-4">
+                  <span className="flex font-bold justify-center text-3xl border-1 mt-4 border-black border-b-4 bg-blue-700">
                   {loading ? <div className="text-center">Loading...</div> : `$${(balance.stocks * 0.01778584).toFixed(2)}`}
                   </span>
                 </div>
@@ -141,7 +141,7 @@ const TransferStocks = () => {
             </div>
 
             <div className="m-3 flex flex-col">
-              <label className="text-center" htmlFor="transferAmount">
+              <label className="text-center text-white font-semibold" htmlFor="transferAmount">
                 Transfer Amount
               </label>
 
