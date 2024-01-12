@@ -7,6 +7,7 @@
 - [Contributors](#contributors)
 - [Features](#features)
 - [Prerequisites](#prerequisites)
+- [Description](#description)
 - [Dependencies](#dependencies)
 - [User Stories](#user-stories)
 
@@ -20,11 +21,13 @@ This project is developed by [toney010319](https://github.com/toney010319), [and
 - Utilizes React for the frontend.
 - Rails backend via API.
 - Roles: Admin and Traders.
+- Admin approval
 - Buying and Selling of different currencies (Crypto, Forex, and Stocks).
 - Integrated simulation of payment (deposit).
-- Transaction history.
-- Login and Registration
+- Transaction history
+- Login and Registration (with email confirmation)
 - Dynamic alert errors
+- Portfolio of different currencies
 
 ## Prerequisites
 
@@ -32,6 +35,12 @@ This project is developed by [toney010319](https://github.com/toney010319), [and
 - [npm](https://www.npmjs.com/)
 - [Ruby](https://www.ruby-lang.org/)
 - [Ruby on Rails](https://rubyonrails.org/)
+
+## Description
+
+- Run (`npm run dev`) from frontend
+
+_Note: vite, rails s, and mailcatcher will run via concurrently_
 
 ## Dependencies
 
