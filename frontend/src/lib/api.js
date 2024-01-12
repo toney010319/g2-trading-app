@@ -27,7 +27,9 @@ export const registerUser = async (event) => {
       password: formData.get("password"),
       birthday: formData.get("birthday"),
       email: formData.get("email"),
-      role: "Trader"
+      role: "Trader",
+      status: "pending",
+      email_confirmed: false,
     },
   };
   try {
