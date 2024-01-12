@@ -59,6 +59,7 @@ _Note: vite, rails s, and mailcatcher will run via concurrently_
 - [heroicons](https://www.npmjs.com/package/heroicons)
 - [axios](https://www.npmjs.com/package/axios)
 - [chart.js](https://www.npmjs.com/package/chart.js)
+- [date-fns](https://www.npmjs.com/package/concurrently/date-fns)
 
 ## User Stories
 

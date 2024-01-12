@@ -11,6 +11,7 @@ const TransferStocks = () => {
   const [stockAmount, setStockAmount] = useState("");
   const [balance, setBalance] = useState("");
   const user_id = document.cookie.split("user_id=")[1];
+  const [loading, setLoading] = useState(true);
   const usdAmount = stockAmount * 56.17;
 
   const fetchUserBalance = useMemo(
@@ -19,8 +20,10 @@ const TransferStocks = () => {
         const response = await getUserBalance(user_id);
         setBalance(response);
         console.log(response, "set balance response");
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching transactions:", error);
+        setLoading(false);
       }
     },
     [user_id]
@@ -58,6 +61,7 @@ const TransferStocks = () => {
       console.error("Error transferring from stock to wallet:", error);
     }
   };
+  
 
   useEffect(() => {
     fetchUserBalance();
@@ -79,7 +83,7 @@ const TransferStocks = () => {
                 <div className="flex flex-col">
                   <span className="font-bold ml-1">Balance: </span>
                   <span className="flex font-bold justify-center text-3xl border-1 mt-4 border-black border-b-4">
-                    ₱{parseFloat(balance.balance).toFixed(2)}
+                    {loading ? <div className="text-center">Loading...</div> : `₱${parseFloat(balance.balance).toFixed(2)}`}
                   </span>
                 </div>
               </div>
@@ -130,7 +134,7 @@ const TransferStocks = () => {
                 <div className="flex flex-col">
                   <span className="font-bold ml-1">Balance: </span>
                   <span className="flex font-bold justify-center text-3xl border-1 mt-4 border-black border-b-4">
-                    ${(balance.stocks * 0.01778584).toFixed(2)}
+                  {loading ? <div className="text-center">Loading...</div> : `$${(balance.stocks * 0.01778584).toFixed(2)}`}
                   </span>
                 </div>
               </div>

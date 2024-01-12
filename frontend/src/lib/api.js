@@ -151,6 +151,18 @@ export const getTransactions = async (user_id) => {
   }
 };
 
+export const getUserStocks = async (user_id) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:3000/show_user_stocks?user_id=${user_id}`,
+      {}
+    );
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getProfile = async (user_id) => {
   try {
     const response = await axios.get(
@@ -219,3 +231,5 @@ export const buyStocks = async (user_id, quantity, price, symbol) => {
     return { success: false, error: error.message };
   }
 };
+
+
