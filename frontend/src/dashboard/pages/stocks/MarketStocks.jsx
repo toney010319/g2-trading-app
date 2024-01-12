@@ -156,6 +156,7 @@ const MarketStocks = () => {
                                 onClick={() => {
                                   localStorage.setItem('selectedStockSymbol', data.symbol);
                                   localStorage.setItem('selectedStockName', data.name);
+                                  localStorage.setItem('selectedStockPrice', data.price);
                                   navigate('/dashboard/stocks/trade');
                                 }}
                                 >

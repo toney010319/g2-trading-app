@@ -1,6 +1,6 @@
 # README
 
-# Stock, Forex & Crypto Trading App
+# Full Stack Stock, Forex & Crypto Trading App
 
 ## Table of Contents
 
@@ -44,7 +44,7 @@ _Note: vite, rails s, and mailcatcher will run via concurrently_
 
 ## Dependencies
 
-### Ruby Gems (Run `bundle install` to install)
+### Ruby Gems Run `bundle install` to install
 
 - [gem](https://rubygems.org/)
 - [rack-cors](https://rubygems.org/gems/rack-cors)
@@ -59,6 +59,7 @@ _Note: vite, rails s, and mailcatcher will run via concurrently_
 - [heroicons](https://www.npmjs.com/package/heroicons)
 - [axios](https://www.npmjs.com/package/axios)
 - [chart.js](https://www.npmjs.com/package/chart.js)
+- [date-fns](https://www.npmjs.com/package/concurrently/date-fns)
 
 ## User Stories
 
