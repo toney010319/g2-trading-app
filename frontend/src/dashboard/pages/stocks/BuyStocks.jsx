@@ -7,7 +7,7 @@ import StocksTransactions from "./StocksTransactions";
 import Loading from "../../../components/Loading";
 import StocksMiniPortfolio from "./StocksMiniPortfolio";
 
-const BuyStocks = () => {
+const BuyStocks = ({ setUpdateBalanceFlag }) => {
   const user_id = document.cookie.split("user_id=")[1];
   const [symbol, setSymbol] = useState("");
   const [price, setPrice] = useState("");
@@ -46,6 +46,7 @@ const BuyStocks = () => {
         setPrice("Select a stock");
         setSymbol("Select a stock");
         setUpdateTransactionHistory(true);
+        setUpdateBalanceFlag(true)
       } else {
         console.error("Error purchasing stocks:", message);
       }

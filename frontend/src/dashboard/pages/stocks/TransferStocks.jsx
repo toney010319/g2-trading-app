@@ -6,7 +6,7 @@ import {
 } from "../../../lib/api";
 import LogoDark from "../../../assets/LogoDark";
 
-const TransferStocks = () => {
+const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
   const [transferAmount, setTransferAmount] = useState("");
   const [stockAmount, setStockAmount] = useState("");
   const [balance, setBalance] = useState("");
@@ -65,7 +65,8 @@ const TransferStocks = () => {
 
   useEffect(() => {
     fetchUserBalance();
-  }, [user_id, fetchUserBalance]);
+    setUpdateBalanceFlag(false);
+  }, [user_id, fetchUserBalance, updateBalanceFlag, setUpdateBalanceFlag]);
 
   return (
     <>
