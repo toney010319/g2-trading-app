@@ -53,6 +53,7 @@ const App = () => {
                   <Route path="/my-profile" element={<MyProfile addAlert={addAlert} />} />
                 </Route>
                 {/* ADMIN ROUTES */}
+
                 <Route path="/admin/*" element={<AdminDashboard addAlert={addAlert} />} />
               </Routes>
             </AuthProvider>
