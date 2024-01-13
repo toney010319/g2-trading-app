@@ -63,6 +63,20 @@ class AdminsController < ApplicationController
         render json: { error: 'User not found.' }, status: :not_found
       end
     end
+
+
+    def disapprove
+      user = User.find_by(id: params[:id])
+      disapproval_message = params[:message]  
+      if user
+        user.disapprove!  
+        AdminMailer.account_disapproved_email(user, disapproval_message).deliver_now
+        render json: { message: 'User disapproved and email sent.' }, status: :ok
+      else
+        render json: { error: 'User not found.' }, status: :not_found
+      end
+    end
+
     private
     def user_data_hash(user)
       {

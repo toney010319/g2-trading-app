@@ -29,6 +29,10 @@ class User < ApplicationRecord
     self.update!(email_confirmed: true, status: "active")
     AdminMailer.account_approved_email(self).deliver_now
   end
+
+  def disapprove!
+    update(status: 'pending')  
+  end
   def create_balance
     self.balance = Balance.new(balance: 0, stocks: 0, forex: 0, crypto: 0)
   end

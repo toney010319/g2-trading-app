@@ -1,19 +1,8 @@
-import { Outlet } from "react-router-dom";
-import AdminNavigationBar from "./components/AdminNavigationBar";
-import { useEffect } from "react";
-import axios from 'axios'
-// eslint-disable-next-line react/prop-types
-const AdminDashboardLayout = ({ addAlert }) => {
-  useEffect(() => {
-    const initiateAuthorization = () => {
-      const token = document.cookie.split("token=")[1];
-      if (token) {
-        axios.defaults.headers.common["Authorization"] = token;
-      }
-    };
-    initiateAuthorization();
 
-  }, []);
+import AdminNavigationBar from "./components/AdminNavigationBar";
+// eslint-disable-next-line react/prop-types
+const AdminDashboardLayout = ({ children, addAlert }) => {
+
   return (
     <div className="flex h-screen">
 
@@ -23,7 +12,7 @@ const AdminDashboardLayout = ({ addAlert }) => {
           <AdminNavigationBar addAlert={addAlert} />
         </div>
 
-        <div className="flex-1"><Outlet /></div>
+        <div className="flex-1">{children}</div>
       </div>
     </div>
   );
