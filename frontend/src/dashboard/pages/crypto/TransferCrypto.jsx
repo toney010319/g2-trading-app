@@ -1,12 +1,12 @@
 import { useState, useMemo, useEffect } from "react";
 import {
-  addStockBalance,
-  revertStockBalance,
+  addCryptoBalance,
+  revertCryptoBalance,
   getUserBalance
 } from "../../../lib/api";
 import LogoDark from "../../../assets/LogoDark";
 
-const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
+const TransferCrypto = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
   const [transferAmount, setTransferAmount] = useState("");
   const [stockAmount, setStockAmount] = useState("");
   const [balance, setBalance] = useState("");
@@ -29,9 +29,9 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
     [user_id]
   );
 
-  const handleTransferToStock = async () => {
+  const handleTransferToCrypto = async () => {
     try {
-      const { addBalanceResponse } = await addStockBalance(
+      const { addBalanceResponse } = await addCryptoBalance(
         transferAmount,
         user_id
       );
@@ -48,7 +48,7 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
 
   const handleTransferToWallet = async () => {
     try {
-      const { revertBalanceResponse } = await revertStockBalance(
+      const { revertBalanceResponse } = await revertCryptoBalance(
         usdAmount,
         user_id
       );
@@ -114,7 +114,7 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
               />
               <button
                 className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700 mt-2"
-                onClick={handleTransferToStock}
+                onClick={handleTransferToCrypto}
               >
                 Transfer
               </button>
@@ -130,12 +130,12 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
             <div className="flex bg-azure-900 text-white rounded-lg m-3 pb-3">
               <div className="flex-1">
                 <div className="flex mt-2 justify-center font-sans font-bold text-lg">
-                  USD Stock Wallet
+                  USD Spot Wallet
                 </div>
                 <div className="flex flex-col">
                   <span className="font-bold ml-1">Balance: </span>
                   <span className="flex font-bold justify-center text-3xl border-1 mt-4 border-black border-b-4 bg-blue-700">
-                  {loading ? <div className="text-center">Loading...</div> : `$${parseFloat(balance.stocks).toFixed(2)}`}
+                  {loading ? <div className="text-center">Loading...</div> : `$${parseFloat(balance.crypto).toFixed(2)}`}
                   </span>
                 </div>
               </div>
@@ -177,4 +177,4 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
   );
 };
 
-export default TransferStocks;
+export default TransferCrypto;

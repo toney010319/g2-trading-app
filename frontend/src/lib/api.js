@@ -111,10 +111,66 @@ export const addStockBalance = async (balance, user_id, transactionData) => {
   }
 };
 
+export const addCryptoBalance = async (balance, user_id, transactionData) => {
+  try {
+    const addStockBalanceResponse = await axios.post(
+      "http://localhost:3000/add_crypto_balance",
+      {
+        balance,
+        user_id,
+      }
+    );
+
+    const transactionResponse = await axios.post(
+      "http://localhost:3000/transactions",
+      {
+        balance,
+        user_id,
+        ...transactionData,
+      }
+    );
+
+    return {
+      addBalanceResponse: addStockBalanceResponse.data,
+      transactionResponse: transactionResponse.data,
+    };
+  } catch (error) {
+    return error;
+  }
+};
+
 export const revertStockBalance = async (balance, user_id, transactionData) => {
   try {
     const revertStockBalanceResponse = await axios.post(
       "http://localhost:3000/revert_stock_balance",
+      {
+        balance,
+        user_id,
+      }
+    );
+
+    const transactionResponse = await axios.post(
+      "http://localhost:3000/transactions",
+      {
+        balance,
+        user_id,
+        ...transactionData,
+      }
+    );
+
+    return {
+      revertBalanceResponse: revertStockBalanceResponse.data,
+      transactionResponse: transactionResponse.data,
+    };
+  } catch (error) {
+    return error;
+  }
+};
+
+export const revertCryptoBalance = async (balance, user_id, transactionData) => {
+  try {
+    const revertStockBalanceResponse = await axios.post(
+      "http://localhost:3000/revert_crypto_balance",
       {
         balance,
         user_id,
@@ -155,6 +211,18 @@ export const getUserStocks = async (user_id) => {
   try {
     const response = await axios.get(
       `http://localhost:3000/show_user_stocks?user_id=${user_id}`,
+      {}
+    );
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getUserCrypto = async (user_id) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:3000/show_user_crypto?user_id=${user_id}`,
       {}
     );
     return response.data;
@@ -231,5 +299,24 @@ export const buyStocks = async (user_id, quantity, price, symbol) => {
     return { success: false, error: error.message };
   }
 };
+
+export const buyCrypto = async (user_id, quantity, price, symbol) => {
+  try {
+    const buyStocksResponse = await axios.post(
+      "http://localhost:3000/buy_crypto",
+      {
+        user_id,
+        quantity,
+        price,
+        symbol,
+      }
+    );
+
+    return buyStocksResponse.data;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
 
 

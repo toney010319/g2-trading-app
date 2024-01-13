@@ -11,7 +11,7 @@ import Stocks from "./pages/stocks/Stocks";
 import BuyStocksLayout from "./pages/stocks/BuyStocksLayout";
 import MarketStocks from "./pages/stocks/MarketStocks";
 import Crypto from "./pages/crypto/Crypto";
-import BuyCrypto from "./pages/crypto/BuyCrypto";
+import BuyCryptoLayout from "./pages/crypto/BuyCryptoLayout";
 import MarketCrypto from "./pages/crypto/MarketCrypto";
 import Forex from "./pages/forex/Forex";
 import BuyForex from "./pages/forex/BuyForex";
@@ -50,7 +50,7 @@ const Dashboard = ({ addAlert }) => {
                     <Route path="stocks/trade" element={<BuyStocksLayout />} />
                     <Route path="stocks/market" element={<MarketStocks />} />
                     <Route path="crypto" element={<Crypto />} />
-                    <Route path="crypto/trade" element={<BuyCrypto />} />
+                    <Route path="crypto/trade" element={<BuyCryptoLayout />} />
                     <Route path="crypto/market" element={<MarketCrypto />} />
                     <Route path="forex" element={<Forex />} />
                     <Route path="forex/trade" element={<BuyForex />} />
