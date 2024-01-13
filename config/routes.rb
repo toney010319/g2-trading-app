@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :transactions, only: [:create, :index]
   resources :admins, only: [:index, :show, :create, :update, :destroy]
   post 'user/:id/approve', to: 'admins#approve'
+  post 'user/:id/disapprove', to: 'admins#disapprove'
   get '/transactions/show', to: 'transactions#show'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

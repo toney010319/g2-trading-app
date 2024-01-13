@@ -1,17 +1,32 @@
 /* eslint-disable react/prop-types */
 
+import { useState } from "react";
 import Logo from "../../assets/Logo";
 import Loading from "../../components/Loading";
-import { AdminVerification } from "../../lib/adminapi";
+import { AdminApproval, AdminDisapproval } from "../../lib/adminapi";
 
 
 
 
 const VerifyUser = ({ user, onClose, addAlert }) => {
+    const [message, setMessage] = useState("")
+
 
     const handleApprove = async () => {
 
-        const res = await AdminVerification(user.id)
+        const res = await AdminApproval(user.id)
+        console.log("res", res?.status)
+        if (res?.status == "200") {
+            addAlert('success', res?.data?.message)
+            onClose()
+        }
+        else (addAlert('error', res?.response?.data?.status?.message))
+
+    }
+
+    const handleDisapprove = async () => {
+
+        const res = await AdminDisapproval(message, user.id)
         console.log("res", res?.status)
         if (res?.status == "200") {
             addAlert('success', res?.data?.message)
@@ -177,13 +192,13 @@ const VerifyUser = ({ user, onClose, addAlert }) => {
                         </div>
 
                         <div className="flex flex-col mt-1">
-
+                            <textarea onChange={(e) => setMessage(e.target.value)} placeholder="Please Type the reason of disapproval here."></textarea>
                         </div>
 
 
                         <div className="flex flex-row justify-evenly gap-4 mt-2">
                             <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700" onClick={() => handleApprove(user)}>Approved</button>
-                            <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700">Disapproved</button>
+                            <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700" onClick={() => handleDisapprove(user)}>Disapproved</button>
                         </div>
                     </div>
 
