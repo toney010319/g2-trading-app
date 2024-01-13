@@ -11,6 +11,9 @@ const AdminVerifcation = ({ addAlert }) => {
     const [users, setUsers] = useState();
     const [showModal, setShowModal] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
+
+
+    console.log("AdminVerifcation")
     // const [modalContent, setModalContent] = useState(null);
     const fetchUsersMemoized = useMemo(
         () => async () => {
@@ -20,6 +23,7 @@ const AdminVerifcation = ({ addAlert }) => {
                 const filter = response.filter(user => user.status === 'pending')
                 setUsers(filter)
                 setLoading(false);
+
                 return response;
             } catch (error) {
                 console.error("Error fetching transactions:", error);
@@ -30,6 +34,7 @@ const AdminVerifcation = ({ addAlert }) => {
     );
 
     useEffect(() => {
+        console.log("AdminVerifcation")
         fetchUsersMemoized();
     }, [fetchUsersMemoized, showModal]);
     const handleShowUser = (user) => {
