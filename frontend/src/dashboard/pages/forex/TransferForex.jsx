@@ -1,18 +1,18 @@
 import { useState, useMemo, useEffect } from "react";
 import {
-  addCryptoBalance,
-  revertCryptoBalance,
+  addForexBalance,
+  revertForexBalance,
   getUserBalance
 } from "../../../lib/api";
 import LogoDark from "../../../assets/LogoDark";
 
-const TransferCrypto = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
+const TransferForex = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
   const [transferAmount, setTransferAmount] = useState("");
-  const [stockAmount, setStockAmount] = useState("");
+  const [forexAmount, setForexAmount] = useState("");
   const [balance, setBalance] = useState("");
   const user_id = document.cookie.split("user_id=")[1];
   const [loading, setLoading] = useState(true);
-  const usdAmount = stockAmount;
+  const usdAmount = forexAmount;
 
   const fetchUserBalance = useMemo(
     () => async () => {
@@ -29,36 +29,36 @@ const TransferCrypto = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
     [user_id]
   );
 
-  const handleTransferToCrypto = async () => {
+  const handleTransferToForex = async () => {
     try {
-      const { addBalanceResponse } = await addCryptoBalance(
+      const { addBalanceResponse } = await addForexBalance(
         transferAmount,
         user_id
       );
       console.log(
-        "Transfer from wallet to stock successful:",
+        "Transfer from wallet to forex wallet successful:",
         addBalanceResponse
       );
       fetchUserBalance();
       setTransferAmount("");
     } catch (error) {
-      console.error("Error transferring from wallet to stock:", error);
+      console.error("Error transferring from wallet to forex wallet:", error);
     }
   };
 
   const handleTransferToWallet = async () => {
     try {
-      const { revertBalanceResponse } = await revertCryptoBalance(
+      const { revertBalanceResponse } = await revertForexBalance(
         usdAmount,
         user_id
       );
       console.log(
-        "Transfer from stock to wallet successful:",
+        "Transfer from forex to wallet successful:",
         revertBalanceResponse
       );
       fetchUserBalance();
     } catch (error) {
-      console.error("Error transferring from stock to wallet:", error);
+      console.error("Error transferring from forex to wallet:", error);
     }
   };
   
@@ -114,7 +114,7 @@ const TransferCrypto = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
               />
               <button
                 className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700 mt-2"
-                onClick={handleTransferToCrypto}
+                onClick={handleTransferToForex}
               >
                 Transfer
               </button>
@@ -130,12 +130,12 @@ const TransferCrypto = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
             <div className="flex bg-azure-900 text-white rounded-lg m-3 pb-3">
               <div className="flex-1">
                 <div className="flex mt-2 justify-center font-sans font-bold text-lg">
-                  USD Spot Wallet
+                  Currency Wallet
                 </div>
                 <div className="flex flex-col">
                   <span className="font-bold ml-1">Balance: </span>
                   <span className="flex font-bold justify-center text-3xl border-1 mt-4 border-black border-b-4 bg-blue-700">
-                  {loading ? <div className="text-center">Loading...</div> : `$${parseFloat(balance.crypto).toFixed(2)}`}
+                  {loading ? <div className="text-center">Loading...</div> : `$${parseFloat(balance.forex).toFixed(2)}`}
                   </span>
                 </div>
               </div>
@@ -151,8 +151,8 @@ const TransferCrypto = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
                 type="text"
                 id="transferAmount"
                 placeholder="$ 0.00"
-                value={`₱ ${stockAmount * 56.12}`}
-                onChange={(e) => setStockAmount(e.target.value)}
+                value={`₱ ${forexAmount * 56.12}`}
+                onChange={(e) => setForexAmount(e.target.value)}
                 disabled
               />
               <input
@@ -160,8 +160,8 @@ const TransferCrypto = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
                 type="text"
                 id="transferAmount"
                 placeholder="$ 0.00"
-                value={stockAmount}
-                onChange={(e) => setStockAmount(e.target.value)}
+                value={forexAmount}
+                onChange={(e) => setForexAmount(e.target.value)}
               />
               <button
                 className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700 mt-2"
@@ -177,4 +177,4 @@ const TransferCrypto = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
   );
 };
 
-export default TransferCrypto;
+export default TransferForex;

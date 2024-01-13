@@ -14,7 +14,7 @@ import Crypto from "./pages/crypto/Crypto";
 import BuyCryptoLayout from "./pages/crypto/BuyCryptoLayout";
 import MarketCrypto from "./pages/crypto/MarketCrypto";
 import Forex from "./pages/forex/Forex";
-import BuyForex from "./pages/forex/BuyForex";
+import BuyForexLayout from "./pages/forex/BuyForexLayout";
 import MarketForex from "./pages/forex/MarketForex";
 import TransactionHistory from "./pages/others/TransactionHistory";
 import Referrals from "./pages/others/Referrals";
@@ -53,7 +53,7 @@ const Dashboard = ({ addAlert }) => {
                     <Route path="crypto/trade" element={<BuyCryptoLayout />} />
                     <Route path="crypto/market" element={<MarketCrypto />} />
                     <Route path="forex" element={<Forex />} />
-                    <Route path="forex/trade" element={<BuyForex />} />
+                    <Route path="forex/trade" element={<BuyForexLayout />} />
                     <Route path="forex/market" element={<MarketForex />} />
                     <Route path="transactions" element={<TransactionHistory />} />
                     <Route path="referrals" element={<Referrals />} />
