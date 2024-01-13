@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   post 'buy_forex', to: 'forex_transactions#buy'
 
   get 'show_all_assets', to: 'transactions#show_all_assets'
+  get  'show_all_user_assets', to: 'transactions#show_all_user_assets'
 
   get 'show_all_portfolio_stocks', to: 'stock_transactions#show_all_stocks'
   get 'show_all_portfolio_crypto', to: 'crypto_transactions#show_all_crypto'

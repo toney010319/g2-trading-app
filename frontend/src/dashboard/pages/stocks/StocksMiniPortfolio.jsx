@@ -164,12 +164,14 @@ const StocksMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
                   paginatedTransactions.length > 0 ? (
                     paginatedTransactions.map((userStock) => (
                       <tr key={userStock.id}>
-                        <div className="flex">
+                        <td className="px-4 py-3">
                           <div className="flex">
-                            <img className="ml-2 w-12" src={getImageLink(userStock.symbol)} alt={userStock.symbol} />
+                            <div className="flex">
+                              <img className="ml-2 w-12" src={getImageLink(userStock.symbol)} alt={userStock.symbol} />
+                            </div>
+                            <span>{userStock.symbol}</span>
                           </div>
-                          <td className="px-4 py-3">{userStock.symbol}</td>
-                        </div>
+                        </td>
                         <td className="px-4 py-3 text-center">{parseFloat(userStock.quantity).toFixed(0)}</td>
                         <td className="px-4 py-3 text-center">$ {parseFloat(userStock.price).toFixed(2)}</td>
                       </tr>

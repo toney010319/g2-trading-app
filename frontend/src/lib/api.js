@@ -299,6 +299,18 @@ export const getUserForex = async (user_id) => {
   }
 };
 
+export const getUserAssets = async (user_id) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:3000/show_all_user_assets?user_id=${user_id}`,
+      {}
+    );
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getProfile = async (user_id) => {
   try {
     const response = await axios.get(
