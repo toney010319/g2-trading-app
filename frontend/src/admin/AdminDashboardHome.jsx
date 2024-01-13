@@ -73,6 +73,7 @@ const AdminDashboardHome = ({ addAlert }) => {
   };
   return (
     <>
+
       <section className="container mx-auto p-6 font-mono">
         <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
           <button className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-950 mb-2 " onClick={() => handleCreateUser()}>Create User</button>

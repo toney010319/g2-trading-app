@@ -8,9 +8,10 @@ import { useState } from 'react';
 import Deposit from './dashboard/Deposit';
 import Footer from './components/Footer';
 import MyProfile from './dashboard/Myprofile';
-import AdminDashboardLayout from './admin/AdminDashboardLayout';
-import AdminVerifcation from './admin/AdminVerifcation';
-import AdminDashboardHome from './admin/AdminDashboardHome';
+import RequireAuth from './context/hooks/RequireAuth';
+import { AuthProvider } from './context/AuthProvider';
+import AdminDashboard from './admin/AdminDashboard';
+
 
 const App = () => {
   const [alerts, setAlerts] = useState([]);
@@ -41,18 +42,22 @@ const App = () => {
             ))}
           </div>
           <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Login addAlert={addAlert} />} />
-              <Route path="/register" element={<Registration addAlert={addAlert} />} />
-              <Route path="/dashboard/*" element={<Dashboard addAlert={addAlert} />} />.
-              <Route path="/deposit" element={<Deposit addAlert={addAlert} />} />
-              <Route path="/my-profile" element={<MyProfile addAlert={addAlert} />} />
-              <Route element={<AdminDashboardLayout />}>
-                <Route path="/admin" element={<AdminDashboardHome addAlert={addAlert} />} />
-                <Route path="/admin/verification" element={<AdminVerifcation addAlert={addAlert} />} />
+            <AuthProvider>
+              <Routes>
+                {/* PUBLIC ROUTES */}
+                <Route path="/" element={<Login addAlert={addAlert} />} />
+                <Route path="/register" element={<Registration addAlert={addAlert} />} />
+                {/* TRADER ROUTES */}
+                <Route element={<RequireAuth />}>
+                  <Route path="/dashboard/*" element={<Dashboard addAlert={addAlert} />} />.
+                  <Route path="/deposit" element={<Deposit addAlert={addAlert} />} />
+                  <Route path="/my-profile" element={<MyProfile addAlert={addAlert} />} />
+                </Route>
+                {/* ADMIN ROUTES */}
 
-              </Route>
-            </Routes>
+                <Route path="/admin/*" element={<AdminDashboard addAlert={addAlert} />} />
+              </Routes>
+            </AuthProvider>
           </BrowserRouter>
         </div>
       </div>
