@@ -1,13 +1,13 @@
 import { useState, useMemo, useEffect } from "react";
-import { getUserCrypto } from "../../../lib/api";
+import { getUserCrypto} from "../../../lib/api";
+import { format } from "date-fns"
 import Loading from "../../../components/Loading";
 
-const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHistory }) => {
+const CryptoTransactions = ({ updateTransactionHistory, setUpdateTransactionHistory }) => {
   const user_id = document.cookie.split("user_id=")[1];
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [aggregatedData, setAggregatedData] = useState([]);
   const transactionsPerPage = 5;
   
   const fetchTransactionsMemoized = useMemo(() => async () => {
@@ -15,7 +15,7 @@ const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
       const response = await getUserCrypto(user_id);
       setTransactions(response);
       setLoading(false);
-      console.log('Stock Transaction Resp', response)
+      console.log('Crypto Transaction Resp', response)
     } catch (error) {
       console.error('Error fetching transactions:', error);
       setLoading(false);
@@ -69,11 +69,9 @@ const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
     ? [...transactions.user_crypto].sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
     : [];
 
-    const startIndex = (currentPage - 1) * transactionsPerPage;
-    const endIndex = startIndex + transactionsPerPage;
-    const paginatedTransactions = aggregatedData.slice(startIndex, endIndex);
-
-  
+  const startIndex = (currentPage - 1) * transactionsPerPage;
+  const endIndex = startIndex + transactionsPerPage;
+  const paginatedTransactions = sortedTransactions.slice(startIndex, endIndex);
   
   useEffect(() => {
   fetchTransactionsMemoized();
@@ -83,41 +81,6 @@ const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
   }
 }, [updateTransactionHistory, fetchTransactionsMemoized, setUpdateTransactionHistory]);
 
-
-
-  useEffect(() => {
-    if (transactions.user_crypto) {
-      const symbolDataMap = new Map();
-
-      transactions.user_crypto.forEach((transaction) => {
-        const symbol = transaction.symbol;
-        const quantity = parseFloat(transaction.quantity);
-        const price = parseFloat(transaction.price);
-
-        if (symbolDataMap.has(symbol)) {
-          const existingData = symbolDataMap.get(symbol);
-          symbolDataMap.set(symbol, {
-            quantity: existingData.quantity + quantity,
-            price: existingData.price + quantity * price,
-          });
-        } else {
-          symbolDataMap.set(symbol, {
-            quantity,
-            price: quantity * price,
-          });
-        }
-      });
-
-      const aggregatedArray = Array.from(symbolDataMap, ([symbol, { quantity, price }]) => ({
-        symbol,
-        quantity,
-        price,
-      }));
-
-      setAggregatedData(aggregatedArray);
-    }
-  }, [transactions.user_crypto]);
-
   return (
     <>
     <div className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden">
@@ -125,7 +88,7 @@ const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
         <div>
           <div className="flex justify-center">
             <span className="flex w-full justify-center text-bold text-2xl font-sans underline underline-offset-4 font-bold mb-2">
-              Crypto Assets
+              Recent Transactions
             </span>
           </div>
         </div>
@@ -137,6 +100,8 @@ const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
                   <th className="px-4 py-3">Symbol</th>
                   <th className="px-4 py-3">Quantity</th>
                   <th className="px-4 py-3">Price</th>
+                  <th className="px-4 py-3">Transaction</th>
+                  <th className="px-4 py-3">Created_at</th>
                 </tr>
               </thead>
               <tbody className="bg-white">
@@ -160,13 +125,15 @@ const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
                         </div>
                         <td className="px-4 py-3 text-center">{parseFloat(userCrypto.quantity).toFixed(0)}</td>
                         <td className="px-4 py-3 text-center">$ {parseFloat(userCrypto.price).toFixed(2)}</td>
+                        <td className="px-4 py-3 text-center">{(userCrypto.transaction_type).toUpperCase()}</td>
+                        <td className="px-4 py-3 text-center">{format(new Date(userCrypto.created_at), 'MM/dd/yyyy HH:mm a')}</td>
                       </tr>
                     ))
                   ) : (
                     <tr>
                       <td colSpan="6" className="text-center py-4">
                         <div className="flex justify-center w-full h-10">
-                          No Assets
+                          No Transactions
                         </div>
                       </td>
                     </tr>
@@ -198,4 +165,4 @@ const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
 );
 };
 
-export default CryptoMiniPortfolio;
+export default CryptoTransactions;

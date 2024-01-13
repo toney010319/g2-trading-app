@@ -6,7 +6,7 @@ import Registration from './pages/Registration';
 import Alertbox from './components/Alertbox';
 import { useState } from 'react';
 import Deposit from './dashboard/Deposit';
-
+import Footer from './components/Footer';
 import MyProfile from './dashboard/Myprofile';
 import AdminDashboardLayout from './admin/AdminDashboardLayout';
 import AdminVerifcation from './admin/AdminVerifcation';
@@ -56,6 +56,7 @@ const App = () => {
           </BrowserRouter>
         </div>
       </div>
+      <Footer />
     </>
   )
 }
