@@ -22,7 +22,7 @@ const AdminNavigationBar = ({ addAlert }) => {
                     <Link to="/admin" className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-500">
                         Dashboard
                     </Link>
-                    <Link to="/admin/verification" element={<AdminVerifcation />}
+                    <Link to="/admin/verification" element={<AdminVerifcation addAlert={addAlert} />}
                         className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-500"
 
                     >

@@ -6,12 +6,12 @@ import Modal from "./modals/modal";
 import VerifyUser from "./components/VerifyUser";
 
 
-const AdminVerifcation = () => {
+const AdminVerifcation = ({ addAlert }) => {
     const [loading, setLoading] = useState(true);
     const [users, setUsers] = useState();
     const [showModal, setShowModal] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
-    const [modalContent, setModalContent] = useState(null);
+    // const [modalContent, setModalContent] = useState(null);
     const fetchUsersMemoized = useMemo(
         () => async () => {
             try {
@@ -35,7 +35,7 @@ const AdminVerifcation = () => {
     const handleShowUser = (user) => {
         setShowModal(true);
         setSelectedUser(user);
-        setModalContent("show");
+        // setModalContent("show");
     };
 
     console.log("user", users)
@@ -102,7 +102,7 @@ const AdminVerifcation = () => {
                 {showModal &&
                     createPortal(
                         <Modal >
-                            {<VerifyUser user={selectedUser} onClose={() => setShowModal(false)} />}
+                            {<VerifyUser user={selectedUser} onClose={() => setShowModal(false)} addAlert={addAlert} />}
                         </Modal>,
                         document.body
                     )}

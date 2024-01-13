@@ -112,3 +112,12 @@ export const createUser = async (event) => {
     };
 
  
+  export const AdminVerification = async (user_id) => {
+    try {
+      const res = await axios.post(`http://localhost:3000/user/${user_id}/approve`)
+      console.log(res)
+      return res
+    } catch (error) {
+      return error
+    }
+  }

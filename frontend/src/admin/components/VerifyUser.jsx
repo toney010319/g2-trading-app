@@ -2,14 +2,24 @@
 
 import Logo from "../../assets/Logo";
 import Loading from "../../components/Loading";
-import { updateUser } from "../../lib/adminapi";
-import { useState } from "react";
+import { AdminVerification } from "../../lib/adminapi";
+
 
 
 
 const VerifyUser = ({ user, onClose, addAlert }) => {
 
+    const handleApprove = async () => {
 
+        const res = await AdminVerification(user.id)
+        console.log("res", res?.status)
+        if (res?.status == "200") {
+            addAlert('success', res?.data?.message)
+            onClose()
+        }
+        else (addAlert('error', res?.response?.data?.status?.message))
+
+    }
 
     if (!user) {
         return (
@@ -34,17 +44,8 @@ const VerifyUser = ({ user, onClose, addAlert }) => {
                             alt="close" />
                     </button>
                     <h1>Personal Info</h1>
-                    <form
-                        onSubmit={async (event) => {
-                            event.preventDefault()
-                            const res = await updateUser(event, user.id)
-                            if (res?.status == "200") {
-                                addAlert('success', "User updated successfully")
-                                onClose()
-                            }
-                            else
-                                addAlert('error', res?.response?.data?.status?.message)
-                        }}
+                    <div
+
                         className="flex flex-col">
                         <div className="flex justify-between">
                             <div className="flex flex-col">
@@ -181,10 +182,10 @@ const VerifyUser = ({ user, onClose, addAlert }) => {
 
 
                         <div className="flex flex-row justify-evenly gap-4 mt-2">
-                            <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700" type="submit">Approved</button>
+                            <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700" onClick={() => handleApprove(user)}>Approved</button>
                             <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700">Disapproved</button>
                         </div>
-                    </form>
+                    </div>
 
                 </div>
             </div>
