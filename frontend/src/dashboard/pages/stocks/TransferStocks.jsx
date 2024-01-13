@@ -12,7 +12,7 @@ const TransferStocks = () => {
   const [balance, setBalance] = useState("");
   const user_id = document.cookie.split("user_id=")[1];
   const [loading, setLoading] = useState(true);
-  const usdAmount = stockAmount * 56.17;
+  const usdAmount = stockAmount;
 
   const fetchUserBalance = useMemo(
     () => async () => {
@@ -98,7 +98,7 @@ const TransferStocks = () => {
                 type="text"
                 id="transferAmount"
                 placeholder="$ 0.00"
-                value={`$ ${(transferAmount * 0.01778584).toFixed(2)}`}
+                value={`$ ${parseFloat(transferAmount * 0.01778584).toFixed(2)}`}
                 onChange={(e) => setTransferAmount(e.target.value)}
                 disabled
               />
@@ -134,7 +134,7 @@ const TransferStocks = () => {
                 <div className="flex flex-col">
                   <span className="font-bold ml-1">Balance: </span>
                   <span className="flex font-bold justify-center text-3xl border-1 mt-4 border-black border-b-4 bg-blue-700">
-                  {loading ? <div className="text-center">Loading...</div> : `$${(balance.stocks * 0.01778584).toFixed(2)}`}
+                  {loading ? <div className="text-center">Loading...</div> : `$${parseFloat(balance.stocks).toFixed(2)}`}
                   </span>
                 </div>
               </div>

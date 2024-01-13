@@ -5,6 +5,7 @@ import {
 } from "../../../lib/api";
 import StocksTransactions from "./StocksTransactions";
 import Loading from "../../../components/Loading";
+import StocksMiniPortfolio from "./StocksMiniPortfolio";
 
 const BuyStocks = () => {
   const user_id = document.cookie.split("user_id=")[1];
@@ -171,7 +172,7 @@ const BuyStocks = () => {
             </div>
             {price && symbol ? (
               <>
-                <div className="bg-white flex underline underline-offset-4 justify-center rounded-md shadow-lg p-4 my-2 mx-4">
+                <div className="bg-white flex justify-center rounded-md shadow-lg p-4 my-2 mx-4">
                   <img className="w-10 mr-3" src={getImageLink(symbol)} alt={symbol} />
                   <div className="mt-1 font-bold font-serif text-lg">{selectedStockName}</div>
                 </div>
@@ -208,7 +209,11 @@ const BuyStocks = () => {
           </div>
         )}
           <div className="flex">
-            <StocksTransactions updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory}/>
+            <StocksTransactions updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} />
+          </div>
+
+          <div className="flex">
+              <StocksMiniPortfolio updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} />
           </div>
       </div>
     </>
