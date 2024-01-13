@@ -15,13 +15,6 @@ class CryptoTransactionsController < ApplicationController
 
     result = update_user_balance(total_cost)
 
-    Rails.logger.debug("user: #{user.inspect}")
-    Rails.logger.debug("quantity: #{quantity.inspect}")
-    Rails.logger.debug("price: #{price.inspect}")
-    Rails.logger.debug("symbol: #{symbol.inspect}")
-    Rails.logger.debug("total_cost: #{total_cost.inspect}")
-    Rails.logger.debug("crypto: #{crypto.inspect}")
-
     if result[:success]
       transaction = PortfolioTransaction.create!(
         user_id: user.id,

@@ -58,4 +58,10 @@ before_action :authenticate_user!, only: [:create, :index, :show]
     @all_transactions = Transaction.all
     render json: @all_transactions
   end
+
+  def show_all_assets
+    @all_assets = PortfolioTransaction.all
+    render json: @all_assets
+  end
+
 end

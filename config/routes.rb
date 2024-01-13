@@ -32,8 +32,8 @@ Rails.application.routes.draw do
   post 'add_stock_balance', to: 'balances#add_stock_balance'
   post 'revert_stock_balance', to: 'balances#revert_stock_balance'
 
-  get '/balances', to: 'balances#show'
-  get '/balance', to: 'balances#index'
+  get 'balances', to: 'balances#show'
+  get 'balance', to: 'balances#index'
 
   get 'crypto_list', to: 'datas#show_crypto'
   get 'stocks_list', to: 'datas#show_stocks'
@@ -41,11 +41,16 @@ Rails.application.routes.draw do
 
   post 'buy_stocks', to: 'stock_transactions#buy'
   post 'buy_crypto', to: 'crypto_transactions#buy'
+  post 'buy_forex', to: 'forex_transactions#buy'
+
+  get 'show_all_assets', to: 'transactions#show_all_assets'
 
   get 'show_all_portfolio_stocks', to: 'stock_transactions#show_all_stocks'
   get 'show_all_portfolio_crypto', to: 'crypto_transactions#show_all_crypto'
+  get 'show_all_portfolio_forex', to: 'forex_transactions#show_all_forex'
   get 'show_user_stocks', to:'stock_transactions#show_user_stocks'
   get 'show_user_crypto', to:'crypto_transactions#show_user_crypto'
+  get 'show_user_forex', to:'forex_transactions#show_user_forex'
 
   # Defines the root path route ("/")
   # root "posts#index"
