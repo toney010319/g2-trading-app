@@ -48,7 +48,10 @@ def add_crypto_balance
   user = User.find(params[:user_id])
   amount = params[:balance].to_f
 
-  user.balance.crypto += amount
+  usdphp_conversion_rate = 0.01778584
+  amount_usd = amount * usdphp_conversion_rate
+
+  user.balance.crypto += amount_usd
   user.balance.balance -= amount
 
   if user.balance.save && (!user.username_changed? || user.save)
@@ -60,10 +63,13 @@ end
 
 def revert_crypto_balance
   user = User.find(params[:user_id])
-  amount = params[:balance].to_f
+  amount_usd = params[:balance].to_f
 
-  user.balance.crypto -= amount
-  user.balance.balance += amount
+  conversion_rate = 56.15
+  amount_php = amount_usd * conversion_rate
+
+  user.balance.crypto -= amount_usd
+  user.balance.balance += amount_php
 
   if user.balance.save && (!user.username_changed? || user.save)
     render json: { crypto_balance: user.balance.crypto, main_balance: user.balance.balance }
