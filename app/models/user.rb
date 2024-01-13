@@ -2,7 +2,11 @@ class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
   has_many :transactions, dependent: :destroy
   has_many :stocks, dependent: :destroy
+  has_many :portfolio_transactions
   has_one :balance, dependent: :destroy
+  has_many :stocks, through: :portfolio_transactions, source: :asset, source_type: 'Stock', dependent: :destroy
+  has_many :cryptos, through: :portfolio_transactions, source: :asset, source_type: 'Crypto', dependent: :destroy
+  has_many :forex, through: :portfolio_transactions, source: :asset, source_type: 'Forex', dependent: :destroy
   accepts_nested_attributes_for :balance, allow_destroy: true
   after_create :create_balance
 
@@ -31,7 +35,7 @@ class User < ApplicationRecord
   end
 
   def disapprove!
-    update(status: 'pending')  
+    update(status: 'pending')
   end
   def create_balance
     self.balance = Balance.new(balance: 0, stocks: 0, forex: 0, crypto: 0)

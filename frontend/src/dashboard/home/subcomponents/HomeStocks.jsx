@@ -1,46 +1,112 @@
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
+import { Doughnut} from 'react-chartjs-2';
+import { useState, useEffect, useMemo } from'react';
+import { getUserStocks } from '../../../lib/api';
 
 ChartJS.register(ArcElement, Tooltip);
 
 const HomeStocks = () => {
-    const data = {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [
-          {
-            label: 'Crypto',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-              'rgba(255, 99, 132)',
-              'rgba(54, 162, 235)',
-              'rgba(255, 206, 86)',
-              'rgba(75, 192, 192)',
-              'rgba(153, 102, 255)',
-              'rgba(255, 159, 64)',
-            ],
-            borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)',
-            ],
-            borderWidth: 4,
-          },
-        ],
-      };
+  const user_id = document.cookie.split("user_id=")[1];
+  const [assets, setAssets] = useState([]);
+
+  const fetchAssetsMemoized = useMemo(() => async () => {
+    try {
+      const response = await getUserStocks(user_id);
+      setAssets(response.user_stocks);
+    } catch (error) {
+      console.error('Error fetching transactions:', error);
+    }
+  }, [user_id]);
+  
+  useEffect(() => {
+    fetchAssetsMemoized();
+  }, [user_id]);
+
+  const stockColors = {
+    AAPL: [247, 147, 26],
+    MSFT: [20, 4, 77],
+    AMZN: [243, 186, 47],
+    NVDA: [56, 58, 104],
+    GOOG: [0, 100, 155],
+    GOOGL: [0, 51, 173],
+    TSLA: [232, 65, 66],
+    BFOCX: [225, 179, 3],
+    META: [230, 0, 122],
+    JPFAX: [235, 0, 41],
+    VISAX: [130, 71, 229],
+    COST: [255, 164, 9],
+    PEP: [52, 93, 157],
+    COKE: [20, 182, 231],
+    ADBE: [255, 102, 0],
+    NFLX: [255, 164, 9],
+    INTC: [52, 93, 157],
+    AMD: [20, 182, 231],
+    LEGO: [255, 102, 0],
+    MNST: [255, 164, 9]
+  };
+
+
+
+  const labels = Array.from(new Set(assets.map((asset) => asset.symbol))); 
+  const dataValues = labels.map((symbol) =>
+    assets
+      .filter((asset) => asset.symbol === symbol)
+      .reduce((sum, asset) => sum + parseFloat(asset.quantity * asset.price), 0)
+  );
+
+  const image = new Image();
+  image.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNl4xKQTu98mXrfdGuy4kpJMB9UwIrzro8ATKyflqRGFPMHbMRMVmA2ICIQdph_Uy9T4M&usqp=CAU'
+
+  const plugin = {
+    beforeDraw: (chart) => {
+      const ctx = chart.ctx;
+      const {top, left, width, height} = chart.chartArea;
+      const x = left + width / 2 - image.width / 2;
+      const y = top + height / 2 - image.height / 2;
+      ctx.drawImage(image, x, y);
+    },
+  };
+
+
+  const config = {
+    type: 'doughnut',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Stocks',
+          data: dataValues,
+          backgroundColor: labels.map(symbol => (
+            stockColors[symbol] ? `rgba(${stockColors[symbol].join(',')})` : 'rgba(0,0,0,0)' 
+          )),
+          borderColor: labels.map(symbol => (
+            stockColors[symbol] ? `rgba(${stockColors[symbol].join(',')},1)` : 'rgba(0,0,0,0)'  
+          )),
+          borderWidth: 4,
+          hoverOffset: 4,
+        },
+      ],
+    },
+    plugins: [plugin],
+  };
+
+      
   
   return (
     <>
-        <div className="flex-1 shadow-md rounded-md px-10 py-2 my-2">
-            <span className="flex justify-center mb-1 font-bold text-lg">Stocks</span>
-            <Pie
-            data={data}
-            />
-        </div>
-    </>
-  );
+    {assets.length === 0 ? (
+      <div className="flex-1 shadow-md rounded-md px-10 py-7 my-2 bg-white">
+        <span className="flex justify-center mb-1 font-bold text-lg">Stocks</span>
+        <p className="text-center">No Assets</p>
+      </div>
+    ) : (
+      <div className="flex-1 shadow-md rounded-md px-10 py-7 my-2 bg-white">
+        <span className="flex justify-center mb-1 font-bold text-lg">Stocks</span>
+        <Doughnut {...config} />
+      </div>
+    )}
+  </>
+);
 }
 
 export default HomeStocks;

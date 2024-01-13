@@ -152,12 +152,14 @@ const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
                   paginatedTransactions.length > 0 ? (
                     paginatedTransactions.map((userCrypto) => (
                       <tr key={userCrypto.id}>
-                        <div className="flex">
+                        <td className="px-4 py-3">
                           <div className="flex">
-                            <img className="ml-2 w-8" src={getImageLink(userCrypto.symbol)} alt={userCrypto.symbol} />
+                            <div className="flex">
+                              <img className="ml-2 w-8" src={getImageLink(userCrypto.symbol)} alt={userCrypto.symbol} />
+                            </div>
+                            <span>{userCrypto.symbol}</span>
                           </div>
-                          <td className="px-4 py-3">{userCrypto.symbol}</td>
-                        </div>
+                        </td>
                         <td className="px-4 py-3 text-center">{parseFloat(userCrypto.quantity).toFixed(0)}</td>
                         <td className="px-4 py-3 text-center">$ {parseFloat(userCrypto.price).toFixed(2)}</td>
                       </tr>
