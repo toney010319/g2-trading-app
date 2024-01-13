@@ -20,6 +20,7 @@ const Deposit = ({ addAlert }) => {
             addAlert('success', 'Deposit successful!');
             navigate('/dashboard')
             balance('')
+            console.log(response)
 
         } catch (error) {
             if (error.response) {

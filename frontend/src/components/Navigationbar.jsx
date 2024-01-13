@@ -6,6 +6,7 @@ import ProfileModal from "../dashboard/modals/ProfileModal";
 // import Navbalance from "./subcomponents/Navbalance";
 import { useState } from "react";
 import { logoutUser } from "../lib/api";
+import useAuth from "../context/hooks/useAuth";
 
 // eslint-disable-next-line react/prop-types
 const Navigationbar = ({ addAlert }) => {
@@ -13,7 +14,7 @@ const Navigationbar = ({ addAlert }) => {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [showProfileModal, setShowProfileModal] = useState(false);
-
+    const { setAuth } = useAuth()
     const handleClose = () => {
         setShowModal(false)
         setShowProfileModal(false);
@@ -28,7 +29,7 @@ const Navigationbar = ({ addAlert }) => {
         logoutUser(event)
         document.cookie = 'token=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
         document.cookie = 'user_id=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
-
+        setAuth({})
         navigate('/')
         addAlert('success', 'You have successfully logged out')
     }

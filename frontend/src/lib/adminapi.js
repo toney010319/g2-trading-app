@@ -112,3 +112,23 @@ export const createUser = async (event) => {
     };
 
  
+  export const AdminApproval = async (user_id) => {
+    try {
+      const res = await axios.post(`http://localhost:3000/user/${user_id}/approve`)
+
+      return res
+    } catch (error) {
+      return error
+    }
+  }
+
+
+  export const AdminDisapproval = async (message,user_id) => {
+    try {
+      const res = await axios.post(`http://localhost:3000/user/${user_id}/disapprove`,{message})
+      console.log("disapprove",res)
+      return res
+    } catch (error) {
+      return error
+    }
+  }

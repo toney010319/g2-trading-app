@@ -1,11 +1,10 @@
-const Footer =() => {
-
+const Footer = () => {
   return (
-      <div className="flex text-center">
-        <p className="text-sm">
-          &copy; {new Date().getFullYear()} Group 2
-        </p>
-      </div>
+    <div className="fixed bottom-0 w-full  p-4 text-center">
+      <p className="text-sm mt-4">
+        &copy; {new Date().getFullYear()} Developed by Anthony, Andrew and Justin
+      </p>
+    </div>
   );
 }
 

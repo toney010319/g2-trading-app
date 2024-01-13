@@ -206,6 +206,7 @@ const MarketStocks = () => {
             </div>
           </div>
         </div>
+        <span>Disclaimer: This a real data fetch on January 9, 2024</span>
       </section>
 
     </>

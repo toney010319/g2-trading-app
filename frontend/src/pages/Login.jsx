@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Logo from "../assets/Logo";
+import useAuth from "../context/hooks/useAuth";
 // eslint-disable-next-line react/prop-types
 const Login = ({ addAlert }) => {
   const [agreed, setAgreed] = useState(false);
   const navigate = useNavigate();
-
+  const { setAuth } = useAuth()
   const handleRegister = () => {
     navigate("/register");
   };
@@ -22,18 +23,21 @@ const Login = ({ addAlert }) => {
     };
     try {
       const res = await axios.post("http://localhost:3000/login", user);
+      const accessToken = res?.headers?.authorization
+      const role = res?.data?.data?.role
+      setAuth({ accessToken, role })
       return res;
     } catch (error) {
       return error;
     }
   };
 
-  useEffect(() => {
-    const token = document.cookie.split("token=")[1];
-    if (token) {
-      navigate("/dashboard");
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   const token = document.cookie.split("token=")[1];
+  //   if (token) {
+  //     navigate("/dashboard");
+  //   }
+  // }, [navigate]);
   useEffect(() => {
     return () => {
       axios.defaults.headers.common["Authorization"] = undefined;
@@ -46,25 +50,25 @@ const Login = ({ addAlert }) => {
         <form
           onSubmit={async (event) => {
             event.preventDefault();
-            const res = await loginUser(event);
-
+            const res = await loginUser(event)
             if (res.status == "200" && res.data.data.role === "Trader") {
               const token = res.headers.authorization;
               const user_id = res.data.data.id;
               document.cookie = `token=${token};path=/`;
               document.cookie = `user_id=${user_id};path=/`;
               addAlert("success", res.data.message);
-              navigate("dashboard");
+              navigate("/dashboard");
             } else if (res.status == "200" && res.data.data.role == "Admin") {
               const token = res.headers.authorization;
               const user_id = res.data.data.id;
               document.cookie = `token=${token};path=/`;
               document.cookie = `user_id=${user_id};path=/`;
               addAlert("success", res.data.message);
-              navigate("admin");
+              navigate("/admin");
             } else {
               addAlert("error", res.response?.data);
               navigate("/");
+
             }
           }}
           className="justify-center text-center align-center shadow-md border-md rounded-md  bg-gradient-to-b from-azure-300 to-azure-700 m-2 p-5 pl-8 pr-8"

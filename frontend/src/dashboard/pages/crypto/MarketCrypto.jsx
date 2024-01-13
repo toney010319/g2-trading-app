@@ -8,7 +8,7 @@ const MarketCrypto = () => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('')
-  const rowsPerPage = 11;
+  const rowsPerPage = 12;
   const navigate = useNavigate();
 
 
@@ -166,9 +166,9 @@ const MarketCrypto = () => {
                         <td className="px-4 py-3 text-xs text-center border">${data.day_low}</td>
                         <td className="px-4 py-3 text-xs text-center border">${data.year_high}</td>
                         <td className="px-4 py-3 text-xs text-center border">${data.year_low}</td>
-                        <td className="px-4 py-3 text-xs text-center border">{data.market_cap}</td>
-                        <td className="px-4 py-3 text-xs text-center border">{data.volume}</td>
-                        <td className="px-4 py-3 text-xs text-center border">{data.avg_volume}</td>
+                        <td className="px-4 py-3 text-xs text-center border">{parseFloat(data.market_cap).toFixed(2)}</td>
+                        <td className="px-4 py-3 text-xs text-center border">{parseFloat(data.volume).toFixed(2)}</td>
+                        <td className="px-4 py-3 text-xs text-center border">{parseFloat(data.avg_volume).toFixed(0)}</td>
                         <td className={`px-4 py-3 text-ms text-center font-semibold border ${getChangesStyle(data.changes_percentage)}`}>
                           {data.changes_percentage}%
                         </td>
@@ -197,6 +197,7 @@ const MarketCrypto = () => {
             </div>
           </div>
         </div>
+        <span>Disclaimer: This a real data fetch on January 9, 2024</span>
       </section>
 
     </>

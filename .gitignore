@@ -31,3 +31,18 @@
 
 # Ignore master key for decrypting credentials and more.
 # /config/master.key
+
+node_modules
+node_modules/*
+node_modules/.bin/loose-envify
+node_modules/.bin/loose-envify
+node_modules/loose-envify/cli.js
+node_modules/loose-envify/custom.js
+node_modules/loose-envify/index.js
+node_modules/loose-envify/LICENSE
+node_modules/loose-envify/loose-envify.js
+node_modules/loose-envify/package.json
+node_modules/loose-envify/README.md
+node_modules/loose-envify/replace.js
+
+.gitignore_global
