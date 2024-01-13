@@ -6,7 +6,7 @@ const MarketStocks = () => {
   const [stockList, setStockList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('')
   const rowsPerPage = 11;
   const navigate = useNavigate();
 
@@ -76,9 +76,6 @@ const MarketStocks = () => {
     return changesPercentage < 0 ? 'text-red-500' : 'text-green-500';
   };
 
-  const indexOfLastRow = currentPage * rowsPerPage;
-  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  const currentRows = stockList.slice(indexOfFirstRow, indexOfLastRow);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -89,9 +86,13 @@ const MarketStocks = () => {
     setCurrentPage(1); 
   };
 
+  const indexOfLastRow = currentPage * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  const currentRows = stockList.slice(indexOfFirstRow, indexOfLastRow);
+
   const filteredRows = currentRows.filter((data) =>
-    data.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    data.symbol.toLowerCase().includes(searchQuery.toLowerCase())
+  data.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  data.symbol.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -153,7 +154,12 @@ const MarketStocks = () => {
                             
                                 <div 
                                 className="hover:scale-105 hover:border-2 hover:border-blue-500 cursor-pointer flex"
-                                onClick={() => navigate(`/dashboard/stocks/trade?symbol=${data.symbol}&price=${data.price}`)}
+                                onClick={() => {
+                                  localStorage.setItem('selectedStockSymbol', data.symbol);
+                                  localStorage.setItem('selectedStockName', data.name);
+                                  localStorage.setItem('selectedStockPrice', data.price);
+                                  navigate('/dashboard/stocks/trade');
+                                }}
                                 >
                                   <img className="w-10" src={getImageLink(data.symbol)} alt={data.symbol} />
                                   <span className="ml-1">{data.name}</span>
@@ -180,7 +186,7 @@ const MarketStocks = () => {
                   ) : (
                     <tr>
                       <td colSpan="11" className="text-center py-4">
-                        Error
+                        No Data
                       </td>
                     </tr>
                   )

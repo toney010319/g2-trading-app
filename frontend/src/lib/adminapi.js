@@ -62,6 +62,8 @@ export const createUser = async (event) => {
         birthday: formData.get("birthday"),
         email: formData.get("email"),
         role: formData.get("role"),
+        status: "active",
+        email_confirmed: true,
       },
     };
     try {
@@ -108,4 +110,5 @@ export const createUser = async (event) => {
         }
       }
     };
-  
+
+ 

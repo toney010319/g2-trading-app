@@ -1,6 +1,6 @@
 [{
-  "symbol": "BTCUSD",
-  "name": "Bitcoin USD",
+  "symbol": "BTC",
+  "name": "Bitcoin",
   "price": 46728.61,
   "changes_percentage": -0.55127,
   "change": -259.03,
@@ -14,8 +14,8 @@
   "avg_volume": 20751224722
 },
 {
-  "symbol": "ETHUSD",
-  "name": "Ethereum USD",
+  "symbol": "ETH",
+  "name": "Ethereum",
   "price": 2266.7,
   "changes_percentage": -2.83635,
   "change": -66.1682,
@@ -29,8 +29,8 @@
   "avg_volume": 9856148734
 },
 {
-  "symbol": "BNBUSD",
-  "name": "BNB USD",
+  "symbol": "BNB",
+  "name": "BNB",
   "price": 301.12,
   "changes_percentage": -1.10198,
   "change": -3.35525,
@@ -45,8 +45,8 @@
 
 },
 {
-  "symbol": "SOLUSD",
-  "name": "Solana USD",
+  "symbol": "SOL",
+  "name": "Solana",
   "price": 100.18,
   "changes_percentage": 2.41675,
   "change": 2.36397,
@@ -60,8 +60,8 @@
   "avg_volume": 2232751181
 },
 {
-  "symbol": "XRPUSD",
-  "name": "XRP USD",
+  "symbol": "XRP",
+  "name": "XRP",
   "price": 0.56145,
   "changes_percentage": -2.85734,
   "change": -0.0165144,
@@ -75,8 +75,8 @@
   "avg_volume": 1385515095
 },
 {
-  "symbol": "ADAUSD",
-  "name": "Cardano USD",
+  "symbol": "ADA",
+  "name": "Cardano",
   "price": 0.5116,
   "changes_percentage": -5.44703,
   "change": -0.02947237,
@@ -90,8 +90,8 @@
   "avg_volume": 509920388
 },
 {
-  "symbol": "AVAXUSD",
-  "name": "Avalanche USD",
+  "symbol": "AVAX",
+  "name": "Avalanche",
   "price": 35.61,
   "changes_percentage": -1.31961,
   "change": -0.4762,
@@ -105,8 +105,8 @@
   "avg_volume": 795486390
 },
 {
-  "symbol": "DOGEUSD",
-  "name": "Dogecoin USD",
+  "symbol": "DOGE",
+  "name": "Dogecoin",
   "price": 0.07813,
   "changes_percentage": -3.99129,
   "change": -0.00324803,
@@ -120,8 +120,8 @@
   "avg_volume": 609165114
 },
 {
-  "symbol": "DOTUSD",
-  "name": "Polkadot USD",
+  "symbol": "DOT",
+  "name": "Polkadot",
   "price": 7.16,
   "changes_percentage": -4.26033,
   "change": -0.31861,
@@ -135,8 +135,8 @@
   "avg_volume": 287325896
 },
 {
-  "symbol": "TRXUSD",
-  "name": "TRON USD",
+  "symbol": "TRX",
+  "name": "TRON",
   "price": 0.10231,
   "changes_percentage": -1.90088,
   "change": -0.0019825,
@@ -150,8 +150,8 @@
   "avg_volume": 243808215
 },
 {
-  "symbol": "MATICUSD",
-  "name": "Polygon USD",
+  "symbol": "MATIC",
+  "name": "Polygon",
   "price": 0.79438,
   "changes_percentage": -5.72364,
   "change": -0.0482281,
@@ -165,8 +165,8 @@
   "avg_volume": 508996193
 },
 {
-  "symbol": "SHIBUSD",
-  "name": "Shiba Inu USD",
+  "symbol": "SHIB",
+  "name": "Shiba Inu",
   "price": 0.00000926,
   "changes_percentage": -3.32532,
   "change": -3.18516e-7,
@@ -181,8 +181,8 @@
 },
 
 {
-  "symbol": "LTCUSD",
-  "name": "Litecoin USD",
+  "symbol": "LTC",
+  "name": "Litecoin",
   "price": 65.05,
   "changes_percentage": -4.0744,
   "change": -2.76297,
@@ -196,8 +196,8 @@
   "avg_volume": 335782884
 },
 {
-  "symbol": "XLMUSD",
-  "name": "Stellar USD",
+  "symbol": "XLM",
+  "name": "Stellar",
   "price": 0.11544,
   "changes_percentage": -3.50084,
   "change": -0.0041878,
@@ -211,8 +211,8 @@
   "avg_volume": 96379534
 },
 {
-  "symbol": "XMRUSD",
-  "name": "Monero USD",
+  "symbol": "XMR",
+  "name": "Monero",
   "price": 145.65,
   "changes_percentage": -1.70077,
   "change": -2.52003,

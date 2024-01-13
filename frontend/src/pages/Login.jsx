@@ -7,24 +7,21 @@ const Login = ({ addAlert }) => {
   const [agreed, setAgreed] = useState(false);
   const navigate = useNavigate();
 
-
   const handleRegister = () => {
-    navigate('/register')
-  }
-
+    navigate("/register");
+  };
   const loginUser = async (event) => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
     const user = {
       user: {
-        email: formData.get('email'),
-        password: formData.get('password'),
+        email: formData.get("email"),
+        password: formData.get("password"),
       },
     };
-
     try {
-      const res = await axios.post('http://localhost:3000/login', user);
+      const res = await axios.post("http://localhost:3000/login", user);
       return res;
     } catch (error) {
       return error;
@@ -32,56 +29,52 @@ const Login = ({ addAlert }) => {
   };
 
   useEffect(() => {
-    const token = document.cookie.split('token=')[1];
+    const token = document.cookie.split("token=")[1];
     if (token) {
-      navigate('/dashboard');
+      navigate("/dashboard");
     }
   }, [navigate]);
-
   useEffect(() => {
     return () => {
       axios.defaults.headers.common["Authorization"] = undefined;
     };
   }, []);
 
-
   return (
     <>
       <div className="flex flex-col justify-center items-center align-center content-center w-screen h-screen">
-        <form onSubmit={async (event) => {
-          event.preventDefault()
-          const res = await loginUser(event)
+        <form
+          onSubmit={async (event) => {
+            event.preventDefault();
+            const res = await loginUser(event);
 
-          if (res.status == "200" && res.data.data.role === "Trader") {
-            const token = res.headers.authorization
-            const user_id = res.data.data.id;
-            document.cookie = `token=${token};path=/`;
-            document.cookie = `user_id=${user_id};path=/`;
-            addAlert('success', res.data.message)
-            navigate('dashboard')
-
-          }
-
-          else if (res.status == "200" && res.data.data.role == "Admin") {
-            const token = res.headers.authorization
-            const user_id = res.data.data.id;
-            document.cookie = `token=${token};path=/`;
-            document.cookie = `user_id=${user_id};path=/`;
-            addAlert('success', res.data.message)
-            navigate('admin')
-
-          }
-          else {
-            addAlert('error', res.response?.data)
-            navigate('/')
-          }
-        }}
-
-          className="justify-center text-center align-center shadow-md border-md rounded-md  bg-gradient-to-b from-azure-300 to-azure-700 m-2 p-5 pl-8 pr-8">
+            if (res.status == "200" && res.data.data.role === "Trader") {
+              const token = res.headers.authorization;
+              const user_id = res.data.data.id;
+              document.cookie = `token=${token};path=/`;
+              document.cookie = `user_id=${user_id};path=/`;
+              addAlert("success", res.data.message);
+              navigate("dashboard");
+            } else if (res.status == "200" && res.data.data.role == "Admin") {
+              const token = res.headers.authorization;
+              const user_id = res.data.data.id;
+              document.cookie = `token=${token};path=/`;
+              document.cookie = `user_id=${user_id};path=/`;
+              addAlert("success", res.data.message);
+              navigate("admin");
+            } else {
+              addAlert("error", res.response?.data);
+              navigate("/");
+            }
+          }}
+          className="justify-center text-center align-center shadow-md border-md rounded-md  bg-gradient-to-b from-azure-300 to-azure-700 m-2 p-5 pl-8 pr-8"
+        >
           <Logo />
           <div>
             <div className="flex flex-col">
-              <span className="flex justify-start mb-1 font-semibold">Email</span>
+              <span className="flex justify-start mb-1 font-semibold">
+                Email
+              </span>
               <input
                 className="rounded-sm"
                 type="email"
@@ -90,7 +83,9 @@ const Login = ({ addAlert }) => {
               />
             </div>
             <div className="flex flex-col mt-1">
-              <span className="flex justify-start mb-1 font-semibold">Password</span>
+              <span className="flex justify-start mb-1 font-semibold">
+                Password
+              </span>
               <input
                 className="rounded-sm"
                 type="password"
@@ -110,16 +105,28 @@ const Login = ({ addAlert }) => {
           </div>
 
           <div className="flex flex-row justify-center gap-4 mt-2">
-            <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700" type="submit">Login</button>
-            <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700" onClick={handleRegister}>Register</button>
+            <button
+              className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700"
+              type="submit"
+            >
+              Login
+            </button>
+            <button
+              className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700"
+              onClick={handleRegister}
+            >
+              Register
+            </button>
           </div>
           <div>
-            <button className="flex justify-end w-full mt-2 text-sm text-blue-200 hover:text-blue-400 hover:underline">Forgot Password</button>
+            <button className="flex justify-end w-full mt-2 text-sm text-blue-200 hover:text-blue-400 hover:underline">
+              Forgot Password
+            </button>
           </div>
         </form>
       </div>
     </>
   );
-}
+};
 
-export default Login
+export default Login;

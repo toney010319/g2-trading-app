@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
   has_many :transactions, dependent: :destroy
+  has_many :stocks, dependent: :destroy
   has_one :balance, dependent: :destroy
   accepts_nested_attributes_for :balance, allow_destroy: true
   after_create :create_balance
@@ -17,14 +18,17 @@ class User < ApplicationRecord
   validates :birthday, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :middle_name, presence: true 
+  validates :middle_name, presence: true
   validates :password, presence: true, on: :create
   validate :at_least_18
 
   def admin?
     role == 'Admin'
   end
-
+  def approve!
+    self.update!(email_confirmed: true, status: "active")
+    AdminMailer.account_approved_email(self).deliver_now
+  end
   def create_balance
     self.balance = Balance.new(balance: 0, stocks: 0, forex: 0, crypto: 0)
   end

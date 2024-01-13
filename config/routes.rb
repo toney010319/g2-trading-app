@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get '/users', to: 'users#show'
   resources :transactions, only: [:create, :index]
   resources :admins, only: [:index, :show, :create, :update, :destroy]
-
+  post 'user/:id/approve', to: 'admins#approve'
   get '/transactions/show', to: 'transactions#show'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -37,6 +37,15 @@ Rails.application.routes.draw do
   get 'crypto_list', to: 'datas#show_crypto'
   get 'stocks_list', to: 'datas#show_stocks'
   get 'currency_list', to: 'datas#show_currency'
+
+  post 'buy_stocks', to: 'stock_transactions#buy'
+  post 'buy_crypto', to: 'crypto_transactions#buy'
+
+  get 'show_all_portfolio_stocks', to: 'stock_transactions#show_all_stocks'
+  get 'show_all_portfolio_crypto', to: 'crypto_transactions#show_all_crypto'
+  get 'show_user_stocks', to:'stock_transactions#show_user_stocks'
+  get 'show_user_crypto', to:'crypto_transactions#show_user_crypto'
+
   # Defines the root path route ("/")
   # root "posts#index"
 end
