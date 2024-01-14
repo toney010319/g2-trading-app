@@ -33,7 +33,7 @@ const NotExpandedSidebar = () => {
               </div>
             </Link>
           
-            <Link to="portfolio/news">
+            {/* <Link to="portfolio/news">
               <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
               <img src="https://www.svgrepo.com/show/374991/news.svg" 
                 width="35" 
@@ -71,7 +71,7 @@ const NotExpandedSidebar = () => {
                   width="35" 
                   alt="Forex" />
               </div>
-            </Link>
+            </Link> */}
         </section>
 
         <span className="mt-1 border border-black"></span>
@@ -85,13 +85,13 @@ const NotExpandedSidebar = () => {
             </div>
           </Link>
 
-          <Link to="stocks/trade">
+          {/* <Link to="stocks/trade">
             <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
               <img src="https://www.svgrepo.com/show/301267/monitor-tv.svg" 
                 width="35" 
                 alt="Trade" />
             </div>
-          </Link>
+          </Link> */}
 
           <Link to="stocks/market">
             <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
@@ -114,13 +114,13 @@ const NotExpandedSidebar = () => {
           </div>
         </Link>
 
-        <Link to="crypto/trade">
+        {/* <Link to="crypto/trade">
           <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
             <img src="https://www.svgrepo.com/show/416781/buy-coin-cryptocurrency.svg" 
               width="35" 
               alt="Home" />
           </div>
-        </Link>
+        </Link> */}
 
         <Link to="crypto/market">
           <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
@@ -143,13 +143,13 @@ const NotExpandedSidebar = () => {
             </div>
           </Link>
 
-          <Link to="forex/trade">
+          {/* <Link to="forex/trade">
             <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
               <img src="https://www.svgrepo.com/show/483228/dollar-and-yen-exchange-rate.svg" 
                 width="35" 
                 alt="Home" />
             </div>
-          </Link>
+          </Link> */}
 
           <Link to="forex/market">
             <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">

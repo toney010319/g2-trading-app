@@ -1,5 +1,5 @@
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
-import { Doughnut } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 import {useState, useEffect, useMemo} from'react';
 import { getUserForex } from '../../../lib/api';
 
@@ -76,7 +76,7 @@ const HomeForex = () => {
 
 
   const config = {
-    type: 'doughnut',
+    type: 'pie',
     data: {
       labels: labels,
       datasets: [
@@ -109,7 +109,7 @@ const HomeForex = () => {
     ) : (
       <div className="flex-1 shadow-md rounded-md px-10 py-7 my-2 bg-white">
         <span className="flex justify-center mb-1 font-bold text-lg">Currencies</span>
-        <Doughnut {...config} />
+        <Pie {...config} />
       </div>
     )}
   </>

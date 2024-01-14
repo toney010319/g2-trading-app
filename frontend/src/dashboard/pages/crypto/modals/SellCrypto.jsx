@@ -2,7 +2,6 @@ import { useState, useEffect, useMemo } from "react";
 import { getUserCrypto, sellCrypto } from "../../../../lib/api";
 import Loading from "../../../../components/Loading";
 
-
 // eslint-disable-next-line react/prop-types
 const SellCrypto = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
   const user_id = document.cookie.split("user_id=")[1];
