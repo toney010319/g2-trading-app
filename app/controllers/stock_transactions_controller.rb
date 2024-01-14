@@ -32,7 +32,7 @@ class StockTransactionsController < ApplicationController
 
   def sell
     user = User.find(params[:user_id])
-    quantity = params[:quantity][:quantity].to_f.round(0)
+    quantity = params[:quantity].to_i
     price = params[:price].to_f
     symbol = params[:symbol]
 
@@ -44,23 +44,23 @@ class StockTransactionsController < ApplicationController
       return
     end
 
-    result = update_user_balance_sell(total_sale_value)
+    result = update_user_balance_sell(user, total_sale_value)
 
     if result[:success]
       PortfolioTransaction.create!(
         user_id: user.id,
-        quantity: -quantity,
+        quantity: quantity,
         price: price,
         symbol: symbol,
         transaction_type: 'sell',
         asset: stock
-
       )
       render json: { success: true, message: 'Stock sold successfully' }
     else
       render json: { success: false, error: result[:error] }, status: :unprocessable_entity
     end
   end
+
 
   def show_all_stocks
     stock_transactions = PortfolioTransaction.where(asset_type: 'Stock')
@@ -76,13 +76,11 @@ class StockTransactionsController < ApplicationController
   end
 
   private
-  def update_user_balance_sell(amount)
-    user = User.find(params[:user_id])
-
+  def update_user_balance_sell(user, total_sale_value)
     if user.nil?
       { success: false, error: 'User not authenticated' }
     else
-      user.balance.stocks += amount
+      user.balance.stocks += total_sale_value
       if user.balance.save
         { success: true, message: 'Stocks balance updated successfully' }
       else
@@ -90,6 +88,7 @@ class StockTransactionsController < ApplicationController
       end
     end
   end
+
 
   def update_user_balance(amount)
     user = User.find(params[:user_id])

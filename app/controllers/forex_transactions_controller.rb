@@ -30,6 +30,37 @@ class ForexTransactionsController < ApplicationController
       end
     end
 
+    def sell
+      user = User.find(params[:user_id])
+      quantity = params[:quantity].to_i
+      price = params[:price].to_f
+      symbol = params[:symbol]
+
+      total_sale_value = quantity * price
+
+      currency = Currency.find_by(symbol: symbol)
+      unless currency.present?
+        render json: { success: false, message: 'Invalid currency symbol' }
+        return
+      end
+
+      result = update_user_balance_sell(user, total_sale_value)
+
+      if result[:success]
+        PortfolioTransaction.create!(
+          user_id: user.id,
+          quantity: quantity,
+          price: price,
+          symbol: symbol,
+          transaction_type: 'sell',
+          asset: currency
+        )
+        render json: { success: true, message: 'Currency sold successfully' }
+      else
+        render json: { success: false, error: result[:error] }, status: :unprocessable_entity
+      end
+    end
+
 
     def show_all_forex
     forex_transactions = PortfolioTransaction.where(asset_type: 'Currency')
@@ -48,6 +79,18 @@ class ForexTransactionsController < ApplicationController
 
 
     private
+    def update_user_balance_sell(user, total_sale_value)
+      if user.nil?
+        { success: false, error: 'User not authenticated' }
+      else
+        user.balance.forex += total_sale_value
+        if user.balance.save
+          { success: true, message: 'Forex balance updated successfully' }
+        else
+          { success: false, error: 'Failed to update forex balance' }
+        end
+      end
+    end
 
     def update_user_balance(amount)
       user = User.find(params[:user_id])
@@ -57,9 +100,9 @@ class ForexTransactionsController < ApplicationController
       else
         user.balance.forex -= amount
         if user.balance.save
-          { success: true, message: 'Stocks balance updated successfully' }
+          { success: true, message: 'Forex balance updated successfully' }
         else
-          { success: false, error: 'Failed to update stocks balance' }
+          { success: false, error: 'Failed to update forex balance' }
         end
       end
     end

@@ -1,13 +1,14 @@
 import { useState, useMemo, useEffect } from "react";
 import { getUserForex } from "../../../lib/api";
 import Loading from "../../../components/Loading";
+import SellForex from "./modals/SellForex";
 
-const ForexMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHistory }) => {
+const ForexMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHistory, setUpdateBalanceFlag }) => {
   const user_id = document.cookie.split("user_id=")[1];
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [aggregatedData, setAggregatedData] = useState([]);
+  const [selectedAsset, setSelectedAsset] = useState(null);
   const transactionsPerPage = 5;
   
   const fetchTransactionsMemoized = useMemo(() => async () => {
@@ -85,61 +86,83 @@ const ForexMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHist
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
 
-  const sortedTransactions = transactions.user_forex
-    ? [...transactions.user_forex].sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-    : [];
+  const openModal = (assetSymbol) => {
+    setSelectedAsset(assetSymbol);
+  };
+
+  const closeModal = () => {
+    setSelectedAsset(null);
+    setUpdateTransactionHistory(true);
+    setUpdateBalanceFlag(true);
+  };
+
+    
+    const filteredAndGroupedTransactions = useMemo(() => {
+      const userForex = transactions.user_forex || [];
+      const buyTransactions = userForex.filter((transaction) => transaction.transaction_type === 'buy');
+      const sellTransactions = userForex.filter((transaction) => transaction.transaction_type === 'sell');
+      const pairedTransactions = [];
+  
+      for (const buyTransaction of buyTransactions) {
+        const correspondingSell = sellTransactions.find(
+          (sellTransaction) =>
+            sellTransaction.symbol === buyTransaction.symbol &&
+            sellTransaction.quantity === buyTransaction.quantity &&
+            sellTransaction.price === buyTransaction.price &&
+            !pairedTransactions.includes(sellTransaction)
+        );
+    
+    
+        if (correspondingSell) {
+          pairedTransactions.push(buyTransaction, correspondingSell);
+        }
+      }
+      const unpairedBuyTransactions = buyTransactions.filter(
+        (buyTransaction) => !pairedTransactions.includes(buyTransaction)
+      );
+      const groupedTransactions = unpairedBuyTransactions.reduce((result, transaction) => {
+      const existingTransaction = result.find((t) => t.symbol === transaction.symbol);
+    
+        if (existingTransaction) {
+          existingTransaction.quantity += parseFloat(transaction.quantity);
+        } else {
+          result.push({
+            symbol: transaction.symbol,
+            quantity: parseFloat(transaction.quantity),
+            price: parseFloat(transaction.price),
+          });
+        }
+    
+        return result;
+      }, []);
+    
+      return groupedTransactions;
+    }, [transactions.user_forex]);
 
     const startIndex = (currentPage - 1) * transactionsPerPage;
     const endIndex = startIndex + transactionsPerPage;
-    const paginatedTransactions = aggregatedData.slice(startIndex, endIndex);
-
-  
-  
-  useEffect(() => {
-  fetchTransactionsMemoized();
-  if (updateTransactionHistory) {
-    fetchTransactionsMemoized();
-    setUpdateTransactionHistory(false);
-  }
-}, [updateTransactionHistory, fetchTransactionsMemoized, setUpdateTransactionHistory]);
-
-
+    const paginatedTransactions = filteredAndGroupedTransactions.slice(startIndex, endIndex);
 
   useEffect(() => {
-    if (transactions.user_forex) {
-      const symbolDataMap = new Map();
-
-      transactions.user_forex.forEach((transaction) => {
-        const symbol = transaction.symbol;
-        const quantity = parseFloat(transaction.quantity);
-        const price = parseFloat(transaction.price);
-
-        if (symbolDataMap.has(symbol)) {
-          const existingData = symbolDataMap.get(symbol);
-          symbolDataMap.set(symbol, {
-            quantity: existingData.quantity + quantity,
-            price: existingData.price + quantity * price,
-          });
-        } else {
-          symbolDataMap.set(symbol, {
-            quantity,
-            price: quantity * price,
-          });
-        }
-      });
-
-      const aggregatedArray = Array.from(symbolDataMap, ([symbol, { quantity, price }]) => ({
-        symbol,
-        quantity,
-        price,
-      }));
-
-      setAggregatedData(aggregatedArray);
+    fetchTransactionsMemoized();  
+    if (updateTransactionHistory) {
+      fetchTransactionsMemoized(); 
+      setUpdateTransactionHistory(false);
     }
-  }, [transactions.user_forex]);
+  }, [updateTransactionHistory, fetchTransactionsMemoized, setUpdateTransactionHistory]);
+
 
   return (
     <>
+    {selectedAsset && (
+        <SellForex
+          handleClose={closeModal}
+          addAlert={() => {}}
+          selectedAsset={selectedAsset}
+          setUpdateBalanceFlag={setUpdateBalanceFlag}
+        />
+      )}
+
     <div className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden">
       <section className="container mx-auto p-2 font-mono">
         <div>
@@ -171,15 +194,17 @@ const ForexMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHist
                 ) : (
                   paginatedTransactions.length > 0 ? (
                     paginatedTransactions.map((userForex) => (
-                      <tr key={userForex.id}>
-                        <div className="flex">
+                      <tr className="cursor-pointer hover:border-azure-950 hover:border-4 hover:scale-105" key={userForex.id} onClick={() => openModal(userForex.symbol)}>
+                        <td className="px-4 py-3">
                           <div className="flex">
-                            <img className="ml-2 w-8" src={getImageLink(userForex.symbol)} alt={userForex.symbol} />
+                            <div className="flex">
+                              <img className="ml-2 w-8" src={getImageLink(userForex.symbol)} alt={userForex.symbol} />
+                            </div>
+                            <span className="ml-2">{userForex.symbol}</span>
                           </div>
-                          <td className="px-4 py-3">{userForex.symbol}</td>
-                        </div>
+                        </td>
                         <td className="px-4 py-3 text-center">{parseFloat(userForex.quantity).toFixed(0)}</td>
-                        <td className="px-4 py-3 text-center">$ {parseFloat(userForex.price).toFixed(2)}</td>
+                        <td className="px-4 py-3 text-center">$ {parseFloat((userForex.price)*(userForex.quantity)).toFixed(2)}</td>
                       </tr>
                     ))
                   ) : (
@@ -205,7 +230,7 @@ const ForexMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHist
                 <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
                   onClick={handleNextPage}
-                  disabled={endIndex >= sortedTransactions.length}
+                  disabled={endIndex >= filteredAndGroupedTransactions.length}
                 >
                   Next
                 </button>
@@ -215,7 +240,7 @@ const ForexMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHist
       </section>
     </div>
   </>
-);
-};
+  )
+}
 
 export default ForexMiniPortfolio;

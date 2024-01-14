@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   get 'currency_list', to: 'datas#show_currency'
 
   post 'sell_stocks', to: 'stock_transactions#sell'
+  post 'sell_crypto', to: 'crypto_transactions#sell'
+  post 'sell_forex', to: 'forex_transactions#sell'
 
   post 'buy_stocks', to: 'stock_transactions#buy'
   post 'buy_crypto', to: 'crypto_transactions#buy'
