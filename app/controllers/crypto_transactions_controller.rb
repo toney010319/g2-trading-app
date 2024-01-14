@@ -30,6 +30,37 @@ class CryptoTransactionsController < ApplicationController
     end
   end
 
+  def sell
+    user = User.find(params[:user_id])
+    quantity = params[:quantity].to_i
+    price = params[:price].to_f
+    symbol = params[:symbol]
+
+    total_sale_value = quantity * price
+
+    crypto = Cryptocurrency.find_by(symbol: symbol)
+    unless crypto.present?
+      render json: { success: false, message: 'Invalid crypto symbol' }
+      return
+    end
+
+    result = update_user_balance_sell(user, total_sale_value)
+
+    if result[:success]
+      PortfolioTransaction.create!(
+        user_id: user.id,
+        quantity: quantity,
+        price: price,
+        symbol: symbol,
+        transaction_type: 'sell',
+        asset: crypto
+      )
+      render json: { success: true, message: 'Crypto sold successfully' }
+    else
+      render json: { success: false, error: result[:error] }, status: :unprocessable_entity
+    end
+  end
+
 
   def show_all_crypto
   crypto_transactions = PortfolioTransaction.where(asset_type: 'Cryptocurrency')
@@ -48,6 +79,18 @@ class CryptoTransactionsController < ApplicationController
 
 
 private
+  def update_user_balance_sell(user, total_sale_value)
+    if user.nil?
+      { success: false, error: 'User not authenticated' }
+    else
+      user.balance.crypto += total_sale_value
+      if user.balance.save
+        { success: true, message: 'Crypto balance updated successfully' }
+      else
+        { success: false, error: 'Failed to update crypto balance' }
+      end
+    end
+  end
 
   def update_user_balance(amount)
     user = User.find(params[:user_id])

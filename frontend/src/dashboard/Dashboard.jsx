@@ -7,13 +7,10 @@ import FolioPerformance from "./pages/portfolio/FolioPerformance";
 import FolioCrypto from "./pages/portfolio/FolioCrypto";
 import FolioStocks from "./pages/portfolio/FolioStocks";
 import FolioForex from "./pages/portfolio/FolioForex";
-import Stocks from "./pages/stocks/Stocks";
 import BuyStocksLayout from "./pages/stocks/BuyStocksLayout";
 import MarketStocks from "./pages/stocks/MarketStocks";
-import Crypto from "./pages/crypto/Crypto";
 import BuyCryptoLayout from "./pages/crypto/BuyCryptoLayout";
 import MarketCrypto from "./pages/crypto/MarketCrypto";
-import Forex from "./pages/forex/Forex";
 import BuyForexLayout from "./pages/forex/BuyForexLayout";
 import MarketForex from "./pages/forex/MarketForex";
 import TransactionHistory from "./pages/others/TransactionHistory";
@@ -46,13 +43,13 @@ const Dashboard = ({ addAlert }) => {
                     <Route path="portfolio/crypto" element={<FolioCrypto />} />
                     <Route path="portfolio/stocks" element={<FolioStocks />} />
                     <Route path="portfolio/forex" element={<FolioForex />} />
-                    <Route path="stocks" element={<Stocks />} />
+                    <Route path="stocks" element={<BuyStocksLayout /> } />
                     <Route path="stocks/trade" element={<BuyStocksLayout />} />
                     <Route path="stocks/market" element={<MarketStocks />} />
-                    <Route path="crypto" element={<Crypto />} />
+                    <Route path="crypto" element={<BuyCryptoLayout />} />
                     <Route path="crypto/trade" element={<BuyCryptoLayout />} />
                     <Route path="crypto/market" element={<MarketCrypto />} />
-                    <Route path="forex" element={<Forex />} />
+                    <Route path="forex" element={<BuyForexLayout />} />
                     <Route path="forex/trade" element={<BuyForexLayout />} />
                     <Route path="forex/market" element={<MarketForex />} />
                     <Route path="transactions" element={<TransactionHistory />} />

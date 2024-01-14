@@ -220,7 +220,7 @@ const BuyForex = ({ setUpdateBalanceFlag }) => {
           </div>
 
           <div className="flex">
-              <ForexMiniPortfolio updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} />
+              <ForexMiniPortfolio updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} setUpdateBalanceFlag={setUpdateBalanceFlag} />
           </div>
       </div>
     </>

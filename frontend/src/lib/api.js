@@ -416,20 +416,56 @@ export const buyForex = async (user_id, quantity, price, symbol) => {
   }
 };
 
-export const sellStocks = async ({ user_id, quantity: { quantity, price }, symbol }) => {
+export const sellStocks = async ({ user_id, quantity, price, symbol }) => {
   try {
     const sellStocksResponse = await axios.post(
       "http://localhost:3000/sell_stocks",
       {
         user_id,
-        quantity: { quantity, price },
+        quantity,
+        price,
         symbol,
       }
     );
-
     return sellStocksResponse.data;
   } catch (error) {
     return { success: false, error: error.message };
   }
 };
+
+export const sellForex = async ({ user_id, quantity, price, symbol }) => {
+  try {
+    const sellForexResponse = await axios.post(
+      "http://localhost:3000/sell_forex",
+      {
+        user_id,
+        quantity,
+        price,
+        symbol,
+      }
+    );
+    return sellForexResponse.data;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+
+export const sellCrypto = async ({ user_id, quantity, price, symbol }) => {
+  try {
+    const sellCryptoResponse = await axios.post(
+      "http://localhost:3000/sell_crypto",
+      {
+        user_id,
+        quantity,
+        price,
+        symbol,
+      }
+    );
+    return sellCryptoResponse.data;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
 

@@ -1,21 +1,22 @@
 import { useState, useMemo, useEffect } from "react";
 import { getUserCrypto } from "../../../lib/api";
+import SellCrypto from "./modals/SellCrypto";
 import Loading from "../../../components/Loading";
 
-const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHistory }) => {
+const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHistory, setUpdateBalanceFlag }) => {
   const user_id = document.cookie.split("user_id=")[1];
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [aggregatedData, setAggregatedData] = useState([]);
-  const transactionsPerPage = 5;
+  const [selectedAsset, setSelectedAsset] = useState(null);
+  const transactionsPerPage = 4;
   
   const fetchTransactionsMemoized = useMemo(() => async () => {
     try {
       const response = await getUserCrypto(user_id);
       setTransactions(response);
       setLoading(false);
-      console.log('Stock Transaction Resp', response)
+      console.log('Crypto Transaction Resp', response)
     } catch (error) {
       console.error('Error fetching transactions:', error);
       setLoading(false);
@@ -65,61 +66,83 @@ const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
 
-  const sortedTransactions = transactions.user_crypto
-    ? [...transactions.user_crypto].sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-    : [];
+  const openModal = (assetSymbol) => {
+    setSelectedAsset(assetSymbol);
+  };
+
+  const closeModal = () => {
+    setSelectedAsset(null);
+    setUpdateTransactionHistory(true);
+    setUpdateBalanceFlag(true);
+  };
+
+    
+    const filteredAndGroupedTransactions = useMemo(() => {
+      const userCrypto = transactions.user_crypto || [];
+      const buyTransactions = userCrypto.filter((transaction) => transaction.transaction_type === 'buy');
+      const sellTransactions = userCrypto.filter((transaction) => transaction.transaction_type === 'sell');
+      const pairedTransactions = [];
+  
+      for (const buyTransaction of buyTransactions) {
+        const correspondingSell = sellTransactions.find(
+          (sellTransaction) =>
+            sellTransaction.symbol === buyTransaction.symbol &&
+            sellTransaction.quantity === buyTransaction.quantity &&
+            sellTransaction.price === buyTransaction.price &&
+            !pairedTransactions.includes(sellTransaction)
+        );
+    
+    
+        if (correspondingSell) {
+          pairedTransactions.push(buyTransaction, correspondingSell);
+        }
+      }
+      const unpairedBuyTransactions = buyTransactions.filter(
+        (buyTransaction) => !pairedTransactions.includes(buyTransaction)
+      );
+      const groupedTransactions = unpairedBuyTransactions.reduce((result, transaction) => {
+      const existingTransaction = result.find((t) => t.symbol === transaction.symbol);
+    
+        if (existingTransaction) {
+          existingTransaction.quantity += parseFloat(transaction.quantity);
+        } else {
+          result.push({
+            symbol: transaction.symbol,
+            quantity: parseFloat(transaction.quantity),
+            price: parseFloat(transaction.price),
+          });
+        }
+    
+        return result;
+      }, []);
+    
+      return groupedTransactions;
+    }, [transactions.user_crypto]);
 
     const startIndex = (currentPage - 1) * transactionsPerPage;
     const endIndex = startIndex + transactionsPerPage;
-    const paginatedTransactions = aggregatedData.slice(startIndex, endIndex);
-
-  
-  
-  useEffect(() => {
-  fetchTransactionsMemoized();
-  if (updateTransactionHistory) {
-    fetchTransactionsMemoized();
-    setUpdateTransactionHistory(false);
-  }
-}, [updateTransactionHistory, fetchTransactionsMemoized, setUpdateTransactionHistory]);
-
-
+    const paginatedTransactions = filteredAndGroupedTransactions.slice(startIndex, endIndex);
 
   useEffect(() => {
-    if (transactions.user_crypto) {
-      const symbolDataMap = new Map();
-
-      transactions.user_crypto.forEach((transaction) => {
-        const symbol = transaction.symbol;
-        const quantity = parseFloat(transaction.quantity);
-        const price = parseFloat(transaction.price);
-
-        if (symbolDataMap.has(symbol)) {
-          const existingData = symbolDataMap.get(symbol);
-          symbolDataMap.set(symbol, {
-            quantity: existingData.quantity + quantity,
-            price: existingData.price + quantity * price,
-          });
-        } else {
-          symbolDataMap.set(symbol, {
-            quantity,
-            price: quantity * price,
-          });
-        }
-      });
-
-      const aggregatedArray = Array.from(symbolDataMap, ([symbol, { quantity, price }]) => ({
-        symbol,
-        quantity,
-        price,
-      }));
-
-      setAggregatedData(aggregatedArray);
+    fetchTransactionsMemoized();  
+    if (updateTransactionHistory) {
+      fetchTransactionsMemoized(); 
+      setUpdateTransactionHistory(false);
     }
-  }, [transactions.user_crypto]);
+  }, [updateTransactionHistory, fetchTransactionsMemoized, setUpdateTransactionHistory]);
+
 
   return (
     <>
+    {selectedAsset && (
+        <SellCrypto
+          handleClose={closeModal}
+          addAlert={() => {}}
+          selectedAsset={selectedAsset}
+          setUpdateBalanceFlag={setUpdateBalanceFlag}
+        />
+      )}
+
     <div className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden">
       <section className="container mx-auto p-2 font-mono">
         <div>
@@ -151,17 +174,17 @@ const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
                 ) : (
                   paginatedTransactions.length > 0 ? (
                     paginatedTransactions.map((userCrypto) => (
-                      <tr key={userCrypto.id}>
+                      <tr className="cursor-pointer hover:border-azure-950 hover:border-4 hover:scale-105" key={userCrypto.id} onClick={() => openModal(userCrypto.symbol)}>
                         <td className="px-4 py-3">
                           <div className="flex">
                             <div className="flex">
-                              <img className="w-6" src={getImageLink(userCrypto.symbol)} alt={userCrypto.symbol} />
+                              <img className="ml-2 w-8" src={getImageLink(userCrypto.symbol)} alt={userCrypto.symbol} />
                             </div>
                             <span className="ml-2">{userCrypto.symbol}</span>
                           </div>
                         </td>
                         <td className="px-4 py-3 text-center">{parseFloat(userCrypto.quantity).toFixed(0)}</td>
-                        <td className="px-4 py-3 text-center">$ {parseFloat(userCrypto.price).toFixed(2)}</td>
+                        <td className="px-4 py-3 text-center">$ {parseFloat((userCrypto.price)*(userCrypto.quantity)).toFixed(2)}</td>
                       </tr>
                     ))
                   ) : (
@@ -187,7 +210,7 @@ const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
                 <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
                   onClick={handleNextPage}
-                  disabled={endIndex >= sortedTransactions.length}
+                  disabled={endIndex >= filteredAndGroupedTransactions.length}
                 >
                   Next
                 </button>
