@@ -4,9 +4,9 @@ class User < ApplicationRecord
   has_many :stocks, dependent: :destroy
   has_many :portfolio_transactions
   has_one :balance, dependent: :destroy
-  has_many :stocks, through: :portfolio_transactions, source: :asset, source_type: 'Stock', dependent: :destroy
-  has_many :cryptos, through: :portfolio_transactions, source: :asset, source_type: 'Crypto', dependent: :destroy
-  has_many :forex, through: :portfolio_transactions, source: :asset, source_type: 'Forex', dependent: :destroy
+  has_many :stocks, through: :portfolio_transactions, source: :asset, source_type: 'Stock', class_name: 'Stock', dependent: :destroy
+  has_many :cryptos, through: :portfolio_transactions, source: :asset, source_type: 'Crypto', class_name: 'Cryptocurrency',dependent: :destroy
+  has_many :forex, through: :portfolio_transactions, source: :asset, source_type: 'Forex',  class_name: 'Currency',dependent: :destroy
   accepts_nested_attributes_for :balance, allow_destroy: true
   after_create :create_balance
 
