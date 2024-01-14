@@ -12,7 +12,7 @@ const HomeStocks = () => {
   const fetchAssetsMemoized = useMemo(() => async () => {
     try {
       const response = await getUserStocks(user_id);
-      setAssets(response.user_stocks);
+      setAssets(response.user_stocks)
     } catch (error) {
       console.error('Error fetching transactions:', error);
     }

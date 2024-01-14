@@ -131,7 +131,7 @@ const StocksTransactions = ({ updateTransactionHistory, setUpdateTransactionHist
                       <tr key={userStock.id}>
                         <div className="flex">
                           <div className="flex">
-                            <img className="ml-2 w-12" src={getImageLink(userStock.symbol)} alt={userStock.symbol} />
+                            <img className="ml-2 w-10" src={getImageLink(userStock.symbol)} alt={userStock.symbol} />
                           </div>
                           <td className="px-4 py-3">{userStock.symbol}</td>
                         </div>

@@ -416,5 +416,20 @@ export const buyForex = async (user_id, quantity, price, symbol) => {
   }
 };
 
+export const sellStocks = async ({ user_id, quantity: { quantity, price }, symbol }) => {
+  try {
+    const sellStocksResponse = await axios.post(
+      "http://localhost:3000/sell_stocks",
+      {
+        user_id,
+        quantity: { quantity, price },
+        symbol,
+      }
+    );
 
+    return sellStocksResponse.data;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
 

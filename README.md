@@ -38,7 +38,7 @@ This project is developed by [toney010319](https://github.com/toney010319), [and
 
 ## Description
 
-- Run (`npm run dev`) from frontend
+- Run `npm run dev` from frontend
 
 _Note: vite, rails s, and mailcatcher will run via concurrently_
 
