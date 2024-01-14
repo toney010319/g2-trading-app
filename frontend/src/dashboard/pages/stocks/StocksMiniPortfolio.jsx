@@ -1,14 +1,17 @@
 import { useState, useMemo, useEffect } from "react";
 import { getUserStocks } from "../../../lib/api";
+import SellStocks from "./modals/SellStock";
 import Loading from "../../../components/Loading";
 
-const StocksMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHistory }) => {
+const StocksMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHistory, setUpdateBalanceFlag }) => {
   const user_id = document.cookie.split("user_id=")[1];
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  // eslint-disable-next-line no-unused-vars
   const [aggregatedData, setAggregatedData] = useState([]);
-  const transactionsPerPage = 5;
+  const [selectedAsset, setSelectedAsset] = useState(null);
+  const transactionsPerPage = 4;
   
   const fetchTransactionsMemoized = useMemo(() => async () => {
     try {
@@ -78,15 +81,25 @@ const StocksMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
   };
 
   const sortedTransactions = transactions.user_stocks
-    ? [...transactions.user_stocks].sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-    : [];
+  ? [...transactions.user_stocks].sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+  : [];
 
-    const startIndex = (currentPage - 1) * transactionsPerPage;
-    const endIndex = startIndex + transactionsPerPage;
-    const paginatedTransactions = aggregatedData.slice(startIndex, endIndex);
+  const filteredTransactions = sortedTransactions.filter(transaction => parseFloat(transaction.quantity) >= 1);
 
+  const startIndex = (currentPage - 1) * transactionsPerPage;
+  const endIndex = startIndex + transactionsPerPage;
+  const paginatedTransactions = filteredTransactions.slice(startIndex, endIndex);
+
+    const openModal = (assetSymbol) => {
+      setSelectedAsset(assetSymbol);
+    };
   
-  
+    const closeModal = () => {
+      setSelectedAsset(null);
+      setUpdateTransactionHistory(true);
+      setUpdateBalanceFlag(true);
+    };
+   
   useEffect(() => {
   fetchTransactionsMemoized();
   if (updateTransactionHistory) {
@@ -132,6 +145,15 @@ const StocksMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
 
   return (
     <>
+    {selectedAsset && (
+        <SellStocks
+          handleClose={closeModal}
+          addAlert={() => {}}
+          selectedAsset={selectedAsset}
+          setUpdateBalanceFlag={setUpdateBalanceFlag}
+        />
+      )}
+
     <div className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden">
       <section className="container mx-auto p-2 font-mono">
         <div>
@@ -163,13 +185,13 @@ const StocksMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
                 ) : (
                   paginatedTransactions.length > 0 ? (
                     paginatedTransactions.map((userStock) => (
-                      <tr key={userStock.id}>
+                      <tr className="cursor-pointer hover:border-azure-950 hover:border-4 hover:scale-105" key={userStock.id} onClick={() => openModal(userStock.symbol)}>
                         <td className="px-4 py-3">
                           <div className="flex">
                             <div className="flex">
-                              <img className="ml-2 w-12" src={getImageLink(userStock.symbol)} alt={userStock.symbol} />
+                              <img className="ml-2 w-10" src={getImageLink(userStock.symbol)} alt={userStock.symbol} />
                             </div>
-                            <span>{userStock.symbol}</span>
+                            <span className="ml-2">{userStock.symbol}</span>
                           </div>
                         </td>
                         <td className="px-4 py-3 text-center">{parseFloat(userStock.quantity).toFixed(0)}</td>

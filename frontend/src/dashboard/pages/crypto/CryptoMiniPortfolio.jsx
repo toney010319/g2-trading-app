@@ -155,9 +155,9 @@ const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
                         <td className="px-4 py-3">
                           <div className="flex">
                             <div className="flex">
-                              <img className="ml-2 w-8" src={getImageLink(userCrypto.symbol)} alt={userCrypto.symbol} />
+                              <img className="w-6" src={getImageLink(userCrypto.symbol)} alt={userCrypto.symbol} />
                             </div>
-                            <span>{userCrypto.symbol}</span>
+                            <span className="ml-2">{userCrypto.symbol}</span>
                           </div>
                         </td>
                         <td className="px-4 py-3 text-center">{parseFloat(userCrypto.quantity).toFixed(0)}</td>
