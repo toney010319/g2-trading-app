@@ -112,6 +112,7 @@ Parameters
 | `middle_name`| middlename   | true     |
 | `last_name`  | lastname     | true     |
 | `birthday`   | birthday     | true     |
+| `first_name` | firstname    |  true    |
 | `email`      | email        | true     |
 
 
@@ -175,7 +176,7 @@ Sample Request Body
 {
     "user_id": "1",
     transactionData: {
-        "amount": "200",
+        "balance": "200",
         "type": "deposit" 
     }
 }
@@ -185,8 +186,34 @@ Parameters
 | Name                    | Description                                                    | Required |
 |-------------------------|----------------------------------------------------------------|----------|
 | `user_id`               | UID of Login User                                              | true     |
-| `amount`                | amount                                                         | true     |
+| `balance`               | amount                                                         | true     |
 | `transactionData`       | it is an Object that consests of `amount`, `type`,`date & time`| true     |
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Transfer Base wallet balance to Stock wallet.
+```
+HTTP Method: POST
+URL: http://localhost:3000/add_stock_balance
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "balance": "200"
+}
+```
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+| `balance`    | Amount to Transfer       | true     |
 ## Request Headers
 Get these Values from the login Response Header
 
