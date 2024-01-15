@@ -168,7 +168,9 @@ Get these Values from the login Response Header
 HTTP Method: POST
 URL: http://localhost:3000/transactions
 ``
+
 Sample Request Body
+
 ``
 {
     "user_id": "1",
@@ -178,6 +180,7 @@ Sample Request Body
     }
 }
 ``
+
 Parameters
 | Name                    | Description                                                    | Required |
 |-------------------------|----------------------------------------------------------------|----------|
