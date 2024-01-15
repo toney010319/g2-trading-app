@@ -13,10 +13,10 @@ const Sidebar = () => {
             )}
         </div>
         <button 
-                className="ml-1 bg-azure-300 p-2 rounded-full absolute -left-3 top-1/2 -translate-y-1/2"
+                className="ml-1 bg-azure-300 p-1 rounded-full absolute -left-4 top-1/2 -translate-y-1/2"
                 onClick={() => setExpanded(!expanded)}
             >
-                {expanded ? '<' : '>'}
+                {expanded ? <img src="https://www.svgrepo.com/show/500756/arrow-left-bold.svg" width="30" /> : <img src="https://www.svgrepo.com/show/390864/arrow-right-bold.svg" width="30" />}
         </button>
     </>
     )

@@ -88,7 +88,7 @@ const MarketCrypto = () => {
 
   return (
     <>
-      <section className="container mx-auto p-2 font-mono">
+      <section className="container mx-auto p-2 font-mono ">
         <div>
           <div className="flex justify-center">
             <span className="flex w-full justify-center text-bold text-3xl font-sans underline underline-offset-8 font-bold mb-2">  

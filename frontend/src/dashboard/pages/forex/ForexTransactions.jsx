@@ -103,7 +103,7 @@ const ForexTransactions = ({ updateTransactionHistory, setUpdateTransactionHisto
 
   return (
     <>
-    <div className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden">
+    <div className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
       <section className="container mx-auto p-2 font-mono">
         <div>
           <div className="flex justify-center">

@@ -24,57 +24,6 @@ const NotExpandedSidebar = () => {
         
         <span className="mt-1 border border-black "></span>
         
-        <section className="mt-1">
-            <Link to="portfolio">
-              <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
-                <img src="https://www.svgrepo.com/show/189071/files-folder.svg" 
-                  width="40" 
-                  alt="Portfolio" />
-              </div>
-            </Link>
-          
-            {/* <Link to="portfolio/news">
-              <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
-              <img src="https://www.svgrepo.com/show/374991/news.svg" 
-                width="35" 
-                alt="News" />
-              </div>
-            </Link>
-
-            <Link to="portfolio/performance">
-              <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
-                <img src="https://www.svgrepo.com/show/483055/performance-up-graph.svg" 
-                  width="35" 
-                  alt="Performance" />
-              </div>
-            </Link>
-
-            <Link to="portfolio/crypto">
-              <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
-                <img src="https://www.svgrepo.com/show/488803/bitcoin-1.svg" 
-                  width="35" 
-                  alt="Crypto" />
-              </div>
-            </Link>
-
-            <Link to="portfolio/stocks">
-              <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
-                <img src="https://www.svgrepo.com/show/141143/stocks-graphic-in-a-circle.svg" 
-                  width="35" 
-                  alt="Stocks" />
-              </div>
-            </Link>
-
-            <Link to="portfolio/forex">
-              <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
-                <img src="https://www.svgrepo.com/show/437676/fx.svg" 
-                  width="35" 
-                  alt="Forex" />
-              </div>
-            </Link> */}
-        </section>
-
-        <span className="mt-1 border border-black"></span>
 
         <section className="mt-1">
           <Link to="stocks">
@@ -84,14 +33,6 @@ const NotExpandedSidebar = () => {
                 alt="Stocks" />
             </div>
           </Link>
-
-          {/* <Link to="stocks/trade">
-            <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
-              <img src="https://www.svgrepo.com/show/301267/monitor-tv.svg" 
-                width="35" 
-                alt="Trade" />
-            </div>
-          </Link> */}
 
           <Link to="stocks/market">
             <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
@@ -114,14 +55,6 @@ const NotExpandedSidebar = () => {
           </div>
         </Link>
 
-        {/* <Link to="crypto/trade">
-          <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
-            <img src="https://www.svgrepo.com/show/416781/buy-coin-cryptocurrency.svg" 
-              width="35" 
-              alt="Home" />
-          </div>
-        </Link> */}
-
         <Link to="crypto/market">
           <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
             <img src="https://www.svgrepo.com/show/487223/coin-2.svg" 
@@ -142,14 +75,6 @@ const NotExpandedSidebar = () => {
                 alt="Home" />
             </div>
           </Link>
-
-          {/* <Link to="forex/trade">
-            <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
-              <img src="https://www.svgrepo.com/show/483228/dollar-and-yen-exchange-rate.svg" 
-                width="35" 
-                alt="Home" />
-            </div>
-          </Link> */}
 
           <Link to="forex/market">
             <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
