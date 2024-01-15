@@ -84,3 +84,55 @@ _Note: vite, rails s, and mailcatcher will run via concurrently_
 7. As a Trader, I want to have a Transaction page to see and monitor all the transactions made by my actions
    of buying and selling.
 8. As a Trader, I want to sell my stocks so that I can adjust my portfolio.
+
+
+
+## Trading App API
+
+================
+
+## User Registration
+------------------
+
+```
+HTTP Method: POST
+URL: http://localhost:3000/signup
+``` 
+Sample Request Body
+```
+{
+    "email": "test",
+    "password": "test"
+}
+```
+Parameters
+
+| Name         | Description  | Required |
+|--------------|--------------|----------|
+| `username`   | username     | true     |
+| `password`   | password     | true     |
+| `middle_name`| middlename   | true     |
+| `last_name`  | lastname     | true     |
+| `birthday`   | birthday     | true     |
+| `email`      | email        | true     |
+-----------------------------------------;
+
+### User Login
+------------------
+```
+HTTP Method: POST
+URL: http://localhost:3000/login
+``` 
+Sample Request Body
+```
+{
+    "email": "test",
+    "password": "test"
+}
+```
+Parameters
+| Name         | Description  | Required |
+|--------------|--------------|----------|
+| `email`      | email        | true     |
+| `password`   | password     | true     |
+-----------------------------------------;
