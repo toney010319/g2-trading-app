@@ -164,14 +164,14 @@ Get these Values from the login Response Header
 
 ------------------
 ## Add Transactions
-``
+```
 HTTP Method: POST
 URL: http://localhost:3000/transactions
-``
+```
 
 Sample Request Body
 
-``
+```
 {
     "user_id": "1",
     transactionData: {
@@ -179,7 +179,7 @@ Sample Request Body
         "type": "deposit" 
     }
 }
-``
+```
 
 Parameters
 | Name                    | Description                                                    | Required |
