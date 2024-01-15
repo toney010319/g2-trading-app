@@ -46,3 +46,5 @@ node_modules/loose-envify/README.md
 node_modules/loose-envify/replace.js
 
 .gitignore_global
+node_modules/.package-lock.json
+.gitignore

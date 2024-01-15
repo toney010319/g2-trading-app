@@ -69,7 +69,7 @@ const TransactionHistory = () => {
                       <td className="px-2 py-2 border">
                         <div className="flex items-center text-sm">
                           <div>
-                            <p className="font-semibold text-black">{transaction.date}</p>
+                            <p className="font-semibold text-black">{transaction.created_at}</p>
                           </div>
                         </div>
                       </td>

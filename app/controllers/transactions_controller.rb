@@ -58,4 +58,16 @@ before_action :authenticate_user!, only: [:create, :index, :show]
     @all_transactions = Transaction.all
     render json: @all_transactions
   end
+
+  def show_all_assets
+    @all_assets = PortfolioTransaction.all
+    render json: @all_assets
+  end
+
+  def show_all_user_assets
+    user = User.find(params[:user_id])
+    @user_assets = PortfolioTransaction.where(user_id: user.id).includes(:asset)
+    render json: @user_assets.to_json(include: :asset)
+  end
+
 end

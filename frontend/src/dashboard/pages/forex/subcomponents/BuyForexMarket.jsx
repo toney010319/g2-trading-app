@@ -1,17 +1,17 @@
 import { useState, useEffect, useMemo } from "react";
-import { getCryptoList } from "../../../../lib/api";
+import { getForexList } from "../../../../lib/api";
 import Loading from "../../../../components/Loading";
 
-const BuyCryptoMarket = () => {
-    const [stockList, setStockList] = useState([]);
+const BuyForexMarket = () => {
+    const [forexList, setForexList] = useState([]);
     const [loading, setLoading] = useState(true);
     const user_id = document.cookie.split('user_id=')[1];
     
     const fetchStockListMemoized = useMemo(() => async () => {
         try {
-        const response = await getCryptoList(user_id);
-        setStockList(response);
-        console.log('stocklist', response)
+        const response = await getForexList(user_id);
+        setForexList(response);
+        console.log('forex list', response)
         setLoading(false);
         } catch (error) {
         console.error('Error fetching transactions:', error);
@@ -25,36 +25,56 @@ const BuyCryptoMarket = () => {
 
     const getImageLink = (symbol) => {
       switch (symbol) {
-        case 'BTC':
-          return 'https://cryptologos.cc/logos/bitcoin-btc-logo.svg?v=029';
-        case 'ETH':
-          return 'https://cryptologos.cc/logos/ethereum-eth-logo.svg?v=029';
-        case 'BNB':
-          return 'https://cryptologos.cc/logos/bnb-bnb-logo.svg?v=029';
-        case 'SOL':
-          return 'https://cryptologos.cc/logos/solana-sol-logo.svg?v=029';
-        case 'XRP':
-          return 'https://cryptologos.cc/logos/xrp-xrp-logo.svg?v=029'; 
-        case 'ADA':
-          return 'https://cryptologos.cc/logos/cardano-ada-logo.svg?v=029';   
-        case 'AVAX':
-          return 'https://cryptologos.cc/logos/avalanche-avax-logo.svg?v=029';  
-        case 'DOGE':
-          return 'https://cryptologos.cc/logos/dogecoin-doge-logo.svg?v=029'; 
-        case 'DOT':
-          return 'https://cryptologos.cc/logos/polkadot-new-dot-logo.svg?v=029'; 
-        case 'TRX':
-          return 'https://cryptologos.cc/logos/tron-trx-logo.svg?v=029';  
-        case 'MATIC':
-          return 'https://cryptologos.cc/logos/polygon-matic-logo.svg?v=029';  
-        case 'SHIB':
-          return 'https://cryptologos.cc/logos/shiba-inu-shib-logo.svg?v=029';  
-        case 'LTC':
-          return 'https://cryptologos.cc/logos/litecoin-ltc-logo.svg?v=029';  
-        case 'XLM':
-          return 'https://cryptologos.cc/logos/stellar-xlm-logo.svg?v=029';  
-        case 'XMR':
-          return 'https://cryptologos.cc/logos/monero-xmr-logo.svg?v=029';  
+        case 'PHP':
+          return 'https://flagicons.lipis.dev/flags/4x3/ph.svg';
+        case 'EUR':
+          return 'https://flagicons.lipis.dev/flags/4x3/eu.svg';
+        case 'JPY':
+          return 'https://flagicons.lipis.dev/flags/4x3/jp.svg';
+        case 'GBP':
+          return 'https://flagicons.lipis.dev/flags/4x3/gb.svg';
+        case 'AUD':
+          return 'https://flagicons.lipis.dev/flags/4x3/au.svg'; 
+        case 'CAD':
+          return 'https://flagicons.lipis.dev/flags/4x3/ca.svg';   
+        case 'CHF':
+          return 'https://flagicons.lipis.dev/flags/4x3/ch.svg';  
+        case 'CNY':
+          return 'https://flagicons.lipis.dev/flags/4x3/cn.svg'; 
+        case 'SEK':
+          return 'https://flagicons.lipis.dev/flags/4x3/se.svg'; 
+        case 'MXN':
+          return 'https://flagicons.lipis.dev/flags/4x3/mx.svg';  
+        case 'NZD':
+          return 'https://flagicons.lipis.dev/flags/4x3/nz.svg';  
+        case 'SGD':
+          return 'https://flagicons.lipis.dev/flags/4x3/sg.svg';  
+        case 'HKD':
+          return 'https://flagicons.lipis.dev/flags/4x3/hk.svg';  
+        case 'NOK':
+          return 'https://flagicons.lipis.dev/flags/4x3/no.svg';  
+        case 'KRW':
+          return 'https://flagicons.lipis.dev/flags/4x3/kr.svg';  
+        case 'TRY':
+          return 'https://flagicons.lipis.dev/flags/4x3/tr.svg'; 
+        case 'INR':
+          return 'https://flagicons.lipis.dev/flags/4x3/in.svg';  
+        case 'RUB':
+          return 'https://flagicons.lipis.dev/flags/4x3/ru.svg';  
+        case 'BRL':
+          return 'https://flagicons.lipis.dev/flags/4x3/br.svg';  
+        case 'ZAR':
+          return 'https://flagicons.lipis.dev/flags/4x3/za.svg';  
+        case 'DKK':
+          return 'https://flagicons.lipis.dev/flags/4x3/dk.svg';  
+        case 'TWD':
+          return 'https://flagicons.lipis.dev/flags/4x3/tw.svg';  
+        case 'PLN':
+        return 'https://flagicons.lipis.dev/flags/4x3/pl.svg';  
+        case 'THB':
+          return 'https://flagicons.lipis.dev/flags/4x3/th.svg';  
+        case 'MYR':
+        return 'https://flagicons.lipis.dev/flags/4x3/my.svg';    
         }
       };
 
@@ -81,11 +101,10 @@ return(
               <tr className="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
                 <th className="px-4 py-3">Name</th>
                 <th className="px-4 py-3">Symbol</th>
+                <th className="px-4 py-3">Country</th>
                 <th className="px-4 py-3">Price ($)</th>
                 <th className="px-4 py-3">Highest Price Today</th>
                 <th className="px-4 py-3">Lowest Price Today</th>
-                <th className="px-4 py-3">Market Cap</th>
-                <th className="px-4 py-3">Average Volume</th>
                 <th className="px-4 py-3">Percentage +/-</th>
               </tr>
             </thead>
@@ -99,8 +118,8 @@ return(
                   </td>
                 </tr>
               ) : (
-                stockList.length > 0 ? (
-                  stockList.slice(0, 5).map((data) => (
+                forexList.length > 0 ? (
+                  forexList.slice(0, 5).map((data) => (
                     <tr key={data.id} className="text-gray-700">
                       <td className="px-2 py-2 border">
                         <div className="flex items-center text-sm">
@@ -115,12 +134,11 @@ return(
                         </div>
                       </td>
                       <td className="px-4 py-3 text-ms text-center font-semibold border">{data.symbol}</td>
+                      <td className="px-4 py-3 text-ms text-center font-semibold border">{data.country}</td>
                       <td className="px-4 py-3 text-ms text-center font-semibold border">${data.price}</td>
                       <td className="px-4 py-3 text-xs text-center border">${data.day_high}</td>
                       <td className="px-4 py-3 text-xs text-center border">${data.day_low}</td>
-                      <td className="px-4 py-3 text-xs text-center border">{data.market_cap}</td>
-                      <td className="px-4 py-3 text-xs text-center border">{data.avg_volume}</td>
-                     <td className={`px-4 py-3 text-ms text-center font-semibold border ${getChangesStyle(data.changes_percentage)}`}>
+                      <td className={`px-4 py-3 text-ms text-center font-semibold border ${getChangesStyle(data.changes_percentage)}`}>
                           {data.changes_percentage}%
                         </td>
                       
@@ -144,4 +162,4 @@ return(
 };
 
 
-export default BuyCryptoMarket
+export default BuyForexMarket

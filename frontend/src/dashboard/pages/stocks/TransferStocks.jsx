@@ -6,7 +6,7 @@ import {
 } from "../../../lib/api";
 import LogoDark from "../../../assets/LogoDark";
 
-const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
+const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag, addAlert }) => {
   const [transferAmount, setTransferAmount] = useState("");
   const [stockAmount, setStockAmount] = useState("");
   const [balance, setBalance] = useState("");
@@ -19,8 +19,9 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
       try {
         const response = await getUserBalance(user_id);
         setBalance(response);
-        console.log(response, "set balance response");
+
         setLoading(false);
+        return response;
       } catch (error) {
         console.error("Error fetching transactions:", error);
         setLoading(false);
@@ -35,12 +36,16 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
         transferAmount,
         user_id
       );
-      console.log(
-        "Transfer from wallet to stock successful:",
-        addBalanceResponse
-      );
+
+      if (addBalanceResponse?.status == 200) {
+        addAlert('success', `Transfer from wallet to stock successful: ₱${addBalanceResponse?.amount}.00`)
+      }
+      else {
+        addAlert('error', `Transfer from wallet to stock failed:  invalid amount`)
+      }
       fetchUserBalance();
       setTransferAmount("");
+
     } catch (error) {
       console.error("Error transferring from wallet to stock:", error);
     }
@@ -61,7 +66,7 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
       console.error("Error transferring from stock to wallet:", error);
     }
   };
-  
+
 
   useEffect(() => {
     fetchUserBalance();
@@ -73,7 +78,7 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
       <div className="flex justify-around mt-3 h-96">
         <div className="bg-gradient-to-b from-azure-950 to-azure-600 rounded-lg ml-4">
           <div className="mt-4">
-            <LogoDark  />
+            <LogoDark />
           </div>
           <div className="flex flex-col">
             <div className="flex bg-azure-700 text-white rounded-lg m-3 pb-3">
@@ -124,7 +129,7 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
 
         <div className="bg-gradient-to-b from-azure-600 to-azure-950 rounded-lg ml-4">
           <div className="mt-4">
-            <LogoDark  />
+            <LogoDark />
           </div>
           <div className="flex flex-col">
             <div className="flex bg-azure-900 text-white rounded-lg m-3 pb-3">
@@ -135,7 +140,7 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
                 <div className="flex flex-col">
                   <span className="font-bold ml-1">Balance: </span>
                   <span className="flex font-bold justify-center text-3xl border-1 mt-4 border-black border-b-4 bg-blue-700">
-                  {loading ? <div className="text-center">Loading...</div> : `$${parseFloat(balance.stocks).toFixed(2)}`}
+                    {loading ? <div className="text-center">Loading...</div> : `$${parseFloat(balance.stocks).toFixed(2)}`}
                   </span>
                 </div>
               </div>

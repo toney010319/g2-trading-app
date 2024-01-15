@@ -1,9 +1,9 @@
 import { useState, useMemo, useEffect } from "react";
-import { getUserCrypto} from "../../../lib/api";
+import { getUserForex} from "../../../lib/api";
 import { format } from "date-fns"
 import Loading from "../../../components/Loading";
 
-const CryptoTransactions = ({ updateTransactionHistory, setUpdateTransactionHistory }) => {
+const ForexTransactions = ({ updateTransactionHistory, setUpdateTransactionHistory }) => {
   const user_id = document.cookie.split("user_id=")[1];
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,10 +12,10 @@ const CryptoTransactions = ({ updateTransactionHistory, setUpdateTransactionHist
   
   const fetchTransactionsMemoized = useMemo(() => async () => {
     try {
-      const response = await getUserCrypto(user_id);
+      const response = await getUserForex(user_id);
       setTransactions(response);
       setLoading(false);
-      console.log('Crypto Transaction Resp', response)
+      console.log('Forex Transaction Resp', response)
     } catch (error) {
       console.error('Error fetching transactions:', error);
       setLoading(false);
@@ -24,36 +24,56 @@ const CryptoTransactions = ({ updateTransactionHistory, setUpdateTransactionHist
 
   const getImageLink = (symbol) => {
     switch (symbol) {
-      case 'BTC':
-        return 'https://cryptologos.cc/logos/bitcoin-btc-logo.svg?v=029';
-      case 'ETH':
-        return 'https://cryptologos.cc/logos/ethereum-eth-logo.svg?v=029';
-      case 'BNB':
-        return 'https://cryptologos.cc/logos/bnb-bnb-logo.svg?v=029';
-      case 'SOL':
-        return 'https://cryptologos.cc/logos/solana-sol-logo.svg?v=029';
-      case 'XRP':
-        return 'https://cryptologos.cc/logos/xrp-xrp-logo.svg?v=029'; 
-      case 'ADA':
-        return 'https://cryptologos.cc/logos/cardano-ada-logo.svg?v=029';   
-      case 'AVAX':
-        return 'https://cryptologos.cc/logos/avalanche-avax-logo.svg?v=029';  
-      case 'DOGE':
-        return 'https://cryptologos.cc/logos/dogecoin-doge-logo.svg?v=029'; 
-      case 'DOT':
-        return 'https://cryptologos.cc/logos/polkadot-new-dot-logo.svg?v=029'; 
-      case 'TRX':
-        return 'https://cryptologos.cc/logos/tron-trx-logo.svg?v=029';  
-      case 'MATIC':
-        return 'https://cryptologos.cc/logos/polygon-matic-logo.svg?v=029';  
-      case 'SHIB':
-        return 'https://cryptologos.cc/logos/shiba-inu-shib-logo.svg?v=029';  
-      case 'LTC':
-        return 'https://cryptologos.cc/logos/litecoin-ltc-logo.svg?v=029';  
-      case 'XLM':
-        return 'https://cryptologos.cc/logos/stellar-xlm-logo.svg?v=029';  
-      case 'XMR':
-        return 'https://cryptologos.cc/logos/monero-xmr-logo.svg?v=029';  
+      case 'PHP':
+        return 'https://flagicons.lipis.dev/flags/4x3/ph.svg';
+      case 'EUR':
+        return 'https://flagicons.lipis.dev/flags/4x3/eu.svg';
+      case 'JPY':
+        return 'https://flagicons.lipis.dev/flags/4x3/jp.svg';
+      case 'GBP':
+        return 'https://flagicons.lipis.dev/flags/4x3/gb.svg';
+      case 'AUD':
+        return 'https://flagicons.lipis.dev/flags/4x3/au.svg'; 
+      case 'CAD':
+        return 'https://flagicons.lipis.dev/flags/4x3/ca.svg';   
+      case 'CHF':
+        return 'https://flagicons.lipis.dev/flags/4x3/ch.svg';  
+      case 'CNY':
+        return 'https://flagicons.lipis.dev/flags/4x3/cn.svg'; 
+      case 'SEK':
+        return 'https://flagicons.lipis.dev/flags/4x3/se.svg'; 
+      case 'MXN':
+        return 'https://flagicons.lipis.dev/flags/4x3/mx.svg';  
+      case 'NZD':
+        return 'https://flagicons.lipis.dev/flags/4x3/nz.svg';  
+      case 'SGD':
+        return 'https://flagicons.lipis.dev/flags/4x3/sg.svg';  
+      case 'HKD':
+        return 'https://flagicons.lipis.dev/flags/4x3/hk.svg';  
+      case 'NOK':
+        return 'https://flagicons.lipis.dev/flags/4x3/no.svg';  
+      case 'KRW':
+        return 'https://flagicons.lipis.dev/flags/4x3/kr.svg';  
+      case 'TRY':
+        return 'https://flagicons.lipis.dev/flags/4x3/tr.svg'; 
+      case 'INR':
+        return 'https://flagicons.lipis.dev/flags/4x3/in.svg';  
+      case 'RUB':
+        return 'https://flagicons.lipis.dev/flags/4x3/ru.svg';  
+      case 'BRL':
+        return 'https://flagicons.lipis.dev/flags/4x3/br.svg';  
+      case 'ZAR':
+        return 'https://flagicons.lipis.dev/flags/4x3/za.svg';  
+      case 'DKK':
+        return 'https://flagicons.lipis.dev/flags/4x3/dk.svg';  
+      case 'TWD':
+        return 'https://flagicons.lipis.dev/flags/4x3/tw.svg';  
+      case 'PLN':
+      return 'https://flagicons.lipis.dev/flags/4x3/pl.svg';  
+      case 'THB':
+        return 'https://flagicons.lipis.dev/flags/4x3/th.svg';  
+      case 'MYR':
+      return 'https://flagicons.lipis.dev/flags/4x3/my.svg';    
       }
     };
 
@@ -65,8 +85,8 @@ const CryptoTransactions = ({ updateTransactionHistory, setUpdateTransactionHist
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
 
-  const sortedTransactions = transactions.user_crypto
-    ? [...transactions.user_crypto].sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+  const sortedTransactions = transactions.user_forex
+    ? [...transactions.user_forex].sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
     : [];
 
   const startIndex = (currentPage - 1) * transactionsPerPage;
@@ -115,18 +135,18 @@ const CryptoTransactions = ({ updateTransactionHistory, setUpdateTransactionHist
                   </tr>
                 ) : (
                   paginatedTransactions.length > 0 ? (
-                    paginatedTransactions.map((userCrypto) => (
-                      <tr key={userCrypto.id}>
+                    paginatedTransactions.map((userForex) => (
+                      <tr key={userForex.id}>
                         <div className="flex">
                           <div className="flex">
-                            <img className="ml-2 w-8" src={getImageLink(userCrypto.symbol)} alt={userCrypto.symbol} />
+                            <img className="ml-2 w-8" src={getImageLink(userForex.symbol)} alt={userForex.symbol} />
                           </div>
-                          <td className="px-4 py-3">{userCrypto.symbol}</td>
+                          <td className="px-4 py-3">{userForex.symbol}</td>
                         </div>
-                        <td className="px-4 py-3 text-center">{parseFloat(userCrypto.quantity).toFixed(0)}</td>
-                        <td className="px-4 py-3 text-center">$ {parseFloat(userCrypto.price).toFixed(2)}</td>
-                        <td className="px-4 py-3 text-center">{(userCrypto.transaction_type).toUpperCase()}</td>
-                        <td className="px-4 py-3 text-center">{format(new Date(userCrypto.created_at), 'MM/dd/yyyy HH:mm a')}</td>
+                        <td className="px-4 py-3 text-center">{parseFloat(userForex.quantity).toFixed(0)}</td>
+                        <td className="px-4 py-3 text-center">$ {parseFloat(userForex.price).toFixed(2)}</td>
+                        <td className="px-4 py-3 text-center">{(userForex.transaction_type).toUpperCase()}</td>
+                        <td className="px-4 py-3 text-center">{format(new Date(userForex.created_at), 'MM/dd/yyyy HH:mm a')}</td>
                       </tr>
                     ))
                   ) : (
@@ -165,4 +185,4 @@ const CryptoTransactions = ({ updateTransactionHistory, setUpdateTransactionHist
 );
 };
 
-export default CryptoTransactions;
+export default ForexTransactions;

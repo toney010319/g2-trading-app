@@ -43,8 +43,8 @@ const BuyStocks = ({ setUpdateBalanceFlag }) => {
       if (success) {
         console.log("Stock purchased successfully:", message);
         setQuantity("");
-        setPrice("Select a stock");
-        setSymbol("Select a stock");
+        setPrice("");
+        setSymbol("");
         setUpdateTransactionHistory(true);
         setUpdateBalanceFlag(true)
       } else {
@@ -191,7 +191,7 @@ const BuyStocks = ({ setUpdateBalanceFlag }) => {
                   )}
 
                   {quantity !== null && !isNaN(parseFloat(quantity)) && (
-                    <div className="text-white bg-azure-950 rounded-md flex justify-center mb-2 font-semibold text-lg ease-in-out duration-300">
+                    <div className="text-white bg-azure-950 rounded-md flex justify-center font-semibold text-lg ease-in-out duration-300">
                       TOTAL: <span className="ml-2 font-bold animate-pulse">${calculateTotalAmount()}</span>
                     </div>
                   )}
@@ -214,7 +214,7 @@ const BuyStocks = ({ setUpdateBalanceFlag }) => {
           </div>
 
           <div className="flex">
-              <StocksMiniPortfolio updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} />
+              <StocksMiniPortfolio updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} setUpdateBalanceFlag={setUpdateBalanceFlag} />
           </div>
       </div>
     </>

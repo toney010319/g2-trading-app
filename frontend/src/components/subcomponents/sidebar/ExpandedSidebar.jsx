@@ -50,7 +50,7 @@ const ExpandedSidebar = () => {
               </div>
             </Link>
           
-            <Link to="portfolio/news">
+            {/* <Link to="portfolio/news">
               <div className="flex flex-row ml-3 hover:underline hover:font-bold underline-offset-4">
               <img src="https://www.svgrepo.com/show/374991/news.svg" 
                 width="20" 
@@ -93,7 +93,7 @@ const ExpandedSidebar = () => {
                   alt="Forex" />
                 <div className="ml-1">Forex</div>
               </div>
-            </Link>
+            </Link> */}
         </section>
 
         <span className="mt-1 border border-black"></span>
@@ -108,14 +108,14 @@ const ExpandedSidebar = () => {
             </div>
           </Link>
 
-          <Link to="stocks/trade">
+          {/* <Link to="stocks/trade">
             <div className="flex flex-row ml-3 hover:underline hover:font-bold underline-offset-4">
               <img src="https://www.svgrepo.com/show/301267/monitor-tv.svg" 
                 width="20" 
                 alt="Trade" />
               <div className="ml-1">Buy/Sell</div>
             </div>
-          </Link>
+          </Link> */}
 
           <Link to="stocks/market">
             <div className="flex flex-row ml-3 hover:underline hover:font-bold underline-offset-4">
@@ -140,14 +140,14 @@ const ExpandedSidebar = () => {
           </div>
         </Link>
 
-        <Link to="crypto/trade">
+        {/* <Link to="crypto/trade">
           <div className="flex flex-row ml-3 hover:underline hover:font-bold underline-offset-4">
             <img src="https://www.svgrepo.com/show/416781/buy-coin-cryptocurrency.svg" 
               width="20" 
               alt="Home" />
             <div className="ml-1">Buy/Sell</div>
           </div>
-        </Link>
+        </Link> */}
 
         <Link to="crypto/market">
           <div className="flex flex-row ml-3 hover:underline hover:font-bold underline-offset-4">
@@ -172,14 +172,14 @@ const ExpandedSidebar = () => {
             </div>
           </Link>
 
-          <Link to="forex/trade">
+          {/* <Link to="forex/trade">
             <div className="flex flex-row ml-3 hover:underline hover:font-bold underline-offset-4">
               <img src="https://www.svgrepo.com/show/483228/dollar-and-yen-exchange-rate.svg" 
                 width="20" 
                 alt="Home" />
               <div className="ml-1">Buy/Sell</div>
             </div>
-          </Link>
+          </Link> */}
 
           <Link to="forex/market">
             <div className="flex flex-row ml-3 hover:underline hover:font-bold underline-offset-4">
