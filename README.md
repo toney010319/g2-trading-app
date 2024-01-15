@@ -145,7 +145,7 @@ Sample Request Body
 ```
 {
     "user_id": "1",
-    "balance": "$200"
+    "balance": "200"
 }
 ```
 Parameters
@@ -160,6 +160,4 @@ Get these Values from the login Response Header
 | Name            | Description              | Required |
 |-----------------|--------------------------|----------|
 | `Authorization` | Bearer-token             | true     |
-| `client`        | client                   | true     |
 | `uid`           | uid                      | true     |
-| `expiry`        | expiry                   | true     |
