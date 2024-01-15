@@ -161,3 +161,33 @@ Get these Values from the login Response Header
 |-----------------|--------------------------|----------|
 | `Authorization` | Bearer-token             | true     |
 | `uid`           | uid                      | true     |
+
+------------------
+## Add Transactions
+``
+HTTP Method: POST
+URL: http://localhost:3000/transactions
+``
+Sample Request Body
+``
+{
+    "user_id": "1",
+    transactionData: {
+        "amount": "200",
+        "type": "deposit" 
+    }
+}
+``
+Parameters
+| Name                    | Description                                                    | Required |
+|-------------------------|----------------------------------------------------------------|----------|
+| `user_id`               | UID of Login User                                              | true     |
+| `amount`                | amount                                                         | true     |
+| `transactionData`       | it is an Object that consests of `amount`, `type`,`date & time`| true     |
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
