@@ -221,3 +221,141 @@ Get these Values from the login Response Header
 |-----------------|--------------------------|----------|
 | `Authorization` | Bearer-token             | true     |
 | `uid`           | user_id                  | true     |
+
+---------------------------
+
+## Transfer Base wallet balance to forex wallet.
+```
+HTTP Method: POST
+URL: http://localhost:3000/add_forex_balance
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "balance": "200"
+}
+```
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+| `balance`    | Amount to Transfer       | true     |
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+
+
+## Transfer Base wallet balance to crypto wallet.
+```
+HTTP Method: POST
+URL: http://localhost:3000/add_crypto_balance
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "balance": "200"
+}
+```
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+| `balance`    | Amount to Transfer       | true     |
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+
+## Transfer Crypto wallet balance to Base wallet.
+```
+HTTP Method: POST
+URL: http://localhost:3000/revert_crypto_balance
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "balance": "200"
+}
+```
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+| `balance`    | Amount to Transfer       | true     |
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+
+## Transfer Stock wallet balance to Base wallet.
+```
+HTTP Method: POST
+URL: http://localhost:3000/revert_stock_balance
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "balance": "200"
+}
+```
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+| `balance`    | Amount to Transfer       | true     |
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Transfer Forex wallet balance to Base wallet.
+```
+HTTP Method: POST
+URL: http://localhost:3000/revert_forex_balance
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "balance": "200"
+}
+```
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+| `balance`    | Amount to Transfer       | true     |
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+---------------------------
+
+
