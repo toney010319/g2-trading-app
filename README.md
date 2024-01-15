@@ -359,3 +359,205 @@ Get these Values from the login Response Header
 ---------------------------
 
 
+---------------------------
+## Get User Transactions.
+```
+HTTP Method: GET
+URL: http://localhost:3000/transactions?user_id=1
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+---------------------------
+## Get  User Stocks.
+```
+HTTP Method: GET
+URL: http://localhost:3000/show_user_stocks?user_id=1
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+---------------------------
+## Get User Cryptos.
+```
+HTTP Method: GET
+URL: http://localhost:3000/show_user_crypto?user_id=1
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+---------------------------
+## Get User Forex.
+```
+HTTP Method: GET
+URL: http://localhost:3000/show_user_forex?user_id=1
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Get All User Assets.
+```
+HTTP Method: GET
+URL: http://localhost:3000/show_all_user_assets?user_id=1
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+
+---------------------------
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Get User Profile.
+```
+HTTP Method: GET
+URL: http://localhost:3000/users?user_id=1
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Get User Balances.
+```
+HTTP Method: GET
+URL: http://localhost:3000/balance?user_id=1
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Get List of Stocks.
+```
+HTTP Method: GET
+URL: http://localhost:3000/stocks_list
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | No       |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Get List of Cryptos.
+```
+HTTP Method: GET
+URL: http://localhost:3000/crypto_list
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | No       |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Get List of Cryptos.
+```
+HTTP Method: GET
+URL: http://localhost:3000/currency_list
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | No       |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+
+
+
+
