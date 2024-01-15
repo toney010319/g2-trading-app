@@ -35,8 +35,8 @@ const AdminNavigationBar = ({ addAlert }) => {
                     </Link>
 
 
-                    <Link to="/dashboard/" className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-500">
-                        Trader Dashboard
+                    <Link className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-500">
+                        Transaction history
                     </Link>
 
                     <div>

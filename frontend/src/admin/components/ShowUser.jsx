@@ -6,6 +6,7 @@ import Loading from "../../components/Loading";
 
 
 const ShowUser = ({ user, onClose }) => {
+
   if (!user) {
     return (
       <div className="flex justify-center w-full h-10">
@@ -13,6 +14,8 @@ const ShowUser = ({ user, onClose }) => {
       </div>
     );
   }
+  console.log(user)
+
   return (
     <>
       <section className="  max-w-screen-xl w-full max-h-screen overflow-scroll container mx-12 p-6 font-mono relative">
@@ -89,17 +92,24 @@ const ShowUser = ({ user, onClose }) => {
                     </tr>
                     <tr>
                       <td colSpan="2" className="text-center py-4">
-                        {user.transaction_history > 0 ? (
-                          user.transaction_history.map((transaction, index) => (
-                            <tr key={index}>
-                              <td className="px-4 py-3 text-sm border">{transaction.id}</td>
-                              <td className="px-4 py-3 text-sm border">{transaction.user_id}</td>
-                              <td className="px-4 py-3 text-sm border">{transaction.balance}</td>
-                              <td className="px-4 py-3 text-sm border">{transaction.created_at}</td>
-                              <td className="px-4 py-3 text-sm border">{transaction.updated_at}</td>
-                            </tr>
-                          ))
-                        ) : (<p>No transaction history</p>)}
+                        {user.transaction_history.length > 0 ? (
+                          <>
+                            <p className="text-md font-semibold text-gray-700 px-4 py-3 border bg-gray-100">Transaction History</p>
+                            {user.transaction_history.map((transaction, index) => (
+                              <tr key={index}>
+                                <td className="px-4 py-3 text-sm border">{transaction.id}</td>
+                                <td className="px-4 py-3 text-sm border">{transaction.user_id}</td>
+                                <td className="px-4 py-3 text-sm border">{transaction.balance}</td>
+                                <td className="px-4 py-3 text-sm border">{transaction.created_at}</td>
+                                <td className="px-4 py-3 text-sm border">{transaction.updated_at}</td>
+                              </tr>
+                            ))}
+                          </>
+                        ) : (
+                          <tr>
+                            <td colSpan="5" className="px-4 py-3 text-sm border">No transaction history</td>
+                          </tr>
+                        )}
                       </td>
                     </tr>
                   </>

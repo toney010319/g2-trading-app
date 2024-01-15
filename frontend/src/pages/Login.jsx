@@ -24,7 +24,8 @@ const Login = ({ addAlert }) => {
     try {
       const res = await axios.post("http://localhost:3000/login", user);
       const role = res?.data?.data?.role
-      setAuth({ role })
+
+      setAuth({ role: [role] })
       return res;
     } catch (error) {
       return error;
