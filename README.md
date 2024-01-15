@@ -92,8 +92,6 @@ _Note: vite, rails s, and mailcatcher will run via concurrently_
 ================
 
 ## User Registration
-------------------
-
 ```
 HTTP Method: POST
 URL: http://localhost:3000/signup
@@ -115,10 +113,11 @@ Parameters
 | `last_name`  | lastname     | true     |
 | `birthday`   | birthday     | true     |
 | `email`      | email        | true     |
------------------------------------------;
 
-### User Login
+
+
 ------------------
+### User Login
 ```
 HTTP Method: POST
 URL: http://localhost:3000/login
@@ -135,4 +134,32 @@ Parameters
 |--------------|--------------|----------|
 | `email`      | email        | true     |
 | `password`   | password     | true     |
------------------------------------------;
+
+------------------
+## Add Balance
+```
+HTTP Method: POST
+URL: http://localhost:3000/add_balance
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "balance": "$200"
+}
+```
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+| `balance`    | balance                  | true     |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `client`        | client                   | true     |
+| `uid`           | uid                      | true     |
+| `expiry`        | expiry                   | true     |
