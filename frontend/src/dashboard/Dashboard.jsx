@@ -43,7 +43,7 @@ const Dashboard = ({ addAlert }) => {
                     <Route path="portfolio/crypto" element={<FolioCrypto />} />
                     <Route path="portfolio/stocks" element={<FolioStocks />} />
                     <Route path="portfolio/forex" element={<FolioForex />} />
-                    <Route path="stocks" element={<BuyStocksLayout /> } />
+                    <Route path="stocks" element={<BuyStocksLayout addAlert={addAlert} />} />
                     <Route path="stocks/trade" element={<BuyStocksLayout />} />
                     <Route path="stocks/market" element={<MarketStocks />} />
                     <Route path="crypto" element={<BuyCryptoLayout />} />
