@@ -68,7 +68,7 @@ const CryptoGains = () => {
 
   return (
     <>
-    <div className="mx-2 bg-white rounded-md shadow-md">
+    <div className="mx-2 bg-white rounded-md shadow-md hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
       <h1 className="text-center font-bold mb-2">Top Crypto Gainers</h1>
       <table className="min-w-full border border-collapse">
         <thead>
@@ -107,7 +107,7 @@ const CryptoGains = () => {
       </table>
     </div>
 
-    <div className="mx-2 bg-white rounded-md shadow-md">
+    <div className="mx-2 bg-white rounded-md shadow-md hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
         <h1 className="text-center font-bold mb-2 ">Top Crypto Losers</h1>
         <table className="min-w-full border border-collapse">
           <thead>

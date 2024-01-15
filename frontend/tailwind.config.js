@@ -21,6 +21,7 @@ export default {
       indigo: colors.indigo,
       yellow: colors.yellow,
       slate: colors.slate,
+      fuchsia: colors.fuchsia,
     
       'azure': {
         50: '#f0f5fe',

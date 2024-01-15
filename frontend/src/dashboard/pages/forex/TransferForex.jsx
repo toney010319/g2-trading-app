@@ -71,7 +71,7 @@ const TransferForex = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
   return (
     <>
       <div className="flex justify-around mt-3 h-96">
-        <div className="bg-gradient-to-b from-azure-950 to-azure-600 rounded-lg ml-4">
+        <div className="bg-gradient-to-b from-azure-950 to-azure-600 rounded-lg ml-4 hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
           <div className="mt-4">
             <LogoDark  />
           </div>
@@ -122,7 +122,7 @@ const TransferForex = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-b from-azure-600 to-azure-950 rounded-lg ml-4">
+        <div className="bg-gradient-to-b from-azure-600 to-azure-950 rounded-lg ml-4 hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
           <div className="mt-4">
             <LogoDark  />
           </div>

@@ -71,7 +71,7 @@ const Login = ({ addAlert }) => {
 
             }
           }}
-          className="justify-center text-center align-center shadow-md border-md rounded-md  bg-gradient-to-b from-azure-300 to-azure-700 m-2 p-5 pl-8 pr-8"
+          className="justify-center text-center align-center shadow-md border-md rounded-md  bg-white m-2 p-5 pl-8 pr-8"
         >
           <Logo />
           <div>
@@ -80,18 +80,18 @@ const Login = ({ addAlert }) => {
                 Email
               </span>
               <input
-                className="rounded-sm"
+                className="rounded-sm border-2 border-gray-200 focus:outline-none focus:border-black focus:ring-black placeholder:italic"
                 type="email"
                 placeholder=" Enter email"
                 name="email"
               />
             </div>
             <div className="flex flex-col mt-1">
-              <span className="flex justify-start mb-1 font-semibold">
+              <span className="flex justify-start mb-1 font-semibold ">
                 Password
               </span>
               <input
-                className="rounded-sm"
+                className="rounded-sm border-2 border-gray-200 focus:outline-none focus:border-black focus:ring-black placeholder:italic"
                 type="password"
                 placeholder=" Enter password"
                 name="password"
@@ -110,20 +110,20 @@ const Login = ({ addAlert }) => {
 
           <div className="flex flex-row justify-center gap-4 mt-2">
             <button
-              className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700"
+              className="text-white px-2 py-1 bg-fuchsia-700 rounded-md hover:bg-fuchsia-900 duration-300 ease-in-out"
               type="submit"
             >
               Login
             </button>
             <button
-              className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700"
+              className="text-white px-2 py-1 bg-fuchsia-700 rounded-md hover:bg-fuchsia-900 duration-300 ease-in-out"
               onClick={handleRegister}
             >
               Register
             </button>
           </div>
           <div>
-            <button className="flex justify-end w-full mt-2 text-sm text-blue-200 hover:text-blue-400 hover:underline">
+            <button className="flex justify-end w-full mt-2 text-sm hover:underline underline-offset-4">
               Forgot Password
             </button>
           </div>

@@ -102,12 +102,12 @@ const HomeForex = () => {
   return (
     <>
     {assets.length === 0 ? (
-      <div className="flex-1 shadow-md rounded-md px-10 py-7 my-2 bg-white">
+      <div className="flex-1 shadow-md rounded-md px-10 py-7 my-2 bg-white hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
         <span className="flex justify-center mb-1 font-bold text-lg">Currencies</span>
         <p className="text-center">No Assets</p>
       </div>
     ) : (
-      <div className="flex-1 shadow-md rounded-md px-10 py-7 my-2 bg-white">
+      <div className="flex-1 shadow-md rounded-md px-10 py-7 my-2 bg-white hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
         <span className="flex justify-center mb-1 font-bold text-lg">Currencies</span>
         <Pie {...config} />
       </div>

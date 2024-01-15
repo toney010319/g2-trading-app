@@ -156,7 +156,7 @@ const StocksMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
           />
         )}
   
-      <div className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden">
+      <div className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden marker:">
         <section className="container mx-auto p-2 font-mono">
           <div>
             <div className="flex justify-center">

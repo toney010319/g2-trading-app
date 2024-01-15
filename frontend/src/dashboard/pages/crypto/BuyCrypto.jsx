@@ -128,7 +128,7 @@ const BuyCrypto = ({ setUpdateBalanceFlag }) => {
           </div>
         </div>
         ) : (
-          <div className="mt-1 rounded-lg p-3 flex flex-col bg-gradient-to-b from-azure-950 to-azure-600">
+          <div className="mt-1 rounded-lg p-3 flex flex-col bg-gradient-to-b from-azure-950 to-azure-600 hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
             <div className="mb-4">
               <label className="text-white ml-1 block text-lg font-bold">
                 Select Crypto:
