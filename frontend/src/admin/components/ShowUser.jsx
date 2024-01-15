@@ -106,9 +106,8 @@ const ShowUser = ({ user, onClose }) => {
                             ))}
                           </>
                         ) : (
-                          <tr>
-                            <td colSpan="5" className="px-4 py-3 text-sm border">No transaction history</td>
-                          </tr>
+                          <p className="text-md font-semibold text-gray-700 px-4 py-3 border bg-gray-100">No Transaction History</p>
+
                         )}
                       </td>
                     </tr>

@@ -47,6 +47,7 @@ const AdminVerifcation = ({ addAlert }) => {
     return (
         <div>
             <>
+                <p className=" flex justify-center  text-lg font-bold w-full mt-5">Verify Users</p>
                 <section className="container mx-auto p-6 font-mono">
                     <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
                         <div className="w-full overflow-x-auto">
