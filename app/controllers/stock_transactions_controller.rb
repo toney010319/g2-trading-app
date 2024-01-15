@@ -4,7 +4,7 @@ class StockTransactionsController < ApplicationController
     quantity = params[:quantity]
     price = params[:price]
     symbol = params[:symbol]
-
+    @transaction_number = rand(100_000..999_999).to_s
     total_cost = quantity.to_i * price.to_f
 
     stock = Stock.find_by(symbol: symbol)
@@ -22,7 +22,8 @@ class StockTransactionsController < ApplicationController
         price: price.to_f,
         symbol: symbol,
         transaction_type: 'buy',
-        asset: stock
+        asset: stock,
+        transaction_number: @transaction_number
       )
       render json: { success: true, message: 'Stock purchased successfully' }
     else
@@ -35,7 +36,7 @@ class StockTransactionsController < ApplicationController
     quantity = params[:quantity].to_i
     price = params[:price].to_f
     symbol = params[:symbol]
-
+    @transaction_number = rand(100_000..999_999).to_s
     total_sale_value = quantity * price
 
     stock = Stock.find_by(symbol: symbol)
@@ -53,7 +54,8 @@ class StockTransactionsController < ApplicationController
         price: price,
         symbol: symbol,
         transaction_type: 'sell',
-        asset: stock
+        asset: stock,
+        transaction_number: @transaction_number
       )
       render json: { success: true, message: 'Stock sold successfully' }
     else

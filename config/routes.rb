@@ -56,6 +56,7 @@ Rails.application.routes.draw do
   get 'show_user_stocks', to:'stock_transactions#show_user_stocks'
   get 'show_user_crypto', to:'crypto_transactions#show_user_crypto'
   get 'show_user_forex', to:'forex_transactions#show_user_forex'
+  get 'all_users_transactions', to:'admins#transactions'
 
   # Defines the root path route ("/")
   # root "posts#index"

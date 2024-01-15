@@ -132,3 +132,12 @@ export const createUser = async (event) => {
       return error
     }
   }
+
+  export const getTransactions = async () => {
+    try {
+      const res = await axios.get('http://localhost:3000/all_users_transactions')
+      return res.data
+    } catch (error) {
+      return error
+    }
+  }

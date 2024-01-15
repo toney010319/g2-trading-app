@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import AdminVerifcation from './AdminVerifcation';
 import AdminDashboardHome from './AdminDashboardHome';
 import Dashboard from '../dashboard/Dashboard';
+import TransactionLogs from './components/TransactionLogs';
 const AdminDashboard = ({ addAlert }) => {
   useEffect(() => {
     const initiateAuthorization = () => {
@@ -22,6 +23,7 @@ const AdminDashboard = ({ addAlert }) => {
         <Routes>
           <Route path="/" element={<AdminDashboardHome addAlert={addAlert} />} />
           <Route path="/verification" element={<AdminVerifcation addAlert={addAlert} />} />
+          <Route path="/Transaction" element={<TransactionLogs addAlert={addAlert} />} />
           <Route path="/dashboard" element={<Dashboard addAlert={addAlert} />} />
 
 
