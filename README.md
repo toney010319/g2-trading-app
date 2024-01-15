@@ -538,7 +538,7 @@ Get these Values from the login Response Header
 | `uid`           | user_id                  | true     |
 
 ---------------------------
-## Get List of Cryptos.
+## Get List of Forex.
 ```
 HTTP Method: GET
 URL: http://localhost:3000/currency_list
@@ -556,6 +556,197 @@ Get these Values from the login Response Header
 |-----------------|--------------------------|----------|
 | `Authorization` | Bearer-token             | true     |
 | `uid`           | user_id                  | true     |
+
+
+---------------------------
+## Buy Stocks
+```
+HTTP Method: POST
+URL: http://localhost:3000/buy_stocks
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "quantity": "10",
+    "price": "51",
+    "symbol": "AMZN"
+}
+```
+Parameters
+| Name         |             Description              | Required |
+|--------------|--------------------------------------|----------|
+| `user_id`    | UID of Login User                    | Yes      |
+| `quantity`   | the number of stock you want to buy  | Yes      |
+| `price`      | the amount of stock you want to buy  | Yes      |
+| `symbol`     | the symbol of stock you want to buy  | Yes      |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Buy Cryptos
+```
+HTTP Method: POST
+URL: http://localhost:3000/buy_crypto
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "quantity": "10",
+    "price": "51",
+    "symbol": "BTC"
+}
+```
+Parameters
+| Name         |             Description              | Required |
+|--------------|--------------------------------------|----------|
+| `user_id`    | UID of Login User                    | Yes      |
+| `quantity`   | the number of stock you want to buy  | Yes      |
+| `price`      | the amount of stock you want to buy  | Yes      |
+| `symbol`     | the symbol of stock you want to buy  | Yes      |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Buy Forex
+```
+HTTP Method: POST
+URL: http://localhost:3000/buy_forex
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "quantity": "10",
+    "price": "51",
+    "symbol": "PHP"
+}
+```
+Parameters
+| Name         |             Description              | Required |
+|--------------|--------------------------------------|----------|
+| `user_id`    | UID of Login User                    | Yes      |
+| `quantity`   | the number of stock you want to buy  | Yes      |
+| `price`      | the amount of stock you want to buy  | Yes      |
+| `symbol`     | the symbol of stock you want to buy  | Yes      |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Sell Stocks
+```
+HTTP Method: POST
+URL: http://localhost:3000/sell_stocks
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "quantity": "10",
+    "price": "51",
+    "symbol": "AMZN"
+}
+```
+Parameters
+| Name         |             Description              | Required |
+|--------------|--------------------------------------|----------|
+| `user_id`    | UID of Login User                    | Yes      |
+| `quantity`   | the number of stock you want to buy  | Yes      |
+| `price`      | the amount of stock you want to buy  | Yes      |
+| `symbol`     | the symbol of stock you want to buy  | Yes      |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Sell Forex
+```
+HTTP Method: POST
+URL: http://localhost:3000/sell_forex
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "quantity": "10",
+    "price": "51",
+    "symbol": "PHP"
+}
+```
+Parameters
+| Name         |             Description              | Required |
+|--------------|--------------------------------------|----------|
+| `user_id`    | UID of Login User                    | Yes      |
+| `quantity`   | the number of stock you want to buy  | Yes      |
+| `price`      | the amount of stock you want to buy  | Yes      |
+| `symbol`     | the symbol of stock you want to buy  | Yes      |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Sell Cryptos
+```
+HTTP Method: POST
+URL: http://localhost:3000/sell_crypto
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "quantity": "10",
+    "price": "51",
+    "symbol": "BTC"
+}
+```
+Parameters
+| Name         |             Description              | Required |
+|--------------|--------------------------------------|----------|
+| `user_id`    | UID of Login User                    | Yes      |
+| `quantity`   | the number of stock you want to buy  | Yes      |
+| `price`      | the amount of stock you want to buy  | Yes      |
+| `symbol`     | the symbol of stock you want to buy  | Yes      |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+
+
+
 
 
 
