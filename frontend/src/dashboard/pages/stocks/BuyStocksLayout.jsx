@@ -3,14 +3,14 @@ import TransferStocks from "./TransferStocks";
 import BuyStocks from "./BuyStocks";
 import { useState } from "react";
 
-const BuyStocksLayout = () => {
+const BuyStocksLayout = ({ addAlert }) => {
   const [updateBalanceFlag, setUpdateBalanceFlag] = useState(false);
 
   return (
     <>
       <div className="flex justify-around mt-3 h-96">
         <div className="flex">
-          <TransferStocks updateBalanceFlag={updateBalanceFlag} setUpdateBalanceFlag={setUpdateBalanceFlag} />
+          <TransferStocks updateBalanceFlag={updateBalanceFlag} setUpdateBalanceFlag={setUpdateBalanceFlag} addAlert={addAlert} />
         </div>
 
         <div className="flex">

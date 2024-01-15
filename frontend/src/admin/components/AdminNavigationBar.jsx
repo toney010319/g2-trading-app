@@ -2,14 +2,19 @@ import { logoutUser } from "../../lib/api";
 import Logo from "../../assets/Logo";
 import { Link, useNavigate } from "react-router-dom";
 import AdminVerifcation from "../AdminVerifcation";
+import useAuth from "../../context/hooks/useAuth";
+
 // eslint-disable-next-line react/prop-types
 const AdminNavigationBar = ({ addAlert }) => {
     // const [balance, setBalance] = useState(500);
     const navigate = useNavigate();
+    const { setAuth } = useAuth()
+
     const handleLogout = (event) => {
         logoutUser(event)
         document.cookie = 'token=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
         document.cookie = 'user_id=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+        setAuth({})
         navigate('/')
         addAlert('success', 'You have successfully logged out')
 
@@ -30,8 +35,8 @@ const AdminNavigationBar = ({ addAlert }) => {
                     </Link>
 
 
-                    <Link to="/dashboard/" className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-500">
-                        Trader Dashboard
+                    <Link className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-500">
+                        Transaction history
                     </Link>
 
                     <div>

@@ -1,13 +1,14 @@
 import { Navigate, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
-const RequireAuth = () => {
+const RequireAuth = ({ allowedRoles }) => {
     const { auth } = useAuth();
 
     console.log("auth", auth)
     return (
 
-        auth?.role ? <Outlet />
+        auth?.role?.find(role => allowedRoles?.includes(role))
+            ? <Outlet />
             : <Navigate to="/" />
     );
 }

@@ -48,14 +48,15 @@ const App = () => {
                 <Route path="/" element={<Login addAlert={addAlert} />} />
                 <Route path="/register" element={<Registration addAlert={addAlert} />} />
                 {/* TRADER ROUTES */}
-                <Route element={<RequireAuth />}>
+                <Route element={<RequireAuth allowedRoles={["Trader"]} />}>
                   <Route path="/dashboard/*" element={<Dashboard addAlert={addAlert} />} />.
                   <Route path="/deposit" element={<Deposit addAlert={addAlert} />} />
                   <Route path="/my-profile" element={<MyProfile addAlert={addAlert} />} />
                 </Route>
                 {/* ADMIN ROUTES */}
-
-                <Route path="/admin/*" element={<AdminDashboard addAlert={addAlert} />} />
+                <Route element={<RequireAuth allowedRoles={["Admin"]} />}>
+                  <Route path="/admin/*" element={<AdminDashboard addAlert={addAlert} />} />
+                </Route>
               </Routes>
             </AuthProvider>
           </BrowserRouter>

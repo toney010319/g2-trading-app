@@ -79,6 +79,7 @@ export const addBalance = async (balance, user_id, transactionData) => {
       transactionResponse: transactionResponse.data,
     };
   } catch (error) {
+    console.log("error",error)
     return error;
   }
 };
@@ -92,7 +93,7 @@ export const addStockBalance = async (balance, user_id, transactionData) => {
         user_id,
       }
     );
-
+    
     const transactionResponse = await axios.post(
       "http://localhost:3000/transactions",
       {
@@ -101,7 +102,7 @@ export const addStockBalance = async (balance, user_id, transactionData) => {
         ...transactionData,
       }
     );
-
+     
     return {
       addBalanceResponse: addStockBalanceResponse.data,
       transactionResponse: transactionResponse.data,
