@@ -35,7 +35,7 @@ const AdminNavigationBar = ({ addAlert }) => {
                     </Link>
 
 
-                    <Link className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-500">
+                    <Link to="/admin/transaction" className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-500">
                         Transaction history
                     </Link>
 

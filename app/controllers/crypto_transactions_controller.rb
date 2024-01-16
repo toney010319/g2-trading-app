@@ -4,7 +4,7 @@ class CryptoTransactionsController < ApplicationController
     quantity = params[:quantity]
     price = params[:price]
     symbol = params[:symbol]
-
+    @transaction_number = rand(100_000..999_999).to_s
     total_cost = quantity.to_i * price.to_f
 
     crypto = Cryptocurrency.find_by(symbol: symbol)
@@ -22,8 +22,9 @@ class CryptoTransactionsController < ApplicationController
         price: price.to_f,
         symbol: symbol,
         transaction_type: 'buy',
-        asset: crypto
-      )
+        asset: crypto,
+        transaction_number: @transaction_number
+              )
       render json: { success: true, message: 'Crypto purchased successfully' }
     else
       render json: { success: false, error: result[:error] }, status: :unprocessable_entity
@@ -35,7 +36,7 @@ class CryptoTransactionsController < ApplicationController
     quantity = params[:quantity].to_i
     price = params[:price].to_f
     symbol = params[:symbol]
-
+    @transaction_number = rand(100_000..999_999).to_s
     total_sale_value = quantity * price
 
     crypto = Cryptocurrency.find_by(symbol: symbol)
@@ -53,7 +54,8 @@ class CryptoTransactionsController < ApplicationController
         price: price,
         symbol: symbol,
         transaction_type: 'sell',
-        asset: crypto
+        asset: crypto,
+        transaction_number: @transaction_number
       )
       render json: { success: true, message: 'Crypto sold successfully' }
     else

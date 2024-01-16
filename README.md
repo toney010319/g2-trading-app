@@ -10,6 +10,7 @@
 - [Description](#description)
 - [Dependencies](#dependencies)
 - [User Stories](#user-stories)
+- [App API](#app-api)
 
 ## Contributors
 
@@ -87,7 +88,7 @@ _Note: vite, rails s, and mailcatcher will run via concurrently_
 
 
 
-## Trading App API
+## App API
 
 ================
 

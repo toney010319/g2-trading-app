@@ -70,4 +70,5 @@ before_action :authenticate_user!, only: [:create, :index, :show]
     render json: @user_assets.to_json(include: :asset)
   end
 
+ 
 end
