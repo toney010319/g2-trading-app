@@ -30,7 +30,7 @@ const App = () => {
   return (
     <>
       <div className="relative">
-        <div className="bg-gradient-to-b from-fuchsia-700 to-fuchsia-950">
+        <div className="bg-gradient-to-b from-azure-300 to-azure-700">
           <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
             {alerts.map((alert, index) => (
               <Alertbox
