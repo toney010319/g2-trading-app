@@ -19,7 +19,7 @@ const BuyStocksLayout = ({ addAlert }) => {
       </div>
 
       <div className="flex p-4">
-        <BuyStocks updateBalanceFlag={updateBalanceFlag} setUpdateBalanceFlag={setUpdateBalanceFlag} />
+        <BuyStocks updateBalanceFlag={updateBalanceFlag} setUpdateBalanceFlag={setUpdateBalanceFlag} addAlert={addAlert} />
       </div>
     </>
   );

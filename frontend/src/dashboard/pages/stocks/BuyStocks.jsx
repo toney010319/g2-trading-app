@@ -8,7 +8,7 @@ import Loading from "../../../components/Loading";
 import StocksMiniPortfolio from "./StocksMiniPortfolio";
 import { getImageLinkStocks } from "../../../assets/Icons";
 
-const BuyStocks = ({ setUpdateBalanceFlag }) => {
+const BuyStocks = ({ setUpdateBalanceFlag, addAlert }) => {
   const user_id = document.cookie.split("user_id=")[1];
   const [symbol, setSymbol] = useState("");
   const [price, setPrice] = useState("");
@@ -42,16 +42,18 @@ const BuyStocks = ({ setUpdateBalanceFlag }) => {
         symbol
       );
       if (success) {
-        console.log("Stock purchased successfully:", message);
+        addAlert('success', `SUCCESSFULLY PURCHASED`)
         setQuantity("");
         setPrice("");
         setSymbol("");
         setUpdateTransactionHistory(true);
         setUpdateBalanceFlag(true)
       } else {
+        addAlert('error', `FAILED TO PURCHASE`)
         console.error("Error purchasing stocks:", message);
       }
       } catch (error) {
+        addAlert('error', `FAILED TO PURCHASE`)
         console.error("Error purchasing stocks:", error);
       }
   };
@@ -167,7 +169,7 @@ const BuyStocks = ({ setUpdateBalanceFlag }) => {
           </div>
 
           <div className="flex">
-              <StocksMiniPortfolio updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} setUpdateBalanceFlag={setUpdateBalanceFlag} />
+              <StocksMiniPortfolio updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} setUpdateBalanceFlag={setUpdateBalanceFlag} addAlert={addAlert} />
           </div>
       </div>
     </>

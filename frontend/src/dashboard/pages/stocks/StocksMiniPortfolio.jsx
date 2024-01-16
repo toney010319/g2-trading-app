@@ -4,7 +4,7 @@ import SellStocks from "./modals/SellStock";
 import Loading from "../../../components/Loading";
 import { getImageLinkStocks } from "../../../assets/Icons";
 
-const StocksMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHistory, setUpdateBalanceFlag }) => {
+const StocksMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHistory, setUpdateBalanceFlag, addAlert }) => {
     const user_id = document.cookie.split("user_id=")[1];
     const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -103,7 +103,7 @@ const StocksMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
       {selectedAsset && (
           <SellStocks
             handleClose={closeModal}
-            addAlert={() => {}}
+            addAlert={addAlert}
             selectedAsset={selectedAsset}
             setUpdateBalanceFlag={setUpdateBalanceFlag}
           />

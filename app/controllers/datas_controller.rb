@@ -1,4 +1,5 @@
 class DatasController < ApplicationController
+  before_action :authenticate_user!
   def show_stocks
     render json: Stock.all.order(:name)
   end

@@ -1,5 +1,5 @@
 class BalancesController < ApplicationController
-  ## before_action :authenticate_user!
+  before_action :authenticate_user!
 
 def add_balance
   user = User.find(params[:user_id])
@@ -16,13 +16,13 @@ def add_stock_balance
  if amount.blank?
   render json: {
       status: { code: 422, message: "Amount is required" }
-    } ,status: :unprocessable_entity 
+    } ,status: :unprocessable_entity
   return
 end
 if amount <= 0
   render json: {
       status: { code: 422, message: "Invalid Transfer Amount" }
-    },status: :unprocessable_entity 
+    },status: :unprocessable_entity
   return
 end
 
@@ -33,14 +33,14 @@ end
   if user.balance.balance < amount
     render json: {
       status: { code: 422, message: "Not enough Balance to transfer." }
-    } ,status: :unprocessable_entity 
+    } ,status: :unprocessable_entity
     return
   end
   user.balance.stocks += amount_usd
   user.balance.balance -= amount
 
   if user.balance.save && (!user.username_changed? || user.save)
-   
+
     render json: {
       message: "Transfer successful",
       stocks_balance: user.balance.stocks,
