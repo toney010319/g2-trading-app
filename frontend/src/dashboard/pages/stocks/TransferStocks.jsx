@@ -57,12 +57,10 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag, addAlert }) =
         usdAmount,
         user_id
       );
-      console.log(
-        "Transfer from stock to wallet successful:",
-        revertBalanceResponse
-      );
+      addAlert('success', `SUCCESSFUL TRANSFER`)
       fetchUserBalance();
     } catch (error) {
+      addAlert('error', `FAILED TRANSFER`)
       console.error("Error transferring from stock to wallet:", error);
     }
   };

@@ -12,6 +12,7 @@ const DashboardLayout = ({ children, addAlert }) => {
         }
     };
     initiateAuthorization();
+    
 }, []);
   return (
     <div className="flex h-screen">
