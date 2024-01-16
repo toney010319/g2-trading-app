@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { getForexList } from "../../../../lib/api";
 import Loading from "../../../../components/Loading";
+import { getImageLinkForex } from "../../../../assets/Icons";
 
 const BuyForexMarket = () => {
     const [forexList, setForexList] = useState([]);
@@ -22,61 +23,6 @@ const BuyForexMarket = () => {
     useEffect(() => {
         fetchStockListMemoized();
     }, [fetchStockListMemoized]);
-
-    const getImageLink = (symbol) => {
-      switch (symbol) {
-        case 'PHP':
-          return 'https://flagicons.lipis.dev/flags/4x3/ph.svg';
-        case 'EUR':
-          return 'https://flagicons.lipis.dev/flags/4x3/eu.svg';
-        case 'JPY':
-          return 'https://flagicons.lipis.dev/flags/4x3/jp.svg';
-        case 'GBP':
-          return 'https://flagicons.lipis.dev/flags/4x3/gb.svg';
-        case 'AUD':
-          return 'https://flagicons.lipis.dev/flags/4x3/au.svg'; 
-        case 'CAD':
-          return 'https://flagicons.lipis.dev/flags/4x3/ca.svg';   
-        case 'CHF':
-          return 'https://flagicons.lipis.dev/flags/4x3/ch.svg';  
-        case 'CNY':
-          return 'https://flagicons.lipis.dev/flags/4x3/cn.svg'; 
-        case 'SEK':
-          return 'https://flagicons.lipis.dev/flags/4x3/se.svg'; 
-        case 'MXN':
-          return 'https://flagicons.lipis.dev/flags/4x3/mx.svg';  
-        case 'NZD':
-          return 'https://flagicons.lipis.dev/flags/4x3/nz.svg';  
-        case 'SGD':
-          return 'https://flagicons.lipis.dev/flags/4x3/sg.svg';  
-        case 'HKD':
-          return 'https://flagicons.lipis.dev/flags/4x3/hk.svg';  
-        case 'NOK':
-          return 'https://flagicons.lipis.dev/flags/4x3/no.svg';  
-        case 'KRW':
-          return 'https://flagicons.lipis.dev/flags/4x3/kr.svg';  
-        case 'TRY':
-          return 'https://flagicons.lipis.dev/flags/4x3/tr.svg'; 
-        case 'INR':
-          return 'https://flagicons.lipis.dev/flags/4x3/in.svg';  
-        case 'RUB':
-          return 'https://flagicons.lipis.dev/flags/4x3/ru.svg';  
-        case 'BRL':
-          return 'https://flagicons.lipis.dev/flags/4x3/br.svg';  
-        case 'ZAR':
-          return 'https://flagicons.lipis.dev/flags/4x3/za.svg';  
-        case 'DKK':
-          return 'https://flagicons.lipis.dev/flags/4x3/dk.svg';  
-        case 'TWD':
-          return 'https://flagicons.lipis.dev/flags/4x3/tw.svg';  
-        case 'PLN':
-        return 'https://flagicons.lipis.dev/flags/4x3/pl.svg';  
-        case 'THB':
-          return 'https://flagicons.lipis.dev/flags/4x3/th.svg';  
-        case 'MYR':
-        return 'https://flagicons.lipis.dev/flags/4x3/my.svg';    
-        }
-      };
 
     const getChangesStyle = (changesPercentage) => {
     return changesPercentage < 0 ? 'text-red-500' : 'text-green-500';
@@ -126,7 +72,7 @@ return(
                           <div>
                             <div className="flex font-semibold text-black">
                                     <span>
-                                        <img className="rounded-full w-5" src={getImageLink(data.symbol)} alt={data.symbol} />
+                                        <img className="rounded-full w-5" src={getImageLinkForex(data.symbol)} alt={data.symbol} />
                                     </span>
                                     <span className="ml-1">{data.name}</span>
                             </div>
