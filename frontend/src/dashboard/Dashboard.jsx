@@ -32,7 +32,7 @@ const Dashboard = ({ addAlert }) => {
                     <Route path="/" element={<DashboardHome />} />
                     <Route path="stocks" element={<BuyStocksLayout addAlert={addAlert} />} />
                     <Route path="stocks/market" element={<MarketStocks />} />
-                    <Route path="crypto" element={<BuyCryptoLayout />} />
+                    <Route path="crypto" element={<BuyCryptoLayout addAlert={addAlert} />} />
                     <Route path="crypto/market" element={<MarketCrypto />} />
                     <Route path="forex" element={<BuyForexLayout />} />
                     <Route path="forex/market" element={<MarketForex />} />

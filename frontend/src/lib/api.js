@@ -128,12 +128,9 @@ export const addCryptoBalance = async (balance, user_id, transactionData) => {
       }
     );
 
-    return {
-      addBalanceResponse: addStockBalanceResponse.data,
-      transactionResponse: transactionResponse.data,
-    };
+    return addStockBalanceResponse.data
   } catch (error) {
-    return error;
+    return error?.response?.data
   }
 };
 
@@ -208,12 +205,9 @@ export const revertCryptoBalance = async (balance, user_id, transactionData) => 
       }
     );
 
-    return {
-      revertBalanceResponse: revertStockBalanceResponse.data,
-      transactionResponse: transactionResponse.data,
-    };
+    return revertStockBalanceResponse.data
   } catch (error) {
-    return error;
+    return error?.response?.data
   }
 };
 
