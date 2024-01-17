@@ -2,15 +2,42 @@
 <html>
 <head>
   <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    h1 {
+      color: #3498db;
+    }
+
+    p {
+      margin-bottom: 16px;
+    }
+
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
+
 <body>
   <h1>Account Approval</h1>
-  <p>Hello <%= @user.username %>,</p>
-  <p>Your account has been successfully approved! You can now log in and start using our services.</p>
-  <p>To log in to your account, please follow the link below:</p>
-  <p><a href="http://127.0.0.1:5173/">Log in to your account</a></p>
-  <p>Thank you for choosing our services!</p>
+  <p>Hello <span style="font-weight: bold"><%= @user.username %><span>,</p>
+  <p>Your account has been successfully approved! You are now part of the Stellar Markets community.</p>
+  <p>To access your account and explore our services, simply click the button below:</p>
+  <p><a href="http://localhost:5173/" style="display:inline-block; padding: 10px 20px; background-color: #3498db; color: #fff; border-radius: 5px; text-decoration: none;">Log in to your account</a></p>
+  <p>Feel free to reach out if you have any questions or need assistance. We're here to help!</p>
+  <p>Thank you for choosing Stellar Markets!</p>
   <p>Sincerely,</p>
-  <p>stellarmarkets Team</p>
+  <p>The Stellarmarkets Team</p>
 </body>
+
 </html>
