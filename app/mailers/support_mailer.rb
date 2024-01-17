@@ -1,6 +1,6 @@
-class SupportMailer < Devise::Mailer   
+class SupportMailer < Devise::Mailer
 
-default to: 'adminstellarmarkets.com' 
+default to: 'admin@stellarmarkets.com'
 
   def contact_support_email(user, message,subject)
     @user = user
