@@ -153,12 +153,9 @@ export const addForexBalance = async (balance, user_id, transactionData) => {
       }
     );
 
-    return {
-      addForexResponse: addForexBalanceResponse.data,
-      transactionResponse: transactionResponse.data,
-    };
+    return addForexBalanceResponse.data
   } catch (error) {
-    return error;
+    return error?.response?.data
   }
 };
 
@@ -230,12 +227,9 @@ export const revertForexBalance = async (balance, user_id, transactionData) => {
       }
     );
 
-    return {
-      revertForexResponse: revertForexBalanceResponse.data,
-      transactionResponse: transactionResponse.data,
-    };
+    return revertForexBalanceResponse.data
   } catch (error) {
-    return error;
+    return error?.response?.data
   }
 };
 
