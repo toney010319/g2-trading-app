@@ -1,99 +1,106 @@
 import { useState, useEffect } from "react";
 import { getProfile } from "../../../lib/api";
-const Support = () => {
+import { ContactSupport } from "../../../lib/adminapi";
+const Support = ({ addAlert }) => {
     const user_id = document.cookie.split('user_id=')[1];
-    const [profile, setProfile ] = useState({});
+    const [profile, setProfile] = useState({});
     const [message, setMessage] = useState('');
     const [subject, setSubject] = useState('');
 
 
     const fetchProfile = async () => {
         try {
-        let response = await getProfile(user_id);
-        setProfile(response);
-        console.log(response)
+            let response = await getProfile(user_id);
+            setProfile(response);
+            console.log(response)
         } catch (error) {
-        console.error('Error fetching profile:', error);
+            console.error('Error fetching profile:', error);
         }
     };
 
-  const handleSubmit = () => {
-    console.log('patawad pre state yung form ko ayaw ko ng e.preventdefault haha')
-  }
+    const handleSubmit = async () => {
+        const res = await ContactSupport(message, subject, profile.id)
+        console.log("res", res)
+        if (res?.status == "200") {
+            addAlert('success', res?.data?.message)
 
-  useEffect(() => {
-    fetchProfile();
-  }, []);
+        }
+        else (addAlert('error', res?.response?.data?.status?.message))
+    }
+
+    useEffect(() => {
+        fetchProfile();
+    }, []);
 
 
     return (
-    <>
-        <div className="flex items-center justify-center p-12">
-            <div className="mx-auto w-full max-w-[550px] bg-white p-10 rounded-md shadow-lg">
+        <>
+            <div className="flex items-center justify-center p-12">
+                <div className="mx-auto w-full max-w-[550px] bg-white p-10 rounded-md shadow-lg">
                     <span className="flex justify-center w-full text-3xl font-bold">Contact Us</span>
                     <span className="flex italic w-full justify-center text-xs mt-1">If you have any complaints or suggestions please fill out the form</span>
                     <div className="mb-5">
                         <label
-                        className="mb-3 block text-base font-medium"
+                            className="mb-3 block text-base font-medium"
                         >
-                        Full Name
+                            Full Name
                         </label>
                         <input
-                        value={`${profile.first_name} ${profile.middle_name} ${profile.last_name}`}
-                        className="cursor-not-allowed w-full rounded-md border  bg-white py-3 px-6 text-base font-medium  focus:shadow-md"
-                        disabled
+                            value={`${profile.first_name} ${profile.middle_name} ${profile.last_name}`}
+                            className="cursor-not-allowed w-full rounded-md border  bg-white py-3 px-6 text-base font-medium  focus:shadow-md"
+                            disabled
                         />
                     </div>
                     <div className="mb-5">
                         <label
-                        className="mb-3 block text-base font-medium"
+                            className="mb-3 block text-base font-medium"
                         >
-                        Email Address
+                            Email Address
                         </label>
                         <input
-                        value={profile.email}
-                        placeholder="example@domain.com"
-                        className="cursor-not-allowed w-full rounded-md border  bg-white py-3 px-6 text-base font-medium  outline-none  focus:shadow-md"
-                        disabled
+                            value={profile.email}
+                            placeholder="example@domain.com"
+                            className="cursor-not-allowed w-full rounded-md border  bg-white py-3 px-6 text-base font-medium  outline-none  focus:shadow-md"
+                            disabled
                         />
                     </div>
                     <div className="mb-5">
                         <label
-                        className="mb-3 block text-base font-medium"
+                            className="mb-3 block text-base font-medium"
                         >
-                        Subject
+                            Subject
                         </label>
                         <input
-                        value={subject}
-                        onChange={(e) => setSubject(e.target.value)}
-                        placeholder="Enter your subject"
-                        className="w-full rounded-md border  bg-white py-3 px-6 text-base font-medium outline-none focus:shadow-md"
+                            value={subject}
+                            onChange={(e) => setSubject(e.target.value)}
+                            placeholder="Enter your subject"
+                            className="w-full rounded-md border  bg-white py-3 px-6 text-base font-medium outline-none focus:shadow-md"
                         />
                     </div>
                     <div className="mb-5">
                         <label
-                        className="mb-3 block text-base font-medium"
+                            className="mb-3 block text-base font-medium"
                         >
-                        Message
+                            Message
                         </label>
                         <textarea
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        placeholder="Type your message"
-                        className="w-full resize-none rounded-md border  bg-white py-3 px-6 text-base font-medium outline-none focus:shadow-md"
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            placeholder="Type your message"
+                            className="w-full resize-none rounded-md border  bg-white py-3 px-6 text-base font-medium outline-none focus:shadow-md"
                         ></textarea>
                     </div>
                     <div>
                         <button
-                        className="hover:shadow-form rounded-md bg-azure-500 hover:bg-azure-700 py-3 px-8 text-base font-semibold text-white outline-none"
-                        onClick={handleSubmit}
+                            className="hover:shadow-form rounded-md bg-azure-500 hover:bg-azure-700 py-3 px-8 text-base font-semibold text-white outline-none"
+                            onClick={handleSubmit}
                         >
-                        Submit
+                            Submit
                         </button>
                     </div>
+                </div>
             </div>
-        </div>
-    </>
+        </>
     )
 }
 

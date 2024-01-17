@@ -6,7 +6,7 @@ import {
 } from "../../../lib/api";
 import LogoDark from "../../../assets/LogoDark";
 
-const TransferCrypto = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
+const TransferCrypto = ({ updateBalanceFlag, setUpdateBalanceFlag, addAlert }) => {
   const [transferAmount, setTransferAmount] = useState("");
   const [stockAmount, setStockAmount] = useState("");
   const [balance, setBalance] = useState("");
@@ -31,14 +31,18 @@ const TransferCrypto = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
 
   const handleTransferToCrypto = async () => {
     try {
-      const { addBalanceResponse } = await addCryptoBalance(
+      const res = await addCryptoBalance(
         transferAmount,
         user_id
       );
-      console.log(
-        "Transfer from wallet to stock successful:",
-        addBalanceResponse
-      );
+      console.log("Transfer from wallet to stock unsuccessful:", res)
+      if (res?.status == 200) {
+        addAlert('success', `${res?.message}`)
+
+      }
+      else {
+        addAlert('error', `${res?.status?.message}`)
+      }
       fetchUserBalance();
       setTransferAmount("");
     } catch (error) {
@@ -48,20 +52,23 @@ const TransferCrypto = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
 
   const handleTransferToWallet = async () => {
     try {
-      const { revertBalanceResponse } = await revertCryptoBalance(
+      const res = await revertCryptoBalance(
         usdAmount,
         user_id
       );
-      console.log(
-        "Transfer from stock to wallet successful:",
-        revertBalanceResponse
-      );
+      if (res?.status == 200) {
+        addAlert('success', `${res?.message}`)
+
+      }
+      else {
+        addAlert('error', `${res?.status?.message}`)
+      }
       fetchUserBalance();
     } catch (error) {
       console.error("Error transferring from stock to wallet:", error);
     }
   };
-  
+
 
   useEffect(() => {
     fetchUserBalance();
@@ -73,7 +80,7 @@ const TransferCrypto = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
       <div className="flex justify-around mt-3 h-96">
         <div className="bg-gradient-to-b from-azure-950 to-azure-600 rounded-lg ml-4 hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
           <div className="mt-4">
-            <LogoDark  />
+            <LogoDark />
           </div>
           <div className="flex flex-col">
             <div className="flex bg-azure-700 text-white rounded-lg m-3 pb-3">
@@ -124,7 +131,7 @@ const TransferCrypto = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
 
         <div className="bg-gradient-to-b from-azure-600 to-azure-950 rounded-lg ml-4 hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
           <div className="mt-4">
-            <LogoDark  />
+            <LogoDark />
           </div>
           <div className="flex flex-col">
             <div className="flex bg-azure-900 text-white rounded-lg m-3 pb-3">
@@ -135,7 +142,7 @@ const TransferCrypto = ({ updateBalanceFlag, setUpdateBalanceFlag }) => {
                 <div className="flex flex-col">
                   <span className="font-bold ml-1">Balance: </span>
                   <span className="flex font-bold justify-center text-3xl border-1 mt-4 border-black border-b-4 bg-blue-700">
-                  {loading ? <div className="text-center">Loading...</div> : `$${parseFloat(balance.crypto).toFixed(2)}`}
+                    {loading ? <div className="text-center">Loading...</div> : `$${parseFloat(balance.crypto).toFixed(2)}`}
                   </span>
                 </div>
               </div>

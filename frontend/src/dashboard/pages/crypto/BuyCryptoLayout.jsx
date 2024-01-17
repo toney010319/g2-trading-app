@@ -3,14 +3,14 @@ import BuyCryptoMarket from "./subcomponents/BuyCryptoMarket";
 import BuyCrypto from "./BuyCrypto";
 import { useState } from "react";
 
-const BuyCryptoLayout = () => {
+const BuyCryptoLayout = ({ addAlert }) => {
   const [updateBalanceFlag, setUpdateBalanceFlag] = useState(false);
 
   return (
     <>
       <div className="flex justify-around mt-3 h-96">
         <div className="flex">
-          <TransferCrypto updateBalanceFlag={updateBalanceFlag} setUpdateBalanceFlag={setUpdateBalanceFlag} />
+          <TransferCrypto addAlert={addAlert} updateBalanceFlag={updateBalanceFlag} setUpdateBalanceFlag={setUpdateBalanceFlag} />
         </div>
 
         <div className="flex">
