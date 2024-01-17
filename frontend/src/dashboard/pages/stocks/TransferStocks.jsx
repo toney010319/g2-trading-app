@@ -55,14 +55,17 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag, addAlert }) =
 
   const handleTransferToWallet = async () => {
     try {
-      const { revertBalanceResponse } = await revertStockBalance(
+      const res = await revertStockBalance(
         usdAmount,
         user_id
       );
-      console.log(
-        "Transfer from stock to wallet successful:",
-        revertBalanceResponse
-      );
+      if (res?.status == 200) {
+        addAlert('success', `${res?.message}`)
+
+      }
+      else {
+        addAlert('error', `${res?.status?.message}`)
+      }
       fetchUserBalance();
     } catch (error) {
       console.error("Error transferring from stock to wallet:", error);

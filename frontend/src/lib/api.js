@@ -102,10 +102,7 @@ export const addStockBalance = async (balance, user_id, transactionData) => {
         ...transactionData,
       }
     );
-     console.log("click",
-       addStockBalanceResponse.data,
-    transactionResponse
-    )
+     
     return addStockBalanceResponse.data
   } catch (error) {
     return error?.response?.data
@@ -186,13 +183,9 @@ export const revertStockBalance = async (balance, user_id, transactionData) => {
         ...transactionData,
       }
     );
-
-    return {
-      revertBalanceResponse: revertStockBalanceResponse.data,
-      transactionResponse: transactionResponse.data,
-    };
+    return  revertStockBalanceResponse.data
   } catch (error) {
-    return error;
+    return error?.response?.data
   }
 };
 

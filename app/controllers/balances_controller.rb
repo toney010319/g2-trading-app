@@ -57,6 +57,25 @@ def revert_stock_balance
   user = User.find(params[:user_id])
   amount_usd = params[:balance].to_f
 
+  if amount_usd.blank?
+    render json: {
+        status: { code: 422, message: "Amount is required" }
+      }, status: :unprocessable_entity 
+    return
+  end
+  if amount_usd <= 0
+    render json: {
+        status: { code: 422, message: "Invalid amount" }
+      }, status: :unprocessable_entity 
+    return
+  end
+
+  if user.balance.stocks < amount_usd
+    render json: {
+        status: { code: 422, message: "Not enough balance to transfer" }
+      }, status: :unprocessable_entity
+    return
+  end
   conversion_rate = 56.15
   amount_php = amount_usd * conversion_rate
 
@@ -64,7 +83,14 @@ def revert_stock_balance
   user.balance.balance += amount_php
 
   if user.balance.save && (!user.username_changed? || user.save)
-    render json: { stocks_balance: user.balance.stocks, main_balance: user.balance.balance, amount: amount_php }
+    
+    render json: {
+      message: "Transfer successful",
+      stocks_balance: user.balance.stocks,
+      main_balance: user.balance.balance,
+      amount: amount_php,
+      status: 200
+    }, status: :ok
   else
     render json: { error: "Failed to update balances" }, status: :unprocessable_entity
   end
