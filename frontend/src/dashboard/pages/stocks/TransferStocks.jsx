@@ -32,22 +32,24 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag, addAlert }) =
 
   const handleTransferToStock = async () => {
     try {
-      const { addBalanceResponse } = await addStockBalance(
+      const res = await addStockBalance(
         transferAmount,
         user_id
       );
+      console.log("Transfer from wallet to stock unsuccessful:", res)
+      if (res?.status == 200) {
+        addAlert('success', `${res?.message}`)
 
-      if (addBalanceResponse?.status == 200) {
-        addAlert('success', `Transfer from wallet to stock successful: ₱${addBalanceResponse?.amount}.00`)
       }
       else {
-        addAlert('error', `Transfer from wallet to stock failed:  invalid amount`)
+        addAlert('error', `${res?.status?.message}`)
       }
       fetchUserBalance();
       setTransferAmount("");
 
     } catch (error) {
-      console.error("Error transferring from wallet to stock:", error);
+      console.log(error.response, "error.response")
+
     }
   };
 

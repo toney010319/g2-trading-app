@@ -102,13 +102,13 @@ export const addStockBalance = async (balance, user_id, transactionData) => {
         ...transactionData,
       }
     );
-     
-    return {
-      addBalanceResponse: addStockBalanceResponse.data,
-      transactionResponse: transactionResponse.data,
-    };
+     console.log("click",
+       addStockBalanceResponse.data,
+    transactionResponse
+    )
+    return addStockBalanceResponse.data
   } catch (error) {
-    return error;
+    return error?.response?.data
   }
 };
 
