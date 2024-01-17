@@ -11,6 +11,7 @@ import MyProfile from "./dashboard/Myprofile";
 import RequireAuth from "./context/hooks/RequireAuth";
 import { AuthProvider } from "./context/AuthProvider";
 import AdminDashboard from "./admin/AdminDashboard";
+import Checkout from "./dashboard/StripePayment";
 
 const App = () => {
   const [alerts, setAlerts] = useState([]);
@@ -61,11 +62,16 @@ const App = () => {
                     path="/dashboard/*"
                     element={<Dashboard addAlert={addAlert} />}
                   />
-                  .
+                  
                   <Route
                     path="/deposit"
                     element={<Deposit addAlert={addAlert} />}
                   />
+
+                  <Route path="/stripe" 
+                  element={<Checkout />} 
+                  />
+
                   <Route
                     path="/my-profile"
                     element={<MyProfile addAlert={addAlert} />}

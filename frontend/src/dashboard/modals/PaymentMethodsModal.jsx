@@ -27,8 +27,13 @@ const PaymentMethodsModal = ({handleClose, addAlert}) => {
       navigate(`/deposit?amount=${amount}`)
       return
     }
+
+    if (selectedMethod === 'stripe') {
+      navigate(`/stripecheckout?amount=${amount}`)
+      return
+    }
   
-    if (selectedMethod === 'paypal' || selectedMethod === 'stripe') {
+    if (selectedMethod === 'paypal') {
       addAlert('error', 'This payment method is currently unavailable')
       return
     }
@@ -132,7 +137,6 @@ const PaymentMethodsModal = ({handleClose, addAlert}) => {
                       value="stripe"
                       checked={selectedMethod === 'stripe'}
                       onChange={e => setSelectedMethod(e.target.value)}
-                      disabled  
                     />
                     <label htmlFor="paypal">
                       <img
