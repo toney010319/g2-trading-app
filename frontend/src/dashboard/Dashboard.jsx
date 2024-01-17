@@ -37,7 +37,7 @@ const Dashboard = ({ addAlert }) => {
                     <Route path="forex" element={<BuyForexLayout addAlert={addAlert} />} />
                     <Route path="forex/market" element={<MarketForex />} />
                     <Route path="transactions" element={<TransactionHistory />} />
-                    <Route path="support" element={<Support />} />
+                    <Route path="support" element={<Support addAlert={addAlert} />} />
                     <Route path="myprofile" element={<MyProfile />} />
                 </Routes>
             </DashboardLayout>

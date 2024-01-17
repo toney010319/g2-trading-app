@@ -91,6 +91,8 @@ class AdminsController < ApplicationController
       end
     end
 
+    
+
     private
     def user_data_hash(user)
       {
