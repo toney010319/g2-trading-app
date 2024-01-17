@@ -2,9 +2,9 @@ import { useNavigate } from "react-router-dom";
 import PaymentMethodsModal from "../dashboard/modals/PaymentMethodsModal";
 
 import ProfileModal from "../dashboard/modals/ProfileModal";
-
+import { format } from "date-fns";
 // import Navbalance from "./subcomponents/Navbalance";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { logoutUser } from "../lib/api";
 import useAuth from "../context/hooks/useAuth";
 
@@ -14,6 +14,8 @@ const Navigationbar = ({ addAlert }) => {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [showProfileModal, setShowProfileModal] = useState(false);
+    const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
+    const [currentDate, setCurrentDate] = useState(new Date());
     const { setAuth } = useAuth()
     const handleClose = () => {
         setShowModal(false)
@@ -34,7 +36,18 @@ const Navigationbar = ({ addAlert }) => {
         addAlert('success', 'You have successfully logged out')
     }
 
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            const newDate = new Date();
+            setCurrentDate(newDate);
+            setCurrentTime(newDate.toLocaleTimeString());
+        }, 1000);
 
+        return () => clearInterval(intervalId);
+    }, [])
+    
+
+    const formattedDate = format(currentDate, "MMMM dd, yyyy");
 
     return (
 
@@ -58,9 +71,11 @@ const Navigationbar = ({ addAlert }) => {
                         Withdraw
                     </span>
 
-                    <div>
-                        {/* <Navbalance balance={balance} /> */}
-                    </div>
+                </div> 
+
+                <div>
+                    <span className="font-bold text-2xl">{currentTime}</span>
+                    <span className="font-bold text-2xl ml-3">{formattedDate}</span>
                 </div>
 
                 <div className="flex flex-row ml-2">

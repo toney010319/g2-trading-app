@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { getUserAssets, getUserBalance } from "../../../lib/api";
+import axios from "axios";
 
 const HomeBalance = () => {
     const user_id = document.cookie.split("user_id=")[1];
@@ -27,6 +28,17 @@ const HomeBalance = () => {
     }, [user_id]);
 
     useEffect(() => {
+        const initiateAuthorization = () => {
+            const token = document.cookie.split('token=')[1];
+            if (token) {
+                axios.defaults.headers.common['Authorization'] = token;
+            }
+        };
+        initiateAuthorization();
+        
+    }, []);
+
+    useEffect(() => {
         fetchBalanceMemoized()
         fetchUserAssetsMemoized()
       }, [fetchBalanceMemoized, fetchUserAssetsMemoized]);
@@ -47,7 +59,7 @@ const HomeBalance = () => {
 
 return (
     <>
-        <div className="mx-2 bg-white rounded-md shadow-md">
+        <div className="mx-2 bg-white rounded-md shadow-md hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
             <h1 className="text-center font-bold py-2">WALLET BALANCES</h1>
             <table className="min-w-full border border-collapse">
             <tbody>
@@ -70,7 +82,7 @@ return (
             </tbody>
             </table>
         </div>
-        <div className="m-2 bg-white rounded-md shadow-md">
+        <div className="m-2 bg-white rounded-md shadow-m hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
             <h1 className="text-center font-bold py-2">RUNNING BALANCES</h1>
             <table className="min-w-full border border-collapse">
             <tbody>

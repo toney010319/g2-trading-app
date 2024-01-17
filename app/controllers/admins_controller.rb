@@ -13,7 +13,21 @@ class AdminsController < ApplicationController
     render json: users_with_additional_info
   end
 
+  def transactions
+    portfolio_transactions = PortfolioTransaction.joins(:user)
+                                               .where(transaction_type: ['buy', 'sell', 'transfer'])
+                                               .select('portfolio_transactions.*, users.username as user_username, portfolio_transactions.transaction_number')
 
+  
+  other_transactions = Transaction.joins(:user)
+                                  .where(transaction_type: ['Deposit','Withdraw'])
+                                  .select('transactions.*, users.username as user_username, transactions.transaction_number')
+                                  
+
+  combined_transactions = portfolio_transactions + other_transactions
+
+  render json: combined_transactions
+  end
     def show
       user_data = @user.as_json
       user_data[:balance] = @user.balance
@@ -76,6 +90,8 @@ class AdminsController < ApplicationController
         render json: { error: 'User not found.' }, status: :not_found
       end
     end
+
+    
 
     private
     def user_data_hash(user)

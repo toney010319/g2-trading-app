@@ -1,5 +1,55 @@
-<p>Welcome <%= @email %>!</p>
+<html>
 
-<p>You can confirm your account email through the link below:</p>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 600px;
+      margin: 0 auto;
+    }
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+    h1 {
+      color: #3498db;
+    }
+
+    p {
+      margin-bottom: 16px;
+    }
+
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .confirmation-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: #fff;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Hello <%= @email %>!</h1>
+
+  <p>Thank you for registering with stellarmarkets.com. To activate your account and start exploring our services, please confirm your email address by clicking the link below:</p>
+
+  <p><a class="confirmation-button" href="<%= confirmation_url(@resource, confirmation_token: @token) %>">Confirm my account</a></p>
+
+  <p>If you did not create an account on stellarmarkets.com, you can safely ignore this email. Your account will only be activated upon confirmation.</p>
+
+  <p>Best regards,</p>
+  <p>The Stellar Markets Team</p>
+</body>
+
+</html>

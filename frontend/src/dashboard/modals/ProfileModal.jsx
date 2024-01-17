@@ -66,6 +66,8 @@ const ProfileModal = ({setShowModal}) => {
 
     
       <div className="flex flex-col pb-2">
+       
+
         <Link to = 'myprofile'>
           <div className="flex justify-center">
             <button className="text-blue-500 hover:text-blue-700">View Profile</button>

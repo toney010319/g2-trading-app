@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { getUserForex} from "../../../lib/api";
 import { format } from "date-fns"
+import { getImageLinkForex } from "../../../assets/Icons";
 import Loading from "../../../components/Loading";
 
 const ForexTransactions = ({ updateTransactionHistory, setUpdateTransactionHistory }) => {
@@ -21,62 +22,6 @@ const ForexTransactions = ({ updateTransactionHistory, setUpdateTransactionHisto
       setLoading(false);
     }
   }, [user_id]);
-
-  const getImageLink = (symbol) => {
-    switch (symbol) {
-      case 'PHP':
-        return 'https://flagicons.lipis.dev/flags/4x3/ph.svg';
-      case 'EUR':
-        return 'https://flagicons.lipis.dev/flags/4x3/eu.svg';
-      case 'JPY':
-        return 'https://flagicons.lipis.dev/flags/4x3/jp.svg';
-      case 'GBP':
-        return 'https://flagicons.lipis.dev/flags/4x3/gb.svg';
-      case 'AUD':
-        return 'https://flagicons.lipis.dev/flags/4x3/au.svg'; 
-      case 'CAD':
-        return 'https://flagicons.lipis.dev/flags/4x3/ca.svg';   
-      case 'CHF':
-        return 'https://flagicons.lipis.dev/flags/4x3/ch.svg';  
-      case 'CNY':
-        return 'https://flagicons.lipis.dev/flags/4x3/cn.svg'; 
-      case 'SEK':
-        return 'https://flagicons.lipis.dev/flags/4x3/se.svg'; 
-      case 'MXN':
-        return 'https://flagicons.lipis.dev/flags/4x3/mx.svg';  
-      case 'NZD':
-        return 'https://flagicons.lipis.dev/flags/4x3/nz.svg';  
-      case 'SGD':
-        return 'https://flagicons.lipis.dev/flags/4x3/sg.svg';  
-      case 'HKD':
-        return 'https://flagicons.lipis.dev/flags/4x3/hk.svg';  
-      case 'NOK':
-        return 'https://flagicons.lipis.dev/flags/4x3/no.svg';  
-      case 'KRW':
-        return 'https://flagicons.lipis.dev/flags/4x3/kr.svg';  
-      case 'TRY':
-        return 'https://flagicons.lipis.dev/flags/4x3/tr.svg'; 
-      case 'INR':
-        return 'https://flagicons.lipis.dev/flags/4x3/in.svg';  
-      case 'RUB':
-        return 'https://flagicons.lipis.dev/flags/4x3/ru.svg';  
-      case 'BRL':
-        return 'https://flagicons.lipis.dev/flags/4x3/br.svg';  
-      case 'ZAR':
-        return 'https://flagicons.lipis.dev/flags/4x3/za.svg';  
-      case 'DKK':
-        return 'https://flagicons.lipis.dev/flags/4x3/dk.svg';  
-      case 'TWD':
-        return 'https://flagicons.lipis.dev/flags/4x3/tw.svg';  
-      case 'PLN':
-      return 'https://flagicons.lipis.dev/flags/4x3/pl.svg';  
-      case 'THB':
-        return 'https://flagicons.lipis.dev/flags/4x3/th.svg';  
-      case 'MYR':
-      return 'https://flagicons.lipis.dev/flags/4x3/my.svg';    
-      }
-    };
-
   const handleNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
@@ -103,7 +48,7 @@ const ForexTransactions = ({ updateTransactionHistory, setUpdateTransactionHisto
 
   return (
     <>
-    <div className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden">
+    <div className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
       <section className="container mx-auto p-2 font-mono">
         <div>
           <div className="flex justify-center">
@@ -139,7 +84,7 @@ const ForexTransactions = ({ updateTransactionHistory, setUpdateTransactionHisto
                       <tr key={userForex.id}>
                         <div className="flex">
                           <div className="flex">
-                            <img className="ml-2 w-8" src={getImageLink(userForex.symbol)} alt={userForex.symbol} />
+                            <img className="ml-2 w-8" src={getImageLinkForex(userForex.symbol)} alt={userForex.symbol} />
                           </div>
                           <td className="px-4 py-3">{userForex.symbol}</td>
                         </div>

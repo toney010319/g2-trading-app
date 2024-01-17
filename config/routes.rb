@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   post 'user/:id/approve', to: 'admins#approve'
   post 'user/:id/disapprove', to: 'admins#disapprove'
   get '/transactions/show', to: 'transactions#show'
+  post 'user/:id/contact_support', to: 'users#contact_support'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -56,6 +57,7 @@ Rails.application.routes.draw do
   get 'show_user_stocks', to:'stock_transactions#show_user_stocks'
   get 'show_user_crypto', to:'crypto_transactions#show_user_crypto'
   get 'show_user_forex', to:'forex_transactions#show_user_forex'
+  get 'all_users_transactions', to:'admins#transactions'
 
   # Defines the root path route ("/")
   # root "posts#index"

@@ -1,10 +1,11 @@
 class ForexTransactionsController < ApplicationController
+  before_action :authenticate_user!
     def buy
       user = User.find(params[:user_id])
       quantity = params[:quantity]
       price = params[:price]
       symbol = params[:symbol]
-
+      @transaction_number = rand(100_000..999_999).to_s
       total_cost = quantity.to_i * price.to_f
 
       currency = Currency.find_by(symbol: symbol)
@@ -22,7 +23,8 @@ class ForexTransactionsController < ApplicationController
           price: price.to_f,
           symbol: symbol,
           transaction_type: 'buy',
-          asset: currency
+          asset: currency,
+          transaction_number: @transaction_number
         )
         render json: { success: true, message: 'Currency purchased successfully' }
       else
@@ -35,7 +37,7 @@ class ForexTransactionsController < ApplicationController
       quantity = params[:quantity].to_i
       price = params[:price].to_f
       symbol = params[:symbol]
-
+      @transaction_number = rand(100_000..999_999).to_s
       total_sale_value = quantity * price
 
       currency = Currency.find_by(symbol: symbol)
@@ -53,7 +55,8 @@ class ForexTransactionsController < ApplicationController
           price: price,
           symbol: symbol,
           transaction_type: 'sell',
-          asset: currency
+          asset: currency,
+          transaction_number: @transaction_number
         )
         render json: { success: true, message: 'Currency sold successfully' }
       else

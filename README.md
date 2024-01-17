@@ -10,6 +10,7 @@
 - [Description](#description)
 - [Dependencies](#dependencies)
 - [User Stories](#user-stories)
+- [App API](#app-api)
 
 ## Contributors
 
@@ -17,7 +18,7 @@ This project is developed by [toney010319](https://github.com/toney010319), [and
 
 ## Features
 
-- Design is optimized for large screen sizes (no media queries implemented).
+- Design is optimized for large screen sizes (no media queries/breakpoints implemented).
 - Utilizes React for the frontend.
 - Rails backend via API.
 - Roles: Admin and Traders.
@@ -84,3 +85,671 @@ _Note: vite, rails s, and mailcatcher will run via concurrently_
 7. As a Trader, I want to have a Transaction page to see and monitor all the transactions made by my actions
    of buying and selling.
 8. As a Trader, I want to sell my stocks so that I can adjust my portfolio.
+
+
+
+## App API
+
+================
+
+## User Registration
+```
+HTTP Method: POST
+URL: http://localhost:3000/signup
+``` 
+Sample Request Body
+```
+{
+    "email": "test",
+    "password": "test"
+}
+```
+Parameters
+
+| Name         | Description  | Required |
+|--------------|--------------|----------|
+| `username`   | username     | true     |
+| `password`   | password     | true     |
+| `middle_name`| middlename   | true     |
+| `last_name`  | lastname     | true     |
+| `birthday`   | birthday     | true     |
+| `first_name` | firstname    |  true    |
+| `email`      | email        | true     |
+
+
+
+------------------
+### User Login
+```
+HTTP Method: POST
+URL: http://localhost:3000/login
+``` 
+Sample Request Body
+```
+{
+    "email": "test",
+    "password": "test"
+}
+```
+Parameters
+| Name         | Description  | Required |
+|--------------|--------------|----------|
+| `email`      | email        | true     |
+| `password`   | password     | true     |
+
+------------------
+## Add Balance
+```
+HTTP Method: POST
+URL: http://localhost:3000/add_balance
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "balance": "200"
+}
+```
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+| `balance`    | balance                  | true     |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | uid                      | true     |
+
+------------------
+## Add Transactions
+```
+HTTP Method: POST
+URL: http://localhost:3000/transactions
+```
+
+Sample Request Body
+
+```
+{
+    "user_id": "1",
+    transactionData: {
+        "balance": "200",
+        "type": "deposit" 
+    }
+}
+```
+
+Parameters
+| Name                    | Description                                                    | Required |
+|-------------------------|----------------------------------------------------------------|----------|
+| `user_id`               | UID of Login User                                              | true     |
+| `balance`               | amount                                                         | true     |
+| `transactionData`       | it is an Object that consests of `amount`, `type`,`date & time`| true     |
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Transfer Base wallet balance to Stock wallet.
+```
+HTTP Method: POST
+URL: http://localhost:3000/add_stock_balance
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "balance": "200"
+}
+```
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+| `balance`    | Amount to Transfer       | true     |
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+
+## Transfer Base wallet balance to forex wallet.
+```
+HTTP Method: POST
+URL: http://localhost:3000/add_forex_balance
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "balance": "200"
+}
+```
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+| `balance`    | Amount to Transfer       | true     |
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+
+
+## Transfer Base wallet balance to crypto wallet.
+```
+HTTP Method: POST
+URL: http://localhost:3000/add_crypto_balance
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "balance": "200"
+}
+```
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+| `balance`    | Amount to Transfer       | true     |
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+
+## Transfer Crypto wallet balance to Base wallet.
+```
+HTTP Method: POST
+URL: http://localhost:3000/revert_crypto_balance
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "balance": "200"
+}
+```
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+| `balance`    | Amount to Transfer       | true     |
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+
+## Transfer Stock wallet balance to Base wallet.
+```
+HTTP Method: POST
+URL: http://localhost:3000/revert_stock_balance
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "balance": "200"
+}
+```
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+| `balance`    | Amount to Transfer       | true     |
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Transfer Forex wallet balance to Base wallet.
+```
+HTTP Method: POST
+URL: http://localhost:3000/revert_forex_balance
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "balance": "200"
+}
+```
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+| `balance`    | Amount to Transfer       | true     |
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+---------------------------
+
+
+---------------------------
+## Get User Transactions.
+```
+HTTP Method: GET
+URL: http://localhost:3000/transactions?user_id=1
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+---------------------------
+## Get  User Stocks.
+```
+HTTP Method: GET
+URL: http://localhost:3000/show_user_stocks?user_id=1
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+---------------------------
+## Get User Cryptos.
+```
+HTTP Method: GET
+URL: http://localhost:3000/show_user_crypto?user_id=1
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+---------------------------
+## Get User Forex.
+```
+HTTP Method: GET
+URL: http://localhost:3000/show_user_forex?user_id=1
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Get All User Assets.
+```
+HTTP Method: GET
+URL: http://localhost:3000/show_all_user_assets?user_id=1
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+
+---------------------------
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Get User Profile.
+```
+HTTP Method: GET
+URL: http://localhost:3000/users?user_id=1
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Get User Balances.
+```
+HTTP Method: GET
+URL: http://localhost:3000/balance?user_id=1
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | true     |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Get List of Stocks.
+```
+HTTP Method: GET
+URL: http://localhost:3000/stocks_list
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | No       |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Get List of Cryptos.
+```
+HTTP Method: GET
+URL: http://localhost:3000/crypto_list
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | No       |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Get List of Forex.
+```
+HTTP Method: GET
+URL: http://localhost:3000/currency_list
+``` 
+
+Parameters
+| Name         | Description              | Required |
+|--------------|--------------------------|----------|
+| `user_id`    | UID of Login User        | No       |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+
+---------------------------
+## Buy Stocks
+```
+HTTP Method: POST
+URL: http://localhost:3000/buy_stocks
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "quantity": "10",
+    "price": "51",
+    "symbol": "AMZN"
+}
+```
+Parameters
+| Name         |             Description              | Required |
+|--------------|--------------------------------------|----------|
+| `user_id`    | UID of Login User                    | Yes      |
+| `quantity`   | the number of stock you want to buy  | Yes      |
+| `price`      | the amount of stock you want to buy  | Yes      |
+| `symbol`     | the symbol of stock you want to buy  | Yes      |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Buy Cryptos
+```
+HTTP Method: POST
+URL: http://localhost:3000/buy_crypto
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "quantity": "10",
+    "price": "51",
+    "symbol": "BTC"
+}
+```
+Parameters
+| Name         |             Description              | Required |
+|--------------|--------------------------------------|----------|
+| `user_id`    | UID of Login User                    | Yes      |
+| `quantity`   | the number of stock you want to buy  | Yes      |
+| `price`      | the amount of stock you want to buy  | Yes      |
+| `symbol`     | the symbol of stock you want to buy  | Yes      |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Buy Forex
+```
+HTTP Method: POST
+URL: http://localhost:3000/buy_forex
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "quantity": "10",
+    "price": "51",
+    "symbol": "PHP"
+}
+```
+Parameters
+| Name         |             Description              | Required |
+|--------------|--------------------------------------|----------|
+| `user_id`    | UID of Login User                    | Yes      |
+| `quantity`   | the number of stock you want to buy  | Yes      |
+| `price`      | the amount of stock you want to buy  | Yes      |
+| `symbol`     | the symbol of stock you want to buy  | Yes      |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Sell Stocks
+```
+HTTP Method: POST
+URL: http://localhost:3000/sell_stocks
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "quantity": "10",
+    "price": "51",
+    "symbol": "AMZN"
+}
+```
+Parameters
+| Name         |             Description              | Required |
+|--------------|--------------------------------------|----------|
+| `user_id`    | UID of Login User                    | Yes      |
+| `quantity`   | the number of stock you want to buy  | Yes      |
+| `price`      | the amount of stock you want to buy  | Yes      |
+| `symbol`     | the symbol of stock you want to buy  | Yes      |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Sell Forex
+```
+HTTP Method: POST
+URL: http://localhost:3000/sell_forex
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "quantity": "10",
+    "price": "51",
+    "symbol": "PHP"
+}
+```
+Parameters
+| Name         |             Description              | Required |
+|--------------|--------------------------------------|----------|
+| `user_id`    | UID of Login User                    | Yes      |
+| `quantity`   | the number of stock you want to buy  | Yes      |
+| `price`      | the amount of stock you want to buy  | Yes      |
+| `symbol`     | the symbol of stock you want to buy  | Yes      |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+---------------------------
+## Sell Cryptos
+```
+HTTP Method: POST
+URL: http://localhost:3000/sell_crypto
+``` 
+Sample Request Body
+```
+{
+    "user_id": "1",
+    "quantity": "10",
+    "price": "51",
+    "symbol": "BTC"
+}
+```
+Parameters
+| Name         |             Description              | Required |
+|--------------|--------------------------------------|----------|
+| `user_id`    | UID of Login User                    | Yes      |
+| `quantity`   | the number of stock you want to buy  | Yes      |
+| `price`      | the amount of stock you want to buy  | Yes      |
+| `symbol`     | the symbol of stock you want to buy  | Yes      |
+
+## Request Headers
+Get these Values from the login Response Header
+
+| Name            | Description              | Required |
+|-----------------|--------------------------|----------|
+| `Authorization` | Bearer-token             | true     |
+| `uid`           | user_id                  | true     |
+
+
+
+
+
+
+
+
+

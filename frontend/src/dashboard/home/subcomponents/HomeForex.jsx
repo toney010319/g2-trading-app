@@ -2,6 +2,8 @@ import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import {useState, useEffect, useMemo} from'react';
 import { getUserForex } from '../../../lib/api';
+import Loading from '../../../components/Loading';
+import axios from 'axios';
 
 ChartJS.register(ArcElement, Tooltip);
 
@@ -19,6 +21,17 @@ const HomeForex = () => {
       console.error('Error fetching transactions:', error);
     }
   }, [user_id]);
+
+  useEffect(() => {
+    const initiateAuthorization = () => {
+        const token = document.cookie.split('token=')[1];
+        if (token) {
+            axios.defaults.headers.common['Authorization'] = token;
+        }
+    };
+    initiateAuthorization();
+    
+}, []);
   
   useEffect(() => {
     fetchAssetsMemoized();
@@ -102,14 +115,14 @@ const HomeForex = () => {
   return (
     <>
     {assets.length === 0 ? (
-      <div className="flex-1 shadow-md rounded-md px-10 py-7 my-2 bg-white">
+      <div className="flex-1 shadow-md rounded-md px-10 py-7 my-2 bg-white hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
         <span className="flex justify-center mb-1 font-bold text-lg">Currencies</span>
         <p className="text-center">No Assets</p>
       </div>
     ) : (
-      <div className="flex-1 shadow-md rounded-md px-10 py-7 my-2 bg-white">
+      <div className="flex-1 shadow-md rounded-md px-10 py-7 my-2 bg-white hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
         <span className="flex justify-center mb-1 font-bold text-lg">Currencies</span>
-        <Pie {...config} />
+        {config ? <Pie {...config} /> : <Loading />}
       </div>
     )}
   </>

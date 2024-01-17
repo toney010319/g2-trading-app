@@ -25,9 +25,9 @@ const DashboardHome = () => {
                         </div>
 
                         </div>
-                    <div>
-                        <HomeBalance />
-                    </div>
+                        <div>
+                            <HomeBalance />
+                        </div>
                 </div>
                 
             </section>

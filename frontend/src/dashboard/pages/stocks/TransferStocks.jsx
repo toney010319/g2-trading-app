@@ -32,37 +32,43 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag, addAlert }) =
 
   const handleTransferToStock = async () => {
     try {
-      const { addBalanceResponse } = await addStockBalance(
+      const res = await addStockBalance(
         transferAmount,
         user_id
       );
+      console.log("Transfer from wallet to stock unsuccessful:", res)
+      if (res?.status == 200) {
+        addAlert('success', `${res?.message}`)
 
-      if (addBalanceResponse?.status == 200) {
-        addAlert('success', `Transfer from wallet to stock successful: ₱${addBalanceResponse?.amount}.00`)
       }
       else {
-        addAlert('error', `Transfer from wallet to stock failed:  invalid amount`)
+        addAlert('error', `${res?.status?.message}`)
       }
       fetchUserBalance();
       setTransferAmount("");
 
     } catch (error) {
-      console.error("Error transferring from wallet to stock:", error);
+      console.log(error.response, "error.response")
+
     }
   };
 
   const handleTransferToWallet = async () => {
     try {
-      const { revertBalanceResponse } = await revertStockBalance(
+      const res = await revertStockBalance(
         usdAmount,
         user_id
       );
-      console.log(
-        "Transfer from stock to wallet successful:",
-        revertBalanceResponse
-      );
+      if (res?.status == 200) {
+        addAlert('success', `${res?.message}`)
+
+      }
+      else {
+        addAlert('error', `${res?.status?.message}`)
+      }
       fetchUserBalance();
     } catch (error) {
+      addAlert('error', `FAILED TRANSFER`)
       console.error("Error transferring from stock to wallet:", error);
     }
   };
@@ -76,7 +82,7 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag, addAlert }) =
   return (
     <>
       <div className="flex justify-around mt-3 h-96">
-        <div className="bg-gradient-to-b from-azure-950 to-azure-600 rounded-lg ml-4">
+        <div className="bg-gradient-to-b from-azure-950 to-azure-600 rounded-lg ml-4 hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
           <div className="mt-4">
             <LogoDark />
           </div>
@@ -127,7 +133,7 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag, addAlert }) =
           </div>
         </div>
 
-        <div className="bg-gradient-to-b from-azure-600 to-azure-950 rounded-lg ml-4">
+        <div className="bg-gradient-to-b from-azure-600 to-azure-950 rounded-lg ml-4 hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
           <div className="mt-4">
             <LogoDark />
           </div>

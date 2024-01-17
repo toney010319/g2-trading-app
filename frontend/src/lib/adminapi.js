@@ -132,3 +132,22 @@ export const createUser = async (event) => {
       return error
     }
   }
+
+  export const getTransactions = async () => {
+    try {
+      const res = await axios.get('http://localhost:3000/all_users_transactions')
+      return res.data
+    } catch (error) {
+      return error
+    }
+  }
+
+  export const ContactSupport = async (message,subject,user_id,support) => {
+    try {
+      const res = await axios.post(`http://localhost:3000/user/${user_id}/contact_support`,{message,subject,support})
+      console.log("support",res)
+      return res
+    } catch (error) {
+      return error
+    }
+  }
