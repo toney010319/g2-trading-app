@@ -12,7 +12,6 @@ end
 def add_stock_balance
   user = User.find(params[:user_id])
   amount = params[:balance].to_f
- # Ensure that amount parameter is present
  if amount.blank?
   render json: {
       status: { code: 422, message: "Amount is required" }
@@ -100,7 +99,24 @@ end
 def add_crypto_balance
   user = User.find(params[:user_id])
   amount = params[:balance].to_f
-
+  if amount.blank?
+    render json: {
+        status: { code: 422, message: "Amount is required" }
+      } ,status: :unprocessable_entity
+    return
+  end
+  if amount <= 0
+    render json: {
+        status: { code: 422, message: "Invalid Transfer Amount" }
+      },status: :unprocessable_entity
+    return
+  end
+  if user.balance.balance < amount
+    render json: {
+      status: { code: 422, message: "Not enough Balance to transfer." }
+    } ,status: :unprocessable_entity
+    return
+  end
   usdphp_conversion_rate = 0.01778584
   amount_usd = amount * usdphp_conversion_rate
 
@@ -108,7 +124,13 @@ def add_crypto_balance
   user.balance.balance -= amount
 
   if user.balance.save && (!user.username_changed? || user.save)
-    render json: { crypto_balance: user.balance.crypto, main_balance: user.balance.balance }
+    render json: {  
+      message: "Transfer successful", 
+      crypto_balance: user.balance.crypto, 
+      main_balance: user.balance.balance,
+      amount: amount_usd,
+      status: 200
+    }, status: :ok
   else
     render json: { error: "Failed to update balances" }, status: :unprocessable_entity
   end
@@ -117,7 +139,25 @@ end
 def revert_crypto_balance
   user = User.find(params[:user_id])
   amount_usd = params[:balance].to_f
+  if amount_usd.blank?
+    render json: {
+        status: { code: 422, message: "Amount is required" }
+      }, status: :unprocessable_entity 
+    return
+  end
+  if amount_usd <= 0
+    render json: {
+        status: { code: 422, message: "Invalid amount" }
+      }, status: :unprocessable_entity 
+    return
+  end
 
+  if user.balance.crypto < amount_usd
+    render json: {
+        status: { code: 422, message: "Not enough balance to transfer" }
+      }, status: :unprocessable_entity
+    return
+  end
   conversion_rate = 56.15
   amount_php = amount_usd * conversion_rate
 
@@ -125,7 +165,14 @@ def revert_crypto_balance
   user.balance.balance += amount_php
 
   if user.balance.save && (!user.username_changed? || user.save)
-    render json: { crypto_balance: user.balance.crypto, main_balance: user.balance.balance }
+    render json: { 
+      message: "Transfer successful",
+      crypto_balance: user.balance.crypto, 
+      main_balance: user.balance.balance,
+      amount: amount_php,
+      status: 200
+    }, status: :ok
+     
   else
     render json: { error: "Failed to update balances" }, status: :unprocessable_entity
   end
