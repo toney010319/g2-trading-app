@@ -26,7 +26,7 @@ const DashboardLayout = ({ children, addAlert }) => {
         if (response.status !== "active") {
           addAlert(
             "alert-info",
-            "Your account is currently restricted. Kindly await administrative approval or reach out to the administrator for further assistance in obtaining approval"
+            "Your account is currently restricted. Kindly wait for approval or reach out to the administrator for further assistance in obtaining approval"
           );
         }
       } catch (error) {
