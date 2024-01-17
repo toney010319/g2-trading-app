@@ -1,6 +1,6 @@
-class AdminMailer < Devise::Mailer   
-    default from: 'adminstellarmarkets.com'
-  
+class AdminMailer < Devise::Mailer
+    default from: 'admin@stellarmarkets.com'
+
     def account_approved_email(user)
       @user = user
       mail(to: @user.email, subject: 'Your account has been approved')
@@ -12,6 +12,3 @@ class AdminMailer < Devise::Mailer
       mail(to: @user.email, subject: 'Account Disapproval Notice')
     end
   end
-
-
-  
