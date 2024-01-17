@@ -103,12 +103,9 @@ export const addStockBalance = async (balance, user_id, transactionData) => {
       }
     );
      
-    return {
-      addBalanceResponse: addStockBalanceResponse.data,
-      transactionResponse: transactionResponse.data,
-    };
+    return addStockBalanceResponse.data
   } catch (error) {
-    return error;
+    return error?.response?.data
   }
 };
 
@@ -131,12 +128,9 @@ export const addCryptoBalance = async (balance, user_id, transactionData) => {
       }
     );
 
-    return {
-      addBalanceResponse: addStockBalanceResponse.data,
-      transactionResponse: transactionResponse.data,
-    };
+    return addStockBalanceResponse.data
   } catch (error) {
-    return error;
+    return error?.response?.data
   }
 };
 
@@ -159,12 +153,9 @@ export const addForexBalance = async (balance, user_id, transactionData) => {
       }
     );
 
-    return {
-      addForexResponse: addForexBalanceResponse.data,
-      transactionResponse: transactionResponse.data,
-    };
+    return addForexBalanceResponse.data
   } catch (error) {
-    return error;
+    return error?.response?.data
   }
 };
 
@@ -186,13 +177,9 @@ export const revertStockBalance = async (balance, user_id, transactionData) => {
         ...transactionData,
       }
     );
-
-    return {
-      revertBalanceResponse: revertStockBalanceResponse.data,
-      transactionResponse: transactionResponse.data,
-    };
+    return  revertStockBalanceResponse.data
   } catch (error) {
-    return error;
+    return error?.response?.data
   }
 };
 
@@ -215,12 +202,9 @@ export const revertCryptoBalance = async (balance, user_id, transactionData) => 
       }
     );
 
-    return {
-      revertBalanceResponse: revertStockBalanceResponse.data,
-      transactionResponse: transactionResponse.data,
-    };
+    return revertStockBalanceResponse.data
   } catch (error) {
-    return error;
+    return error?.response?.data
   }
 };
 
@@ -243,12 +227,9 @@ export const revertForexBalance = async (balance, user_id, transactionData) => {
       }
     );
 
-    return {
-      revertForexResponse: revertForexBalanceResponse.data,
-      transactionResponse: transactionResponse.data,
-    };
+    return revertForexBalanceResponse.data
   } catch (error) {
-    return error;
+    return error?.response?.data
   }
 };
 

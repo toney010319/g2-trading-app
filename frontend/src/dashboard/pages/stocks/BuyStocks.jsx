@@ -52,17 +52,17 @@ const BuyStocks = ({ setUpdateBalanceFlag, addAlert }) => {
         addAlert('error', `FAILED TO PURCHASE`)
         console.error("Error purchasing stocks:", message);
       }
-      } catch (error) {
-        addAlert('error', `FAILED TO PURCHASE`)
-        console.error("Error purchasing stocks:", error);
-      }
+    } catch (error) {
+      addAlert('error', `FAILED TO PURCHASE`)
+      console.error("Error purchasing stocks:", error);
+    }
   };
 
   const calculateTotalAmount = () => {
     return (price * quantity).toFixed(2);
   };
-  
-    useEffect(() => {
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const apiData = await getStockList();
@@ -71,12 +71,12 @@ const BuyStocks = ({ setUpdateBalanceFlag, addAlert }) => {
         const storedSymbol = localStorage.getItem("selectedStockSymbol");
         const storedPrice = localStorage.getItem("selectedStockPrice");
         const storedName = localStorage.getItem("selectedStockName");
-        console.log('1st symbol:', storedSymbol, '1st price:', storedPrice);
+
         if (storedSymbol || storedPrice) {
           setSymbol(storedSymbol);
           setPrice(storedPrice);
           setSelectedStockName(storedName);
-          console.log('symbol:', storedSymbol, 'price:', storedPrice);
+
         }
       } catch (error) {
         setLoading(false);
@@ -91,11 +91,11 @@ const BuyStocks = ({ setUpdateBalanceFlag, addAlert }) => {
     <>
       <div className="flex-1 flex justify-around">
         {loading ? (
-        <div className="ml-12 w-96 mr-24">
-          <div className="h-full my-auto mx-auto w-20">
-            <Loading  /> 
+          <div className="ml-12 w-96 mr-24">
+            <div className="h-full my-auto mx-auto w-20">
+              <Loading />
+            </div>
           </div>
-        </div>
         ) : (
           <div className="mt-1 rounded-lg p-3 flex flex-col bg-gradient-to-b from-azure-950 to-azure-600 hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
             <div className="mb-4">
@@ -133,7 +133,7 @@ const BuyStocks = ({ setUpdateBalanceFlag, addAlert }) => {
                   <div className="mt-1 font-bold font-serif text-lg">{selectedStockName}</div>
                 </div>
                 <div className="flex-1 flex-col justify-center ease-in-out duration-300">
-                {price !== null && !isNaN(parseFloat(price)) && (
+                  {price !== null && !isNaN(parseFloat(price)) && (
                     <div className="text-white bg-azure-950 rounded-md flex justify-center mb-2 font-semibold text-lg">
                       PRICE: <span className="ml-2 font-bold">${parseFloat(price).toFixed(2)}</span>
                     </div>
@@ -164,13 +164,13 @@ const BuyStocks = ({ setUpdateBalanceFlag, addAlert }) => {
             </button>
           </div>
         )}
-          <div className="flex">
-            <StocksTransactions updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} />
-          </div>
+        <div className="flex">
+          <StocksTransactions updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} />
+        </div>
 
-          <div className="flex">
-              <StocksMiniPortfolio updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} setUpdateBalanceFlag={setUpdateBalanceFlag} addAlert={addAlert} />
-          </div>
+        <div className="flex">
+          <StocksMiniPortfolio updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} setUpdateBalanceFlag={setUpdateBalanceFlag} addAlert={addAlert} />
+        </div>
       </div>
     </>
   );

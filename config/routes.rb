@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   post 'user/:id/approve', to: 'admins#approve'
   post 'user/:id/disapprove', to: 'admins#disapprove'
   get '/transactions/show', to: 'transactions#show'
+  post 'user/:id/contact_support', to: 'users#contact_support'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
