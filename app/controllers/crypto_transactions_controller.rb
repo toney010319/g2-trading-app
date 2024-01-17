@@ -1,4 +1,5 @@
 class CryptoTransactionsController < ApplicationController
+  before_action :authenticate_user!
   def buy
     user = User.find(params[:user_id])
     quantity = params[:quantity]

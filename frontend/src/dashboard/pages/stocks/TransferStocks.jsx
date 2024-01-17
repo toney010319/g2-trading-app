@@ -68,6 +68,7 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag, addAlert }) =
       }
       fetchUserBalance();
     } catch (error) {
+      addAlert('error', `FAILED TRANSFER`)
       console.error("Error transferring from stock to wallet:", error);
     }
   };

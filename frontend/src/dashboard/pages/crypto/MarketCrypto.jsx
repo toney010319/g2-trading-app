@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../../components/Loading';
 import { getCryptoList } from '../../../lib/api';
+import { getImageLinkCrypto } from '../../../assets/Icons';
 
 const MarketCrypto = () => {
   const [cryptoList, setCryptoList] = useState([]);
@@ -28,40 +29,7 @@ const MarketCrypto = () => {
     fetchData();
   }, []); 
 
-  const getImageLink = (symbol) => {
-    switch (symbol) {
-      case 'BTC':
-        return 'https://cryptologos.cc/logos/bitcoin-btc-logo.svg?v=029';
-      case 'ETH':
-        return 'https://cryptologos.cc/logos/ethereum-eth-logo.svg?v=029';
-      case 'BNB':
-        return 'https://cryptologos.cc/logos/bnb-bnb-logo.svg?v=029';
-      case 'SOL':
-        return 'https://cryptologos.cc/logos/solana-sol-logo.svg?v=029';
-      case 'XRP':
-        return 'https://cryptologos.cc/logos/xrp-xrp-logo.svg?v=029'; 
-      case 'ADA':
-        return 'https://cryptologos.cc/logos/cardano-ada-logo.svg?v=029';   
-      case 'AVAX':
-        return 'https://cryptologos.cc/logos/avalanche-avax-logo.svg?v=029';  
-      case 'DOGE':
-        return 'https://cryptologos.cc/logos/dogecoin-doge-logo.svg?v=029'; 
-      case 'DOT':
-        return 'https://cryptologos.cc/logos/polkadot-new-dot-logo.svg?v=029'; 
-      case 'TRX':
-        return 'https://cryptologos.cc/logos/tron-trx-logo.svg?v=029';  
-      case 'MATIC':
-        return 'https://cryptologos.cc/logos/polygon-matic-logo.svg?v=029';  
-      case 'SHIB':
-        return 'https://cryptologos.cc/logos/shiba-inu-shib-logo.svg?v=029';  
-      case 'LTC':
-        return 'https://cryptologos.cc/logos/litecoin-ltc-logo.svg?v=029';  
-      case 'XLM':
-        return 'https://cryptologos.cc/logos/stellar-xlm-logo.svg?v=029';  
-      case 'XMR':
-        return 'https://cryptologos.cc/logos/monero-xmr-logo.svg?v=029';  
-      }
-    };
+
 
   const getChangesStyle = (changesPercentage) => {
     return changesPercentage < 0 ? 'text-red-500' : 'text-green-500';
@@ -152,7 +120,7 @@ const MarketCrypto = () => {
                                   navigate('/dashboard/crypto/trade');
                                 }}
                                 >
-                                  <img className="w-6 mr-1" src={getImageLink(data.symbol)} alt={data.symbol} />
+                                  <img className="w-6 mr-1" src={getImageLinkCrypto(data.symbol)} alt={data.symbol} />
                                   <span className="ml-1">{data.name}</span>
                                 </div>
           

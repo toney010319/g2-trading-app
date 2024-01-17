@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { getUserAssets, getUserBalance } from "../../../lib/api";
+import axios from "axios";
 
 const HomeBalance = () => {
     const user_id = document.cookie.split("user_id=")[1];
@@ -25,6 +26,17 @@ const HomeBalance = () => {
           console.error('Error fetching balance:', error);
         }
     }, [user_id]);
+
+    useEffect(() => {
+        const initiateAuthorization = () => {
+            const token = document.cookie.split('token=')[1];
+            if (token) {
+                axios.defaults.headers.common['Authorization'] = token;
+            }
+        };
+        initiateAuthorization();
+        
+    }, []);
 
     useEffect(() => {
         fetchBalanceMemoized()

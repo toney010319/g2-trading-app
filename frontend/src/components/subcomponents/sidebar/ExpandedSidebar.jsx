@@ -25,7 +25,7 @@ const ExpandedSidebar = () => {
       <div className="flex flex-col justify-between h-full">
         <div className="flex flex-col">
             <Logo />
-        <span className="mt-1 border border-black"></span> 
+        <span className="mt-2 border border-black"></span> 
         
         <div className="mt-1 mb-1">
           <Link to="/dashboard">
@@ -120,15 +120,6 @@ const ExpandedSidebar = () => {
             </div>
           </Link>       
 
-          <Link to="referrals">
-            <div className="flex flex-row ml-3 hover:underline hover:font-bold underline-offset-4">
-              <img src="https://www.svgrepo.com/show/453989/partner.svg" 
-                width="20" 
-                alt="Home" />
-              <div className="ml-1">Referrals</div>
-            </div>
-          </Link>       
-
           <Link to="support">
             <div className="flex flex-row ml-3 hover:underline hover:font-bold underline-offset-4">
               <img src="https://www.svgrepo.com/show/355287/support.svg" 
@@ -159,10 +150,10 @@ const ExpandedSidebar = () => {
                 
                   ) : (
                     <>
-                      <p className="cursor-pointer text-sm leading-5 text-white">
+                      <p className="cursor-pointer leading-5 font-bold text-white">
                         {profile.first_name} {profile.last_name}
                       </p>
-                      <p className="cursor-pointer text-xs leading-3 text-gray-300">
+                      <p className="cursor-pointer text-xs italic leading-3 text-gray-300">
                         {profile.email}
                       </p>
                     </>

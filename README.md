@@ -18,7 +18,7 @@ This project is developed by [toney010319](https://github.com/toney010319), [and
 
 ## Features
 
-- Design is optimized for large screen sizes (no media queries implemented).
+- Design is optimized for large screen sizes (no media queries/breakpoints implemented).
 - Utilizes React for the frontend.
 - Rails backend via API.
 - Roles: Admin and Traders.

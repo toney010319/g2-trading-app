@@ -8,7 +8,7 @@ const NotExpandedSidebar = () => {
           <div className="flex justify-center ease-in-out duration-300">
             <img src="https://www.freeiconspng.com/uploads/stock-exchange-icon-png-10.png" width="50" alt="Icon Svg Stock Exchange" />
           </div>
-        <span className="mt-1 border border-black"></span> 
+        <span className="mt-2 border border-black"></span> 
         
 
 
@@ -96,15 +96,7 @@ const NotExpandedSidebar = () => {
                 width="40" 
                 alt="Home" />
             </div>
-          </Link>       
-
-          <Link to="referrals">
-            <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
-              <img src="https://www.svgrepo.com/show/453989/partner.svg" 
-                width="35" 
-                alt="Home" />
-            </div>
-          </Link>       
+          </Link>         
 
           <Link to="support">
             <div className="flex flex-row justify-center hover:border-b-4 hover:scale-105 ease-in-out duration-100 border-black">
