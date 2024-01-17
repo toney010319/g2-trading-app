@@ -123,7 +123,7 @@ class AdminsController < ApplicationController
 
 
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :username, :birthday, :status, :first_name, :middle_name, :role, :last_name, )
+      params.require(:user).permit(:email, :password, :password_confirmation, :username, :birthday, :status, :first_name, :middle_name, :role, :last_name, :email_confirmed)
     end
 
     def update_params
