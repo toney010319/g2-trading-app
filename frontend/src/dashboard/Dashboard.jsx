@@ -11,7 +11,6 @@ import TransactionHistory from "./pages/others/TransactionHistory";
 import Support from "./pages/others/Support";
 import axios from "axios";
 import { useEffect } from "react"; import MyProfile from "./Myprofile";
-
 // eslint-disable-next-line react/prop-types
 const Dashboard = ({ addAlert }) => {
 
