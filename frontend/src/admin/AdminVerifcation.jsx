@@ -8,9 +8,11 @@ import VerifyUser from "./components/VerifyUser";
 
 const AdminVerifcation = ({ addAlert }) => {
     const [loading, setLoading] = useState(true);
-    const [users, setUsers] = useState();
+    const [users, setUsers] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 8;
 
 
     console.log("AdminVerifcation")
@@ -34,7 +36,6 @@ const AdminVerifcation = ({ addAlert }) => {
     );
 
     useEffect(() => {
-        console.log("AdminVerifcation")
         fetchUsersMemoized();
     }, [fetchUsersMemoized, showModal]);
     const handleShowUser = (user) => {
@@ -43,15 +44,28 @@ const AdminVerifcation = ({ addAlert }) => {
         // setModalContent("show");
     };
 
-    console.log("user", users)
+    const handleNextPage = () => {
+        setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+      };
+    
+      const handlePrevPage = () => {
+        setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+      };
+    
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      const paginatedUsers = users.slice(startIndex, endIndex);
+      const totalPages = Math.ceil(users.length / itemsPerPage);
+
+
     return (
         <div>
             <>
                 <p className=" flex justify-center  text-lg font-bold w-full mt-5">Verify Users</p>
                 <section className="container mx-auto p-6 font-mono">
                     <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
-                        <div className="w-full overflow-x-auto">
-                            <table className="w-full">
+                        <div className="w-full overflow-x-auto bg-white">
+                            <table className="w-full bg-white">
                                 <thead>
                                     <tr className="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
                                         <th className="px-4 py-3">Name</th>
@@ -71,8 +85,8 @@ const AdminVerifcation = ({ addAlert }) => {
                                                 </div>
                                             </td>
                                         </tr>
-                                    ) : users.length > 0 ? (
-                                        users.map((user, index) => (
+                                      ) : paginatedUsers.length > 0 ? (
+                                        paginatedUsers.map((user, index) => (
                                             <tr key={index} className="text-gray-700">
                                                 <td className="px-4 py-3 text-ms font-semibold border">{`${user.first_name} ${user.last_name}`}</td>
                                                 <td className="px-4 py-3 text-ms font-semibold border">
@@ -102,6 +116,23 @@ const AdminVerifcation = ({ addAlert }) => {
                                     )}
                                 </tbody>
                             </table>
+
+                            <div className="flex justify-center m-4">
+                                <button
+                                    onClick={handlePrevPage}
+                                    className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-950 mr-2"
+                                    disabled={currentPage === 1}
+                                >
+                                    Previous Page
+                                </button>
+                                <button
+                                    onClick={handleNextPage}
+                                    className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-950"
+                                    disabled={currentPage === totalPages}
+                                >
+                                    Next Page
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </section>
