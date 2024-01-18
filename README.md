@@ -18,17 +18,20 @@ This project is developed by [toney010319](https://github.com/toney010319), [and
 
 ## Features
 
-- Design is optimized for large screen sizes (no media queries/breakpoints implemented).
-- Utilizes React for the frontend.
-- Rails backend via API.
-- Roles: Admin and Traders.
-- Admin approval
-- Buying and Selling of different currencies (Crypto, Forex, and Stocks).
-- Integrated simulation of payment (deposit).
+- Design is optimized for large screen sizes - 1080p or above (no media queries/breakpoints implemented)
+- Utilizes React for the frontend (vite compiler)
+- Rails backend via API
+- Roles: Admin and Traders (Trader and Admin dashboard)
+- Admin CRUD on balances and user accounts
+- Admin approval (with email notification)
+- Buying and Selling of different currencies (Crypto, Forex, and Stocks)
+- Integrated simulation of payment (deposit)
 - Transaction history
 - Login and Registration (with email confirmation)
 - Dynamic alert errors
 - Portfolio of different currencies
+- Currencies integrated on database via json files (real time data fetched on January 9, 2024)
+- Email support
 
 ## Prerequisites
 
@@ -36,12 +39,13 @@ This project is developed by [toney010319](https://github.com/toney010319), [and
 - [npm](https://www.npmjs.com/)
 - [Ruby](https://www.ruby-lang.org/)
 - [Ruby on Rails](https://rubyonrails.org/)
+- [Tailwind](https://tailwindcss.com/docs/installation)
 
 ## Description
 
 - Run `npm run dev` from frontend
 
-_Note: vite, rails s, and mailcatcher will run via concurrently_
+_Note: vite, rails s, and mailcatcher will run via concurrently on dev mode_ 
 
 ## Dependencies
 
@@ -54,13 +58,14 @@ _Note: vite, rails s, and mailcatcher will run via concurrently_
 - [jsonapi-serializer](https://rubygems.org/gems/jsonapi-serializer)
 - [mailcatcher](https://rubygems.org/gems/mailcatcher) (Install independently via `gem install mailcatcher`)
 
-### Node.js Packages (Run `npm install` to install)
+### Node.js Packages Run `npm install` to install
 
 - [concurrently](https://www.npmjs.com/package/concurrently)
 - [heroicons](https://www.npmjs.com/package/heroicons)
 - [axios](https://www.npmjs.com/package/axios)
 - [chart.js](https://www.npmjs.com/package/chart.js)
-- [date-fns](https://www.npmjs.com/package/concurrently/date-fns)
+- [date-fns](https://www.npmjs.com/package/date-fns)
+  
 
 ## User Stories
 
@@ -90,9 +95,7 @@ _Note: vite, rails s, and mailcatcher will run via concurrently_
 
 ## App API
 
-================
-
-## User Registration
+### User Registration
 ```
 HTTP Method: POST
 URL: http://localhost:3000/signup
@@ -113,7 +116,7 @@ Parameters
 | `middle_name`| middlename   | true     |
 | `last_name`  | lastname     | true     |
 | `birthday`   | birthday     | true     |
-| `first_name` | firstname    |  true    |
+| `first_name` | firstname    | true    |
 | `email`      | email        | true     |
 
 
@@ -528,7 +531,7 @@ URL: http://localhost:3000/crypto_list
 Parameters
 | Name         | Description              | Required |
 |--------------|--------------------------|----------|
-| `user_id`    | UID of Login User        | No       |
+| `user_id`    | UID of Login User        | false    |
 
 ## Request Headers
 Get these Values from the login Response Header
@@ -548,7 +551,7 @@ URL: http://localhost:3000/currency_list
 Parameters
 | Name         | Description              | Required |
 |--------------|--------------------------|----------|
-| `user_id`    | UID of Login User        | No       |
+| `user_id`    | UID of Login User        | false    |
 
 ## Request Headers
 Get these Values from the login Response Header
