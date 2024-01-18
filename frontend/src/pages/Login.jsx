@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import Logo from "../assets/Logo";
 import useAuth from "../context/hooks/useAuth";
 // eslint-disable-next-line react/prop-types
@@ -13,7 +12,7 @@ const Login = ({ addAlert }) => {
   };
   const loginUser = async (event) => {
     event.preventDefault();
-
+  
     const formData = new FormData(event.target);
     const user = {
       user: {
@@ -21,17 +20,31 @@ const Login = ({ addAlert }) => {
         password: formData.get("password"),
       },
     };
+  
     try {
-      const res = await axios.post("https://stellarmarkets-e9ba8be437a0.herokuapp.com/login", user);
-      // const res = await axios.post("http://localhost:3000/login", user);
-      const role = res?.data?.data?.role
-
-      setAuth({ role: [role] })
-      return res;
+      const response = await fetch("https://stellarmarkets-e9ba8be437a0.herokuapp.com/login", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      const role = data?.data?.role;
+  
+      setAuth({ role: [role] });
+      return data;
     } catch (error) {
       return error;
     }
-  };
+  }
+
+  // const res = await axios.post("http://localhost:3000/login", user);
   
   const handleSubmit = async (event) => {
     event.preventDefault();
