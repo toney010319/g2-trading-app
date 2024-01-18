@@ -11,7 +11,8 @@ class User < ApplicationRecord
   after_create :create_balance
 
   devise :database_authenticatable, :registerable, :validatable, :confirmable,
-         :jwt_authenticatable, jwt_revocation_strategy: self
+         :jwt_authenticatable
+        #  jwt_revocation_strategy: self
 
          def jwt_payload
           super
