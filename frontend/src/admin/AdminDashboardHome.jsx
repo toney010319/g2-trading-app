@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 import ShowUser from "./components/ShowUser";
 import EditUser from "./components/EditUser";
 import CreateUser from "./components/CreateUser";
+import axios from "axios";
 
 const AdminDashboardHome = ({ addAlert }) => {
   const [users, setUsers] = useState([]); 
@@ -16,6 +17,17 @@ const AdminDashboardHome = ({ addAlert }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
   const user_id = document.cookie.split("user_id=")[1];
+  
+  useEffect(() => {
+    const initiateAuthorization = () => {
+      const token = document.cookie.split("token=")[1];
+      if (token) {
+        axios.defaults.headers.common["Authorization"] = token;
+      }
+    };
+    initiateAuthorization();
+
+  }, []);
 
   const fetchUsersMemoized = useMemo(
     () => async () => {
