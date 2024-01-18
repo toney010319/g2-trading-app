@@ -8,11 +8,13 @@ import EditUser from "./components/EditUser";
 import CreateUser from "./components/CreateUser";
 
 const AdminDashboardHome = ({ addAlert }) => {
-  const [users, setUsers] = useState();
+  const [users, setUsers] = useState([]); 
   const [loading, setLoading] = useState(true);
   const [selectedUser, setSelectedUser] = useState(null);
   const [modalContent, setModalContent] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
   const user_id = document.cookie.split("user_id=")[1];
 
   const fetchUsersMemoized = useMemo(
@@ -80,6 +82,26 @@ const AdminDashboardHome = ({ addAlert }) => {
       console.error("Error deleting user:", error);
     }
   };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const paginatedUsers = users
+    .filter((user) => user.role !== 'Admin')
+    .slice(startIndex, endIndex);
+
+  const totalPages = Math.ceil(
+    (users.filter((user) => user.role !== 'Admin').length || 1) / itemsPerPage
+  );
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
+
   return (
     <>
       <section className="container mx-auto p-6 font-mono">
@@ -93,7 +115,7 @@ const AdminDashboardHome = ({ addAlert }) => {
           >
             Create User
           </button>
-          <div className="w-full overflow-x-auto">
+          <div className="w-full overflow-x-auto bg-white">
             <table className="w-full">
               <thead>
                 <tr className="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
@@ -114,10 +136,8 @@ const AdminDashboardHome = ({ addAlert }) => {
                       </div>
                     </td>
                   </tr>
-                ) : users.length > 0 ? (
-                  users
-                    .filter((user) => user.role !== "Admin")
-                    .map((user) => (
+                ) : paginatedUsers.length > 0 ? (
+                  paginatedUsers.map((user) => (
                       <tr key={user.id} className="text-gray-700">
                         <td className="px-4 py-3 text-ms font-semibold border">{`${user.first_name} ${user.last_name}`}</td>
                         <td className="px-4 py-3 text-ms font-semibold border">
@@ -163,7 +183,24 @@ const AdminDashboardHome = ({ addAlert }) => {
                   </tr>
                 )}
               </tbody>
+             
             </table>
+            <div className="flex justify-center m-4">
+                <button
+                  onClick={handlePrevPage}
+                  className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-950 mr-2"
+                  disabled={currentPage === 1}
+                >
+                  Previous Page
+                </button>
+                <button
+                  onClick={handleNextPage}
+                  className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-950"
+                  disabled={currentPage === totalPages}
+                >
+                  Next Page
+                </button>
+              </div>
           </div>
         </div>
       </section>
