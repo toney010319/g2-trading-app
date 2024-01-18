@@ -13,7 +13,7 @@ Rails.application.configure do
 
   # Show full error reports.
   config.consider_all_requests_local = true
-P
+
   # Enable server timing
   config.server_timing = true
 
@@ -37,25 +37,15 @@ P
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
-  # config.action_mailer.perform_caching = false
-  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  # config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.smtp_settings = {
-  #   address:'127.0.0.1',
-  #   port:1025
-  # }
-  
-  #  config.action_mailer.perform_caching = false
-  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { host: 'localhost', port: '3000' }
+  # config.action_mailer.default_url_options = { host: 'https://g2-trading-app.vercel.app/' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-  :authentication => :plain,
-  :address => "smtp.mailgun.org",
-  :port => 587,
-  :domain => "sandboxdbf3840dd33948469b93733ddc6dc93c.mailgun.org",
-  :user_name => "postmaster@sandboxdbf3840dd33948469b93733ddc6dc93c.mailgun.org",
-  :password => "1870de62125ed05fa4b7088d4655cf2e-07f37fca-b816ed59"
-}
+    address:'127.0.0.1',
+    port:1025
+  }
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
