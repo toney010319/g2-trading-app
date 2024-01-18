@@ -3,7 +3,7 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def login_params
-    params.require(:user).permit( :email, :password)
+    params.permit( :email, :password)
   end
 
   def respond_with(resource, _opts = {})
