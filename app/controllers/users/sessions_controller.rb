@@ -1,9 +1,10 @@
 class Users::SessionsController < Devise::SessionsController
+  skip_before_action :authenticate_user!, only: :create
   respond_to :json
   private
 
   def login_params
-    params.permit( :email, :password)
+    params.require(:user).permit( :email, :password)
   end
 
   def respond_with(resource, _opts = {})
