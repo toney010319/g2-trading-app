@@ -62,12 +62,6 @@ const Login = ({ addAlert }) => {
     }
   };
 
-  useEffect(() => {
-    return () => {
-      axios.defaults.headers.common["Authorization"] = undefined;
-    };
-  }, []);
-
   return (
     <>
       <div className="flex flex-col justify-center items-center align-center content-center w-screen h-screen">
