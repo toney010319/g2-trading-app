@@ -49,16 +49,16 @@ const BuyForex = ({ setUpdateBalanceFlag }) => {
       } else {
         console.error("Error purchasing currency:", message);
       }
-      } catch (error) {
-        console.error("Error purchasing currency:", error);
-      }
+    } catch (error) {
+      console.error("Error purchasing currency:", error);
+    }
   };
 
   const calculateTotalAmount = () => {
     return (price * quantity).toFixed(2);
   };
-  
-    useEffect(() => {
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const apiData = await getForexList();
@@ -67,12 +67,12 @@ const BuyForex = ({ setUpdateBalanceFlag }) => {
         const storedSymbol = localStorage.getItem("selectedForexSymbol");
         const storedPrice = localStorage.getItem("selectedForexPrice");
         const storedName = localStorage.getItem("selectedForexName");
-        console.log('1st symbol:', storedSymbol, '1st price:', storedPrice);
+
         if (storedSymbol || storedPrice) {
           setSymbol(storedSymbol);
           setPrice(storedPrice);
           setSelectedCurrencyName(storedName);
-          console.log('symbol:', storedSymbol, 'price:', storedPrice);
+
         }
       } catch (error) {
         setLoading(false);
@@ -87,11 +87,11 @@ const BuyForex = ({ setUpdateBalanceFlag }) => {
     <>
       <div className="flex-1 flex justify-around">
         {loading ? (
-        <div className="ml-12 w-96 mr-24">
-          <div className="h-full my-auto mx-auto w-20">
-            <Loading  /> 
+          <div className="ml-12 w-96 mr-24">
+            <div className="h-full my-auto mx-auto w-20">
+              <Loading />
+            </div>
           </div>
-        </div>
         ) : (
           <div className="mt-1 rounded-lg p-3 flex flex-col bg-gradient-to-b from-azure-950 to-azure-600 hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
             <div className="mb-4">
@@ -129,7 +129,7 @@ const BuyForex = ({ setUpdateBalanceFlag }) => {
                   <div className="mt-1 font-bold font-serif text-lg">{selectedCurrencyName}</div>
                 </div>
                 <div className="flex-1 flex-col justify-center ease-in-out duration-300">
-                {price !== null && !isNaN(parseFloat(price)) && (
+                  {price !== null && !isNaN(parseFloat(price)) && (
                     <div className="text-white bg-azure-950 rounded-md flex justify-center mb-2 font-semibold text-lg">
                       PRICE: <span className="ml-2 font-bold">${parseFloat(price).toFixed(2)}</span>
                     </div>
@@ -160,13 +160,13 @@ const BuyForex = ({ setUpdateBalanceFlag }) => {
             </button>
           </div>
         )}
-          <div className="flex">
-            <ForexTransactions updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} />
-          </div>
+        <div className="flex">
+          <ForexTransactions updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} />
+        </div>
 
-          <div className="flex">
-              <ForexMiniPortfolio updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} setUpdateBalanceFlag={setUpdateBalanceFlag} />
-          </div>
+        <div className="flex">
+          <ForexMiniPortfolio updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} setUpdateBalanceFlag={setUpdateBalanceFlag} />
+        </div>
       </div>
     </>
   );

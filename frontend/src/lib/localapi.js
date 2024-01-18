@@ -79,7 +79,7 @@ export const addBalance = async (balance, user_id, transactionData) => {
       transactionResponse: transactionResponse.data,
     };
   } catch (error) {
-    console.log("error",error)
+   
     return error;
   }
 };

@@ -21,7 +21,7 @@ const DashboardLayout = ({ children, addAlert }) => {
       try {
         const response = await getProfile(user_id);
         setProfile(response);
-        console.log("profile response", profile);
+
 
         if (response.status !== "active") {
           addAlert(

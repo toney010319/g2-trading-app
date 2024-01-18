@@ -14,7 +14,7 @@ const TransactionHistory = () => {
       const response = await getTransactions(user_id);
       setTransactions(response);
       setLoading(false);
-      console.log('Hi Transaction History', response)
+
     } catch (error) {
       console.error('Error fetching transactions:', error);
       setLoading(false);
@@ -33,7 +33,7 @@ const TransactionHistory = () => {
     indexOfLastTransaction
   );
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  console.log(currentTransactions)
+
   return (
     <>
       <div className="flex-1">

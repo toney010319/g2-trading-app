@@ -10,7 +10,7 @@ const TransactionLogs = () => {
         () => async () => {
             try {
                 const response = await getTransactions();
-                console.log("res", response)
+
                 setTransaction(response)
                 setLoading(false);
 
@@ -23,7 +23,7 @@ const TransactionLogs = () => {
         []
     );
     useEffect(() => {
-        console.log("AdminVerifcation")
+
         fetchTransactionsMemoized();
     }, [fetchTransactionsMemoized])
 

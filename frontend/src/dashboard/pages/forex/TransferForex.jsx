@@ -19,7 +19,7 @@ const TransferForex = ({ updateBalanceFlag, setUpdateBalanceFlag, addAlert }) =>
       try {
         const response = await getUserBalance(user_id);
         setBalance(response);
-        console.log(response, "set balance response");
+
         setLoading(false);
       } catch (error) {
         console.error("Error fetching transactions:", error);

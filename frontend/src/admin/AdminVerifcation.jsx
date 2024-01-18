@@ -13,13 +13,13 @@ const AdminVerifcation = ({ addAlert }) => {
     const [selectedUser, setSelectedUser] = useState(null);
 
 
-    console.log("AdminVerifcation")
+
     // const [modalContent, setModalContent] = useState(null);
     const fetchUsersMemoized = useMemo(
         () => async () => {
             try {
                 const response = await getUsers();
-                console.log("res", response)
+
                 const filter = response.filter(user => user.status === 'pending')
                 setUsers(filter)
                 setLoading(false);
@@ -34,7 +34,7 @@ const AdminVerifcation = ({ addAlert }) => {
     );
 
     useEffect(() => {
-        console.log("AdminVerifcation")
+
         fetchUsersMemoized();
     }, [fetchUsersMemoized, showModal]);
     const handleShowUser = (user) => {
@@ -43,7 +43,7 @@ const AdminVerifcation = ({ addAlert }) => {
         // setModalContent("show");
     };
 
-    console.log("user", users)
+
     return (
         <div>
             <>

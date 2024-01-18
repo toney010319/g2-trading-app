@@ -12,7 +12,7 @@ const Registration = ({ addAlert }) => {
 
     const navigateLogin = () => {
         navigate('/')
-        console.log(agreed)
+
     }
 
 
