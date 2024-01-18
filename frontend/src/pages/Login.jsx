@@ -24,9 +24,6 @@ const Login = ({ addAlert }) => {
     try {
       const response = await fetch("https://stellarmarkets-e9ba8be437a0.herokuapp.com/login", {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(user),
       });
   
@@ -42,7 +39,7 @@ const Login = ({ addAlert }) => {
     } catch (error) {
       return error;
     }
-  }
+  };
 
   // const res = await axios.post("http://localhost:3000/login", user);
   
