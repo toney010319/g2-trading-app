@@ -118,7 +118,7 @@ const MarketCrypto = () => {
                                   localStorage.setItem('selectedCryptoSymbol', data.symbol);
                                   localStorage.setItem('selectedCryptoName', data.name);
                                   localStorage.setItem('selectedCryptoPrice', data.price);
-                                  navigate('/dashboard/crypto/trade');
+                                  navigate('/dashboard/crypto');
                                 }}
 
                                 >

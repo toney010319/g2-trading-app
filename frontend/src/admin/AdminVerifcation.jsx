@@ -12,7 +12,7 @@ const AdminVerifcation = ({ addAlert }) => {
     const [showModal, setShowModal] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 8;
+    const itemsPerPage = 9;
 
 
 

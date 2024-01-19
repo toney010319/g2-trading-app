@@ -184,7 +184,7 @@ const MarketForex = () => {
                                   localStorage.setItem('selectedForexSymbol', data.symbol);
                                   localStorage.setItem('selectedForexoName', data.name);
                                   localStorage.setItem('selectedForexPrice', data.price);
-                                  navigate('/dashboard/forex/trade');
+                                  navigate('/dashboard/forex');
                                 }}
                                 >
                                   <img className="w-6 mr-1" src={getImageLinkForex(data.symbol)} alt={data.symbol} />

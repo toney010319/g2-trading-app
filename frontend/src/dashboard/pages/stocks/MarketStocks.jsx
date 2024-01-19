@@ -112,7 +112,7 @@ const MarketStocks = () => {
                                   localStorage.setItem('selectedStockSymbol', data.symbol);
                                   localStorage.setItem('selectedStockName', data.name);
                                   localStorage.setItem('selectedStockPrice', data.price);
-                                  navigate('/dashboard/stocks/trade');
+                                  navigate('/dashboard/stocks');
                                 }}
                                 >
                                   <img className="w-10" src={getImageLinkStocks(data.symbol)} alt={data.symbol} />

@@ -15,7 +15,7 @@ const AdminDashboardHome = ({ addAlert }) => {
   const [modalContent, setModalContent] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const itemsPerPage = 10;
   const user_id = document.cookie.split("user_id=")[1];
   
   useEffect(() => {
