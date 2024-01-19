@@ -4,7 +4,7 @@ import Loading from "../../../../components/Loading";
 
 
 // eslint-disable-next-line react/prop-types
-const SellForex = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
+const SellForex = ({ handleClose, selectedAsset, setUpdateBalanceFlag }) => {
   const user_id = document.cookie.split("user_id=")[1];
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,7 +16,7 @@ const SellForex = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
     () => async () => {
       try {
         const response = await getUserForex(user_id);
-        console.log('Forex Transaction Resp', response);
+
         setTransactions(response);
         setLoading(false);
       } catch (error) {
@@ -40,7 +40,7 @@ const SellForex = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
         price: parseFloat(price),
         symbol: symbol,
       });
-      console.log('Sell Response:', sellResponse);
+
       handleClose(close);
       fetchUserForexMemoized();
       setUpdateBalanceFlag(true);
@@ -48,7 +48,7 @@ const SellForex = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
       console.error('Error selling forex:', error);
     }
   };
-      
+
 
   const getImageLink = (symbol) => {
     switch (symbol) {
@@ -61,49 +61,49 @@ const SellForex = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
       case 'GBP':
         return 'https://flagicons.lipis.dev/flags/4x3/gb.svg';
       case 'AUD':
-        return 'https://flagicons.lipis.dev/flags/4x3/au.svg'; 
+        return 'https://flagicons.lipis.dev/flags/4x3/au.svg';
       case 'CAD':
-        return 'https://flagicons.lipis.dev/flags/4x3/ca.svg';   
+        return 'https://flagicons.lipis.dev/flags/4x3/ca.svg';
       case 'CHF':
-        return 'https://flagicons.lipis.dev/flags/4x3/ch.svg';  
+        return 'https://flagicons.lipis.dev/flags/4x3/ch.svg';
       case 'CNY':
-        return 'https://flagicons.lipis.dev/flags/4x3/cn.svg'; 
+        return 'https://flagicons.lipis.dev/flags/4x3/cn.svg';
       case 'SEK':
-        return 'https://flagicons.lipis.dev/flags/4x3/se.svg'; 
+        return 'https://flagicons.lipis.dev/flags/4x3/se.svg';
       case 'MXN':
-        return 'https://flagicons.lipis.dev/flags/4x3/mx.svg';  
+        return 'https://flagicons.lipis.dev/flags/4x3/mx.svg';
       case 'NZD':
-        return 'https://flagicons.lipis.dev/flags/4x3/nz.svg';  
+        return 'https://flagicons.lipis.dev/flags/4x3/nz.svg';
       case 'SGD':
-        return 'https://flagicons.lipis.dev/flags/4x3/sg.svg';  
+        return 'https://flagicons.lipis.dev/flags/4x3/sg.svg';
       case 'HKD':
-        return 'https://flagicons.lipis.dev/flags/4x3/hk.svg';  
+        return 'https://flagicons.lipis.dev/flags/4x3/hk.svg';
       case 'NOK':
-        return 'https://flagicons.lipis.dev/flags/4x3/no.svg';  
+        return 'https://flagicons.lipis.dev/flags/4x3/no.svg';
       case 'KRW':
-        return 'https://flagicons.lipis.dev/flags/4x3/kr.svg';  
+        return 'https://flagicons.lipis.dev/flags/4x3/kr.svg';
       case 'TRY':
-        return 'https://flagicons.lipis.dev/flags/4x3/tr.svg'; 
+        return 'https://flagicons.lipis.dev/flags/4x3/tr.svg';
       case 'INR':
-        return 'https://flagicons.lipis.dev/flags/4x3/in.svg';  
+        return 'https://flagicons.lipis.dev/flags/4x3/in.svg';
       case 'RUB':
-        return 'https://flagicons.lipis.dev/flags/4x3/ru.svg';  
+        return 'https://flagicons.lipis.dev/flags/4x3/ru.svg';
       case 'BRL':
-        return 'https://flagicons.lipis.dev/flags/4x3/br.svg';  
+        return 'https://flagicons.lipis.dev/flags/4x3/br.svg';
       case 'ZAR':
-        return 'https://flagicons.lipis.dev/flags/4x3/za.svg';  
+        return 'https://flagicons.lipis.dev/flags/4x3/za.svg';
       case 'DKK':
-        return 'https://flagicons.lipis.dev/flags/4x3/dk.svg';  
+        return 'https://flagicons.lipis.dev/flags/4x3/dk.svg';
       case 'TWD':
-        return 'https://flagicons.lipis.dev/flags/4x3/tw.svg';  
+        return 'https://flagicons.lipis.dev/flags/4x3/tw.svg';
       case 'PLN':
-      return 'https://flagicons.lipis.dev/flags/4x3/pl.svg';  
+        return 'https://flagicons.lipis.dev/flags/4x3/pl.svg';
       case 'THB':
-        return 'https://flagicons.lipis.dev/flags/4x3/th.svg';  
+        return 'https://flagicons.lipis.dev/flags/4x3/th.svg';
       case 'MYR':
-      return 'https://flagicons.lipis.dev/flags/4x3/my.svg';    
-      }
-    };
+        return 'https://flagicons.lipis.dev/flags/4x3/my.svg';
+    }
+  };
 
   useEffect(() => {
     fetchUserForexMemoized()
@@ -125,7 +125,7 @@ const SellForex = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
     const filteredBuyTransactions = buyTransactions.filter((buyTransaction) =>
       buyTransaction.symbol === selectedAsset && parseFloat(buyTransaction.quantity) > 0
     );
-  
+
     for (const buyTransaction of buyTransactions) {
       const correspondingSell = sellTransactions.find(
         (sellTransaction) =>
@@ -134,22 +134,22 @@ const SellForex = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
           sellTransaction.price === buyTransaction.price &&
           !pairedTransactions.includes(sellTransaction)
       );
-  
+
       if (correspondingSell) {
         pairedTransactions.push(buyTransaction, correspondingSell);
       }
     }
-  
+
     const unpairedBuyTransactions = filteredBuyTransactions.filter(
       (buyTransaction) => !pairedTransactions.includes(buyTransaction)
     );
-  
+
     const groupedTransactions = unpairedBuyTransactions.reduce((result, transaction) => {
       const existingGroup = result.find(
         (group) =>
           group.symbol === transaction.symbol && group.quantity === transaction.quantity && group.price === transaction.price
       );
-  
+
       if (existingGroup) {
         existingGroup.quantity += parseFloat(transaction.quantity);
       } else {
@@ -159,17 +159,17 @@ const SellForex = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
           price: parseFloat(transaction.price)
         });
       }
-  
+
       return result;
     }, []);
-  
+
     return groupedTransactions;
   }, [transactions.user_forex, selectedAsset]);
 
-      const startIndex = (currentPage - 1) * transactionsPerPage;
-      const endIndex = startIndex + transactionsPerPage;
-      const paginatedTransactions = filteredAndGroupedTransactions.slice(startIndex, endIndex);
-   
+  const startIndex = (currentPage - 1) * transactionsPerPage;
+  const endIndex = startIndex + transactionsPerPage;
+  const paginatedTransactions = filteredAndGroupedTransactions.slice(startIndex, endIndex);
+
 
   return (
     <>
@@ -179,11 +179,11 @@ const SellForex = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
           </div>
           <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg bg-white">
             <div className="w-full overflow-x-auto">
-            <div className="flex justify-center">
-              <span className="flex w-full justify-center text-bold text-2xl font-sans underline underline-offset-4 font-bold mb-2">
-                Forex Assets
-              </span>
-            </div>
+              <div className="flex justify-center">
+                <span className="flex w-full justify-center text-bold text-2xl font-sans underline underline-offset-4 font-bold mb-2">
+                  Forex Assets
+                </span>
+              </div>
               <table className="w-full">
                 <thead>
                   <tr className="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
@@ -234,16 +234,16 @@ const SellForex = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
                         </td>
 
                         <td className="px-4 py-3 text-center">
-                          
-                          <button 
-                          onClick={() => handleSellForex(userForex)}
-                          className="p-2 px-5 text-white font-bold bg-azure-500 hover:bg-azure-700 rounded-md"
+
+                          <button
+                            onClick={() => handleSellForex(userForex)}
+                            className="p-2 px-5 text-white font-bold bg-azure-500 hover:bg-azure-700 rounded-md"
                           >Sell
                           </button>
                         </td>
 
 
-                        
+
                       </tr>
                     ))
                   ) : (

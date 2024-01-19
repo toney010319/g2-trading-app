@@ -41,7 +41,7 @@ const BuyStocks = ({ setUpdateBalanceFlag, addAlert }) => {
         adjustedPrice,
         symbol
       );
-      console.log(res)
+
       if (res?.data?.success) {
         addAlert('success', `SUCCESSFULLY PURCHASED`)
         setQuantity("");

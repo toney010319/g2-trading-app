@@ -5,7 +5,7 @@ axios.defaults.headers.common['Authorization'] = token;
 
 export const getUsers = async () => {
     try {
-        const res = await axios.get('https://stellarmarkets-e9ba8be437a0.herokuapp.com/admins')
+        const res = await axios.get('http://localhost:3000/admins')
         return res.data
     } catch (error) {
         return error
@@ -17,7 +17,7 @@ export const getUsers = async () => {
     
 //     try {
       
-//         const res = await axios.get(`https://stellarmarkets-e9ba8be437a0.herokuapp.com/admins/${user_id}`)
+//         const res = await axios.get(`http://localhost:3000/admins/${user_id}`)
         
 //         return res.data
 //     } catch (error) {
@@ -28,7 +28,7 @@ export const getUsers = async () => {
 
 export const deleteUser = async (user_id) => {
     try {
-        const res = await axios.delete(`https://stellarmarkets-e9ba8be437a0.herokuapp.com/admins/${user_id}`)
+        const res = await axios.delete(`http://localhost:3000/admins/${user_id}`)
         return res.data
     } catch (error) {
         return error
@@ -67,7 +67,7 @@ export const createUser = async (event) => {
       },
     };
     try {
-      const res = await axios.post("https://stellarmarkets-e9ba8be437a0.herokuapp.com/admins", newUser);
+      const res = await axios.post("http://localhost:3000/admins", newUser);
       return res;
     } catch (error) {
       if (error.response) {
@@ -100,7 +100,7 @@ export const createUser = async (event) => {
         }
       }
       try {
-        const res = await axios.patch(`https://stellarmarkets-e9ba8be437a0.herokuapp.com/admins/${user_id}`, newUser);
+        const res = await axios.patch(`http://localhost:3000/admins/${user_id}`, newUser);
         return res;
       } catch (error) {
         if (error.response) {
@@ -126,7 +126,7 @@ export const createUser = async (event) => {
   export const AdminDisapproval = async (message,user_id) => {
     try {
       const res = await axios.post(`http://localhost:3000/${user_id}/disapprove`,{message})
-      console.log("disapprove",res)
+      
       return res
     } catch (error) {
       return error
@@ -135,7 +135,7 @@ export const createUser = async (event) => {
 
   export const getTransactions = async () => {
     try {
-      const res = await axios.get('https://stellarmarkets-e9ba8be437a0.herokuapp.com/all_users_transactions')
+      const res = await axios.get('http://localhost:3000/all_users_transactions')
       return res.data
     } catch (error) {
       return error
@@ -145,7 +145,7 @@ export const createUser = async (event) => {
   export const ContactSupport = async (message,subject,user_id,support) => {
     try {
       const res = await axios.post(`http://localhost:3000/${user_id}/contact_support`,{message,subject,support})
-      console.log("support",res)
+     
       return res
     } catch (error) {
       return error

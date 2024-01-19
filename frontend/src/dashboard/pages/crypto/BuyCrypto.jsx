@@ -40,7 +40,7 @@ const BuyCrypto = ({ setUpdateBalanceFlag, addAlert }) => {
         adjustedPrice,
         symbol
       );
-      console.log(res)
+
       if (res?.data?.success) {
         addAlert('success', `SUCCESSFULLY PURCHASED`)
         setQuantity("");
@@ -70,12 +70,12 @@ const BuyCrypto = ({ setUpdateBalanceFlag, addAlert }) => {
         const storedSymbol = localStorage.getItem("selectedCryptoSymbol");
         const storedPrice = localStorage.getItem("selectedCryptoPrice");
         const storedName = localStorage.getItem("selectedCryptoName");
-        console.log('1st symbol:', storedSymbol, '1st price:', storedPrice);
+
         if (storedSymbol || storedPrice) {
           setSymbol(storedSymbol);
           setPrice(storedPrice);
           setSelectedStockName(storedName);
-          console.log('symbol:', storedSymbol, 'price:', storedPrice);
+
         }
       } catch (error) {
         setLoading(false);
