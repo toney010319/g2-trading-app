@@ -158,7 +158,7 @@ const Deposit = ({ addAlert }) => {
                                 </div>
                                 <div>
                                     <button
-                                        className="block w-full max-w-xs mx-auto bg-azure-700 hover:bg-azure-950  text-white rounded-lg px-3 py-2 font-semibold"
+                                        className="block w-full max-w-xs mx-auto bg-gray-700 hover:bg-gray-950  text-white rounded-lg px-3 py-2 font-semibold"
                                         onClick={handlePayNow}
                                     >
                                         <i className="mdi mdi-lock-outline mr-1">

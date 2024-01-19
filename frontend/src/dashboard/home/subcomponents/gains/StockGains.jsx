@@ -32,7 +32,7 @@ const StockGains = () => {
 
     return (
         <>
-        <div className="mx-2 bg-white rounded-md shadow-md hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
+        <div className="mx-2 bg-white rounded-md shadow-md hover:ring-gray-400 hover:border-4 hover:border-gray-300 hover:scale-105 duration-300 ease-in-out">
         <h1 className="text-center font-bold mb-2">Top Stock Gainers</h1>
         <table className="min-w-full border border-collapse">
             <thead>
@@ -67,7 +67,7 @@ const StockGains = () => {
         </table>
         </div>
 
-        <div className="mx-2 bg-white rounded-md shadow-md hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
+        <div className="mx-2 bg-white rounded-md shadow-md hover:ring-gray-400 hover:border-4 hover:border-gray-300 hover:scale-105 duration-300 ease-in-out">
             <h1 className="text-center font-bold mb-2 ">Top Stock Losers</h1>
             <table className="min-w-full border border-collapse">
             <thead>

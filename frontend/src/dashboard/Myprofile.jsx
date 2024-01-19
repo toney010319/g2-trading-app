@@ -46,7 +46,7 @@ const MyProfile = () => {
                     <p className="text-gray-600">Joined on {profile.created_at}</p>
                   </div>
                 </div>
-                <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
+                <button className="bg-gray-500 text-white px-4 py-2 rounded-md">
                   Edit Profile
                 </button>
               </div>

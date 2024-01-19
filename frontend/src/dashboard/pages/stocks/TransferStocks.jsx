@@ -82,19 +82,19 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag, addAlert }) =
   return (
     <>
       <div className="flex justify-around mt-3 h-96">
-        <div className="bg-gradient-to-b from-azure-950 to-azure-600 rounded-lg ml-4 hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
+        <div className="bg-gradient-to-b from-gray-600 to-gray-950 rounded-lg ml-4 hover:ring-white-400 hover:border-4 hover:border-white-300 hover:scale-105 duration-300 ease-in-out">
           <div className="mt-4">
             <LogoDark />
           </div>
           <div className="flex flex-col">
-            <div className="flex bg-azure-700 text-white rounded-lg m-3 pb-3">
+            <div className="flex bg-gray-700 text-white rounded-lg m-3 pb-3">
               <div className="flex-1">
                 <div className="flex mt-2 justify-center font-sans font-bold text-lg">
                   Your PHP Wallet
                 </div>
                 <div className="flex flex-col">
                   <span className="font-bold ml-1">Balance: </span>
-                  <span className="flex text-white font-bold justify-center text-3xl border-1 mt-4 border-black border-b-4 rounded-sm bg-blue-900">
+                  <span className="flex text-white font-bold justify-center text-3xl border-1 mt-4 border-black border-b-4 rounded-sm bg-gray-900">
                     {loading ? <div className="text-center">Loading...</div> : `₱${parseFloat(balance.balance).toFixed(2)}`}
                   </span>
                 </div>
@@ -124,7 +124,7 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag, addAlert }) =
                 onChange={(e) => setTransferAmount(e.target.value)}
               />
               <button
-                className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700 mt-2"
+                className="text-white px-2 py-1 bg-gray-500 rounded-md hover:bg-gray-700 mt-2"
                 onClick={handleTransferToStock}
               >
                 Transfer
@@ -133,19 +133,19 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag, addAlert }) =
           </div>
         </div>
 
-        <div className="bg-gradient-to-b from-azure-600 to-azure-950 rounded-lg ml-4 hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
+        <div className="bg-gradient-to-b from-gray-600 to-gray-950 rounded-lg ml-4 hover:ring-white-400 hover:border-4 hover:border-white-300 hover:scale-105 duration-300 ease-in-out">
           <div className="mt-4">
             <LogoDark />
           </div>
           <div className="flex flex-col">
-            <div className="flex bg-azure-900 text-white rounded-lg m-3 pb-3">
+            <div className="flex bg-gray-900 text-white rounded-lg m-3 pb-3">
               <div className="flex-1">
                 <div className="flex mt-2 justify-center font-sans font-bold text-lg">
                   USD Stock Wallet
                 </div>
                 <div className="flex flex-col">
                   <span className="font-bold ml-1">Balance: </span>
-                  <span className="flex font-bold justify-center text-3xl border-1 mt-4 border-black border-b-4 bg-blue-700">
+                  <span className="flex font-bold justify-center text-3xl border-1 mt-4 border-black border-b-4 bg-gray-700">
                     {loading ? <div className="text-center">Loading...</div> : `$${parseFloat(balance.stocks).toFixed(2)}`}
                   </span>
                 </div>
@@ -175,7 +175,7 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag, addAlert }) =
                 onChange={(e) => setStockAmount(e.target.value)}
               />
               <button
-                className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700 mt-2"
+                className="text-white px-2 py-1 bg-gray-500 rounded-md hover:bg-gray-700 mt-2"
                 onClick={handleTransferToWallet}
               >
                 Transfer

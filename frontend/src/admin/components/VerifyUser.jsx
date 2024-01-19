@@ -46,7 +46,7 @@ const VerifyUser = ({ user, onClose, addAlert }) => {
     return (
         <>
             <div className="flex flex-col justify-center items-center align-center content-center w-screen h-screen">
-                <div className=" relative justify-center text-center align-center shadow-md border-md rounded-md  bg-gradient-to-b from-azure-300 to-azure-700 m-2 p-5 pl-8 pr-8">
+                <div className=" relative justify-center text-center align-center shadow-md border-md rounded-md  bg-gradient-to-b from-gray-300 to-gray-700 m-2 p-5 pl-8 pr-8">
                     <Logo />
                     <button
                         onClick={onClose}
@@ -197,8 +197,8 @@ const VerifyUser = ({ user, onClose, addAlert }) => {
 
 
                         <div className="flex flex-row justify-evenly gap-4 mt-2">
-                            <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700" onClick={() => handleApprove(user)}>Approved</button>
-                            <button className="text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700" onClick={() => handleDisapprove(user)}>Disapproved</button>
+                            <button className="text-white px-2 py-1 bg-gray-500 rounded-md hover:bg-gray-700" onClick={() => handleApprove(user)}>Approved</button>
+                            <button className="text-white px-2 py-1 bg-gray-500 rounded-md hover:bg-gray-700" onClick={() => handleDisapprove(user)}>Disapproved</button>
                         </div>
                     </div>
 

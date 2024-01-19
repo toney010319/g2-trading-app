@@ -109,7 +109,7 @@ const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
         />
       )}
 
-    <div className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
+    <div className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden hover:ring-white-400 hover:border-4 hover:border-white-300 hover:scale-105 duration-300 ease-in-out">
       <section className="container mx-auto p-2 font-mono">
         <div>
           <div className="flex justify-center">
@@ -140,7 +140,7 @@ const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
                 ) : (
                   paginatedTransactions.length > 0 ? (
                     paginatedTransactions.map((userCrypto) => (
-                      <tr className="cursor-pointer hover:border-azure-950 hover:border-4 hover:scale-105" key={userCrypto.id} onClick={() => openModal(userCrypto.symbol)}>
+                      <tr className="cursor-pointer hover:border-gray-950 hover:border-4 hover:scale-105" key={userCrypto.id} onClick={() => openModal(userCrypto.symbol)}>
                         <td className="px-4 py-3">
                           <div className="flex">
                             <div className="flex">
@@ -167,14 +167,14 @@ const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
             </table>
               <div className="flex justify-center w-full  mt-4 mb-4">
                 <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md mr-2"
+                  className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-md mr-2"
                   onClick={handlePrevPage}
                   disabled={currentPage === 1}
                 >
                   Previous
                 </button>
                 <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
+                  className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-md"
                   onClick={handleNextPage}
                   disabled={endIndex >= filteredAndGroupedTransactions.length}
                 >

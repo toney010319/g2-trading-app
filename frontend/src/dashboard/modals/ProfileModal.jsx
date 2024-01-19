@@ -70,19 +70,19 @@ const ProfileModal = ({setShowModal}) => {
 
         <Link to = 'myprofile'>
           <div className="flex justify-center">
-            <button className="text-blue-500 hover:text-blue-700">View Profile</button>
+            <button className="text-gray-500 hover:text-gray-700">View Profile</button>
           </div>
         </Link>
 
         
         <Link to = 'changepassword'>
           <div className="flex justify-center">
-            <button className="text-blue-500 hover:text-blue-700">Change Password</button>
+            <button className="text-gray-500 hover:text-gray-700">Change Password</button>
           </div>
         </Link>
 
         <div className="flex justify-center">
-          <button className="text-blue-500 hover:text-blue-700">Settings</button>
+          <button className="text-gray-500 hover:text-gray-700">Settings</button>
         </div>
 
       </div>

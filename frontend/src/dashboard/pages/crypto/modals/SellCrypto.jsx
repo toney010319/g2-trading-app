@@ -216,7 +216,7 @@ const SellCrypto = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
                           
                           <button 
                           onClick={() => handleSellCrypto(userCrypto)}
-                          className="p-2 px-5 text-white font-bold bg-azure-500 hover:bg-azure-700 rounded-md"
+                          className="p-2 px-5 text-white font-bold bg-gray-500 hover:bg-gray-700 rounded-md"
                           >Sell
                           </button>
                         </td>

@@ -122,7 +122,7 @@ const AdminDashboardHome = ({ addAlert }) => {
             All Users
           </p>
           <button
-            className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-950 mb-2 "
+            className="cursor-pointer text-white px-2 py-1 bg-gray-700 rounded-md hover:bg-gray-950 mb-2 "
             onClick={() => handleCreateUser()}
           >
             Create User
@@ -200,14 +200,14 @@ const AdminDashboardHome = ({ addAlert }) => {
             <div className="flex justify-center m-4">
                 <button
                   onClick={handlePrevPage}
-                  className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-950 mr-2"
+                  className="cursor-pointer text-white px-2 py-1 bg-gray-700 rounded-md hover:bg-gray-950 mr-2"
                   disabled={currentPage === 1}
                 >
                   Previous Page
                 </button>
                 <button
                   onClick={handleNextPage}
-                  className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-950"
+                  className="cursor-pointer text-white px-2 py-1 bg-gray-700 rounded-md hover:bg-gray-950"
                   disabled={currentPage === totalPages}
                 >
                   Next Page

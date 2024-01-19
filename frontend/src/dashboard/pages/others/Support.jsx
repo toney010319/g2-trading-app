@@ -92,7 +92,7 @@ const Support = ({ addAlert }) => {
                     </div>
                     <div>
                         <button
-                            className="hover:shadow-form rounded-md bg-azure-500 hover:bg-azure-700 py-3 px-8 text-base font-semibold text-white outline-none"
+                            className="hover:shadow-form rounded-md bg-gray-500 hover:bg-gray-700 py-3 px-8 text-base font-semibold text-white outline-none"
                             onClick={handleSubmit}
                         >
                             Submit
