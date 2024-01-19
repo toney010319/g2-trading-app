@@ -57,17 +57,17 @@ const Navigationbar = ({ addAlert }) => {
 
 
 
-            <div className="flex min-w-full justify-between bg-gradient-to-r from-azure-400 to-azure-900 p-2">
+            <div className="flex min-w-full justify-between bg-gradient-to-r from-gray-400 to-gray-800 p-2 ">
                 <div className="flex gap-2 ml-1">
                     <button
-                        className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-950"
+                        className="cursor-pointer text-white px-2 py-1 bg-gray-500 rounded-md hover:bg-gray-700"
                         onClick={() => setShowModal(true)}
                     >
                         Deposit
                     </button>
 
 
-                    <span className="cursor-pointer text-white px-2 py-1 bg-azure-500 rounded-md hover:bg-azure-700">
+                    <span className="cursor-pointer text-white px-2 py-1 bg-gray-500 rounded-md hover:bg-gray-700">
                         Withdraw
                     </span>
 

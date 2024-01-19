@@ -12,6 +12,8 @@ import RequireAuth from "./context/hooks/RequireAuth";
 import { AuthProvider } from "./context/AuthProvider";
 import AdminDashboard from "./admin/AdminDashboard";
 
+// ... (previous imports)
+
 const App = () => {
   const [alerts, setAlerts] = useState([]);
 
@@ -29,7 +31,19 @@ const App = () => {
   return (
     <>
       <div className="relative">
-        <div className="bg-gradient-to-b from-azure-300 to-azure-700">
+        <div
+          className="bg-cover bg-center"
+          style={{
+            backgroundImage: `url(/diabg5.gif)`,
+            position: "absolute",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "100vw",
+            height: "100vh",
+            zIndex: "-1",
+            backgroundSize: "50% 100%",
+          }}
+        >
           <div
             style={{
               position: "absolute",
@@ -86,9 +100,10 @@ const App = () => {
               </Routes>
             </AuthProvider>
           </BrowserRouter>
+          <Footer />
         </div>
       </div>
-      <Footer />
+  
     </>
   );
 };

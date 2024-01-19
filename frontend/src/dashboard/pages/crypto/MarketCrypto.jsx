@@ -59,18 +59,19 @@ const MarketCrypto = () => {
       <section className="container mx-auto p-2 font-mono ">
         <div>
           <div className="flex justify-center">
-            <span className="flex w-full justify-center text-bold text-3xl font-sans underline underline-offset-8 font-bold mb-2">
-              Cryptocurrency
+            <span className="flex w-full justify-center text-bold text-3xl font-sans underline underline-offset-8 font-bold mb-2 bg-white rounded-md mr-1">
+              CRYPTOCURRENCY
             </span>
             <div className="flex justify-center">
-              <input
-                type="text"
-                placeholder="Search by name or symbol"
-                value={searchQuery}
-                onChange={handleSearchChange}
-                className="mb-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
-              />
-            </div>
+            <input
+              type="text"
+              placeholder="Search by name or symbol"
+              value={searchQuery}
+              onChange={handleSearchChange}
+              className="mb-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-gray-300"
+            />
+          </div>
+
           </div>
         </div>
         <div className="bg-gray-100 w-full mb-12 pb-4 overflow-hidden rounded-lg shadow-lg">
@@ -109,16 +110,17 @@ const MarketCrypto = () => {
                             <div>
                               <div className="flex font-semibold text-black">
 
+              
+                            
+                                <div 
+                                className="hover:scale-105 hover:border-2 hover:border-gray-500 cursor-pointer flex"
+                                onClick={() => {
+                                  localStorage.setItem('selectedCryptoSymbol', data.symbol);
+                                  localStorage.setItem('selectedCryptoName', data.name);
+                                  localStorage.setItem('selectedCryptoPrice', data.price);
+                                  navigate('/dashboard/crypto/trade');
+                                }}
 
-
-                                <div
-                                  className="hover:scale-105 hover:border-2 hover:border-blue-500 cursor-pointer flex"
-                                  onClick={() => {
-                                    localStorage.setItem('selectedCryptoSymbol', data.symbol);
-                                    localStorage.setItem('selectedCryptoName', data.name);
-                                    localStorage.setItem('selectedCryptoPrice', data.price);
-                                    navigate('/dashboard/crypto/trade');
-                                  }}
                                 >
                                   <img className="w-6 mr-1" src={getImageLinkCrypto(data.symbol)} alt={data.symbol} />
                                   <span className="ml-1">{data.name}</span>
@@ -165,7 +167,7 @@ const MarketCrypto = () => {
             </div>
           </div>
         </div>
-        <span>Disclaimer: This a real data fetch on January 9, 2024</span>
+        <span className="bg-white opacity-50 rounded-md p-1">Disclaimer: This a real data fetch on January 9, 2024</span>
       </section>
 
     </>

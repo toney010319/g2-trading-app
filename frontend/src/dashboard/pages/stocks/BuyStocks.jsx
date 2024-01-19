@@ -97,7 +97,7 @@ const BuyStocks = ({ setUpdateBalanceFlag, addAlert }) => {
             </div>
           </div>
         ) : (
-          <div className="mt-1 rounded-lg p-3 flex flex-col bg-gradient-to-b from-azure-950 to-azure-600 hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
+          <div className="mt-1 rounded-lg p-3 flex flex-col bg-gradient-to-b from-gray-950 to-gray-600 hover:ring-white-400 hover:border-4 hover:border-white-300 hover:scale-105 duration-300 ease-in-out">
             <div className="mb-4">
               <label className="text-white ml-1 block text-lg font-bold">
                 Select a stock:
@@ -134,19 +134,19 @@ const BuyStocks = ({ setUpdateBalanceFlag, addAlert }) => {
                 </div>
                 <div className="flex-1 flex-col justify-center ease-in-out duration-300">
                   {price !== null && !isNaN(parseFloat(price)) && (
-                    <div className="text-white bg-azure-950 rounded-md flex justify-center mb-2 font-semibold text-lg">
+                    <div className="text-white bg-gray-950 rounded-md flex justify-center mb-2 font-semibold text-lg">
                       PRICE: <span className="ml-2 font-bold">${parseFloat(price).toFixed(2)}</span>
                     </div>
                   )}
 
                   {symbol && (
-                    <div className="text-white bg-azure-950 rounded-md flex justify-center mb-2 font-semibold text-lg ease-in-out duration-300">
+                    <div className="text-white bg-gray-950 rounded-md flex justify-center mb-2 font-semibold text-lg ease-in-out duration-300">
                       SYMBOL: <span className="ml-2 font-bold">{symbol}</span>
                     </div>
                   )}
 
                   {quantity !== null && !isNaN(parseFloat(quantity)) && (
-                    <div className="text-white bg-azure-950 rounded-md flex justify-center font-semibold text-lg ease-in-out duration-300">
+                    <div className="text-white bg-gray-950 rounded-md flex justify-center font-semibold text-lg ease-in-out duration-300">
                       TOTAL: <span className="ml-2 font-bold animate-pulse">${calculateTotalAmount()}</span>
                     </div>
                   )}
@@ -157,7 +157,7 @@ const BuyStocks = ({ setUpdateBalanceFlag, addAlert }) => {
             )}
 
             <button
-              className="text-white px-4 py-2 bg-azure-500 rounded-md hover:bg-azure-700 mb-2"
+              className="text-white px-4 py-2 bg-gray-500 rounded-md hover:bg-gray-700 mb-2"
               onClick={handleBuyStocks}
             >
               Buy Shares

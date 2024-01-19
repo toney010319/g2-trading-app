@@ -202,10 +202,10 @@ const SellCrypto = ({ handleClose, selectedAsset, setUpdateBalanceFlag }) => {
                           </div>
                         </td>
                         <td className="px-4 py-3 text-center">
-                          {parseFloat(userCrypto.quantity).toFixed(0)}
+                          {parseFloat(userCrypto.quantity).toFixed(2)}
                         </td>
                         <td className="px-4 py-3 text-center">
-                          $ {parseFloat(userCrypto.price).toFixed(2)}
+                          $ {parseFloat(userCrypto.price).toFixed(9)}
                         </td>
 
                         <td className="px-4 py-3 text-center">
@@ -213,10 +213,11 @@ const SellCrypto = ({ handleClose, selectedAsset, setUpdateBalanceFlag }) => {
                         </td>
 
                         <td className="px-4 py-3 text-center">
+                          
+                          <button 
+                          onClick={() => handleSellCrypto(userCrypto)}
+                          className="p-2 px-5 text-white font-bold bg-gray-500 hover:bg-gray-700 rounded-md"
 
-                          <button
-                            onClick={() => handleSellCrypto(userCrypto)}
-                            className="p-2 px-5 text-white font-bold bg-azure-500 hover:bg-azure-700 rounded-md"
                           >Sell
                           </button>
                         </td>

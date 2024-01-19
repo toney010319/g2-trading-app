@@ -67,7 +67,7 @@ const Login = ({ addAlert }) => {
 
             }
           }}
-          className="justify-center text-center align-center shadow-md border-md rounded-md  bg-gradient-to-b from-azure-300 to-azure-700 m-2 p-5 pl-8 pr-8"
+          className="justify-center text-center align-center shadow-md border-md rounded-md  bg-gradient-to-b from-gray-300 to-gray-700 m-2 p-5 pl-8 pr-8"
         >
           <Logo />
           <div>
@@ -106,13 +106,13 @@ const Login = ({ addAlert }) => {
 
           <div className="flex flex-row justify-center gap-4 mt-2">
             <button
-              className="text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-950 duration-300 ease-in-out"
+              className="text-white px-2 py-1 bg-gray-700 rounded-md hover:bg-gray-950 duration-300 ease-in-out"
               type="submit"
             >
               Login
             </button>
             <button
-              className="text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-950 duration-300 ease-in-out"
+              className="text-white px-2 py-1 bg-gray-700 rounded-md hover:bg-gray-950 duration-300 ease-in-out"
               onClick={handleRegister}
             >
               Register
