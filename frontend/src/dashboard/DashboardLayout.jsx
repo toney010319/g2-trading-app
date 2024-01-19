@@ -39,7 +39,8 @@ const DashboardLayout = ({ children, addAlert }) => {
 
   return (
     <div className="flex h-screen">
-      {profile.status === "active" && <Sidebar />}
+      {/* {profile.status === "active" && <Sidebar />} */}
+      <Sidebar />
       <div className="w-screen">
         <div className="flex-1">
           <Navigationbar addAlert={addAlert} />

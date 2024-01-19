@@ -140,7 +140,7 @@ const StocksMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
                   ) : (
                     paginatedTransactions.length > 0 ? (
                       paginatedTransactions.map((userStock) => (
-                        <tr className="cursor-pointer hover:border-azure-950 hover:border-4 hover:scale-105" key={userStock.id} onClick={() => openModal(userStock.symbol)}>
+                        <tr className="cursor-pointer hover:border-gray-950 hover:border-4 hover:scale-105" key={userStock.id} onClick={() => openModal(userStock.symbol)}>
                           <td className="px-4 py-3">
                             <div className="flex">
                               <div className="flex">
@@ -165,22 +165,23 @@ const StocksMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
                   )}
                 </tbody>
               </table>
-              <div className="flex justify-center w-full  mt-4 mb-4">
-                <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md mr-2"
-                  onClick={handlePrevPage}
-                  disabled={currentPage === 1}
-                >
-                  Previous
-                </button>
-                <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
-                  onClick={handleNextPage}
-                  disabled={endIndex >= filteredAndGroupedTransactions.length}
-                >
-                  Next
-                </button>
-              </div>
+                <div className="flex justify-center w-full  mt-4 mb-4">
+                  <button
+                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-md mr-2"
+                    onClick={handlePrevPage}
+                    disabled={currentPage === 1}
+                  >
+                    Previous
+                  </button>
+                  <button
+                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-md"
+                    onClick={handleNextPage}
+                    disabled={endIndex >= filteredAndGroupedTransactions.length}
+                  >
+                    Next
+                  </button>
+                </div>
+
             </div>
           </div>
         </section>
