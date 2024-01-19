@@ -10,7 +10,15 @@ class StockTransactionsController < ApplicationController
 
     stock = Stock.find_by(symbol: symbol)
     unless stock.present?
-      render json: { success: false, message: 'Invalid stock symbol' }
+      render json: { success: false, message: 'Invalid stock symbol' },status: :unprocessable_entity
+      return
+    end
+    if user.balance.stocks.to_f < price.to_f
+      render json: { success: false, message: 'Not enough stock wallet balance' }, status: :unprocessable_entity
+      return
+    end
+    if quantity.to_i <= 0
+      render json: { success: false, message: 'Please enter a valid quantity' }, status: :unprocessable_entity
       return
     end
 
@@ -26,7 +34,7 @@ class StockTransactionsController < ApplicationController
         asset: stock,
         transaction_number: @transaction_number
       )
-      render json: { success: true, message: 'Stock purchased successfully' }
+      render json: { success: true, message: 'Stock purchased successfully' } ,status: :ok
     else
       render json: { success: false, error: result[:error] }, status: :unprocessable_entity
     end
