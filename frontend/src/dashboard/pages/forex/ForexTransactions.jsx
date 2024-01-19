@@ -124,6 +124,7 @@ const ForexTransactions = ({ updateTransactionHistory, setUpdateTransactionHisto
               </div>
             </div>
           </div>
+        </div>
         </section>
       </div>
     </>

@@ -183,6 +183,7 @@ const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
               </div>
             </div>
           </div>
+        </div>
         </section>
       </div>
     </>

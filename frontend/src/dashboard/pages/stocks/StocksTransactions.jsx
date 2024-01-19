@@ -123,6 +123,7 @@ const StocksTransactions = ({ updateTransactionHistory, setUpdateTransactionHist
               </div>
             </div>
           </div>
+        </div>
         </section>
       </div>
     </>

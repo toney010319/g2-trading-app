@@ -125,6 +125,7 @@ const CryptoTransactions = ({ updateTransactionHistory, setUpdateTransactionHist
               </div>
             </div>
           </div>
+        </div>
         </section>
       </div>
     </>
