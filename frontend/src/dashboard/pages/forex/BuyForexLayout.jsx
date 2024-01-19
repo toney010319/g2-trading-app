@@ -19,7 +19,7 @@ const BuyForexLayout = ({ addAlert }) => {
       </div>
 
       <div className="flex p-4">
-        <BuyForex updateBalanceFlag={updateBalanceFlag} setUpdateBalanceFlag={setUpdateBalanceFlag} />
+        <BuyForex addAlert={addAlert} updateBalanceFlag={updateBalanceFlag} setUpdateBalanceFlag={setUpdateBalanceFlag} />
       </div>
     </>
   );
