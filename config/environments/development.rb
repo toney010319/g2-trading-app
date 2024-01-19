@@ -38,12 +38,16 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'localhost', port: '3000' }
+  config.action_mailer.default_url_options = { host: 'https://stellarmarkets-e9ba8be437a0.herokuapp.com' }
   # config.action_mailer.default_url_options = { host: 'https://g2-trading-app.vercel.app/' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:'127.0.0.1',
-    port:1025
+    heroku config:set SMTP_USERNAME=
+    heroku config:set SMTP_PASSWORD=
+    heroku config:set SMTP_ADDRESS=
+    heroku config:set SMTP_HOST=
+    heroku config:set SMTP_PORT=
+    heroku config:set SMTP_AUTHENTICATION=
   }
 
   # Print deprecation notices to the Rails logger.
