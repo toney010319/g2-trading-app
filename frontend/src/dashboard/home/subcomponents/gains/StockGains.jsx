@@ -7,13 +7,13 @@ const StockGains = () => {
 
     const fetchStockList = useMemo(
         () => async () => {
-        try {
-            const response = await getStockList(user_id);
-            setStockList(response);
-            console.log('Cryptolist', response)
-        } catch (error) {
-            console.error('Error fetching transactions:', error);
-        }
+            try {
+                const response = await getStockList(user_id);
+                setStockList(response);
+
+            } catch (error) {
+                console.error('Error fetching transactions:', error);
+            }
         },
         [user_id]
     );

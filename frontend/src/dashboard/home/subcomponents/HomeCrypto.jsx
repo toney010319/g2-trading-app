@@ -16,8 +16,7 @@ const HomeCrypto = () => {
     try {
       const response = await getUserCrypto(user_id);
       setAssets(response.user_crypto);
-      console.log('Stock Transaction Resp', response)
-      console.log('Crpyot Assets', assets)
+
     } catch (error) {
       console.error('Error fetching transactions:', error);
     }
@@ -25,15 +24,15 @@ const HomeCrypto = () => {
 
   useEffect(() => {
     const initiateAuthorization = () => {
-        const token = document.cookie.split('token=')[1];
-        if (token) {
-            axios.defaults.headers.common['Authorization'] = token;
-        }
+      const token = document.cookie.split('token=')[1];
+      if (token) {
+        axios.defaults.headers.common['Authorization'] = token;
+      }
     };
     initiateAuthorization();
-    
-}, []);
-  
+
+  }, []);
+
   useEffect(() => {
     fetchAssetsMemoized();
   }, [user_id]);
@@ -57,7 +56,7 @@ const HomeCrypto = () => {
     XMR: [255, 102, 0],
   };
 
-  
+
   const labels = Array.from(new Set(assets.map((asset) => asset.symbol)));
   const dataValues = labels.map((symbol) =>
     assets
@@ -71,7 +70,7 @@ const HomeCrypto = () => {
   const plugin = {
     beforeDraw: (chart) => {
       const ctx = chart.ctx;
-      const {top, left, width, height} = chart.chartArea;
+      const { top, left, width, height } = chart.chartArea;
       const x = left + width / 2 - image.width / 2;
       const y = top + height / 2 - image.height / 2;
       ctx.drawImage(image, x, y);
@@ -88,7 +87,7 @@ const HomeCrypto = () => {
           label: 'Crypto',
           data: dataValues,
           backgroundColor: labels.map(symbol => (
-            cryptoColors[symbol] ? `rgba(${cryptoColors[symbol].join(',')})` : 'rgba(0,0,0,0)' 
+            cryptoColors[symbol] ? `rgba(${cryptoColors[symbol].join(',')})` : 'rgba(0,0,0,0)'
           )),
           borderColor: labels.map(symbol => (
             cryptoColors[symbol] ? `rgba(${cryptoColors[symbol].join(',')},1)` : 'rgba(0,0,0,0)'
@@ -101,8 +100,8 @@ const HomeCrypto = () => {
     plugins: [plugin],
   };
 
-      
-  
+
+
   return (
     <>
     {assets.length === 0 ? (

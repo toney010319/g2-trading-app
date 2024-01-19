@@ -11,13 +11,13 @@ const ForexMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHist
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedAsset, setSelectedAsset] = useState(null);
   const transactionsPerPage = 5;
-  
+
   const fetchTransactionsMemoized = useMemo(() => async () => {
     try {
       const response = await getUserForex(user_id);
       setTransactions(response);
       setLoading(false);
-      console.log('Forex Transaction Resp', response)
+
     } catch (error) {
       console.error('Error fetching transactions:', error);
       setLoading(false);
@@ -42,57 +42,57 @@ const ForexMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHist
     setUpdateBalanceFlag(true);
   };
 
-    
-    const filteredAndGroupedTransactions = useMemo(() => {
-      const userForex = transactions.user_forex || [];
-      const buyTransactions = userForex.filter((transaction) => transaction.transaction_type === 'buy');
-      const sellTransactions = userForex.filter((transaction) => transaction.transaction_type === 'sell');
-      const pairedTransactions = [];
-  
-      for (const buyTransaction of buyTransactions) {
-        const correspondingSell = sellTransactions.find(
-          (sellTransaction) =>
-            sellTransaction.symbol === buyTransaction.symbol &&
-            sellTransaction.quantity === buyTransaction.quantity &&
-            sellTransaction.price === buyTransaction.price &&
-            !pairedTransactions.includes(sellTransaction)
-        );
-    
-    
-        if (correspondingSell) {
-          pairedTransactions.push(buyTransaction, correspondingSell);
-        }
-      }
-      const unpairedBuyTransactions = buyTransactions.filter(
-        (buyTransaction) => !pairedTransactions.includes(buyTransaction)
-      );
-      const groupedTransactions = unpairedBuyTransactions.reduce((result, transaction) => {
-      const existingTransaction = result.find((t) => t.symbol === transaction.symbol);
-    
-        if (existingTransaction) {
-          existingTransaction.quantity += parseFloat(transaction.quantity);
-        } else {
-          result.push({
-            symbol: transaction.symbol,
-            quantity: parseFloat(transaction.quantity),
-            price: parseFloat(transaction.price),
-          });
-        }
-    
-        return result;
-      }, []);
-    
-      return groupedTransactions;
-    }, [transactions.user_forex]);
 
-    const startIndex = (currentPage - 1) * transactionsPerPage;
-    const endIndex = startIndex + transactionsPerPage;
-    const paginatedTransactions = filteredAndGroupedTransactions.slice(startIndex, endIndex);
+  const filteredAndGroupedTransactions = useMemo(() => {
+    const userForex = transactions.user_forex || [];
+    const buyTransactions = userForex.filter((transaction) => transaction.transaction_type === 'buy');
+    const sellTransactions = userForex.filter((transaction) => transaction.transaction_type === 'sell');
+    const pairedTransactions = [];
+
+    for (const buyTransaction of buyTransactions) {
+      const correspondingSell = sellTransactions.find(
+        (sellTransaction) =>
+          sellTransaction.symbol === buyTransaction.symbol &&
+          sellTransaction.quantity === buyTransaction.quantity &&
+          sellTransaction.price === buyTransaction.price &&
+          !pairedTransactions.includes(sellTransaction)
+      );
+
+
+      if (correspondingSell) {
+        pairedTransactions.push(buyTransaction, correspondingSell);
+      }
+    }
+    const unpairedBuyTransactions = buyTransactions.filter(
+      (buyTransaction) => !pairedTransactions.includes(buyTransaction)
+    );
+    const groupedTransactions = unpairedBuyTransactions.reduce((result, transaction) => {
+      const existingTransaction = result.find((t) => t.symbol === transaction.symbol);
+
+      if (existingTransaction) {
+        existingTransaction.quantity += parseFloat(transaction.quantity);
+      } else {
+        result.push({
+          symbol: transaction.symbol,
+          quantity: parseFloat(transaction.quantity),
+          price: parseFloat(transaction.price),
+        });
+      }
+
+      return result;
+    }, []);
+
+    return groupedTransactions;
+  }, [transactions.user_forex]);
+
+  const startIndex = (currentPage - 1) * transactionsPerPage;
+  const endIndex = startIndex + transactionsPerPage;
+  const paginatedTransactions = filteredAndGroupedTransactions.slice(startIndex, endIndex);
 
   useEffect(() => {
-    fetchTransactionsMemoized();  
+    fetchTransactionsMemoized();
     if (updateTransactionHistory) {
-      fetchTransactionsMemoized(); 
+      fetchTransactionsMemoized();
       setUpdateTransactionHistory(false);
     }
   }, [updateTransactionHistory, fetchTransactionsMemoized, setUpdateTransactionHistory]);
@@ -100,10 +100,10 @@ const ForexMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHist
 
   return (
     <>
-    {selectedAsset && (
+      {selectedAsset && (
         <SellForex
           handleClose={closeModal}
-          addAlert={() => {}}
+          addAlert={() => { }}
           selectedAsset={selectedAsset}
           setUpdateBalanceFlag={setUpdateBalanceFlag}
         />
@@ -117,27 +117,27 @@ const ForexMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHist
               Currency Assets
             </span>
           </div>
-        </div>
-        <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
-          <div className="w-full overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
-                  <th className="px-4 py-3">Symbol</th>
-                  <th className="px-4 py-3">Quantity</th>
-                  <th className="px-4 py-3">Price</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white">
-                {loading ? (
-                  <tr>
-                    <td colSpan="6" className="text-center py-4">
-                      <div className="flex justify-center w-full h-10">
-                        <Loading />
-                      </div>
-                    </td>
+          <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+            <div className="w-full overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                    <th className="px-4 py-3">Symbol</th>
+                    <th className="px-4 py-3">Quantity</th>
+                    <th className="px-4 py-3">Price</th>
                   </tr>
-                ) : (
+                </thead>
+                <tbody className="bg-white">
+                  {loading ? (
+
+                    <tr>
+                      <td colSpan="6" className="text-center py-4">
+                        <div className="flex justify-center w-full h-10">
+                          <Loading />
+                        </div>
+                      </td>
+                    </tr>
+                  ) : (
                   paginatedTransactions.length > 0 ? (
                     paginatedTransactions.map((userForex) => (
                       <tr className="cursor-pointer hover:border-gray-950 hover:border-4 hover:scale-105" key={userForex.id} onClick={() => openModal(userForex.symbol)}>
@@ -154,17 +154,17 @@ const ForexMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHist
                       </tr>
                     ))
                   ) : (
-                    <tr>
-                      <td colSpan="6" className="text-center py-4">
-                        <div className="flex justify-center w-full h-10">
-                          No Assets
-                        </div>
-                      </td>
-                    </tr>
-                  )
-                )}
-              </tbody>
-            </table>
+                      <tr>
+                        <td colSpan="6" className="text-center py-4">
+                          <div className="flex justify-center w-full h-10">
+                            No Assets
+                          </div>
+                        </td>
+                      </tr>
+                    )
+                  )}
+                </tbody>
+              </table>
               <div className="flex justify-center w-full  mt-4 mb-4">
                 <button
                   className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-md mr-2"
@@ -181,11 +181,11 @@ const ForexMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHist
                   Next
                 </button>
               </div>
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
-  </>
+        </section>
+      </div>
+    </>
   )
 }
 

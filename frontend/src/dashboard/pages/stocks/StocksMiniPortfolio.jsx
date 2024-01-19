@@ -5,110 +5,110 @@ import Loading from "../../../components/Loading";
 import { getImageLinkStocks } from "../../../assets/Icons";
 
 const StocksMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHistory, setUpdateBalanceFlag, addAlert }) => {
-    const user_id = document.cookie.split("user_id=")[1];
-    const [transactions, setTransactions] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [selectedAsset, setSelectedAsset] = useState(null);
-    const transactionsPerPage = 4;
-    
-    const fetchTransactionsMemoized = useMemo(() => async () => {
-      try {
-        const response = await getUserStocks(user_id);
-        setTransactions(response);
-        setLoading(false);
-        console.log('Stock Transaction Resp', response)
-      } catch (error) {
-        console.error('Error fetching transactions:', error);
-        setLoading(false);
+  const user_id = document.cookie.split("user_id=")[1];
+  const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedAsset, setSelectedAsset] = useState(null);
+  const transactionsPerPage = 4;
+
+  const fetchTransactionsMemoized = useMemo(() => async () => {
+    try {
+      const response = await getUserStocks(user_id);
+      setTransactions(response);
+      setLoading(false);
+
+    } catch (error) {
+      console.error('Error fetching transactions:', error);
+      setLoading(false);
+    }
+  }, [user_id]);
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
+
+  const openModal = (assetSymbol) => {
+    setSelectedAsset(assetSymbol);
+  };
+
+  const closeModal = () => {
+    setSelectedAsset(null);
+    setUpdateTransactionHistory(true);
+    setUpdateBalanceFlag(true);
+  };
+
+
+  const filteredAndGroupedTransactions = useMemo(() => {
+    const userStocks = transactions.user_stocks || [];
+    const buyTransactions = userStocks.filter((transaction) => transaction.transaction_type === 'buy');
+    const sellTransactions = userStocks.filter((transaction) => transaction.transaction_type === 'sell');
+    const pairedTransactions = [];
+
+    for (const buyTransaction of buyTransactions) {
+      const correspondingSell = sellTransactions.find(
+        (sellTransaction) =>
+          sellTransaction.symbol === buyTransaction.symbol &&
+          sellTransaction.quantity === buyTransaction.quantity &&
+          sellTransaction.price === buyTransaction.price &&
+          !pairedTransactions.includes(sellTransaction)
+      );
+
+
+      if (correspondingSell) {
+        pairedTransactions.push(buyTransaction, correspondingSell);
       }
-    }, [user_id]);
-  
-    const handleNextPage = () => {
-      setCurrentPage((prevPage) => prevPage + 1);
-    };
-  
-    const handlePrevPage = () => {
-      setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-    };
-  
-    const openModal = (assetSymbol) => {
-      setSelectedAsset(assetSymbol);
-    };
-  
-    const closeModal = () => {
-      setSelectedAsset(null);
-      setUpdateTransactionHistory(true);
-      setUpdateBalanceFlag(true);
-    };
+    }
+    const unpairedBuyTransactions = buyTransactions.filter(
+      (buyTransaction) => !pairedTransactions.includes(buyTransaction)
+    );
+    const groupedTransactions = unpairedBuyTransactions.reduce((result, transaction) => {
+      const existingTransaction = result.find((t) => t.symbol === transaction.symbol);
 
-      
-      const filteredAndGroupedTransactions = useMemo(() => {
-        const userStocks = transactions.user_stocks || [];
-        const buyTransactions = userStocks.filter((transaction) => transaction.transaction_type === 'buy');
-        const sellTransactions = userStocks.filter((transaction) => transaction.transaction_type === 'sell');
-        const pairedTransactions = [];
-    
-        for (const buyTransaction of buyTransactions) {
-          const correspondingSell = sellTransactions.find(
-            (sellTransaction) =>
-              sellTransaction.symbol === buyTransaction.symbol &&
-              sellTransaction.quantity === buyTransaction.quantity &&
-              sellTransaction.price === buyTransaction.price &&
-              !pairedTransactions.includes(sellTransaction)
-          );
-      
-      
-          if (correspondingSell) {
-            pairedTransactions.push(buyTransaction, correspondingSell);
-          }
-        }
-        const unpairedBuyTransactions = buyTransactions.filter(
-          (buyTransaction) => !pairedTransactions.includes(buyTransaction)
-        );
-        const groupedTransactions = unpairedBuyTransactions.reduce((result, transaction) => {
-        const existingTransaction = result.find((t) => t.symbol === transaction.symbol);
-      
-          if (existingTransaction) {
-            existingTransaction.quantity += parseFloat(transaction.quantity);
-          } else {
-            result.push({
-              symbol: transaction.symbol,
-              quantity: parseFloat(transaction.quantity),
-              price: parseFloat(transaction.price),
-            });
-          }
-      
-          return result;
-        }, []);
-      
-        return groupedTransactions;
-      }, [transactions.user_stocks]);
-
-      const startIndex = (currentPage - 1) * transactionsPerPage;
-      const endIndex = startIndex + transactionsPerPage;
-      const paginatedTransactions = filteredAndGroupedTransactions.slice(startIndex, endIndex);
-
-    useEffect(() => {
-      fetchTransactionsMemoized();  
-      if (updateTransactionHistory) {
-        fetchTransactionsMemoized(); 
-        setUpdateTransactionHistory(false);
+      if (existingTransaction) {
+        existingTransaction.quantity += parseFloat(transaction.quantity);
+      } else {
+        result.push({
+          symbol: transaction.symbol,
+          quantity: parseFloat(transaction.quantity),
+          price: parseFloat(transaction.price),
+        });
       }
-    }, [updateTransactionHistory, fetchTransactionsMemoized, setUpdateTransactionHistory]);
-  
 
-    return (
-      <>
+      return result;
+    }, []);
+
+    return groupedTransactions;
+  }, [transactions.user_stocks]);
+
+  const startIndex = (currentPage - 1) * transactionsPerPage;
+  const endIndex = startIndex + transactionsPerPage;
+  const paginatedTransactions = filteredAndGroupedTransactions.slice(startIndex, endIndex);
+
+  useEffect(() => {
+    fetchTransactionsMemoized();
+    if (updateTransactionHistory) {
+      fetchTransactionsMemoized();
+      setUpdateTransactionHistory(false);
+    }
+  }, [updateTransactionHistory, fetchTransactionsMemoized, setUpdateTransactionHistory]);
+
+
+  return (
+    <>
       {selectedAsset && (
-          <SellStocks
-            handleClose={closeModal}
-            addAlert={addAlert}
-            selectedAsset={selectedAsset}
-            setUpdateBalanceFlag={setUpdateBalanceFlag}
-          />
-        )}
-  
+        <SellStocks
+          handleClose={closeModal}
+          addAlert={addAlert}
+          selectedAsset={selectedAsset}
+          setUpdateBalanceFlag={setUpdateBalanceFlag}
+        />
+      )}
+
       <div className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden marker:">
         <section className="container mx-auto p-2 font-mono">
           <div>
@@ -150,7 +150,7 @@ const StocksMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
                             </div>
                           </td>
                           <td className="px-4 py-3 text-center">{parseFloat(userStock.quantity).toFixed(0)}</td>
-                          <td className="px-4 py-3 text-center">$ {parseFloat((userStock.price)*(userStock.quantity)).toFixed(2)}</td>
+                          <td className="px-4 py-3 text-center">$ {parseFloat((userStock.price) * (userStock.quantity)).toFixed(2)}</td>
                         </tr>
                       ))
                     ) : (
@@ -181,12 +181,13 @@ const StocksMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
                     Next
                   </button>
                 </div>
+
             </div>
           </div>
         </section>
       </div>
     </>
-);
+  );
 };
 
 export default StocksMiniPortfolio;

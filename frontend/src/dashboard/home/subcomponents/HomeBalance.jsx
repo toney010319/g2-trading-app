@@ -6,24 +6,24 @@ const HomeBalance = () => {
     const user_id = document.cookie.split("user_id=")[1];
     const [balance, setBalance] = useState(0);
     const [assets, setAssets] = useState([]);
-    
+
     const fetchBalanceMemoized = useMemo(() => async () => {
         try {
-          const response = await getUserBalance(user_id);
-          setBalance(response);
-          console.log(response)
+            const response = await getUserBalance(user_id);
+            setBalance(response);
+
         } catch (error) {
-          console.error('Error fetching balance:', error);
+            console.error('Error fetching balance:', error);
         }
     }, [user_id]);
 
     const fetchUserAssetsMemoized = useMemo(() => async () => {
         try {
-          const response = await getUserAssets(user_id);
-          setAssets(response);
-          console.log('Assets response', response)
+            const response = await getUserAssets(user_id);
+            setAssets(response);
+
         } catch (error) {
-          console.error('Error fetching balance:', error);
+            console.error('Error fetching balance:', error);
         }
     }, [user_id]);
 
@@ -35,17 +35,17 @@ const HomeBalance = () => {
             }
         };
         initiateAuthorization();
-        
+
     }, []);
 
     useEffect(() => {
         fetchBalanceMemoized()
         fetchUserAssetsMemoized()
-      }, [fetchBalanceMemoized, fetchUserAssetsMemoized]);
+    }, [fetchBalanceMemoized, fetchUserAssetsMemoized]);
 
     const totalStocksBalance = assets
-    .filter(asset => asset.asset_type === 'Stock')
-    .reduce((total, stock) => total + parseFloat(stock.quantity) * parseFloat(stock.price), 0);
+        .filter(asset => asset.asset_type === 'Stock')
+        .reduce((total, stock) => total + parseFloat(stock.quantity) * parseFloat(stock.price), 0);
 
     const totalCryptoBalance = assets
         .filter(asset => asset.asset_type === 'Cryptocurrency')
@@ -54,8 +54,6 @@ const HomeBalance = () => {
     const totalForexBalance = assets
         .filter(asset => asset.asset_type === 'Currency')
         .reduce((total, forex) => total + parseFloat(forex.quantity) * parseFloat(forex.price), 0);
-
-    
 
 return (
     <>
@@ -103,6 +101,7 @@ return (
         </div>
     </>
 )
+
 }
 
 export default HomeBalance;

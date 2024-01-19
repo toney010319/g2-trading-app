@@ -13,7 +13,7 @@ const TransactionLogs = () => {
         () => async () => {
             try {
                 const response = await getTransactions();
-                console.log("res", response)
+
                 setTransaction(response)
                 setLoading(false);
 
@@ -26,22 +26,22 @@ const TransactionLogs = () => {
         []
     );
     useEffect(() => {
-        console.log("AdminVerifcation")
+
         fetchTransactionsMemoized();
     }, [fetchTransactionsMemoized])
 
     const handleNextPage = () => {
         setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-      };
-    
-      const handlePrevPage = () => {
+    };
+
+    const handlePrevPage = () => {
         setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-      };
-    
-      const startIndex = (currentPage - 1) * itemsPerPage;
-      const endIndex = startIndex + itemsPerPage;
-      const paginatedTransactions = transaction.slice(startIndex, endIndex);
-      const totalPages = Math.ceil(transaction.length / itemsPerPage);
+    };
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedTransactions = transaction.slice(startIndex, endIndex);
+    const totalPages = Math.ceil(transaction.length / itemsPerPage);
 
     return (
         <div>
@@ -74,7 +74,7 @@ const TransactionLogs = () => {
                                                 </div>
                                             </td>
                                         </tr>
-                                     ) : paginatedTransactions.length > 0 ? (
+                                    ) : paginatedTransactions.length > 0 ? (
                                         paginatedTransactions.map((user, index) => (
                                             <tr key={index} className="text-gray-700">
                                                 <td className="px-4 py-3 text-ms font-semibold border">{user.created_at}</td>
@@ -113,8 +113,8 @@ const TransactionLogs = () => {
                                 >
                                     Next Page
                                 </button>
-                                </div>
                             </div>
+                        </div>
                     </div>
                 </section>
 

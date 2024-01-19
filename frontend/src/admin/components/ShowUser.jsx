@@ -14,7 +14,7 @@ const ShowUser = ({ user, onClose }) => {
       </div>
     );
   }
-  console.log(user)
+
 
   return (
     <>

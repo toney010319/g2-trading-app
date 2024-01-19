@@ -2,24 +2,31 @@ import { useNavigate } from "react-router-dom";
 import { registerUser } from "../lib/api";
 import { useState } from "react";
 import Logo from "../assets/Logo";
-
+import TermsAndConditions from "./modals/TermsAndConditions";
 
 // eslint-disable-next-line react/prop-types
 const Registration = ({ addAlert }) => {
     const [agreed, setAgreed] = useState(false)
+    const [showModal, setShowModal] = useState(false);
+    const [termsError, setTermsError] = useState(false);
+
+    const handleClose = () => {
+        setShowModal(false)
+    }
 
     const navigate = useNavigate();
 
     const navigateLogin = () => {
         navigate('/')
         console.log(agreed)
+        console.log(termsError)
     }
-
-
 
 
     return (
         <>
+         {showModal ? (<TermsAndConditions handleClose={handleClose} />
+            ) : null}
             <div className="flex flex-col justify-center items-center align-center content-center w-screen h-screen">
                 <div className="justify-center text-center align-center shadow-md border-md rounded-md  bg-gradient-to-b from-gray-300 to-gray-700 m-2 p-5 pl-8 pr-8">
                     <Logo />
@@ -27,6 +34,12 @@ const Registration = ({ addAlert }) => {
                     <form
                         onSubmit={async (event) => {
                             event.preventDefault()
+                            if (!agreed) {
+                                addAlert('error', 'Please agree to the terms and conditions')
+                                setTermsError(true);
+                                return;
+                            }
+                            setTermsError(false);
                             const res = await registerUser(event)
                             if (res?.data?.status?.code == "200") {
                                 addAlert('success', res?.data?.status.message)
@@ -136,7 +149,12 @@ const Registration = ({ addAlert }) => {
                                 type="checkbox"
                                 onChange={(e) => setAgreed(e.target.value)}
                             />
-                            <span className="flex justify-start ml-1">I have read and agreed with the <button className="ml-1 text-blue-200 hover:text-blue-400 hover:underline">terms and conditions</button></span>
+                            <span className="flex justify-start ml-1">I have read and agreed with the 
+                            <button className="ml-1 text-blue-200 hover:text-blue-400 hover:underline"
+                            onClick={() => setShowModal(true)}>
+                                Terms and Conditions
+                            </button>
+                            </span>
                         </div>
 
 

@@ -3,7 +3,7 @@ import { getUserCrypto, sellCrypto } from "../../../../lib/api";
 import Loading from "../../../../components/Loading";
 
 // eslint-disable-next-line react/prop-types
-const SellCrypto = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
+const SellCrypto = ({ handleClose, selectedAsset, setUpdateBalanceFlag }) => {
   const user_id = document.cookie.split("user_id=")[1];
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,7 +15,7 @@ const SellCrypto = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
     () => async () => {
       try {
         const response = await getUserCrypto(user_id);
-        console.log('Forex Transaction Resp', response);
+
         setTransactions(response);
         setLoading(false);
       } catch (error) {
@@ -39,7 +39,7 @@ const SellCrypto = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
         price: parseFloat(price),
         symbol: symbol,
       });
-      console.log('Sell Response:', sellResponse);
+
       handleClose(close);
       fetchUserCryptoMemoized();
       setUpdateBalanceFlag(true);
@@ -47,7 +47,7 @@ const SellCrypto = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
       console.error('Error selling forex:', error);
     }
   };
-      
+
 
   const getImageLink = (symbol) => {
     switch (symbol) {
@@ -60,29 +60,29 @@ const SellCrypto = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
       case 'SOL':
         return 'https://cryptologos.cc/logos/solana-sol-logo.svg?v=029';
       case 'XRP':
-        return 'https://cryptologos.cc/logos/xrp-xrp-logo.svg?v=029'; 
+        return 'https://cryptologos.cc/logos/xrp-xrp-logo.svg?v=029';
       case 'ADA':
-        return 'https://cryptologos.cc/logos/cardano-ada-logo.svg?v=029';   
+        return 'https://cryptologos.cc/logos/cardano-ada-logo.svg?v=029';
       case 'AVAX':
-        return 'https://cryptologos.cc/logos/avalanche-avax-logo.svg?v=029';  
+        return 'https://cryptologos.cc/logos/avalanche-avax-logo.svg?v=029';
       case 'DOGE':
-        return 'https://cryptologos.cc/logos/dogecoin-doge-logo.svg?v=029'; 
+        return 'https://cryptologos.cc/logos/dogecoin-doge-logo.svg?v=029';
       case 'DOT':
-        return 'https://cryptologos.cc/logos/polkadot-new-dot-logo.svg?v=029'; 
+        return 'https://cryptologos.cc/logos/polkadot-new-dot-logo.svg?v=029';
       case 'TRX':
-        return 'https://cryptologos.cc/logos/tron-trx-logo.svg?v=029';  
+        return 'https://cryptologos.cc/logos/tron-trx-logo.svg?v=029';
       case 'MATIC':
-        return 'https://cryptologos.cc/logos/polygon-matic-logo.svg?v=029';  
+        return 'https://cryptologos.cc/logos/polygon-matic-logo.svg?v=029';
       case 'SHIB':
-        return 'https://cryptologos.cc/logos/shiba-inu-shib-logo.svg?v=029';  
+        return 'https://cryptologos.cc/logos/shiba-inu-shib-logo.svg?v=029';
       case 'LTC':
-        return 'https://cryptologos.cc/logos/litecoin-ltc-logo.svg?v=029';  
+        return 'https://cryptologos.cc/logos/litecoin-ltc-logo.svg?v=029';
       case 'XLM':
-        return 'https://cryptologos.cc/logos/stellar-xlm-logo.svg?v=029';  
+        return 'https://cryptologos.cc/logos/stellar-xlm-logo.svg?v=029';
       case 'XMR':
-        return 'https://cryptologos.cc/logos/monero-xmr-logo.svg?v=029';  
-      }
-    };
+        return 'https://cryptologos.cc/logos/monero-xmr-logo.svg?v=029';
+    }
+  };
 
   useEffect(() => {
     fetchUserCryptoMemoized()
@@ -104,7 +104,7 @@ const SellCrypto = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
     const filteredBuyTransactions = buyTransactions.filter((buyTransaction) =>
       buyTransaction.symbol === selectedAsset && parseFloat(buyTransaction.quantity) > 0
     );
-  
+
     for (const buyTransaction of buyTransactions) {
       const correspondingSell = sellTransactions.find(
         (sellTransaction) =>
@@ -113,22 +113,22 @@ const SellCrypto = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
           sellTransaction.price === buyTransaction.price &&
           !pairedTransactions.includes(sellTransaction)
       );
-  
+
       if (correspondingSell) {
         pairedTransactions.push(buyTransaction, correspondingSell);
       }
     }
-  
+
     const unpairedBuyTransactions = filteredBuyTransactions.filter(
       (buyTransaction) => !pairedTransactions.includes(buyTransaction)
     );
-  
+
     const groupedTransactions = unpairedBuyTransactions.reduce((result, transaction) => {
       const existingGroup = result.find(
         (group) =>
           group.symbol === transaction.symbol && group.quantity === transaction.quantity && group.price === transaction.price
       );
-  
+
       if (existingGroup) {
         existingGroup.quantity += parseFloat(transaction.quantity);
       } else {
@@ -138,17 +138,17 @@ const SellCrypto = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
           price: parseFloat(transaction.price)
         });
       }
-  
+
       return result;
     }, []);
-  
+
     return groupedTransactions;
   }, [transactions.user_crypto, selectedAsset]);
 
-      const startIndex = (currentPage - 1) * transactionsPerPage;
-      const endIndex = startIndex + transactionsPerPage;
-      const paginatedTransactions = filteredAndGroupedTransactions.slice(startIndex, endIndex);
-   
+  const startIndex = (currentPage - 1) * transactionsPerPage;
+  const endIndex = startIndex + transactionsPerPage;
+  const paginatedTransactions = filteredAndGroupedTransactions.slice(startIndex, endIndex);
+
 
   return (
     <>
@@ -158,11 +158,11 @@ const SellCrypto = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
           </div>
           <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg bg-white">
             <div className="w-full overflow-x-auto">
-            <div className="flex justify-center">
-              <span className="flex w-full justify-center text-bold text-2xl font-sans underline underline-offset-4 font-bold mb-2">
-                Crypto Assets
-              </span>
-            </div>
+              <div className="flex justify-center">
+                <span className="flex w-full justify-center text-bold text-2xl font-sans underline underline-offset-4 font-bold mb-2">
+                  Crypto Assets
+                </span>
+              </div>
               <table className="w-full">
                 <thead>
                   <tr className="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
@@ -217,12 +217,13 @@ const SellCrypto = ({handleClose, selectedAsset, setUpdateBalanceFlag}) => {
                           <button 
                           onClick={() => handleSellCrypto(userCrypto)}
                           className="p-2 px-5 text-white font-bold bg-gray-500 hover:bg-gray-700 rounded-md"
+
                           >Sell
                           </button>
                         </td>
 
 
-                        
+
                       </tr>
                     ))
                   ) : (

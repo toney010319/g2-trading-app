@@ -19,7 +19,7 @@ const BuyCryptoLayout = ({ addAlert }) => {
       </div>
 
       <div className="flex p-4">
-        <BuyCrypto updateBalanceFlag={updateBalanceFlag} setUpdateBalanceFlag={setUpdateBalanceFlag} />
+        <BuyCrypto addAlert={addAlert} updateBalanceFlag={updateBalanceFlag} setUpdateBalanceFlag={setUpdateBalanceFlag} />
       </div>
     </>
   );

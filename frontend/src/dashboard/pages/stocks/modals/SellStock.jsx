@@ -5,7 +5,7 @@ import { getImageLinkStocks } from "../../../../assets/Icons";
 
 
 // eslint-disable-next-line react/prop-types
-const SellStocks = ({handleClose, selectedAsset, setUpdateBalanceFlag, addAlert}) => {
+const SellStocks = ({ handleClose, selectedAsset, setUpdateBalanceFlag, addAlert }) => {
   const user_id = document.cookie.split("user_id=")[1];
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,7 +17,7 @@ const SellStocks = ({handleClose, selectedAsset, setUpdateBalanceFlag, addAlert}
     () => async () => {
       try {
         const response = await getUserStocks(user_id);
-        console.log('Stock Transaction Resp', response);
+
         setTransactions(response);
         setLoading(false);
       } catch (error) {
@@ -42,7 +42,7 @@ const SellStocks = ({handleClose, selectedAsset, setUpdateBalanceFlag, addAlert}
         symbol: symbol,
       });
       addAlert('success', `SUCCESSFULLY SOLD`)
-      console.log('Sell Response:', sellResponse);
+
       handleClose(close);
       fetchUserStocksMemoized();
       setUpdateBalanceFlag(true);
@@ -51,7 +51,7 @@ const SellStocks = ({handleClose, selectedAsset, setUpdateBalanceFlag, addAlert}
       console.error('Error selling stocks:', error);
     }
   };
-      
+
   useEffect(() => {
     fetchUserStocksMemoized()
   }, [user_id])
@@ -72,7 +72,7 @@ const SellStocks = ({handleClose, selectedAsset, setUpdateBalanceFlag, addAlert}
     const filteredBuyTransactions = buyTransactions.filter((buyTransaction) =>
       buyTransaction.symbol === selectedAsset && parseFloat(buyTransaction.quantity) > 0
     );
-  
+
     for (const buyTransaction of buyTransactions) {
       const correspondingSell = sellTransactions.find(
         (sellTransaction) =>
@@ -81,22 +81,22 @@ const SellStocks = ({handleClose, selectedAsset, setUpdateBalanceFlag, addAlert}
           sellTransaction.price === buyTransaction.price &&
           !pairedTransactions.includes(sellTransaction)
       );
-  
+
       if (correspondingSell) {
         pairedTransactions.push(buyTransaction, correspondingSell);
       }
     }
-  
+
     const unpairedBuyTransactions = filteredBuyTransactions.filter(
       (buyTransaction) => !pairedTransactions.includes(buyTransaction)
     );
-  
+
     const groupedTransactions = unpairedBuyTransactions.reduce((result, transaction) => {
       const existingGroup = result.find(
         (group) =>
           group.symbol === transaction.symbol && group.quantity === transaction.quantity && group.price === transaction.price
       );
-  
+
       if (existingGroup) {
         existingGroup.quantity += parseFloat(transaction.quantity);
       } else {
@@ -106,17 +106,17 @@ const SellStocks = ({handleClose, selectedAsset, setUpdateBalanceFlag, addAlert}
           price: parseFloat(transaction.price)
         });
       }
-  
+
       return result;
     }, []);
-  
+
     return groupedTransactions;
   }, [transactions.user_stocks, selectedAsset]);
 
-      const startIndex = (currentPage - 1) * transactionsPerPage;
-      const endIndex = startIndex + transactionsPerPage;
-      const paginatedTransactions = filteredAndGroupedTransactions.slice(startIndex, endIndex);
-   
+  const startIndex = (currentPage - 1) * transactionsPerPage;
+  const endIndex = startIndex + transactionsPerPage;
+  const paginatedTransactions = filteredAndGroupedTransactions.slice(startIndex, endIndex);
+
 
   return (
     <>
@@ -126,11 +126,11 @@ const SellStocks = ({handleClose, selectedAsset, setUpdateBalanceFlag, addAlert}
           </div>
           <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg bg-white">
             <div className="w-full overflow-x-auto">
-            <div className="flex justify-center">
-              <span className="flex w-full justify-center text-bold text-2xl font-sans underline underline-offset-4 font-bold mb-2">
-                Stock Assets
-              </span>
-            </div>
+              <div className="flex justify-center">
+                <span className="flex w-full justify-center text-bold text-2xl font-sans underline underline-offset-4 font-bold mb-2">
+                  Stock Assets
+                </span>
+              </div>
               <table className="w-full">
                 <thead>
                   <tr className="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
@@ -185,12 +185,13 @@ const SellStocks = ({handleClose, selectedAsset, setUpdateBalanceFlag, addAlert}
                           <button 
                           onClick={() => handleSellStocks(userStock)}
                           className="p-2 px-5 text-white font-bold bg-gray-500 hover:bg-gray-700 rounded-md"
+
                           >Sell
                           </button>
                         </td>
 
 
-                        
+
                       </tr>
                     ))
                   ) : (

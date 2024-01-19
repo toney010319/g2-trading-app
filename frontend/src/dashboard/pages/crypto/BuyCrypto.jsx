@@ -8,7 +8,7 @@ import Loading from "../../../components/Loading";
 import CryptoMiniPortfolio from "./CryptoMiniPortfolio";
 import { getImageLinkCrypto } from "../../../assets/Icons";
 
-const BuyCrypto = ({ setUpdateBalanceFlag }) => {
+const BuyCrypto = ({ setUpdateBalanceFlag, addAlert }) => {
   const user_id = document.cookie.split("user_id=")[1];
   const [symbol, setSymbol] = useState("");
   const [price, setPrice] = useState("");
@@ -34,31 +34,34 @@ const BuyCrypto = ({ setUpdateBalanceFlag }) => {
   const handleBuyCrypto = async () => {
     try {
       const adjustedPrice = price;
-      const { success, message } = await buyCrypto(
+      const res = await buyCrypto(
         user_id,
         quantity,
         adjustedPrice,
         symbol
       );
-      if (success) {
+
+      if (res?.data?.success) {
+        addAlert('success', `SUCCESSFULLY PURCHASED`)
         setQuantity("");
         setPrice("");
         setSymbol("");
         setUpdateTransactionHistory(true);
         setUpdateBalanceFlag(true)
       } else {
-        console.error("Error purchasing stocks:", message);
+        addAlert('error', `${res.message}`)
+        console.error("Error purchasing crypto:", res.message);
       }
-      } catch (error) {
-        console.error("Error purchasing stocks:", error);
-      }
+    } catch (error) {
+      console.error("Error purchasing crypto:", error);
+    }
   };
 
   const calculateTotalAmount = () => {
     return (price * quantity).toFixed(2);
   };
-  
-    useEffect(() => {
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const apiData = await getCryptoList();
@@ -67,12 +70,12 @@ const BuyCrypto = ({ setUpdateBalanceFlag }) => {
         const storedSymbol = localStorage.getItem("selectedCryptoSymbol");
         const storedPrice = localStorage.getItem("selectedCryptoPrice");
         const storedName = localStorage.getItem("selectedCryptoName");
-        console.log('1st symbol:', storedSymbol, '1st price:', storedPrice);
+
         if (storedSymbol || storedPrice) {
           setSymbol(storedSymbol);
           setPrice(storedPrice);
           setSelectedStockName(storedName);
-          console.log('symbol:', storedSymbol, 'price:', storedPrice);
+
         }
       } catch (error) {
         setLoading(false);
@@ -87,11 +90,11 @@ const BuyCrypto = ({ setUpdateBalanceFlag }) => {
     <>
       <div className="flex-1 flex justify-around">
         {loading ? (
-        <div className="ml-12 w-96 mr-24">
-          <div className="h-full my-auto mx-auto w-20">
-            <Loading  /> 
+          <div className="ml-12 w-96 mr-24">
+            <div className="h-full my-auto mx-auto w-20">
+              <Loading />
+            </div>
           </div>
-        </div>
         ) : (
           <div className="mt-1 rounded-lg p-3 flex flex-col bg-gradient-to-b from-gray-950 to-gray-600 hover:ring-white-400 hover:border-4 hover:border-white-300 hover:scale-105 duration-300 ease-in-out">
             <div className="mb-4">
@@ -131,6 +134,7 @@ const BuyCrypto = ({ setUpdateBalanceFlag }) => {
                 <div className="flex-1 flex-col justify-center ease-in-out duration-300">
                 {price !== null && !isNaN(parseFloat(price)) && (
                     <div className="text-white bg-gray-950 rounded-md flex justify-center mb-2 font-semibold text-lg">
+
                       PRICE: <span className="ml-2 font-bold">${parseFloat(price).toFixed(2)}</span>
                     </div>
                   )}
@@ -160,13 +164,13 @@ const BuyCrypto = ({ setUpdateBalanceFlag }) => {
             </button>
           </div>
         )}
-          <div className="flex">
-            <CryptoTransactions updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} />
-          </div>
+        <div className="flex">
+          <CryptoTransactions updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} />
+        </div>
 
-          <div className="flex">
-              <CryptoMiniPortfolio updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} setUpdateBalanceFlag={setUpdateBalanceFlag} />
-          </div>
+        <div className="flex">
+          <CryptoMiniPortfolio updateTransactionHistory={updateTransactionHistory} setUpdateTransactionHistory={setUpdateTransactionHistory} setUpdateBalanceFlag={setUpdateBalanceFlag} />
+        </div>
       </div>
     </>
   );

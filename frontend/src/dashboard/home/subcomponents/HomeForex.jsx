@@ -1,6 +1,6 @@
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import {useState, useEffect, useMemo} from'react';
+import { useState, useEffect, useMemo } from 'react';
 import { getUserForex } from '../../../lib/api';
 import Loading from '../../../components/Loading';
 import axios from 'axios';
@@ -16,7 +16,6 @@ const HomeForex = () => {
     try {
       const response = await getUserForex(user_id);
       setAssets(response.user_forex);
-      console.log('Currency Transaction Resp', response)
     } catch (error) {
       console.error('Error fetching transactions:', error);
     }
@@ -24,15 +23,15 @@ const HomeForex = () => {
 
   useEffect(() => {
     const initiateAuthorization = () => {
-        const token = document.cookie.split('token=')[1];
-        if (token) {
-            axios.defaults.headers.common['Authorization'] = token;
-        }
+      const token = document.cookie.split('token=')[1];
+      if (token) {
+        axios.defaults.headers.common['Authorization'] = token;
+      }
     };
     initiateAuthorization();
-    
-}, []);
-  
+
+  }, []);
+
   useEffect(() => {
     fetchAssetsMemoized();
   }, [user_id]);
@@ -67,7 +66,7 @@ const HomeForex = () => {
 
 
 
-  const labels = Array.from(new Set(assets.map((asset) => asset.symbol))); 
+  const labels = Array.from(new Set(assets.map((asset) => asset.symbol)));
   const dataValues = labels.map((symbol) =>
     assets
       .filter((asset) => asset.symbol === symbol)
@@ -80,7 +79,7 @@ const HomeForex = () => {
   const plugin = {
     beforeDraw: (chart) => {
       const ctx = chart.ctx;
-      const {top, left, width, height} = chart.chartArea;
+      const { top, left, width, height } = chart.chartArea;
       const x = left + width / 2 - image.width / 2;
       const y = top + height / 2 - image.height / 2;
       ctx.drawImage(image, x, y);
@@ -97,10 +96,10 @@ const HomeForex = () => {
           label: 'Currency',
           data: dataValues,
           backgroundColor: labels.map(symbol => (
-            forexColors[symbol] ? `rgba(${forexColors[symbol].join(',')})` : 'rgba(0,0,0,0)' 
+            forexColors[symbol] ? `rgba(${forexColors[symbol].join(',')})` : 'rgba(0,0,0,0)'
           )),
           borderColor: labels.map(symbol => (
-            forexColors[symbol] ? `rgba(${forexColors[symbol].join(',')},1)` : 'rgba(0,0,0,0)'  
+            forexColors[symbol] ? `rgba(${forexColors[symbol].join(',')},1)` : 'rgba(0,0,0,0)'
           )),
           borderWidth: 4,
           hoverOffset: 4,
@@ -110,8 +109,8 @@ const HomeForex = () => {
     plugins: [plugin],
   };
 
-      
-  
+
+
   return (
     <>
     {assets.length === 0 ? (

@@ -12,7 +12,7 @@ const Support = ({ addAlert }) => {
         try {
             let response = await getProfile(user_id);
             setProfile(response);
-            console.log(response)
+
         } catch (error) {
             console.error('Error fetching profile:', error);
         }
@@ -20,7 +20,7 @@ const Support = ({ addAlert }) => {
 
     const handleSubmit = async () => {
         const res = await ContactSupport(message, subject, profile.id)
-        console.log("res", res)
+
         if (res?.status == "200") {
             addAlert('success', res?.data?.message)
 

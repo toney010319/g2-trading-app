@@ -16,10 +16,10 @@ const MarketCrypto = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiData = await getCryptoList(); 
+        const apiData = await getCryptoList();
         setCryptoList(apiData);
         setLoading(false);
-        console.log("Hi Cryptolist,", apiData)
+
       } catch (error) {
         console.error('Error fetching data:', error);
         setLoading(false);
@@ -27,7 +27,7 @@ const MarketCrypto = () => {
     };
 
     fetchData();
-  }, []); 
+  }, []);
 
 
 
@@ -42,7 +42,7 @@ const MarketCrypto = () => {
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
 
   const indexOfLastRow = currentPage * rowsPerPage;
@@ -50,8 +50,8 @@ const MarketCrypto = () => {
   const currentRows = cryptoList.slice(indexOfFirstRow, indexOfLastRow);
 
   const filteredRows = currentRows.filter((data) =>
-  data.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  data.symbol.toLowerCase().includes(searchQuery.toLowerCase())
+    data.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    data.symbol.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -59,7 +59,7 @@ const MarketCrypto = () => {
       <section className="container mx-auto p-2 font-mono ">
         <div>
           <div className="flex justify-center">
-            <span className="flex w-full justify-center text-bold text-3xl font-sans underline underline-offset-8 font-bold mb-2">  
+            <span className="flex w-full justify-center text-bold text-3xl font-sans underline underline-offset-8 font-bold mb-2">
               Cryptocurrency
             </span>
             <div className="flex justify-center">
@@ -71,6 +71,7 @@ const MarketCrypto = () => {
               className="mb-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-gray-300"
             />
           </div>
+
           </div>
         </div>
         <div className="bg-gray-100 w-full mb-12 pb-4 overflow-hidden rounded-lg shadow-lg">
@@ -108,8 +109,8 @@ const MarketCrypto = () => {
                           <div className="flex items-center text-sm">
                             <div>
                               <div className="flex font-semibold text-black">
-                                
-        
+
+              
                             
                                 <div 
                                 className="hover:scale-105 hover:border-2 hover:border-gray-500 cursor-pointer flex"
@@ -119,11 +120,12 @@ const MarketCrypto = () => {
                                   localStorage.setItem('selectedCryptoPrice', data.price);
                                   navigate('/dashboard/crypto/trade');
                                 }}
+
                                 >
                                   <img className="w-6 mr-1" src={getImageLinkCrypto(data.symbol)} alt={data.symbol} />
                                   <span className="ml-1">{data.name}</span>
                                 </div>
-          
+
                               </div>
                             </div>
                           </div>

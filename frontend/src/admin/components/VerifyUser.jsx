@@ -15,7 +15,7 @@ const VerifyUser = ({ user, onClose, addAlert }) => {
     const handleApprove = async () => {
 
         const res = await AdminApproval(user.id)
-        console.log("res", res?.status)
+
         if (res?.status == "200") {
             addAlert('success', res?.data?.message)
             onClose()
@@ -27,7 +27,7 @@ const VerifyUser = ({ user, onClose, addAlert }) => {
     const handleDisapprove = async () => {
 
         const res = await AdminDisapproval(message, user.id)
-        console.log("res", res?.status)
+
         if (res?.status == "200") {
             addAlert('success', res?.data?.message)
             onClose()
