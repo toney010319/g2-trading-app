@@ -19,7 +19,7 @@ const TransferCrypto = ({ updateBalanceFlag, setUpdateBalanceFlag, addAlert }) =
       try {
         const response = await getUserBalance(user_id);
         setBalance(response);
-        console.log(response, "set balance response");
+
         setLoading(false);
       } catch (error) {
         console.error("Error fetching transactions:", error);
@@ -35,7 +35,7 @@ const TransferCrypto = ({ updateBalanceFlag, setUpdateBalanceFlag, addAlert }) =
         transferAmount,
         user_id
       );
-      console.log("Transfer from wallet to stock unsuccessful:", res)
+
       if (res?.status == 200) {
         addAlert('success', `${res?.message}`)
 

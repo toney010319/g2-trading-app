@@ -40,7 +40,7 @@ const BuyForex = ({ setUpdateBalanceFlag, addAlert }) => {
         adjustedPrice,
         symbol
       );
-      console.log(res)
+
       if (res?.data?.success) {
         addAlert('success', `SUCCESSFULLY PURCHASED`)
         setQuantity("");
@@ -70,12 +70,12 @@ const BuyForex = ({ setUpdateBalanceFlag, addAlert }) => {
         const storedSymbol = localStorage.getItem("selectedForexSymbol");
         const storedPrice = localStorage.getItem("selectedForexPrice");
         const storedName = localStorage.getItem("selectedForexName");
-        console.log('1st symbol:', storedSymbol, '1st price:', storedPrice);
+
         if (storedSymbol || storedPrice) {
           setSymbol(storedSymbol);
           setPrice(storedPrice);
           setSelectedCurrencyName(storedName);
-          console.log('symbol:', storedSymbol, 'price:', storedPrice);
+
         }
       } catch (error) {
         setLoading(false);
