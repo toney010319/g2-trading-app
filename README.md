@@ -31,7 +31,7 @@ This project is developed by [toney010319](https://github.com/toney010319), [and
 - Dynamic alert errors
 - Portfolio of different currencies
 - Currencies integrated on database via json files (real time data fetched on January 9, 2024)
-- Email support
+- Email support (via gmail)
 
 ## Prerequisites
 
