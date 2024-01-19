@@ -1,11 +1,21 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getProfile } from "../../lib/api";
 
 // eslint-disable-next-line react/prop-types
 const PaymentMethodsModal = ({handleClose, addAlert}) => {
+  const user_id = document.cookie.split('user_id=')[1];
   const [selectedMethod, setSelectedMethod] = useState('')
   const [amount, setAmount] = useState('')
+  const [profile, setProfile] = useState({})
   const navigate = useNavigate()
+ 
+
+  const fetchProfile = async () => {
+    let response = await getProfile(user_id)
+    setProfile(response)
+    return response
+  }
 
   const handleNext = () => {
     if (!amount) {
@@ -29,7 +39,7 @@ const PaymentMethodsModal = ({handleClose, addAlert}) => {
     }
 
     if (selectedMethod === 'stripe') {
-      navigate(`/stripecheckout?amount=${amount}`)
+      addAlert('error', 'This payment method is currently unavailable')
       return
     }
   
@@ -38,6 +48,10 @@ const PaymentMethodsModal = ({handleClose, addAlert}) => {
       return
     }
   }
+  
+  useEffect(() => {
+    fetchProfile();
+  }, [user_id]);
 
   return (
     <> 
@@ -69,7 +83,7 @@ const PaymentMethodsModal = ({handleClose, addAlert}) => {
 
                   <div className="flex m-2 mr-4">
                     <label htmlFor="amount">Email:</label>
-                    <span className="text-gray-500 text-sm font-serif mt-1 ml-1">email@email.com</span> 
+                    <span className="text-gray-500 text-sm font-serif mt-1 ml-1">{profile.email}</span> 
                   </div>
               </div>
               
@@ -137,6 +151,7 @@ const PaymentMethodsModal = ({handleClose, addAlert}) => {
                       value="stripe"
                       checked={selectedMethod === 'stripe'}
                       onChange={e => setSelectedMethod(e.target.value)}
+                      disabled
                     />
                     <label htmlFor="paypal">
                       <img
