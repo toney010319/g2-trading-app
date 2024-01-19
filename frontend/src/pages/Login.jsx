@@ -13,7 +13,7 @@ const Login = ({ addAlert }) => {
   };
   const loginUser = async (event) => {
     event.preventDefault();
-  
+
     const formData = new FormData(event.target);
     const user = {
       user: {
@@ -21,17 +21,17 @@ const Login = ({ addAlert }) => {
         password: formData.get("password"),
       },
     };
-  
+
     const axiosConfig = {
       headers: {
         Authorization: '',
       },
     };
-  
+
     try {
-      const res = await axios.post("https://stellarmarkets-e9ba8be437a0.herokuapp.com/login", user, axiosConfig);
+      const res = await axios.post("http://localhost:3000/login", user, axiosConfig);
       const role = res?.data?.data?.role;
-  
+
       setAuth({ role: [role] });
       return res;
     } catch (error) {
@@ -43,7 +43,7 @@ const Login = ({ addAlert }) => {
   return (
     <>
       <div className="flex flex-col justify-center items-center align-center content-center w-screen h-screen">
-      <form
+        <form
           onSubmit={async (event) => {
             event.preventDefault();
             const res = await loginUser(event)
