@@ -213,10 +213,11 @@ const SellCrypto = ({ handleClose, selectedAsset, setUpdateBalanceFlag }) => {
                         </td>
 
                         <td className="px-4 py-3 text-center">
+                          
+                          <button 
+                          onClick={() => handleSellCrypto(userCrypto)}
+                          className="p-2 px-5 text-white font-bold bg-gray-500 hover:bg-gray-700 rounded-md"
 
-                          <button
-                            onClick={() => handleSellCrypto(userCrypto)}
-                            className="p-2 px-5 text-white font-bold bg-azure-500 hover:bg-azure-700 rounded-md"
                           >Sell
                           </button>
                         </td>

@@ -174,7 +174,7 @@ const PaymentMethodsModal = ({handleClose, addAlert}) => {
                   </button>
 
                   <button
-                    className="text-white px-5 py-1 bg-azure-500 rounded-md hover:bg-azure-700"
+                    className="text-white px-5 py-1 bg-gray-500 rounded-md hover:bg-gray-700"
                     type="button"
                     onClick={handleNext}
                   >

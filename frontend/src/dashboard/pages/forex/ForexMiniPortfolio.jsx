@@ -109,14 +109,13 @@ const ForexMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHist
         />
       )}
 
-      <div className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden hover:ring-yellow-400 hover:border-4 hover:border-yellow-300 hover:scale-105 duration-300 ease-in-out">
-        <section className="container mx-auto p-2 font-mono">
-          <div>
-            <div className="flex justify-center">
-              <span className="flex w-full justify-center text-bold text-2xl font-sans underline underline-offset-4 font-bold mb-2">
-                Currency Assets
-              </span>
-            </div>
+    <div className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden hover:ring-white-400 hover:border-4 hover:border-white-300 hover:scale-105 duration-300 ease-in-out">
+      <section className="container mx-auto p-2 font-mono">
+        <div>
+          <div className="flex justify-center">
+            <span className="flex w-full justify-center text-bold text-2xl font-sans underline underline-offset-4 font-bold mb-2">
+              Currency Assets
+            </span>
           </div>
           <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
             <div className="w-full overflow-x-auto">
@@ -130,6 +129,7 @@ const ForexMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHist
                 </thead>
                 <tbody className="bg-white">
                   {loading ? (
+
                     <tr>
                       <td colSpan="6" className="text-center py-4">
                         <div className="flex justify-center w-full h-10">
@@ -138,22 +138,22 @@ const ForexMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHist
                       </td>
                     </tr>
                   ) : (
-                    paginatedTransactions.length > 0 ? (
-                      paginatedTransactions.map((userForex) => (
-                        <tr className="cursor-pointer hover:border-azure-950 hover:border-4 hover:scale-105" key={userForex.id} onClick={() => openModal(userForex.symbol)}>
-                          <td className="px-4 py-3">
+                  paginatedTransactions.length > 0 ? (
+                    paginatedTransactions.map((userForex) => (
+                      <tr className="cursor-pointer hover:border-gray-950 hover:border-4 hover:scale-105" key={userForex.id} onClick={() => openModal(userForex.symbol)}>
+                        <td className="px-4 py-3">
+                          <div className="flex">
                             <div className="flex">
-                              <div className="flex">
-                                <img className="ml-2 w-8" src={getImageLinkForex(userForex.symbol)} alt={userForex.symbol} />
-                              </div>
-                              <span className="ml-2">{userForex.symbol}</span>
+                              <img className="ml-2 w-8" src={getImageLinkForex(userForex.symbol)} alt={userForex.symbol} />
                             </div>
-                          </td>
-                          <td className="px-4 py-3 text-center">{parseFloat(userForex.quantity).toFixed(0)}</td>
-                          <td className="px-4 py-3 text-center">$ {parseFloat((userForex.price) * (userForex.quantity)).toFixed(2)}</td>
-                        </tr>
-                      ))
-                    ) : (
+                            <span className="ml-2">{userForex.symbol}</span>
+                          </div>
+                        </td>
+                        <td className="px-4 py-3 text-center">{parseFloat(userForex.quantity).toFixed(0)}</td>
+                        <td className="px-4 py-3 text-center">$ {parseFloat((userForex.price)*(userForex.quantity)).toFixed(2)}</td>
+                      </tr>
+                    ))
+                  ) : (
                       <tr>
                         <td colSpan="6" className="text-center py-4">
                           <div className="flex justify-center w-full h-10">
@@ -167,14 +167,14 @@ const ForexMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHist
               </table>
               <div className="flex justify-center w-full  mt-4 mb-4">
                 <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md mr-2"
+                  className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-md mr-2"
                   onClick={handlePrevPage}
                   disabled={currentPage === 1}
                 >
                   Previous
                 </button>
                 <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
+                  className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-md"
                   onClick={handleNextPage}
                   disabled={endIndex >= filteredAndGroupedTransactions.length}
                 >

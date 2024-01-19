@@ -21,21 +21,21 @@ const AdminNavigationBar = ({ addAlert }) => {
     }
     return (
         <>
-            <div className="flex min-w-full justify-between bg-gradient-to-r from-azure-400 to-azure-900 p-2">
+            <div className="flex min-w-full justify-between bg-gradient-to-r from-gray-400 to-gray-900 p-2">
                 <Logo />
                 <div className="flex gap-2 ml-1">
-                    <Link to="/admin" className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-500">
+                    <Link to="/admin" className="cursor-pointer text-white px-2 py-1 bg-gray-700 rounded-md hover:bg-gray-500">
                         Dashboard
                     </Link>
                     <Link to="/admin/verification" element={<AdminVerifcation addAlert={addAlert} />}
-                        className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-500"
+                        className="cursor-pointer text-white px-2 py-1 bg-gray-700 rounded-md hover:bg-gray-500"
 
                     >
                         Verification
                     </Link>
 
 
-                    <Link to="/admin/transaction" className="cursor-pointer text-white px-2 py-1 bg-azure-700 rounded-md hover:bg-azure-500">
+                    <Link to="/admin/transaction" className="cursor-pointer text-white px-2 py-1 bg-gray-700 rounded-md hover:bg-gray-500">
                         Transaction history
                     </Link>
 

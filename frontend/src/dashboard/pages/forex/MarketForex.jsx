@@ -122,7 +122,7 @@ const MarketForex = () => {
               placeholder="Search by name or symbol"
               value={searchQuery}
               onChange={handleSearchChange}
-              className="mb-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              className="mb-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-gray-300"
             />
           </div>
             <div className="flex justify-center mt-4">
@@ -179,7 +179,7 @@ const MarketForex = () => {
         
                             
                                 <div 
-                                className="hover:scale-105 hover:border-2 hover:border-blue-500 cursor-pointer flex"
+                                className="hover:scale-105 hover:border-2 hover:border-gray-500 cursor-pointer flex"
                                 onClick={() => {
                                   localStorage.setItem('selectedForexSymbol', data.symbol);
                                   localStorage.setItem('selectedForexoName', data.name);
