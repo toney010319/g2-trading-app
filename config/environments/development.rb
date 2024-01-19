@@ -42,12 +42,12 @@ Rails.application.configure do
   # config.action_mailer.default_url_options = { host: 'https://g2-trading-app.vercel.app/' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    heroku config:set SMTP_USERNAME=
-    heroku config:set SMTP_PASSWORD=
-    heroku config:set SMTP_ADDRESS=
-    heroku config:set SMTP_HOST=
-    heroku config:set SMTP_PORT=
-    heroku config:set SMTP_AUTHENTICATION=
+    address: ENV['SMTP_ADDRESS'],
+    port: ENV['SMTP_PORT'],
+    host: ENV['SMTP_HOST'],
+    user_name: ENV['SMTP_USERNAME'],
+    password: ENV['SMTP_PASSWORD'],
+    authentication: ENV['SMTP_AUTHENTICATION'],
   }
 
   # Print deprecation notices to the Rails logger.
