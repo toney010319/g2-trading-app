@@ -33,7 +33,7 @@ export const registerUser = async (event) => {
     },
   };
   try {
-    const res = await axios.post("http://localhost:3000/signup", newUser);
+    const res = await axios.post("https://stellarmarkets-e9ba8be437a0.herokuapp.com/signup", newUser);
     return res;
   } catch (error) {
     if (error.response) {
@@ -48,7 +48,7 @@ export const logoutUser = async (event) => {
   event.preventDefault();
 
   try {
-    const res = await axios.delete("http://localhost:3000/logout");
+    const res = await axios.delete("https://stellarmarkets-e9ba8be437a0.herokuapp.com/logout");
     return res.data;
   } catch (error) {
     return error;
@@ -58,7 +58,7 @@ export const logoutUser = async (event) => {
 export const addBalance = async (balance, user_id, transactionData) => {
   try {
     const addBalanceResponse = await axios.post(
-      "http://localhost:3000/add_balance",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/add_balance",
       {
         balance,
         user_id,
@@ -66,7 +66,7 @@ export const addBalance = async (balance, user_id, transactionData) => {
     );
 
     const transactionResponse = await axios.post(
-      "http://localhost:3000/transactions",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/transactions",
       {
         balance,
         user_id,
@@ -87,7 +87,7 @@ export const addBalance = async (balance, user_id, transactionData) => {
 export const addStockBalance = async (balance, user_id, transactionData) => {
   try {
     const addStockBalanceResponse = await axios.post(
-      "http://localhost:3000/add_stock_balance",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/add_stock_balance",
       {
         balance,
         user_id,
@@ -95,7 +95,7 @@ export const addStockBalance = async (balance, user_id, transactionData) => {
     );
     
     const transactionResponse = await axios.post(
-      "http://localhost:3000/transactions",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/transactions",
       {
         balance,
         user_id,
@@ -112,7 +112,7 @@ export const addStockBalance = async (balance, user_id, transactionData) => {
 export const addCryptoBalance = async (balance, user_id, transactionData) => {
   try {
     const addStockBalanceResponse = await axios.post(
-      "http://localhost:3000/add_crypto_balance",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/add_crypto_balance",
       {
         balance,
         user_id,
@@ -120,7 +120,7 @@ export const addCryptoBalance = async (balance, user_id, transactionData) => {
     );
 
     const transactionResponse = await axios.post(
-      "http://localhost:3000/transactions",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/transactions",
       {
         balance,
         user_id,
@@ -137,7 +137,7 @@ export const addCryptoBalance = async (balance, user_id, transactionData) => {
 export const addForexBalance = async (balance, user_id, transactionData) => {
   try {
     const addForexBalanceResponse = await axios.post(
-      "http://localhost:3000/add_forex_balance",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/add_forex_balance",
       {
         balance,
         user_id,
@@ -145,7 +145,7 @@ export const addForexBalance = async (balance, user_id, transactionData) => {
     );
 
     const transactionResponse = await axios.post(
-      "http://localhost:3000/transactions",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/transactions",
       {
         balance,
         user_id,
@@ -162,7 +162,7 @@ export const addForexBalance = async (balance, user_id, transactionData) => {
 export const revertStockBalance = async (balance, user_id, transactionData) => {
   try {
     const revertStockBalanceResponse = await axios.post(
-      "http://localhost:3000/revert_stock_balance",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/revert_stock_balance",
       {
         balance,
         user_id,
@@ -170,7 +170,7 @@ export const revertStockBalance = async (balance, user_id, transactionData) => {
     );
 
     const transactionResponse = await axios.post(
-      "http://localhost:3000/transactions",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/transactions",
       {
         balance,
         user_id,
@@ -186,7 +186,7 @@ export const revertStockBalance = async (balance, user_id, transactionData) => {
 export const revertCryptoBalance = async (balance, user_id, transactionData) => {
   try {
     const revertStockBalanceResponse = await axios.post(
-      "http://localhost:3000/revert_crypto_balance",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/revert_crypto_balance",
       {
         balance,
         user_id,
@@ -194,7 +194,7 @@ export const revertCryptoBalance = async (balance, user_id, transactionData) => 
     );
 
     const transactionResponse = await axios.post(
-      "http://localhost:3000/transactions",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/transactions",
       {
         balance,
         user_id,
@@ -211,7 +211,7 @@ export const revertCryptoBalance = async (balance, user_id, transactionData) => 
 export const revertForexBalance = async (balance, user_id, transactionData) => {
   try {
     const revertForexBalanceResponse = await axios.post(
-      "http://localhost:3000/revert_forex_balance",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/revert_forex_balance",
       {
         balance,
         user_id,
@@ -219,7 +219,7 @@ export const revertForexBalance = async (balance, user_id, transactionData) => {
     );
 
     const transactionResponse = await axios.post(
-      "http://localhost:3000/transactions",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/transactions",
       {
         balance,
         user_id,
@@ -236,7 +236,7 @@ export const revertForexBalance = async (balance, user_id, transactionData) => {
 export const getTransactions = async (user_id) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/transactions?user_id=${user_id}`,
+      `https://stellarmarkets-e9ba8be437a0.herokuapp.com/transactions?user_id=${user_id}`,
       {}
     );
     return response.data;
@@ -248,7 +248,7 @@ export const getTransactions = async (user_id) => {
 export const getUserStocks = async (user_id) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/show_user_stocks?user_id=${user_id}`,
+      `https://stellarmarkets-e9ba8be437a0.herokuapp.com/show_user_stocks?user_id=${user_id}`,
       {}
     );
     return response.data;
@@ -260,7 +260,7 @@ export const getUserStocks = async (user_id) => {
 export const getUserCrypto = async (user_id) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/show_user_crypto?user_id=${user_id}`,
+      `https://stellarmarkets-e9ba8be437a0.herokuapp.com/show_user_crypto?user_id=${user_id}`,
       {}
     );
     return response.data;
@@ -272,7 +272,7 @@ export const getUserCrypto = async (user_id) => {
 export const getUserForex = async (user_id) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/show_user_forex?user_id=${user_id}`,
+      `https://stellarmarkets-e9ba8be437a0.herokuapp.com/show_user_forex?user_id=${user_id}`,
       {}
     );
     return response.data;
@@ -284,7 +284,7 @@ export const getUserForex = async (user_id) => {
 export const getUserAssets = async (user_id) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/show_all_user_assets?user_id=${user_id}`,
+      `https://stellarmarkets-e9ba8be437a0.herokuapp.com/show_all_user_assets?user_id=${user_id}`,
       {}
     );
     return response.data;
@@ -296,7 +296,7 @@ export const getUserAssets = async (user_id) => {
 export const getProfile = async (user_id) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/users?user_id=${user_id}`,
+      `https://stellarmarkets-e9ba8be437a0.herokuapp.com/users?user_id=${user_id}`,
       {}
     );
     return response.data;
@@ -308,7 +308,7 @@ export const getProfile = async (user_id) => {
 export const getUserBalance = async (user_id) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/balance?user_id=${user_id}`,
+      `https://stellarmarkets-e9ba8be437a0.herokuapp.com/balance?user_id=${user_id}`,
       {}
     );
     return response.data;
@@ -319,7 +319,7 @@ export const getUserBalance = async (user_id) => {
 
 export const getStockList = async () => {
   try {
-    const response = await axios.get(`http://localhost:3000/stocks_list`, {});
+    const response = await axios.get(`https://stellarmarkets-e9ba8be437a0.herokuapp.com/stocks_list`, {});
     return response.data;
   } catch (error) {
     return error;
@@ -328,7 +328,7 @@ export const getStockList = async () => {
 
 export const getCryptoList = async () => {
   try {
-    const response = await axios.get(`http://localhost:3000/crypto_list`, {});
+    const response = await axios.get(`https://stellarmarkets-e9ba8be437a0.herokuapp.com/crypto_list`, {});
     return response.data;
   } catch (error) {
     return error;
@@ -337,7 +337,7 @@ export const getCryptoList = async () => {
 
 export const getForexList = async () => {
   try {
-    const response = await axios.get(`http://localhost:3000/currency_list`, {});
+    const response = await axios.get(`https://stellarmarkets-e9ba8be437a0.herokuapp.com/currency_list`, {});
     return response.data;
   } catch (error) {
     return error;
@@ -347,7 +347,7 @@ export const getForexList = async () => {
 export const buyStocks = async (user_id, quantity, price, symbol) => {
   try {
     const buyStocksResponse = await axios.post(
-      "http://localhost:3000/buy_stocks",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/buy_stocks",
       {
         user_id,
         quantity,
@@ -355,17 +355,18 @@ export const buyStocks = async (user_id, quantity, price, symbol) => {
         symbol,
       }
     );
-
-    return buyStocksResponse.data;
+      console.log('buyStocksResponse:', buyStocksResponse)
+    return buyStocksResponse;
   } catch (error) {
-    return { success: false, error: error.message };
+    
+    return error.response.data
   }
 };
 
 export const buyCrypto = async (user_id, quantity, price, symbol) => {
   try {
     const buyCryptoResponse = await axios.post(
-      "http://localhost:3000/buy_crypto",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/buy_crypto",
       {
         user_id,
         quantity,
@@ -383,7 +384,7 @@ export const buyCrypto = async (user_id, quantity, price, symbol) => {
 export const buyForex = async (user_id, quantity, price, symbol) => {
   try {
     const buyForexResponse = await axios.post(
-      "http://localhost:3000/buy_forex",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/buy_forex",
       {
         user_id,
         quantity,
@@ -401,7 +402,7 @@ export const buyForex = async (user_id, quantity, price, symbol) => {
 export const sellStocks = async ({ user_id, quantity, price, symbol }) => {
   try {
     const sellStocksResponse = await axios.post(
-      "http://localhost:3000/sell_stocks",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/sell_stocks",
       {
         user_id,
         quantity,
@@ -418,7 +419,7 @@ export const sellStocks = async ({ user_id, quantity, price, symbol }) => {
 export const sellForex = async ({ user_id, quantity, price, symbol }) => {
   try {
     const sellForexResponse = await axios.post(
-      "http://localhost:3000/sell_forex",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/sell_forex",
       {
         user_id,
         quantity,
@@ -436,7 +437,7 @@ export const sellForex = async ({ user_id, quantity, price, symbol }) => {
 export const sellCrypto = async ({ user_id, quantity, price, symbol }) => {
   try {
     const sellCryptoResponse = await axios.post(
-      "http://localhost:3000/sell_crypto",
+      "https://stellarmarkets-e9ba8be437a0.herokuapp.com/sell_crypto",
       {
         user_id,
         quantity,

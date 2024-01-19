@@ -61,11 +61,16 @@ const App = () => {
                     path="/dashboard/*"
                     element={<Dashboard addAlert={addAlert} />}
                   />
-                  .
+                  
                   <Route
                     path="/deposit"
                     element={<Deposit addAlert={addAlert} />}
                   />
+
+                  {/* <Route path="/stripe" 
+                  element={<Checkout />} 
+                  /> */}
+
                   <Route
                     path="/my-profile"
                     element={<MyProfile addAlert={addAlert} />}

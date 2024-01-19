@@ -35,13 +35,14 @@ const BuyStocks = ({ setUpdateBalanceFlag, addAlert }) => {
     try {
       const adjustedPrice = price;
 
-      const { success, message } = await buyStocks(
+      const res = await buyStocks(
         user_id,
         quantity,
         adjustedPrice,
         symbol
       );
-      if (success) {
+      console.log(res)
+      if (res?.data?.success) {
         addAlert('success', `SUCCESSFULLY PURCHASED`)
         setQuantity("");
         setPrice("");
@@ -49,8 +50,8 @@ const BuyStocks = ({ setUpdateBalanceFlag, addAlert }) => {
         setUpdateTransactionHistory(true);
         setUpdateBalanceFlag(true)
       } else {
-        addAlert('error', `FAILED TO PURCHASE`)
-        console.error("Error purchasing stocks:", message);
+        addAlert('error', `${res.message}`)
+        console.error("Error purchasing stocks:", res.message);
       }
     } catch (error) {
       addAlert('error', `FAILED TO PURCHASE`)

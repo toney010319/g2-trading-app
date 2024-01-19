@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import Logo from "../assets/Logo";
 import useAuth from "../context/hooks/useAuth";
+import axios from "axios";
 // eslint-disable-next-line react/prop-types
 const Login = ({ addAlert }) => {
   const [agreed, setAgreed] = useState(false);
@@ -21,28 +21,24 @@ const Login = ({ addAlert }) => {
         password: formData.get("password"),
       },
     };
-    try {
-      const res = await axios.post("http://localhost:3000/login", user);
-      const role = res?.data?.data?.role
 
-      setAuth({ role: [role] })
+    const axiosConfig = {
+      headers: {
+        Authorization: '',
+      },
+    };
+
+    try {
+      const res = await axios.post("https://stellarmarkets-e9ba8be437a0.herokuapp.com/login", user, axiosConfig);
+      const role = res?.data?.data?.role;
+
+      setAuth({ role: [role] });
       return res;
     } catch (error) {
       return error;
     }
   };
 
-  // useEffect(() => {
-  //   const token = document.cookie.split("token=")[1];
-  //   if (token) {
-  //     navigate("/dashboard");
-  //   }
-  // }, [navigate]);
-  useEffect(() => {
-    return () => {
-      axios.defaults.headers.common["Authorization"] = undefined;
-    };
-  }, []);
 
   return (
     <>
