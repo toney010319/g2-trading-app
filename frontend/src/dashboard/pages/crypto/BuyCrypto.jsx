@@ -58,7 +58,7 @@ const BuyCrypto = ({ setUpdateBalanceFlag, addAlert }) => {
   };
 
   const calculateTotalAmount = () => {
-    return (price * quantity).toFixed(2);
+    return (price * quantity).toFixed(9);
   };
 
   useEffect(() => {
@@ -135,7 +135,7 @@ const BuyCrypto = ({ setUpdateBalanceFlag, addAlert }) => {
                 {price !== null && !isNaN(parseFloat(price)) && (
                     <div className="text-white bg-gray-950 rounded-md flex justify-center mb-2 font-semibold text-lg">
 
-                      PRICE: <span className="ml-2 font-bold">${parseFloat(price).toFixed(2)}</span>
+                      PRICE: <span className="ml-2 font-bold">${parseFloat(price).toFixed(9)}</span>
                     </div>
                   )}
 

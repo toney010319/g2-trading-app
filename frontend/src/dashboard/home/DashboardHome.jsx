@@ -9,7 +9,7 @@ const DashboardHome = () => {
     <>
         <div>
             <section className="flex flex-col w-full items-center">
-                <div className="flex text-2xl font-semibold underline underline-offset-2">Summary of Portfolio</div>
+                <div className="flex text-2xl font-bold underline underline-offset-2 bg-white flex-1 w-full justify-center opacity-50">Summary of Portfolio</div>
                 <div className="flex w-full justify-around">
                     <div className="flex justify-around">
                         <div className="flex mx-5">

@@ -150,7 +150,7 @@ const CryptoMiniPortfolio = ({ updateTransactionHistory, setUpdateTransactionHis
                           </div>
                         </td>
                         <td className="px-4 py-3 text-center">{parseFloat(userCrypto.quantity).toFixed(0)}</td>
-                        <td className="px-4 py-3 text-center">$ {parseFloat((userCrypto.price)*(userCrypto.quantity)).toFixed(2)}</td>
+                        <td className="px-4 py-3 text-center text-sm">$ {parseFloat((userCrypto.price)*(userCrypto.quantity)).toFixed(9)}</td>
                       </tr>
                     ))
                   ) : (

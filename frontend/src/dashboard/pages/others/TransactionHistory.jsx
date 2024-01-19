@@ -37,12 +37,12 @@ const TransactionHistory = () => {
   return (
     <>
       <div className="flex-1">
-        <span className=" flex justify-center  text-lg font-bold w-full mt-2">Transaction History</span>
+        <span className=" flex justify-center  text-2xl font-bold w-full mt-2 bg-white opacity-60">Transaction History</span>
       </div>
       <section className="container mx-auto p-6 font-mono">
         <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
           <div className="w-full overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full bg-white">
               <thead>
                 <tr className="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
                   <th className="px-4 py-3">Date</th>
@@ -78,7 +78,7 @@ const TransactionHistory = () => {
                         <td className="px-4 py-3 text-ms font-semibold border">{transaction.debit_credit}</td>
                         <td className="px-4 py-3 text-ms font-semibold border">{transaction.transaction_type}</td>
                         <td className="px-4 py-3 text-xs border">
-                          <span className="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">{transaction.status}</span>
+                          <span className="flex-1 w-full justify-center text-center px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">{(transaction.status).toUpperCase()}</span>
                         </td>
                       </tr>
                     ))
@@ -91,7 +91,7 @@ const TransactionHistory = () => {
                   )
                 )}
               </tbody>
-              <div className=" bg-red-200 flex justify-center mt-4">
+              <div className="flex justify-center mt-4 hover:underline hover:underline-offset-2 hover:scale-105">
                 <ul className="flex gap-2">
                   {Array.from({ length: Math.ceil(transactions.length / transactionsPerPage) }, (_, i) => (
                     <li key={i} className={`page-item ${i + 1 === currentPage ? 'active' : ''}`}>

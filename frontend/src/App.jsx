@@ -100,9 +100,10 @@ const App = () => {
               </Routes>
             </AuthProvider>
           </BrowserRouter>
+          <Footer />
         </div>
       </div>
-      <Footer />
+  
     </>
   );
 };

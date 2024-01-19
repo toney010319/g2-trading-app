@@ -90,7 +90,7 @@ const CryptoTransactions = ({ updateTransactionHistory, setUpdateTransactionHist
                             <td className="px-4 py-3">{userCrypto.symbol}</td>
                           </div>
                           <td className="px-4 py-3 text-center">{parseFloat(userCrypto.quantity).toFixed(0)}</td>
-                          <td className="px-4 py-3 text-center">$ {parseFloat(userCrypto.price).toFixed(2)}</td>
+                          <td className="px-4 py-3 text-center text-sm">$ {parseFloat(userCrypto.price).toFixed(9)}</td>
                           <td className="px-4 py-3 text-center">{(userCrypto.transaction_type).toUpperCase()}</td>
                           <td className="px-4 py-3 text-center">{format(new Date(userCrypto.created_at), 'MM/dd/yyyy HH:mm a')}</td>
                         </tr>

@@ -202,10 +202,10 @@ const SellCrypto = ({ handleClose, selectedAsset, setUpdateBalanceFlag }) => {
                           </div>
                         </td>
                         <td className="px-4 py-3 text-center">
-                          {parseFloat(userCrypto.quantity).toFixed(0)}
+                          {parseFloat(userCrypto.quantity).toFixed(2)}
                         </td>
                         <td className="px-4 py-3 text-center">
-                          $ {parseFloat(userCrypto.price).toFixed(2)}
+                          $ {parseFloat(userCrypto.price).toFixed(9)}
                         </td>
 
                         <td className="px-4 py-3 text-center">

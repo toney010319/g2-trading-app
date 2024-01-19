@@ -59,8 +59,8 @@ const MarketCrypto = () => {
       <section className="container mx-auto p-2 font-mono ">
         <div>
           <div className="flex justify-center">
-            <span className="flex w-full justify-center text-bold text-3xl font-sans underline underline-offset-8 font-bold mb-2">
-              Cryptocurrency
+            <span className="flex w-full justify-center text-bold text-3xl font-sans underline underline-offset-8 font-bold mb-2 bg-white rounded-md mr-1">
+              CRYPTOCURRENCY
             </span>
             <div className="flex justify-center">
             <input
@@ -167,7 +167,7 @@ const MarketCrypto = () => {
             </div>
           </div>
         </div>
-        <span>Disclaimer: This a real data fetch on January 9, 2024</span>
+        <span className="bg-white opacity-50 rounded-md p-1">Disclaimer: This a real data fetch on January 9, 2024</span>
       </section>
 
     </>
