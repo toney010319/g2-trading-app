@@ -355,10 +355,11 @@ export const buyStocks = async (user_id, quantity, price, symbol) => {
         symbol,
       }
     );
-
-    return buyStocksResponse.data;
+      console.log('buyStocksResponse:', buyStocksResponse)
+    return buyStocksResponse;
   } catch (error) {
-    return { success: false, error: error.message };
+    
+    return error.response.data
   }
 };
 
