@@ -374,10 +374,10 @@ export const buyCrypto = async (user_id, quantity, price, symbol) => {
         symbol,
       }
     );
-
-    return buyCryptoResponse.data;
+    console.log('buyStocksResponse:', buyCryptoResponse)
+    return buyCryptoResponse;
   } catch (error) {
-    return { success: false, error: error.message };
+    return error.response.data
   }
 };
 
@@ -393,9 +393,9 @@ export const buyForex = async (user_id, quantity, price, symbol) => {
       }
     );
 
-    return buyForexResponse.data;
+    return buyForexResponse;
   } catch (error) {
-    return { success: false, error: error.message };
+    return error.response.data
   }
 };
 

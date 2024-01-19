@@ -54,7 +54,6 @@ const BuyStocks = ({ setUpdateBalanceFlag, addAlert }) => {
         console.error("Error purchasing stocks:", res.message);
       }
     } catch (error) {
-      addAlert('error', `FAILED TO PURCHASE`)
       console.error("Error purchasing stocks:", error);
     }
   };

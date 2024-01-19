@@ -13,7 +13,7 @@ class StockTransactionsController < ApplicationController
       render json: { success: false, message: 'Invalid stock symbol' },status: :unprocessable_entity
       return
     end
-    if user.balance.stocks.to_f < price.to_f
+    if user.balance.stocks.to_f < total_cost.to_f
       render json: { success: false, message: 'Not enough stock wallet balance' }, status: :unprocessable_entity
       return
     end
