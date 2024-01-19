@@ -74,9 +74,12 @@ const ProfileModal = ({setShowModal}) => {
           </div>
         </Link>
 
-        <div className="flex justify-center">
-          <button className="text-blue-500 hover:text-blue-700">Change Password</button>
-        </div>
+        
+        <Link to = 'changepassword'>
+          <div className="flex justify-center">
+            <button className="text-blue-500 hover:text-blue-700">Change Password</button>
+          </div>
+        </Link>
 
         <div className="flex justify-center">
           <button className="text-blue-500 hover:text-blue-700">Settings</button>
