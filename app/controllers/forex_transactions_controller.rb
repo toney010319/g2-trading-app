@@ -10,10 +10,17 @@ class ForexTransactionsController < ApplicationController
 
       currency = Currency.find_by(symbol: symbol)
       unless currency.present?
-        render json: { success: false, message: 'Invalid currency symbol' }
+        render json: { success: false, message: 'Invalid currency symbol' }, status: :unprocessable_entity
         return
       end
-
+      if user.balance.forex.to_f < total_cost.to_f
+        render json: { success: false, message: 'Not enough stock wallet balance' }, status: :unprocessable_entity
+        return
+      end
+      if quantity.to_i <= 0
+        render json: { success: false, message: 'Please enter a valid quantity' }, status: :unprocessable_entity
+        return
+      end
       result = update_user_balance(total_cost)
 
       if result[:success]
@@ -26,7 +33,7 @@ class ForexTransactionsController < ApplicationController
           asset: currency,
           transaction_number: @transaction_number
         )
-        render json: { success: true, message: 'Currency purchased successfully' }
+        render json: { success: true, message: 'Currency purchased successfully' },status: :ok
       else
         render json: { success: false, error: result[:error] }, status: :unprocessable_entity
       end

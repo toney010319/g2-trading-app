@@ -36,7 +36,7 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag, addAlert }) =
         transferAmount,
         user_id
       );
-      console.log("Transfer from wallet to stock unsuccessful:", res)
+
       if (res?.status == 200) {
         addAlert('success', `${res?.message}`)
 
@@ -48,7 +48,7 @@ const TransferStocks = ({ updateBalanceFlag, setUpdateBalanceFlag, addAlert }) =
       setTransferAmount("");
 
     } catch (error) {
-      console.log(error.response, "error.response")
+
 
     }
   };

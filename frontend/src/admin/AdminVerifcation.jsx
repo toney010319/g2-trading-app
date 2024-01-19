@@ -15,13 +15,13 @@ const AdminVerifcation = ({ addAlert }) => {
     const itemsPerPage = 8;
 
 
-    console.log("AdminVerifcation")
+
     // const [modalContent, setModalContent] = useState(null);
     const fetchUsersMemoized = useMemo(
         () => async () => {
             try {
                 const response = await getUsers();
-                console.log("res", response)
+
                 const filter = response.filter(user => user.status === 'pending')
                 setUsers(filter)
                 setLoading(false);
@@ -46,16 +46,16 @@ const AdminVerifcation = ({ addAlert }) => {
 
     const handleNextPage = () => {
         setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-      };
-    
-      const handlePrevPage = () => {
+    };
+
+    const handlePrevPage = () => {
         setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-      };
-    
-      const startIndex = (currentPage - 1) * itemsPerPage;
-      const endIndex = startIndex + itemsPerPage;
-      const paginatedUsers = users.slice(startIndex, endIndex);
-      const totalPages = Math.ceil(users.length / itemsPerPage);
+    };
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedUsers = users.slice(startIndex, endIndex);
+    const totalPages = Math.ceil(users.length / itemsPerPage);
 
 
     return (
@@ -85,7 +85,7 @@ const AdminVerifcation = ({ addAlert }) => {
                                                 </div>
                                             </td>
                                         </tr>
-                                      ) : paginatedUsers.length > 0 ? (
+                                    ) : paginatedUsers.length > 0 ? (
                                         paginatedUsers.map((user, index) => (
                                             <tr key={index} className="text-gray-700">
                                                 <td className="px-4 py-3 text-ms font-semibold border">{`${user.first_name} ${user.last_name}`}</td>

@@ -79,7 +79,7 @@ export const addBalance = async (balance, user_id, transactionData) => {
       transactionResponse: transactionResponse.data,
     };
   } catch (error) {
-    console.log("error",error)
+    
     return error;
   }
 };
@@ -355,7 +355,7 @@ export const buyStocks = async (user_id, quantity, price, symbol) => {
         symbol,
       }
     );
-      console.log('buyStocksResponse:', buyStocksResponse)
+      
     return buyStocksResponse;
   } catch (error) {
     
@@ -374,10 +374,10 @@ export const buyCrypto = async (user_id, quantity, price, symbol) => {
         symbol,
       }
     );
-
-    return buyCryptoResponse.data;
+     
+    return buyCryptoResponse;
   } catch (error) {
-    return { success: false, error: error.message };
+    return error.response.data
   }
 };
 
@@ -393,9 +393,9 @@ export const buyForex = async (user_id, quantity, price, symbol) => {
       }
     );
 
-    return buyForexResponse.data;
+    return buyForexResponse;
   } catch (error) {
-    return { success: false, error: error.message };
+    return error.response.data
   }
 };
 

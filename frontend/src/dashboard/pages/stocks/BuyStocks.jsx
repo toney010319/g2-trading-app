@@ -41,7 +41,7 @@ const BuyStocks = ({ setUpdateBalanceFlag, addAlert }) => {
         adjustedPrice,
         symbol
       );
-      console.log(res)
+
       if (res?.data?.success) {
         addAlert('success', `SUCCESSFULLY PURCHASED`)
         setQuantity("");
@@ -54,7 +54,6 @@ const BuyStocks = ({ setUpdateBalanceFlag, addAlert }) => {
         console.error("Error purchasing stocks:", res.message);
       }
     } catch (error) {
-      addAlert('error', `FAILED TO PURCHASE`)
       console.error("Error purchasing stocks:", error);
     }
   };

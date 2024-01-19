@@ -10,10 +10,17 @@ class CryptoTransactionsController < ApplicationController
 
     crypto = Cryptocurrency.find_by(symbol: symbol)
     unless crypto.present?
-      render json: { success: false, message: 'Invalid crypto symbol' }
+      render json: { success: false, message: 'Invalid crypto symbol' }, status: :unprocessable_entity
       return
     end
-
+    if user.balance.crypto.to_f < total_cost.to_f
+      render json: { success: false, message: 'Not enough stock wallet balance' }, status: :unprocessable_entity
+      return
+    end
+    if quantity.to_i <= 0
+      render json: { success: false, message: 'Please enter a valid quantity' }, status: :unprocessable_entity
+      return
+    end
     result = update_user_balance(total_cost)
 
     if result[:success]
@@ -26,7 +33,7 @@ class CryptoTransactionsController < ApplicationController
         asset: crypto,
         transaction_number: @transaction_number
               )
-      render json: { success: true, message: 'Crypto purchased successfully' }
+      render json: { success: true, message: 'Crypto purchased successfully' },status: :ok
     else
       render json: { success: false, error: result[:error] }, status: :unprocessable_entity
     end

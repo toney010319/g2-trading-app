@@ -114,7 +114,7 @@ export const createUser = async (event) => {
  
   export const AdminApproval = async (user_id) => {
     try {
-      const res = await axios.post(`https://stellarmarkets-e9ba8be437a0.herokuapp.com/user/${user_id}/approve`)
+      const res = await axios.post(`https://stellarmarkets-e9ba8be437a0.herokuapp.com/${user_id}/approve`)
 
       return res
     } catch (error) {
@@ -125,8 +125,8 @@ export const createUser = async (event) => {
 
   export const AdminDisapproval = async (message,user_id) => {
     try {
-      const res = await axios.post(`https://stellarmarkets-e9ba8be437a0.herokuapp.com/user/${user_id}/disapprove`,{message})
-      console.log("disapprove",res)
+      const res = await axios.post(`https://stellarmarkets-e9ba8be437a0.herokuapp.com/${user_id}/disapprove`,{message})
+      
       return res
     } catch (error) {
       return error
@@ -144,8 +144,8 @@ export const createUser = async (event) => {
 
   export const ContactSupport = async (message,subject,user_id,support) => {
     try {
-      const res = await axios.post(`https://stellarmarkets-e9ba8be437a0.herokuapp.com/user/${user_id}/contact_support`,{message,subject,support})
-      console.log("support",res)
+      const res = await axios.post(`https://stellarmarkets-e9ba8be437a0.herokuapp.com/${user_id}/contact_support`,{message,subject,support})
+     
       return res
     } catch (error) {
       return error
