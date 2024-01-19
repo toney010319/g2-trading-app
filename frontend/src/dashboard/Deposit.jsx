@@ -1,14 +1,21 @@
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { addBalance } from "../lib/api";
+import { useState, useEffect } from "react";
+import { getProfile } from "../lib/api";
 // eslint-disable-next-line react/prop-types
 const Deposit = ({ addAlert }) => {
     const [searchParams] = useSearchParams();
     const balance = searchParams.get("amount");
     const user_id = document.cookie.split('user_id=')[1];
+    const [profile, setProfile] = useState([]);
     const navigate = useNavigate();
 
-
+    const fetchProfile = async () => {
+        let response = await getProfile(user_id)
+        setProfile(response)
+        return response
+      }
     const handlePayNow = async () => {
 
         try {
@@ -30,6 +37,10 @@ const Deposit = ({ addAlert }) => {
         }
     }
 
+    useEffect(() => {
+        fetchProfile();
+      }, [user_id]);
+
     return (
         <>
             <div className="min-w-screen min-h-screen bg-gray-50 py-5">
@@ -45,10 +56,10 @@ const Deposit = ({ addAlert }) => {
                                 <div className="w-full mx-auto text-gray-800 font-light mb-6 border-b border-gray-200 pb-6">
                                     <div className="w-full flex items-center">
                                         <div className="overflow-hidden rounded-lg w-16 h-16 bg-gray-50 border border-gray-200">
-                                            ITEM 1
+                                        <img className="rounded-md" src="https://www.freeiconspng.com/uploads/stock-exchange-icon-png-10.png" width="90" alt="Icon Svg Stock Exchange" />
                                         </div>
                                         <div className="flex-grow pl-3">
-                                            <h6 className="font-semibold uppercase text-gray-600">NULL</h6>
+                                            <h6 className="font-semibold uppercase text-gray-600">Stellar Markets Credits</h6>
                                             <p className="text-gray-400">x 1</p>
                                         </div>
                                         <div>
@@ -98,7 +109,7 @@ const Deposit = ({ addAlert }) => {
                                             <span className="text-gray-600 font-semibold">Contact</span>
                                         </div>
                                         <div className="flex-grow pl-3">
-                                            <span>NULL</span>
+                                            <span>{profile.first_name} {profile.middle_name} {profile.last_name}</span>
                                         </div>
                                     </div>
                                     <div className="w-full flex items-center">
@@ -106,7 +117,7 @@ const Deposit = ({ addAlert }) => {
                                             <span className="text-gray-600 font-semibold">Billing Address</span>
                                         </div>
                                         <div className="flex-grow pl-3">
-                                            <span>NULL</span>
+                                            <span>Philippines</span>
                                         </div>
                                     </div>
                                 </div>
