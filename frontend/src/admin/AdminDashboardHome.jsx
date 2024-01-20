@@ -117,12 +117,12 @@ const AdminDashboardHome = ({ addAlert }) => {
   return (
     <>
       <section className="container mx-auto p-6 font-mono">
-        <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
-          <p className=" flex justify-center  text-lg font-bold w-full mt-2">
+        <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg bg-white">
+          <p className=" flex justify-center  text-3xl font-bold w-full mt-2 ">
             All Users
           </p>
           <button
-            className="cursor-pointer text-white px-2 py-1 bg-gray-700 rounded-md hover:bg-gray-950 mb-2 "
+            className="cursor-pointer text-white px-2 py-1 bg-gray-700 rounded-md hover:bg-gray-950 mb-2 ml-3"
             onClick={() => handleCreateUser()}
           >
             Create User
@@ -155,8 +155,8 @@ const AdminDashboardHome = ({ addAlert }) => {
                         <td className="px-4 py-3 text-ms font-semibold border">
                           {user.email}
                         </td>
-                        <td className="px-4 py-3 text-ms font-semibold border">
-                          {user.status}
+                        <td className="px-4 py-3 text-ms font-semibold border text-center">
+                          {(user.status).toUpperCase()}
                         </td>
                         <td className="px-4 py-3 text-ms font-semibold border ">
                           <button onClick={() => handleShowUser(user)}>

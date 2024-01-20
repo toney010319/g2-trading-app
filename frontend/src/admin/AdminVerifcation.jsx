@@ -61,9 +61,10 @@ const AdminVerifcation = ({ addAlert }) => {
     return (
         <div>
             <>
-                <p className=" flex justify-center  text-lg font-bold w-full mt-5">Verify Users</p>
-                <section className="container mx-auto p-6 font-mono">
-                    <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+                
+                <section className="container mx-auto p-6 font-mono ">
+                    <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg bg-white">
+                    <p className=" flex justify-center font-bold w-full text-2xl mt-5">Verify Users</p>
                         <div className="w-full overflow-x-auto bg-white">
                             <table className="w-full bg-white">
                                 <thead>
@@ -92,8 +93,8 @@ const AdminVerifcation = ({ addAlert }) => {
                                                 <td className="px-4 py-3 text-ms font-semibold border">
                                                     {user.email}
                                                 </td>
-                                                <td className="px-4 py-3 text-ms font-semibold border">
-                                                    {user.status}
+                                                <td className="px-4 py-3 text-ms font-semibold border text-center">
+                                                    {(user.status).toUpperCase()}
                                                 </td>
                                                 <td className="px-4 py-3 text-ms font-semibold border ">
                                                     <button onClick={() => handleShowUser(user)}>
