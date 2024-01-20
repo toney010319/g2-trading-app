@@ -23,7 +23,8 @@ const Support = ({ addAlert }) => {
 
         if (res?.status == "200") {
             addAlert('success', res?.data?.message)
-
+            setMessage('')
+            setSubject('')
         }
         else (addAlert('error', res?.response?.data?.status?.message))
     }

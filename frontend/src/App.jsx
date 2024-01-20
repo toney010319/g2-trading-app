@@ -34,7 +34,7 @@ const App = () => {
         <div
           className="bg-cover bg-center"
           style={{
-            backgroundImage: `url(/diabg5.gif)`,
+            backgroundImage: `url(/slowbg.gif)`,
             position: "absolute",
             left: "50%",
             transform: "translateX(-50%)",
