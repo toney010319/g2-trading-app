@@ -29,7 +29,7 @@ const Login = ({ addAlert }) => {
     };
 
     try {
-      const res = await axios.post("https://stellarmarkets-e9ba8be437a0.herokuapp.com/login", user, axiosConfig);
+      const res = await axios.post("http://localhost:3000/login", user, axiosConfig);
       const role = res?.data?.data?.role;
 
       setAuth({ role: [role] });
