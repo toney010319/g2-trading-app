@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react"
 import { getTransactions } from "../../lib/adminapi";
 import Loading from "../../components/Loading";
+import { format } from "date-fns/format";
 
 
 const TransactionLogs = () => {
@@ -46,21 +47,22 @@ const TransactionLogs = () => {
     return (
         <div>
             <>
-                <p className=" flex justify-center  text-lg font-bold w-full mt-5">Verify Users</p>
+                
                 <section className="container mx-auto p-6 font-mono">
                     <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg bg-white">
+                    <p className=" flex justify-center  text-2xl font-bold w-full mt-5 mb-1">Transaction History</p>
                         <div className="w-full overflow-x-auto">
                             <table className="w-full">
                                 <thead>
                                     <tr className="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
-                                        <th className="px-4 py-3">Date</th>
-                                        <th className="px-4 py-3">Username</th>
-                                        <th className="px-4 py-3">Transaction Number</th>
-                                        <th className="px-4 py-3">Amount</th>
-                                        <th className="px-4 py-3">D/C</th>
-                                        <th className="px-4 py-3">Type</th>
-                                        <th className="px-4 py-3">Symbols</th>
-                                        <th className="px-4 py-3">Status</th>
+                                        <th className="px-4 py-3 text-center">Date</th>
+                                        <th className="px-4 py-3 text-center">Username</th>
+                                        <th className="px-4 py-3 text-center">Transaction Number</th>
+                                        <th className="px-4 py-3 text-center">Amount</th>
+                                        <th className="px-4 py-3 text-center">D/C</th>
+                                        <th className="px-4 py-3 text-center">Type</th>
+                                        <th className="px-4 py-3 text-center">Symbols</th>
+                                        <th className="px-4 py-3 text-center">Status</th>
 
                                     </tr>
                                 </thead>
@@ -77,14 +79,14 @@ const TransactionLogs = () => {
                                     ) : paginatedTransactions.length > 0 ? (
                                         paginatedTransactions.map((user, index) => (
                                             <tr key={index} className="text-gray-700">
-                                                <td className="px-4 py-3 text-ms font-semibold border">{user.created_at}</td>
-                                                <td className="px-4 py-3 text-ms font-semibold border">{`${user.user_username}`}</td>
-                                                <td className="px-4 py-3 text-ms font-semibold border">{user.transaction_number}</td>
-                                                <td className="px-4 py-3 text-ms font-semibold border">{user.amount || user.price}</td>
-                                                <td className="px-4 py-3 text-ms font-semibold border">{user.debit_credit || "N/A"}</td>
-                                                <td className="px-4 py-3 text-ms font-semibold border">{user.transaction_type}</td>
-                                                <td className="px-4 py-3 text-ms font-semibold border">{user.symbol || "N/A"}</td>
-                                                <td className="px-4 py-3 text-ms font-semibold border">{user.status || "success"}</td>
+                                                <td className="px-4 py-3 text-ms font-semibold border text-center"> {user.created_at ? format(user.created_at, 'MM/dd/yyyy HH:mm:ss a'): 'N/A'}</td>
+                                                <td className="px-4 py-3 text-ms font-semibold border text-center">{`${user.user_username}`}</td>
+                                                <td className="px-4 py-3 text-ms font-semibold border text-center">{user.transaction_number}</td>
+                                                <td className="px-4 py-3 text-ms font-semibold border text-center">{user.amount || user.price}</td>
+                                                <td className="px-4 py-3 text-ms font-semibold border text-center">{user.debit_credit || "N/A"}</td>
+                                                <td className="px-4 py-3 text-ms font-semibold border text-center">{(user.transaction_type).toUpperCase()}</td>
+                                                <td className="px-4 py-3 text-ms font-semibold border text-center">{user.symbol || "N/A"}</td>
+                                                <td className="px-4 py-3 text-ms font-semibold border text-center">{user.status ? user.status.toUpperCase() : "SUCCESS"}</td>
 
 
                                             </tr>
