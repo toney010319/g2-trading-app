@@ -749,7 +749,9 @@ Get these Values from the login Response Header
 | `uid`           | user_id                  | true     |
 
 
+## License
 
+This project is licensed under the [MIT License](LICENSE).
 
 
 
