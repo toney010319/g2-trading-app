@@ -1,6 +1,5 @@
-# README
-
 # Full Stack Stock, Forex & Crypto Trading App
+Project Duration: 3 weeks
 
 ## Table of Contents
 
@@ -11,6 +10,7 @@
 - [Dependencies](#dependencies)
 - [User Stories](#user-stories)
 - [App API](#app-api)
+- [License](#license)
 
 ## Contributors
 
